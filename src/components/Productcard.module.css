@@ -1,0 +1,65 @@
+/*
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+SHADOW SYSTEM (px)
+2 / 6 / 12 / 24
+
+*/
+
+.card {
+  margin: 50px auto;
+
+  height: 300px;
+  width: 250px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container {
+  height: 80%;
+  width: 80%;
+
+  display: grid;
+  grid-template-areas:
+    "img img"
+    "info info"
+    "price delivery"
+    "btn btn";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 150px 1fr 1fr 1fr;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 10px;
+}
+
+.card-container .card-img {
+  grid-area: img;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.card-container .card-info {
+  grid-area: info;
+}
+
+.card-container .card-price {
+  grid-area: price;
+}
+
+.card-container .card-delivery {
+  grid-area: delivery;
+}
+
+.card-container .btn-purchase {
+  grid-area: btn;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
