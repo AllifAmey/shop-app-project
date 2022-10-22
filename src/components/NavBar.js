@@ -1,6 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/system";
 import styles from "./NavBar.module.css";
+import { Routes, Route, Link } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -9,8 +10,8 @@ function NavBar() {
         <div className={styles["nav-container"]}>
           <div className={styles["nav-title"]}>Sahrah Amey Jewellery</div>
           <div className={styles["nav-items"]}>
-            <div>Home</div>
-            <div>Product</div>
+            <Link to="/home">Home</Link>
+            <Link to="/product">Product</Link>
           </div>
         </div>
       </div>
