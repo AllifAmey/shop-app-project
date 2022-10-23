@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  height: auto;
+  width: 100%;
+}
+
+.filter {
+  background: pink;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+
+  width: 20%;
+}
+.filter-title {
+  font-size: 24px;
+  text-align: center;
+  padding: 20px 0 40px;
+}
+
+.filter-item {
+  height: 60px;
+  width: 120px;
+}
+.product-side {
+  background: yellow;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
