@@ -10,8 +10,12 @@ function NavBar() {
         <div className={styles["nav-container"]}>
           <div className={styles["nav-title"]}>Sahrah Amey Jewellery</div>
           <div className={styles["nav-items"]}>
-            <Link to="/home">Home</Link>
-            <Link to="/product">Product</Link>
+            <Link className={styles["nav-link"]} to="/home">
+              Home
+            </Link>
+            <Link className={styles["nav-link"]} to="/product">
+              Product
+            </Link>
           </div>
         </div>
       </div>

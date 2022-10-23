@@ -1,8 +1,9 @@
 import * as React from "react";
 import { styled } from "@mui/system";
 import styles from "./Productcard.module.css";
-import img from "../img/Cards/Product/card1-img.avif";
+import img from "../img/Cards/Product/card-ring.avif";
 import Button from "@mui/material/Button";
+import { Routes, Route, Link } from "react-router-dom";
 
 function ProductCard() {
   return (
@@ -15,7 +16,13 @@ function ProductCard() {
         <div className={styles["card-price"]}>£3.99</div>
         <div className={styles["card-delivery"]}>FREE UK delivery</div>
         <div className={styles["btn-purchase"]}>
-          <Button variant="contained" size="small" style={{ fontSize: "10px" }}>
+          <Button
+            variant="contained"
+            size="small"
+            component={Link}
+            to="/product-description"
+            style={{ fontSize: "10px" }}
+          >
             Buy Now!
           </Button>
         </div>

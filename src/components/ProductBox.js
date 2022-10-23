@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/system";
 import styles from "./ProductBox.module.css";
-import img from "../img/Cards/Product/card1-img.avif";
+import img from "../img/Cards/Product/card-ring.avif";
 import Button from "@mui/material/Button";
 import ProductCard from "./ProductCard";
 import Checkbox from "@mui/material/Checkbox";
