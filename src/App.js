@@ -3,6 +3,7 @@ import ProductCard from "./components/ProductCard";
 import ProductBox from "./components/ProductBox";
 import InfoBox from "./components/InfoBox";
 import Hero from "./components/Hero";
+import Checkout from "./components/Checkout";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/home" element={<Hero />} />
         <Route path="product" element={<ProductBox />} />
         <Route path="/product-description" element={<InfoBox />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </>
   );

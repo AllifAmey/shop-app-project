@@ -66,10 +66,10 @@ function InfoBox() {
                 variant="contained"
                 size="small"
                 component={Link}
-                to="/product-description"
+                to="/checkout"
                 style={{ fontSize: "10px" }}
               >
-                Buy Now!
+                Check out
               </Button>
               <Button
                 variant="contained"
