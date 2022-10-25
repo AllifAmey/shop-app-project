@@ -70,11 +70,15 @@ function Checkout() {
   const changeStep = (event) => {
     setCount(count + 1);
   };
+
   return (
     <>
       <div className={styles["sectionProgress-container"]}>
         <div className={styles["progress-container"]}>
-          <Stepper alternativeLabel activeStep={count}>
+          <Stepper
+            alternativeLabel
+            activeStep={count == 1 || count == 0 ? 0 : count - 1}
+          >
             <Step>
               <StepLabel>Address</StepLabel>
             </Step>
@@ -88,7 +92,11 @@ function Checkout() {
         </div>
       </div>
       <div className={styles["section-container"]}>
-        <CheckoutStep1_1 onCount={changeStep}></CheckoutStep1_1>
+        {count == 0 ? (
+          <CheckoutStep1_1 onCount={changeStep}></CheckoutStep1_1>
+        ) : (
+          <CheckoutStep1_2 onCount={changeStep}> </CheckoutStep1_2>
+        )}
         <div className={styles["checkout-container"]}>
           <div className={styles["checkout-title"]}>Order Summary</div>
           <div className={styles["order-item"]}>
