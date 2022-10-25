@@ -1,3 +1,23 @@
+/* Section Container for contact and checkout*/
+
+.sectionProgress-container {
+  margin-top: 20px;
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Progress container */
+
+.progress-container {
+  width: 40%;
+  height: 80%;
+}
+
+/* Section Container for contact and checkout*/
+
 .section-container {
   width: 90%;
   height: 100vh;

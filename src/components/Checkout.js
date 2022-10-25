@@ -1,10 +1,15 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/system";
 import styles from "./Checkout.module.css";
 import img from "../img/Cards/Product/card-ring.avif";
 import { Routes, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import CheckoutStep1_2 from "./CheckoutStep1_2";
+import CheckoutStep1_1 from "./CheckoutStep1_1";
 
 function Checkout() {
   /*
@@ -16,67 +21,74 @@ function Checkout() {
 
     1. Make the Order item in the summary form a seperate component at least
     2. Make the Order Summary or at least the payment a seperator component to calculate price individually.
-    3. Make individual contact sections ( like Last Name ) into a seperate component. 
+    3. Make individual contact sections ( like Last Name ) into a seperate component.
 
     When pressing continue , move to the next component and update the progress component.
-    After Address and Delivery stage are completed 
+    After Address and Delivery stage are completed.
 
+    current idea on implementation of Stepper:
+
+    I don't want to dwell into functionality too much at this stage, I want a foundation to build upon. To adhere to that, use the bare minimum.
+
+    First use of functionality will be the use of states.
+
+    Use useState to track the state of the step. Show the component corresponding to the state.
+
+    Further investigation into made shows the full steps 
+
+    Address contains 2 parts with no indicator, I could add that through animation.
+
+    2nd part - 
+
+    Address
+    2 textinputfields
+    City
+    1 Textinputfield
+    PostCode
+    1 short Textinputfield
+    Country
+    Select widget from material UI is very similar.
+
+    Delivery
+
+    A list of products , I assume, is shown above. 
+    Shows different standards of delivery
+    Standard 
+    Saturday Delivery
+    Sunday Delivery
+
+    Idea of delivery : show fast vs slow or estimate the time.
+
+    Payment
+
+    This is typical payment form that can be implemented much later.
 
     */
+
+  const [count, setCount] = useState(0);
+
+  const changeStep = (event) => {
+    setCount(count + 1);
+  };
   return (
     <>
-      <div className={styles["section-container"]}>
-        <div className={styles["contact-container"]}>
-          <div className={styles["section-title"]}>Delivery Contact</div>
-          <div className={styles["first-name"]}>
-            <div className={styles["contact-title"]}>First Name</div>
-            <TextField
-              id="outlined-basic"
-              label="First Name"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-          <div className={styles["last-name"]}>
-            <div className={styles["contact-title"]}>Last Name</div>
-            <TextField
-              id="outlined-basic"
-              label="Last Name"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-          <div className={styles["email"]}>
-            <div className={styles["contact-title"]}>Email Address</div>
-            <TextField
-              id="outlined-basic"
-              label="Email Address"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-          <div className={styles["phone"]}>
-            <div className={styles["contact-title"]}>Phone</div>
-            <TextField
-              id="outlined-basic"
-              label="Phone"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-          <div className={styles["btn"]}>
-            <Button
-              variant="text"
-              size="big"
-              component={Link}
-              to="/checkout"
-              style={{ fontSize: "16px" }}
-            >
-              Continue
-            </Button>
-          </div>
+      <div className={styles["sectionProgress-container"]}>
+        <div className={styles["progress-container"]}>
+          <Stepper alternativeLabel activeStep={count}>
+            <Step>
+              <StepLabel>Address</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Delivery</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Payments</StepLabel>
+            </Step>
+          </Stepper>
         </div>
-
+      </div>
+      <div className={styles["section-container"]}>
+        <CheckoutStep1_1 onCount={changeStep}></CheckoutStep1_1>
         <div className={styles["checkout-container"]}>
           <div className={styles["checkout-title"]}>Order Summary</div>
           <div className={styles["order-item"]}>
