@@ -10,6 +10,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import CheckoutStep1_2 from "./CheckoutStep1_2";
 import CheckoutStep1_1 from "./CheckoutStep1_1";
+import CheckoutSteps from "./CheckoutSteps";
 
 function Checkout() {
   /*
@@ -92,11 +93,8 @@ function Checkout() {
         </div>
       </div>
       <div className={styles["section-container"]}>
-        {count == 0 ? (
-          <CheckoutStep1_1 onCount={changeStep}></CheckoutStep1_1>
-        ) : (
-          <CheckoutStep1_2 onCount={changeStep}> </CheckoutStep1_2>
-        )}
+        {<CheckoutSteps count={count} onCount={changeStep}></CheckoutSteps>}
+
         <div className={styles["checkout-container"]}>
           <div className={styles["checkout-title"]}>Order Summary</div>
           <div className={styles["order-item"]}>
