@@ -18,7 +18,7 @@ function CheckoutSteps(props) {
   } else if (props.count == 1) {
     return <CheckoutStep1_2 onCount={props.onCount}></CheckoutStep1_2>;
   } else if (props.count == 2) {
-    return <CheckoutStep2></CheckoutStep2>;
+    return <CheckoutStep2 onCount={props.onCount}></CheckoutStep2>;
   } else {
     return (
       <>
