@@ -20,6 +20,8 @@ function CheckoutStep2(props) {
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
+  /*Inspiration: 
+  https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
   return (
     <>
       <div className={styles["section-container"]}>

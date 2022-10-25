@@ -11,6 +11,7 @@ import StepLabel from "@mui/material/StepLabel";
 import CheckoutStep1_2 from "./CheckoutStep1_2";
 import CheckoutStep1_1 from "./CheckoutStep1_1";
 import CheckoutStep2 from "./CheckoutStep2";
+import CheckoutStep3 from "./CheckoutStep3";
 
 function CheckoutSteps(props) {
   if (props.count == 0) {
@@ -20,11 +21,7 @@ function CheckoutSteps(props) {
   } else if (props.count == 2) {
     return <CheckoutStep2 onCount={props.onCount}></CheckoutStep2>;
   } else {
-    return (
-      <>
-        <h1>Something went wrong!</h1>
-      </>
-    );
+    return <CheckoutStep3 onCount={props.onCount}></CheckoutStep3>;
   }
 }
 

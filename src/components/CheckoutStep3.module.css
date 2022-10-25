@@ -1,0 +1,38 @@
+.section-container {
+  padding: 1rem;
+  margin-top: 20px;
+  width: 70%;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "cNumber cNumber"
+    "cValid cCVV"
+    "cName cName"
+    "btn .";
+}
+
+.payment-title {
+  margin-bottom: 0.8rem;
+}
+
+.cardnumber-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.payment-cNumber {
+  grid-area: cNumber;
+}
+
+.payment-cValid {
+  grid-area: cValid;
+}
+
+.payment-cCVV {
+  grid-area: cCVV;
+}
+
+.payment-cName {
+  grid-area: cName;
+}
