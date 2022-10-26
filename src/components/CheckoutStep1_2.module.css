@@ -12,7 +12,7 @@
     "postcode ."
     "country ."
     "btn btn";
-  grid-template-rows: 20% 25% 1fr 1fr 1fr 1fr 20%;
+  grid-template-rows: 10% 25% 1fr 1fr 1fr 1fr 20%;
   gap: 1rem 0.5rem;
   font-size: 16px;
 }
