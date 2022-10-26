@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/system";
-import styles from "./Hero.module.css";
+import styles from "./HomePage.module.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -36,7 +36,7 @@ function Hero() {
               color="secondary"
               style={{ fontSize: "10px" }}
               component={Link}
-              to="/product"
+              to="/shop"
             >
               Explore Shop
             </Button>

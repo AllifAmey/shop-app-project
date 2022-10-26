@@ -1,12 +1,20 @@
 .container {
-  height: auto;
+  height: 100vh;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product {
   height: auto;
   width: 60%;
+}
+
+.section-container {
+  display: flex;
+  height: 90%;
+  width: 80%;
 }
 
 .product-info {

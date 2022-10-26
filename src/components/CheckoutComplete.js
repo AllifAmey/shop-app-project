@@ -23,7 +23,7 @@ function CheckoutComplete(props) {
         <Button
           variant="contained"
           size="small"
-          to="/product"
+          to="/shop"
           LinkComponent={Link}
           onClick={props.onCount}
           style={{ fontSize: "16px" }}
