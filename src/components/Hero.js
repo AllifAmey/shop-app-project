@@ -20,6 +20,7 @@ https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f2158f4bbb
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f23208b459df8790224_6002086f72b7270da901e44a_personalized-cans.jpeg - maybe as inspiration ? Not sure. 
 */
 function Hero() {
+  /* In the btns show the Online Shop, Physical Shop and scroll down   */
   return (
     <>
       <section className={styles["main"]}>
