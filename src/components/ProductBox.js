@@ -12,28 +12,30 @@ function ProductBox() {
   return (
     <>
       <div className={styles["container"]}>
-        <div className={styles["filter"]}>
-          <div className={styles["filter-title"]}>Items</div>
-          <div className={styles["filter-item"]}>
-            <Checkbox {...label} defaultChecked />
-            Pin Cushions
+        <div className={styles["section-container"]}>
+          <div className={styles["filter"]}>
+            <div className={styles["filter-title"]}>Items</div>
+            <div className={styles["filter-item"]}>
+              <Checkbox {...label} defaultChecked />
+              Pin Cushions
+            </div>
+            <div className={styles["filter-item"]}>
+              <Checkbox {...label} defaultChecked />
+              Scrunchies
+            </div>
+            <div className={styles["filter-item"]}>
+              <Checkbox {...label} defaultChecked />
+              Rings
+            </div>
           </div>
-          <div className={styles["filter-item"]}>
-            <Checkbox {...label} defaultChecked />
-            Scrunchies
+          <div className={styles["product-side"]}>
+            <ProductCard></ProductCard>
+            <ProductCard></ProductCard>
+            <ProductCard></ProductCard>
+            <ProductCard></ProductCard>
+            <ProductCard></ProductCard>
+            <ProductCard></ProductCard>
           </div>
-          <div className={styles["filter-item"]}>
-            <Checkbox {...label} defaultChecked />
-            Rings
-          </div>
-        </div>
-        <div className={styles["product-side"]}>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
         </div>
       </div>
     </>

@@ -2,6 +2,18 @@
   display: flex;
   height: auto;
   width: 100%;
+  justify-content: center;
+}
+
+.section-container {
+  padding-left: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  width: 90%;
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter {
