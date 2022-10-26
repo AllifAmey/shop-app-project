@@ -32,8 +32,8 @@ function Footer() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 48 48"
-                  width="24px"
-                  height="24px"
+                  width="28px"
+                  height="28px"
                 >
                   <path
                     fill="#FF3D00"

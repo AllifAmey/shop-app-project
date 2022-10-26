@@ -1,3 +1,25 @@
+# Phase 1 - Creating Foundation
+
+- &#9745; Home Page
+- &#9745; Shop page
+- &#9745; About page
+- &#9745; Checkout page
+- &#9745; Support page
+- &#9745; Footer
+- &#9745; Navbar
+
+# Phase 2 - Consolidation, fixing bugs and prettifying certain components.
+
+- &#9744; Fix bug related to navbar - align navbar to center.
+- &#9744; Fix Footer alignment with Checkout.
+- &#9744; Adhere to DRY by seperating components as necessary
+- &#9744; Reformat folders and files to decrease project maintenance.
+- &#9744; Add documentation to further reduce project maintenance.
+
+# Phase 3 - Add functionality, animation and improve overall feel of the website.
+
+TBA.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
