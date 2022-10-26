@@ -6,9 +6,14 @@ import CheckoutPage from "./components/pages/CheckoutPage";
 import StoryPage from "./components/pages/StoryPage";
 import HelpPage from "./components/pages/HelpPage";
 import Footer from "./components/Footer";
-import { Routes, Route, Link, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  /* 
+  Use react-helmet-async, it's the updated version of react-helmet to change web title. 
+  https://www.freecodecamp.org/news/react-helmet-examples/
+  
+  */
   return (
     <>
       <NavBar></NavBar>

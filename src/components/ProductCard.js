@@ -1,9 +1,8 @@
 import * as React from "react";
-import { styled } from "@mui/system";
 import styles from "./ProductCard.module.css";
 import img from "../img/Cards/Product/card-ring.avif";
 import Button from "@mui/material/Button";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ProductCard() {
   return (

@@ -1,7 +1,6 @@
 import * as React from "react";
-import { styled } from "@mui/system";
 import styles from "./NavBar.module.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (

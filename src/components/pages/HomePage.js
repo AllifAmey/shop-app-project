@@ -1,7 +1,6 @@
 import * as React from "react";
-import { styled } from "@mui/system";
 import styles from "./HomePage.module.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 

@@ -1,8 +1,5 @@
-import React, { useState } from "react";
-import { styled } from "@mui/system";
+import React from "react";
 import styles from "./CheckoutStep1_2.module.css";
-import img from "../img/Cards/Product/card-ring.avif";
-import { Routes, Route, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 

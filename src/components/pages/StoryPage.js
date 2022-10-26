@@ -1,8 +1,5 @@
 import * as React from "react";
-import { styled } from "@mui/system";
 import styles from "./StoryPage.module.css";
-
-import { Routes, Route, Link } from "react-router-dom";
 
 function StoryPage() {
   /*
