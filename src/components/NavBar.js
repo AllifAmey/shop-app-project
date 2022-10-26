@@ -19,7 +19,7 @@ function NavBar() {
             <Link className={styles["nav-link"]} to="/story">
               Our Story
             </Link>
-            <Link className={styles["nav-link"]} to="/product">
+            <Link className={styles["nav-link"]} to="/help">
               Help
             </Link>
           </div>

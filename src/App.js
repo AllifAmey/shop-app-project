@@ -4,6 +4,7 @@ import InfoBox from "./components/InfoBox";
 import Hero from "./components/Hero";
 import Checkout from "./components/Checkout";
 import StoryPage from "./components/StoryPage";
+import HelpPage from "./components/HelpPage";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/product-description" element={<InfoBox />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/story" element={<StoryPage />} />
+        <Route path="/help" element={<HelpPage />} />
       </Routes>
     </>
   );
