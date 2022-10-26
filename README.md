@@ -10,7 +10,7 @@
 
 # Phase 2 - Consolidation, fixing bugs and prettifying certain components.
 
-- &#9744; Fix bug related to navbar - align navbar to center.
+- &#9745; Fix bug related to navbar - align navbar to center.
 - &#9744; Fix Footer alignment with Checkout.
 - &#9744; Adhere to DRY by seperating components as necessary
 - &#9744; Reformat folders and files to decrease project maintenance.
