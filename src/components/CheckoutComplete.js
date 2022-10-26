@@ -13,6 +13,9 @@ import CheckoutStep1_1 from "./CheckoutStep1_1";
 import CheckoutSteps from "./CheckoutSteps";
 
 function CheckoutComplete(props) {
+  /*
+  Look into dialog material ui perhaps. Or the snackbar material ui one 
+  */
   return (
     <>
       <div className={styles["section-container"]}>
