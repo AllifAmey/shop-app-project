@@ -21,6 +21,13 @@ function CheckoutStep3(props) {
     Card number inspiration: 
     https://assets.materialup.com/uploads/6ec7f467-26ee-49b8-9ca0-542f6ff8b8e4/preview.png
 
+    Just a note: 
+    https://github.com/mui/material-ui/blob/649ef2e34c10c90788b7506e88958c91f87f924c/src/TextField/TextField.js#L171
+    https://stackoverflow.com/questions/35093107/how-to-override-the-width-of-a-textfield-component-with-react-mui
+
+    The stackoverflow answer seems to indicate that I have to look directly at the code and its documentation to ,
+    fully comprehend the material ui component as opposed to looking at the site's documentation. 
+
     */
   return (
     <>
