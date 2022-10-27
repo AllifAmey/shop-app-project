@@ -1,3 +1,4 @@
+/* Main section */
 .section-container {
   padding: 1rem;
   margin-top: 20px;
@@ -15,6 +16,7 @@
 .payment-title {
   margin-bottom: 0.8rem;
 }
+/* Card Number Container containing 4 individual card fields */
 
 .cardnumber-container {
   display: flex;

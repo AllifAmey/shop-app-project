@@ -62,12 +62,12 @@ function InfoBox() {
 
               <div className={styles["btns"]}>
                 <CustomButton
-                  colour="#ededdf"
+                  colour="#ced4da"
                   text="Check Out"
                   href="/checkout"
                 ></CustomButton>
                 <CustomButton
-                  colour="#ededdf"
+                  colour="#ced4da"
                   text="Add Cart"
                   href="/product-description"
                 ></CustomButton>

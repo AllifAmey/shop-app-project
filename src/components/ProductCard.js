@@ -27,7 +27,7 @@ function ProductCard() {
         <div className={styles["card-price"]}>£3.99</div>
         <div className={styles["card-delivery"]}>FREE UK delivery</div>
         <div className={styles["btn-purchase"]}>
-          <CustomButton colour="#ededdf"></CustomButton>
+          <CustomButton colour="#ced4da"></CustomButton>
         </div>
       </div>
     </div>
