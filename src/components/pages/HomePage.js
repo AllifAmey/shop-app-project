@@ -3,6 +3,7 @@ import styles from "./HomePage.module.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CustomButton from "../CustomButton";
 
 const theme = createTheme({
   palette: {
@@ -28,18 +29,7 @@ function Hero() {
           The best handcrafted Jewellery money can buy at a affordable price.
         </div>
         <div className={styles["btn"]}>
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              size="medium"
-              color="secondary"
-              style={{ fontSize: "10px" }}
-              component={Link}
-              to="/shop"
-            >
-              Explore Shop
-            </Button>
-          </ThemeProvider>
+          <CustomButton colour="#613500"></CustomButton>
         </div>
       </section>
     </>

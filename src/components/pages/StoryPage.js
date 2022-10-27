@@ -11,6 +11,11 @@ function StoryPage() {
     Use google map api to create the google map - scroll down to "Connect with one of our global offices"
     https://www.hubspot.com/company/contact?_ga=2.153440184.1862735785.1624414629-863205565.1624414629&hubs_post=blog.hubspot.com%2Fservice%2Fbest-contact-us-pages&hubs_post-cta=HubSpot 
 
+    update: 
+    Added some of the design , mother wanted such as increased boldness and size to the headline
+    Increase the fontsize of the article content by 2px.
+    She asked for the img to go up a bit. 
+
     */
   return (
     <>

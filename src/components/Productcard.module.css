@@ -45,6 +45,7 @@ SHADOW SYSTEM (px)
 
 .card-container .card-info {
   grid-area: info;
+  font-size: 12px;
 }
 
 .card-container .card-price {

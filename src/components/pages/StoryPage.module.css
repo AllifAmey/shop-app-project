@@ -26,11 +26,12 @@
 }
 
 .top-title {
-  font-size: 24px;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 .top-info {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .bottom-container {
@@ -46,6 +47,7 @@
   width: 90%;
   height: 90%;
   display: flex;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -59,7 +61,8 @@
 }
 
 .article-title {
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: 800;
 }
 
 .article-img {
@@ -68,4 +71,8 @@
   border-radius: 20px;
   background: url("../../img/Storypage/nature-inspiration.avif") no-repeat
     center center/cover;
+}
+
+.article-info {
+  font-size: 16px;
 }

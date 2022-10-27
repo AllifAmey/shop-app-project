@@ -3,6 +3,18 @@ import styles from "./ProductCard.module.css";
 import img from "../img/Cards/Product/card-ring.avif";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import CustomButton from "./CustomButton";
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#ededdf",
+    },
+  },
+});
 
 function ProductCard() {
   return (
@@ -15,15 +27,7 @@ function ProductCard() {
         <div className={styles["card-price"]}>£3.99</div>
         <div className={styles["card-delivery"]}>FREE UK delivery</div>
         <div className={styles["btn-purchase"]}>
-          <Button
-            variant="contained"
-            size="small"
-            component={Link}
-            to="/product-info"
-            style={{ fontSize: "10px" }}
-          >
-            Buy Now!
-          </Button>
+          <CustomButton colour="#ededdf"></CustomButton>
         </div>
       </div>
     </div>
