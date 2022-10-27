@@ -22,10 +22,10 @@
 - &#9744; Add Cart functionality and Cart Page.
 - &#9744; Add minimal animations when transitioning to different pages
 - &#9744; Add smooth scrolling animation.
-- &#9744; Add icons to enhance app's look and feel.
+- &#9745; Add icons to enhance app's look and feel.
 - &#9744; Improve the look and feel of the navbar to reduce it's static feeling.
 - &#9744; Greatly improve help page by adding more than FAQ.
-- &#9744; Add a "Quick details" button to the product card with a pop up showing important details.
+- &#9745; Add a "Quick details" button to the product card with a pop up showing important details.
 - &#9744; Improve homepage by making it clearer on how to navigate the website.
 - &#9744; Use Etys's API to transfer the data to the productcard component.
 
