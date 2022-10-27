@@ -1,9 +1,7 @@
 import * as React from "react";
 import styles from "./ProductInfoPage.module.css";
 import img from "../../img/Cards/Product/card-ring.avif";
-import { Link } from "react-router-dom";
-
-import Button from "@mui/material/Button";
+import CustomButton from "../CustomButton";
 
 function InfoBox() {
   /*
@@ -63,24 +61,16 @@ function InfoBox() {
               <div className={styles["price"]}>£3.99</div>
 
               <div className={styles["btns"]}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/checkout"
-                  style={{ fontSize: "10px" }}
-                >
-                  Check out
-                </Button>
-                <Button
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/product-description"
-                  style={{ fontSize: "10px" }}
-                >
-                  Add Cart
-                </Button>
+                <CustomButton
+                  colour="#ededdf"
+                  text="Check Out"
+                  href="/checkout"
+                ></CustomButton>
+                <CustomButton
+                  colour="#ededdf"
+                  text="Add Cart"
+                  href="/product-description"
+                ></CustomButton>
               </div>
             </div>
           </div>

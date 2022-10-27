@@ -1,18 +1,7 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
-import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CustomButton from "../CustomButton";
 
-const theme = createTheme({
-  palette: {
-    secondary: {
-      // This is green.A700 as hex.
-      main: "#613500",
-    },
-  },
-});
 /*
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8bc2cc5785b_6002086f72b7277a6401e43e_sobremesa.jpeg - look at the white arrow at the bottom. Maybe add that.
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f2158f4bbbcec10c88f_6002086f72b727f54401e412_space-posters.jpeg - look at the bottom right , add that most likely
