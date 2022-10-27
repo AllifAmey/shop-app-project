@@ -32,7 +32,7 @@ SHADOW SYSTEM (px)
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 150px 1fr 1fr 1fr;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   font-size: 10px;
 }
 
@@ -54,11 +54,23 @@ SHADOW SYSTEM (px)
 
 .card-container .card-delivery {
   grid-area: delivery;
+  text-align: end;
 }
 
 .card-container .btn-purchase {
   grid-area: btn;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-container {
+  height: 80%;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-evenly;
   align-items: center;
 }
