@@ -1,6 +1,7 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
 import CustomButton from "../CustomButton";
+import LocationHomePage from "../LocationHomePage";
 
 /*
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8bc2cc5785b_6002086f72b7277a6401e43e_sobremesa.jpeg - look at the white arrow at the bottom. Maybe add that.
@@ -21,6 +22,7 @@ function Hero() {
           <CustomButton colour="#613500"></CustomButton>
         </div>
       </section>
+      <LocationHomePage></LocationHomePage>
     </>
   );
 }
