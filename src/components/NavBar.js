@@ -3,6 +3,10 @@ import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 
 function NavBar() {
+  /* Shadow types - could add to toolbox document
+  https://getcssscan.com/css-box-shadow-examples 
+  
+  */
   return (
     <>
       <div className={styles["nav-bg"]}>

@@ -10,6 +10,21 @@ function LocationHomePage() {
 
   // https://i.pinimg.com/originals/65/e7/63/65e763df894b30b767e3134675d83767.jpg <-- inspiration
 
+  /**
+   Next step:
+   add the weather Api above the card using absolute positioning to place the weather information. 
+   
+   instructions for future:
+   https://openweathermap.org/current
+
+   grab the data using lat and long from that set of data,
+   I should get the current weather logo.
+
+   then send a post request to another url to get the logo url from there link it on the page.
+
+
+   */
+
   return (
     <>
       <div className={styles["main-container"]}>
@@ -18,9 +33,14 @@ function LocationHomePage() {
 
           <div className={styles["right-container"]}>
             <div className={styles["article-container"]}>
-              <div className={styles["article-title"]}>
-                Our Physical Location
+              <div className={styles["article-heading"]}>
+                <div className={styles["article-title"]}>
+                  Our Physical Location
+                </div>
+                <div className={styles["article-weather"]}>Weather</div>
+                <div className={styles["article-weatherStatus"]}>☔ </div>
               </div>
+
               <div className={styles["article-card"]}>
                 <div className={styles["article-subContainer"]}>
                   <div className={styles["article-top"]}>
