@@ -3,8 +3,6 @@ import styles from "./LocationHomePage.module.css";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 export default function Home() {
-  // API key : AIzaSyAK257srgQyzbGQDtK3Q7o-WygtdYAvJzU
-
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
