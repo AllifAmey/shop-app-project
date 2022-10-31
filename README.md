@@ -18,7 +18,7 @@
 
 # Phase 3 - Add functionality, animation and improve overall feel of the website.
 
-- &#9744; Use Google Map and weather Map API to showcase location of physical shop - home page.
+- &#9745; Use Google Map and weather Map API to showcase location of physical shop - home page.
 - &#9744; Add Cart functionality and Cart Page.
 - &#9744; Add minimal animations when transitioning to different pages
 - &#9744; Add smooth scrolling animation.
