@@ -19,11 +19,11 @@ function StoryPage() {
     */
   return (
     <>
-      <div class={styles["section-container"]}>
-        <div class={styles["top-container"]}>
-          <div class={styles["top-subContainer"]}>
-            <div class={styles["top-title"]}>Our Story</div>
-            <div class={styles["top-info"]}>
+      <div className={styles["section-container"]}>
+        <div className={styles["top-container"]}>
+          <div className={styles["top-subContainer"]}>
+            <div className={styles["top-title"]}>Our Story</div>
+            <div className={styles["top-info"]}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
               ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
               sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
@@ -32,11 +32,11 @@ function StoryPage() {
             </div>
           </div>
         </div>
-        <div class={styles["bottom-container"]}>
-          <div class={styles["article-container"]}>
-            <div class={styles["article-left"]}>
-              <div class={styles["article-title"]}>Design Inspiration</div>
-              <div class={styles["article-info"]}>
+        <div className={styles["bottom-container"]}>
+          <div className={styles["article-container"]}>
+            <div className={styles["article-left"]}>
+              <div className={styles["article-title"]}>Design Inspiration</div>
+              <div className={styles["article-info"]}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
                 nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate
@@ -44,7 +44,7 @@ function StoryPage() {
               </div>
             </div>
 
-            <div class={styles["article-img"]}></div>
+            <div className={styles["article-img"]}></div>
           </div>
         </div>
       </div>

@@ -51,8 +51,13 @@
 
 .article-weatherStatus {
   position: absolute;
-  top: 115%;
-  left: 45%;
+  top: 90%;
+  left: 40%;
+}
+/* weather icon */
+.weather-icon {
+  height: 50px;
+  width: 50px;
 }
 
 /* This container is the card */

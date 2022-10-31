@@ -1,29 +1,29 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./LocationHomePage.module.css";
 import img from "../img/icons/openSign-icon.png";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import Home from "./googleMap";
 
 function LocationHomePage() {
-  // This could be difficult
-  // This requires Google Map API, weather API
-
   // https://i.pinimg.com/originals/65/e7/63/65e763df894b30b767e3134675d83767.jpg <-- inspiration
 
-  /**
-   Next step:
-   add the weather Api above the card using absolute positioning to place the weather information. 
-   
-   instructions for future:
-   https://openweathermap.org/current
+  const [weatherIcon, setWeatherIcon] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-   grab the data using lat and long from that set of data,
-   I should get the current weather logo.
+  const fetchWeatherHandler = useCallback(async () => {
+    setIsLoading(true);
+    const response = await fetch("http://localhost:8000/weather");
+    const data = await response.json();
 
-   then send a post request to another url to get the logo url from there link it on the page.
+    const icon = data.weather["0"].icon;
 
+    setWeatherIcon(icon);
+    setIsLoading(false);
+  }, []);
 
-   */
+  useEffect(() => {
+    fetchWeatherHandler();
+  }, [fetchWeatherHandler]);
 
   return (
     <>
@@ -38,7 +38,16 @@ function LocationHomePage() {
                   Our Physical Location
                 </div>
                 <div className={styles["article-weather"]}>Weather</div>
-                <div className={styles["article-weatherStatus"]}>☔ </div>
+                <div className={styles["article-weatherStatus"]}>
+                  {!isLoading && (
+                    <img
+                      src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+                      alt="Weather icon"
+                      className={styles["weather-icon"]}
+                    />
+                  )}
+                  {isLoading && <CircularProgress />}
+                </div>
               </div>
 
               <div className={styles["article-card"]}>
