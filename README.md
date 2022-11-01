@@ -29,6 +29,9 @@
 - &#9744; Improve homepage by making it clearer on how to navigate the website.
 - &#9744; Use Etys's API to transfer the data to the productcard component.
 - &#9744; Add functionality to the filter system after Etsy's data is transfered.
+- &#9745; Add dropdown menu to navbar support
+- &#9744; Add Contact Page
+- &#9744; Improve FAQ page
 
 # Phase 4 - Consolidation, fixing bugs and adding Django backend.
 

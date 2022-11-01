@@ -12,7 +12,9 @@ function HelpPage() {
 
     https://mui.com/material-ui/react-accordion/ 
 
-    Accordion component is the one I am looking for. 
+    Accordion component is the one I am looking for.
+    
+    // contact us page 
     */
   return (
     <>

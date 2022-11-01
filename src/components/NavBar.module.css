@@ -47,3 +47,12 @@
 .nav-link {
   color: inherit;
 }
+
+/* DropDown Menu */
+
+.nav-support {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+}

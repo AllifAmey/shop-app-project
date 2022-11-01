@@ -17,6 +17,7 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
+
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<HomePage />} />
@@ -24,7 +25,7 @@ function App() {
         <Route path="/product-info" element={<ProductInfoPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/story" element={<StoryPage />} />
-        <Route path="/help" element={<HelpPage />} />
+        <Route path="/support/faq" element={<HelpPage />} />
       </Routes>
       <Footer></Footer>
     </>

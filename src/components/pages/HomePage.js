@@ -14,7 +14,7 @@ function Hero() {
   return (
     <>
       <section className={styles["main"]}>
-        <div className={styles["title"]}>Sahrah Amey Jewellery</div>
+        <div className={styles["title"]}>Amey Jewellery</div>
         <div className={styles["short-info"]}>
           The best handcrafted Jewellery money can buy at a affordable price.
         </div>

@@ -46,7 +46,9 @@ function LocationHomePage() {
                       className={styles["weather-icon"]}
                     />
                   )}
-                  {isLoading && <CircularProgress />}
+                  {isLoading && (
+                    <CircularProgress size="1.5rem" sx={{ margin: 1 }} />
+                  )}
                 </div>
               </div>
 
