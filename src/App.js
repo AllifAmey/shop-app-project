@@ -5,6 +5,7 @@ import HomePage from "./components/pages/HomePage";
 import CheckoutPage from "./components/pages/CheckoutPage";
 import StoryPage from "./components/pages/StoryPage";
 import HelpPage from "./components/pages/HelpPage";
+import ContactPage from "./components/pages/ContactPage";
 import Footer from "./components/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/story" element={<StoryPage />} />
         <Route path="/support/faq" element={<HelpPage />} />
+        <Route path="/support/contact" element={<ContactPage />} />
       </Routes>
       <Footer></Footer>
     </>
