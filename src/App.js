@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import NavBarNew from "./components/NavBarNew";
 import ShopPage from "./components/pages/ShopPage";
 import ProductInfoPage from "./components/pages/ProductInfoPage";
 import HomePage from "./components/pages/HomePage";
@@ -19,7 +20,7 @@ function App() {
   */
   return (
     <>
-      <NavBar></NavBar>
+      <NavBarNew></NavBarNew>
       <ThemeProvider theme={shopTheme}>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />

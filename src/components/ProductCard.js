@@ -19,6 +19,9 @@ function ProductCard() {
   const handleClose = () => {
     setOpen(false);
   };
+  // Using Paper for the product card ??
+  // Paper according to net ninja https://www.youtube.com/watch?v=GYTN5JdkLSQ&ab_channel=TheNetNinja
+  // is basically meant to look like paper on a screen with some elevation.
 
   return (
     <>

@@ -3,6 +3,7 @@ import styles from "./NavBar.module.css";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 
 function NavBar() {
   /* Shadow types - could add to toolbox document
