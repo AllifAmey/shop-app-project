@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import styles from "./LocationHomePage.module.css";
 import img from "../img/icons/openSign-icon.png";
 import CircularProgress from "@mui/material/CircularProgress";
-import Home from "./googleMap";
+import OurLocation from "./googleMap";
 
 function LocationHomePage() {
   // https://i.pinimg.com/originals/65/e7/63/65e763df894b30b767e3134675d83767.jpg <-- inspiration
@@ -27,10 +27,9 @@ function LocationHomePage() {
 
   return (
     <>
-      <div className={styles["main-container"]}>
+      <div className={styles["main-container"]} id="location">
         <div className={styles["section-container"]}>
-          <Home> </Home>
-
+          <OurLocation> </OurLocation>
           <div className={styles["right-container"]}>
             <div className={styles["article-container"]}>
               <div className={styles["article-heading"]}>

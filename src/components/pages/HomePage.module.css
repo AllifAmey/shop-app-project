@@ -34,3 +34,9 @@
 .short-info {
   font-size: 14px;
 }
+
+.location-container {
+  position: absolute;
+  font-size: 12px;
+  bottom: 2%;
+}

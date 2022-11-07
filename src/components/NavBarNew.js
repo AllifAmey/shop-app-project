@@ -63,6 +63,8 @@ function NavBarNew() {
             alignItems="center"
             sx={gridLinkStyles}
             xs={1}
+            component={RouterLink}
+            to="/home"
           >
             <Link
               color="#343a40"
@@ -80,6 +82,8 @@ function NavBarNew() {
             justifyContent="center"
             alignItems="center"
             sx={gridLinkStyles}
+            component={RouterLink}
+            to="/shop"
           >
             <Link
               color="#343a40"
@@ -97,6 +101,8 @@ function NavBarNew() {
             justifyContent="center"
             alignItems="center"
             sx={gridLinkStyles}
+            component={RouterLink}
+            to="/story"
           >
             <Link
               underline="none"

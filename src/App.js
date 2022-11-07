@@ -1,4 +1,3 @@
-import NavBar from "./components/NavBar";
 import NavBarNew from "./components/NavBarNew";
 import ShopPage from "./components/pages/ShopPage";
 import ProductInfoPage from "./components/pages/ProductInfoPage";
@@ -24,6 +23,7 @@ function App() {
       <ThemeProvider theme={shopTheme}>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
+
           <Route path="/home" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/product-info" element={<ProductInfoPage />} />

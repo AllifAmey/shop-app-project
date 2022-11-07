@@ -21,7 +21,7 @@
 - &#9745; Use Google Map and weather Map API to showcase location of physical shop - home page.
 - &#9744; Add Cart functionality and Cart Page.
 - &#9744; Add minimal animations when transitioning to different pages
-- &#9744; Add smooth scrolling animation.
+- &#9745; Add smooth scrolling animation.
 - &#9745; Add icons to enhance app's look and feel.
 - &#9745; Improve the look and feel of the navbar to reduce it's static feeling.
 - &#9744; Greatly improve help page by adding more than FAQ.
@@ -30,7 +30,7 @@
 - &#9744; Use Etys's API to transfer the data to the productcard component.
 - &#9744; Add functionality to the filter system after Etsy's data is transfered.
 - &#9745; Add dropdown menu to navbar support
-- &#9744; Add Contact Page
+- &#9745; Add Contact Page
 - &#9744; Improve FAQ page
 
 # Phase 4 - Consolidation, fixing bugs and adding Django backend.
