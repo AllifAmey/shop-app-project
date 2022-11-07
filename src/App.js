@@ -8,6 +8,8 @@ import HelpPage from "./components/pages/HelpPage";
 import ContactPage from "./components/pages/ContactPage";
 import Footer from "./components/Footer";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { shopTheme } from "./shopTheme";
 
 function App() {
   /* 
@@ -18,18 +20,19 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product-info" element={<ProductInfoPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
-        <Route path="/story" element={<StoryPage />} />
-        <Route path="/support/faq" element={<HelpPage />} />
-        <Route path="/support/contact" element={<ContactPage />} />
-      </Routes>
-      <Footer></Footer>
+      <ThemeProvider theme={shopTheme}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product-info" element={<ProductInfoPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/story" element={<StoryPage />} />
+          <Route path="/support/faq" element={<HelpPage />} />
+          <Route path="/support/contact" element={<ContactPage />} />
+        </Routes>
+        <Footer></Footer>
+      </ThemeProvider>
     </>
   );
 }

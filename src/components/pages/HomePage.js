@@ -1,6 +1,8 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
-import CustomButton from "../CustomButton";
+import CustomButton from "../utility/CustomButton";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 import LocationHomePage from "../LocationHomePage";
 
 /*
@@ -19,7 +21,9 @@ function Hero() {
           The best handcrafted Jewellery money can buy at a affordable price.
         </div>
         <div className={styles["btn"]}>
-          <CustomButton colour="#613500"></CustomButton>
+          <Button variant="contained" size="small" component={Link} to="/shop">
+            Buy Now
+          </Button>
         </div>
       </section>
       <LocationHomePage></LocationHomePage>

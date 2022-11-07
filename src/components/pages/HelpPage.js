@@ -11,8 +11,11 @@ function HelpPage() {
     https://whatfix.com/blog/wp-content/uploads/2021/12/Screen-Shot-2021-12-13-at-12.21.26.png
 
     https://mui.com/material-ui/react-accordion/ 
+    
 
     Accordion component is the one I am looking for.
+
+    https://www.leadquizzes.com/wp-content/uploads/2020/07/screencapture-leadquizzes-pricing-2020-07-16-00_05_59.png - inspiration 
     
     // contact us page 
     */

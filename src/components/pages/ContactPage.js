@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./ContactPage.module.css";
 import TextField from "@mui/material/TextField";
-import CustomButton from "../CustomButton";
+import CustomButton from "../utility/CustomButton";
 
 function ContactPage() {
   /**

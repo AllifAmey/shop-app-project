@@ -1,24 +1,13 @@
 import React, { useState } from "react";
 import styles from "./ProductCard.module.css";
 import img from "../img/Cards/Product/card-ring.avif";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+import { Link } from "react-router-dom";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-
-import CustomButton from "./CustomButton";
-
-const theme = createTheme({
-  palette: {
-    secondary: {
-      // This is green.A700 as hex.
-      main: "#ededdf",
-    },
-  },
-});
 
 function ProductCard() {
   const [open, setOpen] = useState(false);
@@ -42,18 +31,15 @@ function ProductCard() {
           <div className={styles["card-price"]}>£3.99</div>
           <div className={styles["card-delivery"]}>FREE UK delivery</div>
           <div className={styles["btn-purchase"]}>
-            <CustomButton colour="#ced4da"></CustomButton>
             <Button
               variant="contained"
-              onClick={handleClickOpen}
-              text="Quick Info"
-              style={{
-                fontSize: "10px",
-                backgroundColor: "#ced4da",
-                color: "#000",
-              }}
               size="small"
+              component={Link}
+              to="/product-info"
             >
+              Buy Now
+            </Button>
+            <Button variant="contained" size="small" onClick={handleClickOpen}>
               Quick Info
             </Button>
           </div>
