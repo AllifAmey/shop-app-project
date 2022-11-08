@@ -29,6 +29,7 @@ function ProductCard() {
   // is basically meant to look like paper on a screen with some elevation.
   // quick info instead on the image.
   // whole product card to be in the paper
+  // https://codes4education.com/wp-content/uploads/2020/10/CSS-Creative-Product-Card-UI-Design-E-commerce-Card-Using-Html5-CSS3-Code4Education-min.jpg
 
   const paperStyles = {
     height: "350px",
@@ -95,21 +96,42 @@ function ProductCard() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            height: "90%",
+            maxWidth: "70%",
+
+            display: "flex",
+            flexDirection: "row",
+            flex: "1 1 50%",
+            borderRadius: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
       >
-        <DialogTitle
-          id="alert-dialog-title"
-          sx={{ textAlign: "center", backgroundColor: "yellow" }}
-        >
-          Quick Info
-        </DialogTitle>
+        <CardMedia
+          component="img"
+          image={img}
+          alt="ring"
+          sx={{
+            height: "80%",
+            width: "80vh",
+            marginLeft: "4%",
+            borderRadius: "20px",
+          }}
+        ></CardMedia>
         <DialogContent
           sx={{
+            height: "60vh",
+            lineHeight: "1.5rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <div className={styles["dialog-container"]}>
+            <DialogTitle>Quick Info </DialogTitle>
             <div className={styles["dialog-item"]}>Handmade item </div>
             <div className={styles["dialog-item"]}>
               Handmade item Dispatches from a small business in United Kingdom
@@ -117,11 +139,11 @@ function ProductCard() {
             <div className={styles["dialog-item"]}>
               Materials: copper FREE UK delivery
             </div>
+            <DialogActions>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
           </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
       </Dialog>
     </>
   );
