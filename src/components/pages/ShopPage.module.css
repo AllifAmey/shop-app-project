@@ -16,6 +16,7 @@
   height: 90%;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 /* left side in the section container*/
 .left-container {
@@ -78,6 +79,6 @@
   display: flex;
   align-items: flex-start;
   justify-content: start;
-  gap: 1rem;
+  gap: 2rem;
   flex-wrap: wrap;
 }
