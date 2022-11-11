@@ -6,6 +6,7 @@ import CustomButton from "../utility/CustomButton";
 function ContactPage() {
   /**
    *https://i.ytimg.com/vi/ZafzM_z9PLs/maxresdefault.jpg
+   Contact page with picture under the phone number.
    */
   return (
     <>

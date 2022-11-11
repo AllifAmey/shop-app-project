@@ -9,13 +9,21 @@ import { Link as RouterLink } from "react-router-dom";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useSelector, useDispatch } from "react-redux";
+import { counterActions } from "../store/index";
 
 function ProductCard() {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  /* --------- redux ------------*/
+
+  const show = useSelector((state) => state.showCounter);
+
+  const incrementHandler = () => {
+    dispatch(counterActions.increment());
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -24,6 +32,9 @@ function ProductCard() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  /* ------------------------------ */
+
   // Using Paper for the product card ??
   // Paper according to net ninja https://www.youtube.com/watch?v=GYTN5JdkLSQ&ab_channel=TheNetNinja
   // is basically meant to look like paper on a screen with some elevation.
@@ -43,7 +54,7 @@ function ProductCard() {
 
   return (
     <>
-      <Card sx={paperStyles} elevation={3}>
+      <Card sx={paperStyles} elevation={2}>
         <div className={styles["card-container"]}>
           <Box
             component={Button}
@@ -85,7 +96,7 @@ function ProductCard() {
             >
               Buy Now
             </Button>
-            <Button variant="contained" size="small" onClick={handleClickOpen}>
+            <Button variant="contained" size="small" onClick={incrementHandler}>
               Add Cart
             </Button>
           </div>
