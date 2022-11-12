@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProductCard.module.css";
-import img from "../img/Cards/Product/card-ring.avif";
-import Link from "@mui/material/Link";
+
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -11,18 +10,26 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { useSelector, useDispatch } from "react-redux";
-import { counterActions } from "../store/index";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../store/index";
 
-function ProductCard() {
+function ProductCard(props) {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
+
   /* --------- redux ------------*/
 
-  const show = useSelector((state) => state.showCounter);
+  const shop = useSelector((state) => state.shop.shop);
 
-  const incrementHandler = () => {
-    dispatch(counterActions.increment());
+  const dispatch = useDispatch();
+
+  const addCartHandler = () => {
+    dispatch(
+      cartActions.addCart({
+        name: props.cardName,
+        quantity: 1,
+        ...shop[props.cardName],
+      })
+    );
   };
 
   const handleClickOpen = () => {
@@ -72,7 +79,7 @@ function ProductCard() {
             <CardMedia
               component="img"
               height="140"
-              image={img}
+              image={props.img}
               alt="ring"
               sx={{
                 height: "100%",
@@ -82,10 +89,8 @@ function ProductCard() {
             />
           </Box>
 
-          <div className={styles["card-info"]}>
-            Handmade Flower Nature Design Wrist Pin Cushion
-          </div>
-          <div className={styles["card-price"]}>£3.99</div>
+          <div className={styles["card-info"]}>Handmade {props.type}</div>
+          <div className={styles["card-price"]}>{props.price}</div>
           <div className={styles["card-delivery"]}>FREE UK delivery</div>
           <div className={styles["btn-purchase"]}>
             <Button
@@ -96,7 +101,7 @@ function ProductCard() {
             >
               Buy Now
             </Button>
-            <Button variant="contained" size="small" onClick={incrementHandler}>
+            <Button variant="contained" size="small" onClick={addCartHandler}>
               Add Cart
             </Button>
           </div>
@@ -123,7 +128,7 @@ function ProductCard() {
       >
         <CardMedia
           component="img"
-          image={img}
+          image={props.img}
           alt="ring"
           sx={{
             height: "80%",

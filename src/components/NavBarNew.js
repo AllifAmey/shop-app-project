@@ -7,12 +7,17 @@ import MenuItem from "@mui/material/MenuItem";
 import React, { useState } from "react";
 import { SvgIcon } from "@mui/material";
 import Badge from "@mui/material/Badge";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import Drawer from "@mui/material/Drawer";
+import Container from "@mui/material/Container";
+import img from "../img/Cards/Product/card-ring.avif";
 
 function NavBarNew() {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx investigate whether this is the inspiration.
+  // solution is to put the cart into a props or to use another component to filter that shit.
 
-  const counter = useSelector((state) => state.counter);
+  const cart = useSelector((state) => state.cart.cart);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const linkStyles = {
     display: "flex",
@@ -58,7 +63,35 @@ function NavBarNew() {
     setAnchorEl(null);
   }
 
-  // className={styles["cart"]}
+  function cartNum() {
+    let itemNum = 0;
+
+    if (cart.length == 0) {
+      return 0;
+    }
+
+    cart.forEach((element) => {
+      itemNum += element.quantity;
+    });
+    return itemNum;
+  }
+
+  function subtotalNum(total = false) {
+    let itemNum = 0;
+
+    if (cart.length == 0) {
+      return 0;
+    }
+
+    cart.forEach((element) => {
+      itemNum += element.price;
+    });
+    if (total == false) {
+      return itemNum.toFixed(2);
+    }
+    return (itemNum + 2).toFixed(2);
+  }
+
   return (
     <>
       <Box sx={outerBoxStyles}>
@@ -180,7 +213,7 @@ function NavBarNew() {
               </SvgIcon>
             </Link>
             <Badge
-              badgeContent={counter}
+              badgeContent={cartNum()}
               color="primary"
               sx={{
                 "& .MuiBadge-badge": {
@@ -193,7 +226,7 @@ function NavBarNew() {
                 underline="none"
                 color="#343a40"
                 component={RouterLink}
-                to="/cart"
+                onClick={() => setIsDrawerOpen(true)}
                 sx={linkStyles}
               >
                 <SvgIcon
@@ -230,6 +263,86 @@ function NavBarNew() {
           </Grid>
         </Grid>
       </Box>
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        sx={{
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: 400 },
+        }}
+      >
+        <Box sx={{ height: "80%", overflowY: "scroll" }}>
+          <Container sx={{}}>
+            <Grid container direction="column">
+              {cart.map((item) => {
+                return (
+                  <Grid
+                    container
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    sx={{ height: "5rem" }}
+                    key={item.name}
+                  >
+                    <Box
+                      component="img"
+                      src={item.img}
+                      sx={{
+                        width: "60px",
+                        height: "60px",
+                        borderRadius: "30%",
+                      }}
+                    ></Box>
+                    <Grid
+                      container
+                      direction="column"
+                      sx={{ width: "40%" }}
+                      gap={2}
+                    >
+                      <Grid item>
+                        Handmade
+                        {" " +
+                          item.type.charAt(0).toUpperCase() +
+                          item.type.substring(1)}
+                      </Grid>
+                      <Grid item>Quantity: {item.quantity}</Grid>
+                    </Grid>
+                    <Grid item>{item.price.toFixed(2)}</Grid>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Container>
+        </Box>
+        <Box sx={{ height: "25%" }}>
+          <Container sx={{ padding: "1rem" }}>
+            <Grid
+              container
+              direction="column"
+              justifyContent="space-evenly"
+              alignItems="center"
+              gap={1}
+            >
+              <Grid container direction="row" justifyContent="space-between">
+                <Grid item>Subtotal</Grid>
+                <Grid item>
+                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum()}`}
+                </Grid>
+              </Grid>
+              <Grid container direction="row" justifyContent="space-between">
+                <Grid item>Delivery fee</Grid>
+                <Grid item>{cart.length == 0 ? "" : "£2.00"}</Grid>
+              </Grid>
+              <Grid container direction="row" justifyContent="space-between">
+                <Grid item>Total to pay</Grid>
+                <Grid item>
+                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
+                </Grid>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+      </Drawer>
       <Menu
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}

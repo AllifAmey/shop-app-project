@@ -2,7 +2,8 @@ import * as React from "react";
 import styles from "./ShopPage.module.css";
 import ProductCard from "../ProductCard";
 import Checkbox from "@mui/material/Checkbox";
-import PinCushion from "../../img/icons/pinCushion-icon.png";
+import { useSelector } from "react-redux";
+import img from "../../img/Cards/Product/card-ring.avif";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -14,6 +15,8 @@ function ProductBox() {
   Product item title to be 12px.
   Make the product info button light grey as well. 
   */
+  const shop = useSelector((state) => state.shop.shop);
+
   return (
     <>
       <div className={styles["container"]}>
@@ -45,12 +48,17 @@ function ProductBox() {
             </div>
           </div>
           <div className={styles["right-container"]}>
-            <ProductCard></ProductCard>
-            <ProductCard></ProductCard>
-            <ProductCard></ProductCard>
-            <ProductCard></ProductCard>
-            <ProductCard></ProductCard>
-            <ProductCard></ProductCard>
+            {Object.keys(shop).map((cardName) => {
+              return (
+                <ProductCard
+                  key={cardName}
+                  type={shop[cardName].type}
+                  img={shop[cardName].img}
+                  price={`£  ${shop[cardName].price.toString()}`}
+                  cardName={cardName}
+                ></ProductCard>
+              );
+            })}
           </div>
         </div>
       </div>
