@@ -67,7 +67,7 @@ const initialshopState = {
     card3: { type: "ring", img: imgRing, price: 3.99 },
     card4: { type: "scrunchy", img: imgScrunchy, price: 3.99 },
     card5: { type: "scrunchy", img: imgScrunchy, price: 3.99 },
-    card6: { type: "pin cushion", img: imgPinCushion, price: 3.99 },
+    card6: { type: "pin Cushion", img: imgPinCushion, price: 3.99 },
   },
 };
 

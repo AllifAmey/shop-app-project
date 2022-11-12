@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import styles from "./ShopPage.module.css";
 import ProductCard from "../ProductCard";
 import Checkbox from "@mui/material/Checkbox";
@@ -16,6 +16,32 @@ function ProductBox() {
   Make the product info button light grey as well. 
   */
   const shop = useSelector((state) => state.shop.shop);
+  const filterSystem = {
+    rings: true,
+    scrunchies: true,
+    pinCushions: true,
+  };
+  const [filters, setFilters] = useState({
+    ring: true,
+    scrunchy: true,
+    pinCushion: true,
+  });
+  const [ringChecked, setRingChecked] = React.useState(true);
+  const [scrunchiesChecked, setSrunchiesChecked] = React.useState(true);
+  const [pinCUshionChecked, setPinCushionChecked] = React.useState(true);
+
+  const handleRingFilter = (event) => {
+    setFilters({ ...filters, ring: event.target.checked });
+    setRingChecked(event.target.checked);
+  };
+  const handleSrunchiesFilter = (event) => {
+    setFilters({ ...filters, scrunchy: event.target.checked });
+    setSrunchiesChecked(event.target.checked);
+  };
+  const handlePinCushionFilter = (event) => {
+    setFilters({ ...filters, pinCushion: event.target.checked });
+    setPinCushionChecked(event.target.checked);
+  };
 
   return (
     <>
@@ -26,21 +52,33 @@ function ProductBox() {
               <div className={styles["filter-title"]}>Items</div>
               <div className={styles["filter-item"]}>
                 <div className={styles["filter-name"]}>
-                  <Checkbox {...label} defaultChecked />
+                  <Checkbox
+                    {...label}
+                    checked={pinCUshionChecked}
+                    onChange={handlePinCushionFilter}
+                  />
                   Pin Cushions
                 </div>
                 <div className={styles["filter-icon-pin"]}></div>
               </div>
               <div className={styles["filter-item"]}>
                 <div className={styles["filter-name"]}>
-                  <Checkbox {...label} defaultChecked />
+                  <Checkbox
+                    {...label}
+                    checked={scrunchiesChecked}
+                    onChange={handleSrunchiesFilter}
+                  />
                   Scrunchies
                 </div>
                 <div className={styles["filter-icon-scrunchies"]}></div>
               </div>
               <div className={styles["filter-item"]}>
                 <div className={styles["filter-name"]}>
-                  <Checkbox {...label} defaultChecked />
+                  <Checkbox
+                    {...label}
+                    checked={ringChecked}
+                    onChange={handleRingFilter}
+                  />
                   Rings
                 </div>
                 <div className={styles["filter-icon-ring"]}></div>
@@ -48,17 +86,25 @@ function ProductBox() {
             </div>
           </div>
           <div className={styles["right-container"]}>
-            {Object.keys(shop).map((cardName) => {
-              return (
-                <ProductCard
-                  key={cardName}
-                  type={shop[cardName].type}
-                  img={shop[cardName].img}
-                  price={`£  ${shop[cardName].price.toString()}`}
-                  cardName={cardName}
-                ></ProductCard>
-              );
-            })}
+            {Object.keys(shop)
+              .filter((cardName) => {
+                console.log(shop[cardName].type.replace(/\s/g, ""));
+                console.log(filters[shop[cardName].type.replace(/\s/g, "")]);
+                if (filters[shop[cardName].type.replace(/\s/g, "")]) {
+                  return true;
+                }
+              })
+              .map((cardName) => {
+                return (
+                  <ProductCard
+                    key={cardName}
+                    type={shop[cardName].type.toLowerCase()}
+                    img={shop[cardName].img}
+                    price={`£  ${shop[cardName].price.toString()}`}
+                    cardName={cardName}
+                  ></ProductCard>
+                );
+              })}
           </div>
         </div>
       </div>

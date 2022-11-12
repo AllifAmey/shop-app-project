@@ -28,7 +28,7 @@
 - &#9745; Add a "Quick details" button to the product card with a pop up showing important details.
 - &#9744; Improve homepage by making it clearer on how to navigate the website.
 - &#9744; Create account page.
-- &#9744; Add functionality to the filter system after Etsy's data is transfered.
+- &#9745; Add functionality to the filter system.
 - &#9745; Add dropdown menu to navbar support
 - &#9745; Add Contact Page
 - &#9744; Improve FAQ page
