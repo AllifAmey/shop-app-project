@@ -20,7 +20,7 @@
 
 - &#9745; Use Google Map and weather Map API to showcase location of physical shop - home page.
 - &#9745; Add Cart functionality and Cart Page.
-- &#9744; Add minimal animations when transitioning to different pages
+- &#9745; Add minimal animations when transitioning to different pages
 - &#9745; Add smooth scrolling animation.
 - &#9745; Add icons to enhance app's look and feel.
 - &#9745; Improve the look and feel of the navbar to reduce it's static feeling.

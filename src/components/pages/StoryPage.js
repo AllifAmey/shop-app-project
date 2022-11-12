@@ -1,5 +1,6 @@
 import * as React from "react";
 import styles from "./StoryPage.module.css";
+import AnimatedPage from "../utility/AnimatedPage";
 
 function StoryPage() {
   /*
@@ -19,35 +20,39 @@ function StoryPage() {
     */
   return (
     <>
-      <div className={styles["section-container"]}>
-        <div className={styles["top-container"]}>
-          <div className={styles["top-subContainer"]}>
-            <div className={styles["top-title"]}>Our Story</div>
-            <div className={styles["top-info"]}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
-              ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
-              sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
-              dolor sit, amet consectetur adipisicing elit. Minus ipsam id vel,
-              sit quaerat neque dolores eveniet eos minima nam?
-            </div>
-          </div>
-        </div>
-        <div className={styles["bottom-container"]}>
-          <div className={styles["article-container"]}>
-            <div className={styles["article-left"]}>
-              <div className={styles["article-title"]}>Design Inspiration</div>
-              <div className={styles["article-info"]}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
-                nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate
-                quas est, corrupti magnam aut.
+      <AnimatedPage>
+        <div className={styles["section-container"]}>
+          <div className={styles["top-container"]}>
+            <div className={styles["top-subContainer"]}>
+              <div className={styles["top-title"]}>Our Story</div>
+              <div className={styles["top-info"]}>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
+                ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
+                sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
+                dolor sit, amet consectetur adipisicing elit. Minus ipsam id
+                vel, sit quaerat neque dolores eveniet eos minima nam?
               </div>
             </div>
+          </div>
+          <div className={styles["bottom-container"]}>
+            <div className={styles["article-container"]}>
+              <div className={styles["article-left"]}>
+                <div className={styles["article-title"]}>
+                  Design Inspiration
+                </div>
+                <div className={styles["article-info"]}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
+                  nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate
+                  quas est, corrupti magnam aut.
+                </div>
+              </div>
 
-            <div className={styles["article-img"]}></div>
+              <div className={styles["article-img"]}></div>
+            </div>
           </div>
         </div>
-      </div>
+      </AnimatedPage>
     </>
   );
 }

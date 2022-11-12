@@ -4,6 +4,7 @@ import ProductCard from "../ProductCard";
 import Checkbox from "@mui/material/Checkbox";
 import { useSelector } from "react-redux";
 import img from "../../img/Cards/Product/card-ring.avif";
+import AnimatedPage from "../utility/AnimatedPage";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -16,11 +17,7 @@ function ProductBox() {
   Make the product info button light grey as well. 
   */
   const shop = useSelector((state) => state.shop.shop);
-  const filterSystem = {
-    rings: true,
-    scrunchies: true,
-    pinCushions: true,
-  };
+
   const [filters, setFilters] = useState({
     ring: true,
     scrunchy: true,
@@ -45,69 +42,73 @@ function ProductBox() {
 
   return (
     <>
-      <div className={styles["container"]}>
-        <div className={styles["section-container"]}>
-          <div className={styles["left-container"]}>
-            <div className={styles["filter-container"]}>
-              <div className={styles["filter-title"]}>Items</div>
-              <div className={styles["filter-item"]}>
-                <div className={styles["filter-name"]}>
-                  <Checkbox
-                    {...label}
-                    checked={pinCUshionChecked}
-                    onChange={handlePinCushionFilter}
-                  />
-                  Pin Cushions
+      <AnimatedPage>
+        <div className={styles["container"]}>
+          <div className={styles["section-container"]}>
+            <div className={styles["left-container"]}>
+              <div className={styles["filter-container"]}>
+                <div className={styles["filter-title"]}>Items</div>
+                <div className={styles["filter-item"]}>
+                  <div className={styles["filter-name"]}>
+                    <Checkbox
+                      {...label}
+                      checked={pinCUshionChecked}
+                      onChange={handlePinCushionFilter}
+                    />
+                    Pin Cushions
+                  </div>
+                  <div className={styles["filter-icon-pin"]}></div>
                 </div>
-                <div className={styles["filter-icon-pin"]}></div>
-              </div>
-              <div className={styles["filter-item"]}>
-                <div className={styles["filter-name"]}>
-                  <Checkbox
-                    {...label}
-                    checked={scrunchiesChecked}
-                    onChange={handleSrunchiesFilter}
-                  />
-                  Scrunchies
+                <div className={styles["filter-item"]}>
+                  <div className={styles["filter-name"]}>
+                    <Checkbox
+                      {...label}
+                      checked={scrunchiesChecked}
+                      onChange={handleSrunchiesFilter}
+                    />
+                    Scrunchies
+                  </div>
+                  <div className={styles["filter-icon-scrunchies"]}></div>
                 </div>
-                <div className={styles["filter-icon-scrunchies"]}></div>
-              </div>
-              <div className={styles["filter-item"]}>
-                <div className={styles["filter-name"]}>
-                  <Checkbox
-                    {...label}
-                    checked={ringChecked}
-                    onChange={handleRingFilter}
-                  />
-                  Rings
+                <div className={styles["filter-item"]}>
+                  <div className={styles["filter-name"]}>
+                    <Checkbox
+                      {...label}
+                      checked={ringChecked}
+                      onChange={handleRingFilter}
+                    />
+                    Rings
+                  </div>
+                  <div className={styles["filter-icon-ring"]}></div>
                 </div>
-                <div className={styles["filter-icon-ring"]}></div>
               </div>
             </div>
-          </div>
-          <div className={styles["right-container"]}>
-            {Object.keys(shop)
-              .filter((cardName) => {
-                console.log(shop[cardName].type.replace(/\s/g, ""));
-                console.log(filters[shop[cardName].type.replace(/\s/g, "")]);
-                if (filters[shop[cardName].type.replace(/\s/g, "")]) {
-                  return true;
-                }
-              })
-              .map((cardName) => {
-                return (
-                  <ProductCard
-                    key={cardName}
-                    type={shop[cardName].type.toLowerCase()}
-                    img={shop[cardName].img}
-                    price={`£  ${shop[cardName].price.toString()}`}
-                    cardName={cardName}
-                  ></ProductCard>
-                );
-              })}
+            <div className={styles["right-container"]}>
+              {Object.keys(shop)
+                .filter((cardName) => {
+                  console.log(shop[cardName].type.replace(/\s/g, ""));
+                  console.log(filters[shop[cardName].type.replace(/\s/g, "")]);
+                  if (filters[shop[cardName].type.replace(/\s/g, "")]) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                })
+                .map((cardName) => {
+                  return (
+                    <ProductCard
+                      key={cardName}
+                      type={shop[cardName].type.toLowerCase()}
+                      img={shop[cardName].img}
+                      price={`£  ${shop[cardName].price.toString()}`}
+                      cardName={cardName}
+                    ></ProductCard>
+                  );
+                })}
+            </div>
           </div>
         </div>
-      </div>
+      </AnimatedPage>
     </>
   );
 }

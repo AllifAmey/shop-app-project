@@ -10,6 +10,7 @@ import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
 import Drawer from "@mui/material/Drawer";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 import img from "../img/Cards/Product/card-ring.avif";
 
 function NavBarNew() {
@@ -339,6 +340,21 @@ function NavBarNew() {
                   {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
                 </Grid>
               </Grid>
+              {subtotalNum() == 0 ? (
+                ""
+              ) : (
+                <Grid container direction="row" justifyContent="center">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    component={RouterLink}
+                    to="/checkout"
+                    onClick={() => setIsDrawerOpen(false)}
+                  >
+                    Checkout
+                  </Button>
+                </Grid>
+              )}
             </Grid>
           </Container>
         </Box>

@@ -2,7 +2,7 @@ import * as React from "react";
 import styles from "./ProductInfoPage.module.css";
 import img from "../../img/Cards/Product/card-ring.avif";
 import { Link } from "react-router-dom";
-
+import AnimatedPage from "../utility/AnimatedPage";
 import Button from "@mui/material/Button";
 
 function InfoBox() {
@@ -27,64 +27,68 @@ function InfoBox() {
 
   return (
     <>
-      <div className={styles["container"]}>
-        <div className={styles["section-container"]}>
-          <div className={styles["product"]}>
-            <img
-              src={img}
-              alt="jewellery"
-              className={styles["product-img"]}
-            ></img>
-          </div>
+      <AnimatedPage>
+        <div className={styles["container"]}>
+          <div className={styles["section-container"]}>
+            <div className={styles["product"]}>
+              <img
+                src={img}
+                alt="jewellery"
+                className={styles["product-img"]}
+              ></img>
+            </div>
 
-          <div className={styles["product-info"]}>
-            <div className={styles["product-container"]}>
-              <div className={styles["product-title"]}>
-                Handmade Flower Nature Design Wrist Pin Cushion
-              </div>
-              <div className={styles["detail-title"]}>Details:</div>
-              <div className={styles["detail-info"]}>
-                <div className={styles["detail-item"]}>Handmade item </div>
-                <div className={styles["detail-item"]}>
-                  Handmade item Dispatches from a small business in United
-                  Kingdom{" "}
+            <div className={styles["product-info"]}>
+              <div className={styles["product-container"]}>
+                <div className={styles["product-title"]}>
+                  Handmade Flower Nature Design Wrist Pin Cushion
                 </div>
-                <div className={styles["detail-item"]}>Materials: copper </div>
-                <div className={styles["detail-item"]}>FREE UK delivery </div>
-              </div>
-              <div className={styles["description-title"]}>Description</div>
-              <div className={styles["description-info"]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Faucibus et molestie ac feugiat sed lectus. Ut lectus arcu
-                bibendum at varius. Velit scelerisque in dictum non. Sagittis eu
-                volutpat odio
-              </div>
-              <div className={styles["price"]}>£3.99</div>
+                <div className={styles["detail-title"]}>Details:</div>
+                <div className={styles["detail-info"]}>
+                  <div className={styles["detail-item"]}>Handmade item </div>
+                  <div className={styles["detail-item"]}>
+                    Handmade item Dispatches from a small business in United
+                    Kingdom{" "}
+                  </div>
+                  <div className={styles["detail-item"]}>
+                    Materials: copper{" "}
+                  </div>
+                  <div className={styles["detail-item"]}>FREE UK delivery </div>
+                </div>
+                <div className={styles["description-title"]}>Description</div>
+                <div className={styles["description-info"]}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Faucibus et molestie ac feugiat sed lectus. Ut lectus arcu
+                  bibendum at varius. Velit scelerisque in dictum non. Sagittis
+                  eu volutpat odio
+                </div>
+                <div className={styles["price"]}>£3.99</div>
 
-              <div className={styles["btns"]}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/checkout"
-                >
-                  Check Out
-                </Button>
+                <div className={styles["btns"]}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    component={Link}
+                    to="/checkout"
+                  >
+                    Check Out
+                  </Button>
 
-                <Button
-                  variant="contained"
-                  size="small"
-                  component={Link}
-                  to="/checkout"
-                >
-                  Add Cart
-                </Button>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    component={Link}
+                    to="/checkout"
+                  >
+                    Add Cart
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </AnimatedPage>
     </>
   );
 }
