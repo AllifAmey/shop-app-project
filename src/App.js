@@ -21,6 +21,8 @@ function App() {
   https://www.youtube.com/watch?v=pTinipkJBcs&ab_channel=LesterFernandez - for animation. 
 
   // hover over to pop up. 
+  // consider using Navlink to make it obvious what is active. 
+  // consider using : in the path for the support page. 
   */
   const location = useLocation();
   return (
@@ -32,7 +34,7 @@ function App() {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/shop" element={<ShopPage />} />
-            <Route path="/product-info" element={<ProductInfoPage />} />
+            <Route path="/product/:productId" element={<ProductInfoPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/story" element={<StoryPage />} />
             <Route path="/support/faq" element={<HelpPage />} />

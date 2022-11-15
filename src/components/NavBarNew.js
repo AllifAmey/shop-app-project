@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { NavLink as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
@@ -19,7 +19,7 @@ function NavBarNew() {
 
   const cart = useSelector((state) => state.cart.cart);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  // styles
   const linkStyles = {
     display: "flex",
   };
@@ -28,8 +28,10 @@ function NavBarNew() {
       backgroundColor: "#f1f3f5",
       boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
     },
+    color: "#343a40",
     height: "100%",
     display: "flex",
+    borderRadius: "0.2rem",
   };
 
   const gridLinkIcons = {
@@ -50,6 +52,12 @@ function NavBarNew() {
     height: "100%",
     marginLeft: "5%",
     textAlign: "center",
+  };
+
+  const isActiveStyle = {
+    color: "#4dabf7",
+    backgroundColor: "#dee2e6",
+    boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -114,16 +122,9 @@ function NavBarNew() {
             xs={1}
             component={RouterLink}
             to="/home"
+            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
           >
-            <Link
-              color="#343a40"
-              underline="none"
-              component={RouterLink}
-              to="/home"
-              sx={linkStyles}
-            >
-              Home
-            </Link>
+            Home
           </Grid>
           <Grid
             item
@@ -133,16 +134,9 @@ function NavBarNew() {
             sx={gridLinkStyles}
             component={RouterLink}
             to="/shop"
+            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
           >
-            <Link
-              color="#343a40"
-              underline="none"
-              component={RouterLink}
-              to="/shop"
-              sx={linkStyles}
-            >
-              Shop
-            </Link>
+            Shop
           </Grid>
           <Grid
             item
@@ -152,16 +146,9 @@ function NavBarNew() {
             sx={gridLinkStyles}
             component={RouterLink}
             to="/story"
+            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
           >
-            <Link
-              underline="none"
-              color="#343a40"
-              component={RouterLink}
-              to="/story"
-              sx={linkStyles}
-            >
-              Our Story
-            </Link>
+            Our Story
           </Grid>
           <Grid item xs={1}>
             <Link
@@ -367,12 +354,29 @@ function NavBarNew() {
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         transformOrigin={{ vertical: "top", horizontal: "center" }}
+        sx={{
+          "& 	.MuiMenu-paper": {
+            boxSizing: "border-box",
+
+            width: "5rem",
+          },
+          ".MuiMenu-root": {},
+          "& 	.MuiMenu-list": {},
+        }}
       >
-        <MenuItem component={RouterLink} to="/support/faq">
+        <MenuItem
+          component={RouterLink}
+          to="/support/faq"
+          sx={{ fontSize: "0.8rem" }}
+        >
           FAQ
         </MenuItem>
-        <MenuItem component={RouterLink} to="/support/contact">
-          Contact us
+        <MenuItem
+          component={RouterLink}
+          to="/support/contact"
+          sx={{ fontSize: "0.8rem", whiteSpace: "normal" }}
+        >
+          Contact Us
         </MenuItem>
       </Menu>
     </>

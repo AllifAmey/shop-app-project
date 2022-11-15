@@ -3,12 +3,16 @@ import styles from "./ContactPage.module.css";
 import TextField from "@mui/material/TextField";
 import CustomButton from "../utility/CustomButton";
 import AnimatedPage from "../utility/AnimatedPage";
+import { useParams } from "react-router-dom";
 
 function ContactPage() {
   /**
    *https://i.ytimg.com/vi/ZafzM_z9PLs/maxresdefault.jpg
    Contact page with picture under the phone number.
    */
+
+  const params = useParams();
+
   return (
     <>
       <AnimatedPage>

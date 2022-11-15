@@ -97,7 +97,7 @@ function ProductCard(props) {
               variant="contained"
               size="small"
               component={RouterLink}
-              to="/product-info"
+              to={`/product/handmade-${props.type.replaceAll(" ", "-")}`}
             >
               Buy Now
             </Button>

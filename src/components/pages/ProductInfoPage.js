@@ -1,14 +1,14 @@
 import { Grid } from "@mui/material";
-
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-
+import { useParams } from "react-router-dom";
 import React, { useState } from "react";
-
+import { Link as RouterLink } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import img from "../../img/Cards/Product/card-ring.avif";
 import AnimatedPage from "../utility/AnimatedPage";
+import { useSelector } from "react-redux";
+
 function ProductInfoPage2() {
   /*
    comment from the old code: 
@@ -29,6 +29,7 @@ function ProductInfoPage2() {
     price small letters 
 
     */
+  // styles
   const mainContainerStyles = {
     height: "auto",
     display: "flex",
@@ -38,9 +39,34 @@ function ProductInfoPage2() {
   const mainGridContainerStyles = {
     fontSize: "1rem",
   };
-  const imgStyle = { borderRadius: "50%", height: "50%", width: "50%" };
+  const imgStyle = { borderRadius: "50%", height: "350px", width: "350px" };
   const mainHeaderStyle = { fontSize: "24px" };
   const subTitleStyle = { fontSize: "20px" };
+
+  // routing
+
+  const params = useParams();
+
+  // redux
+
+  const shop = useSelector((state) => state.shop.shop);
+
+  function findProductImg() {
+    // logic is to filter the shop to find the exact img.
+
+    // later a unique id would be placed on the product to better identify the product.
+    // this is a simple solution and a solid foundation for a bigger problem I will solve.
+
+    const img = Object.entries(shop).filter(
+      (e) =>
+        shop[e[0]].type.toLowerCase() ==
+        params.productId
+          .slice(params.productId.indexOf("-") + 1, params.productId.length)
+          .replace("-", " ")
+    )[0][1].img;
+
+    return img;
+  }
 
   return (
     <>
@@ -63,7 +89,7 @@ function ProductInfoPage2() {
               <Box
                 component="img"
                 alt="jewellery"
-                src={img}
+                src={findProductImg()}
                 sx={imgStyle}
               ></Box>
             </Grid>
@@ -77,8 +103,14 @@ function ProductInfoPage2() {
               flexDirection="column"
               gap={2}
             >
-              <Grid item sx={mainHeaderStyle}>
-                Handmade Flower Nature Design Wrist Pin Cushion
+              <Grid item sx={mainHeaderStyle} alignSelf="start">
+                Handmade{" "}
+                {params.productId
+                  .slice(
+                    params.productId.indexOf("-") + 1,
+                    params.productId.length
+                  )
+                  .replace("-", " ")}
               </Grid>
               <Grid item sx={subTitleStyle} alignSelf="start">
                 Details
@@ -116,7 +148,7 @@ function ProductInfoPage2() {
                   <Button
                     variant="contained"
                     size="small"
-                    component={Link}
+                    component={RouterLink}
                     to="/checkout"
                   >
                     Check Out
@@ -126,7 +158,7 @@ function ProductInfoPage2() {
                   <Button
                     variant="contained"
                     size="small"
-                    component={Link}
+                    component={RouterLink}
                     to="/checkout"
                   >
                     Add Cart
