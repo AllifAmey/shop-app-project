@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import styles from "./CheckoutPage.module.css";
-import img from "../../img/Cards/Product/card-ring.avif";
-import CheckOut from "../CheckOut";
+import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
+import Container from "@mui/material/container";
+import CheckOutOrderItem from "../CheckOutOrderItem";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import CheckoutSteps from "../CheckoutSteps";
+import CheckOutStep1_Part1 from "../CheckOutStep1_Part1";
+import CheckOutStep1_Part2 from "../CheckOutStep1_Part2";
+import CheckOutStep2 from "../CheckOutStep2";
+import CheckOutStep3 from "../CheckOutStep3";
 
-function Checkout() {
+function CheckOutPage() {
   /*
     https://boltfinancial.wpengine.com/wp-content/uploads/2019/10/made-checkout-example-progress-indicator-1.png
 
@@ -60,39 +64,128 @@ function Checkout() {
     This is typical payment form that can be implemented much later.
 
     */
-
+  // consts
+  const cart = useSelector((state) => state.cart.cart);
   const [count, setCount] = useState(0);
 
-  const changeStep = (event) => {
-    setCount(count + 1);
+  // functionality
+
+  const changeStep = (typeStep) => {
+    if (typeStep === "forward") {
+      console.log(count);
+      setCount(count + 1);
+    }
+    if (typeStep === "back") {
+      setCount(count - 1);
+    }
+  };
+
+  function subtotalNum(total = false) {
+    let itemNum = 0;
+
+    if (cart.length == 0) {
+      return 0;
+    }
+
+    cart.forEach((element) => {
+      itemNum += element.price;
+    });
+    if (total == false) {
+      return itemNum.toFixed(2);
+    }
+    return (itemNum + 2).toFixed(2);
+  }
+  // styles
+
+  const checkoutContainerStyles = { fontSize: "12px" };
+
+  const titleStyle = {
+    fontSize: "20px",
+    borderBottom: "0.5px solid #dee2e6",
+    textAlign: "center",
+    padding: "0.8rem 0",
+  };
+
+  // steps
+
+  const steps = {
+    0: <CheckOutStep1_Part1 changeStep={changeStep}></CheckOutStep1_Part1>,
+    1: <CheckOutStep1_Part2 changeStep={changeStep}></CheckOutStep1_Part2>,
+    2: <CheckOutStep2 changeStep={changeStep}></CheckOutStep2>,
+    3: <CheckOutStep3 changeStep={changeStep}></CheckOutStep3>,
   };
 
   return (
     <>
-      <div className={styles["sectionProgress-container"]}>
-        <div className={styles["progress-container"]}>
-          <Stepper
-            alternativeLabel
-            activeStep={count == 1 || count == 0 ? 0 : count - 1}
-          >
-            <Step>
-              <StepLabel>Address</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Delivery</StepLabel>
-            </Step>
-            <Step>
-              <StepLabel>Payments</StepLabel>
-            </Step>
-          </Stepper>
-        </div>
-      </div>
-      <div className={styles["section-container"]}>
-        {<CheckoutSteps count={count} onCount={changeStep}></CheckoutSteps>}
-        <CheckOut></CheckOut>
-      </div>
+      <Container maxWidth="md">
+        <Grid container flexDirection="column">
+          <Grid item container justifyContent="center" alignItems="center">
+            <Stepper
+              alternativeLabel
+              activeStep={count == 1 || count == 0 ? 0 : count - 1}
+              sx={{ width: "50%", paddingTop: "2rem" }}
+            >
+              <Step>
+                <StepLabel>Address</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Delivery</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Payments</StepLabel>
+              </Step>
+            </Stepper>
+          </Grid>
+          <Grid item container height="auto" paddingBottom="2rem" xs>
+            {steps[count]}
+            <Grid
+              item
+              xs={3}
+              container
+              flexDirection="column"
+              justifyContent="space-evenly"
+              alignItems="center"
+              alignSelf="start"
+              gap={2}
+              sx={checkoutContainerStyles}
+            >
+              <Grid item sx={titleStyle} width={1}>
+                Order Summary
+              </Grid>
+              {cart.map((item) => {
+                return (
+                  <CheckOutOrderItem
+                    key={item.name}
+                    img={item.img}
+                    quantity={item.quantity}
+                    type={item.type.toLowerCase()}
+                    price={item.price}
+                  ></CheckOutOrderItem>
+                );
+              })}
+
+              <Grid item container justifyContent="space-between">
+                <Grid item>Subtotal</Grid>
+                <Grid item>
+                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum()}`}
+                </Grid>
+              </Grid>
+              <Grid item container justifyContent="space-between">
+                <Grid item>Delivery fee</Grid>
+                <Grid item>£2.00</Grid>
+              </Grid>
+              <Grid item container justifyContent="space-between">
+                <Grid item>Total to pay</Grid>
+                <Grid item>
+                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
     </>
   );
 }
 
-export default Checkout;
+export default CheckOutPage;

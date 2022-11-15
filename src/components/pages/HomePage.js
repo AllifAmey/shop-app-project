@@ -1,6 +1,7 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
 import AnimatedPage from "../utility/AnimatedPage";
+import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
@@ -13,12 +14,16 @@ https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8b
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f2158f4bbbcec10c88f_6002086f72b727f54401e412_space-posters.jpeg - look at the bottom right , add that most likely
 
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f23208b459df8790224_6002086f72b7270da901e44a_personalized-cans.jpeg - maybe as inspiration ? Not sure. 
+
+!IMPORTANT FEATURE TO ADD:
+
+Add video to the homepage to show examples of making the jewellery.
 */
 function Hero() {
   /* In the btns show the Online Shop, Physical Shop and scroll down   */
   return (
     <>
-      <AnimatedPage>
+      <AnimatedPopUpPage>
         <section className={styles["main"]}>
           <div className={styles["title"]}>Amey Jewellery</div>
           <div className={styles["short-info"]}>
@@ -48,7 +53,7 @@ function Hero() {
           </div>
         </section>
         <LocationHomePage></LocationHomePage>
-      </AnimatedPage>
+      </AnimatedPopUpPage>
     </>
   );
 }

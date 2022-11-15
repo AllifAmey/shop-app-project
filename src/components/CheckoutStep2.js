@@ -1,22 +1,49 @@
 import React, { useState } from "react";
-import styles from "./CheckoutStep2.module.css";
+import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Radio from "@mui/material/Radio";
 
-function CheckoutStep2(props) {
+function CheckOutStep2(props) {
+  /*Inspiration: 
+  https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
   const [selectedValue, setSelectedValue] = useState("a");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
-  /*Inspiration: 
-  https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
+
   return (
     <>
-      <div className={styles["section-container"]}>
-        <div class={styles["delivery-title"]}>Delivery Type!</div>
-        <div class={styles["delivery-container"]}>
-          <div>
+      <Grid
+        item
+        container
+        xs={9}
+        flexDirection="column"
+        justifyContent="start"
+        gap={2}
+      >
+        <Grid
+          item
+          sx={{
+            padding: "1rem 0",
+            fontSize: "30px",
+            borderBottom: "0.5px solid #dee2e6",
+            width: "80%",
+            textAlign: "center",
+          }}
+        >
+          Delivery Type
+        </Grid>
+
+        <Grid
+          item
+          container
+          justifyContent="center"
+          alignItems="center"
+          width="60%"
+          margin="0 auto"
+        >
+          <Grid item xs={6}>
             <Radio
               checked={selectedValue === "a"}
               onChange={handleChange}
@@ -25,44 +52,78 @@ function CheckoutStep2(props) {
               inputProps={{ "aria-label": "A" }}
             />
             £2.99
-          </div>
-
-          <div class={styles["delivery-subContainer"]}>
-            <div class={styles["delivery-time"]}>Delivered by Thu 18 Nov</div>
-            <div class={styles["delivery-type"]}>Standard Delivery</div>
-          </div>
-        </div>
-
-        <div class={styles["delivery-container"]}>
-          <div>
+          </Grid>
+          <Grid
+            item
+            container
+            flexDirection="column"
+            sx={{ fontSize: "12px" }}
+            xs={6}
+          >
+            <Grid item>Delivered By Thu 18 Nov</Grid>
+            <Grid item>Standard Delivery</Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          container
+          justifyContent="center"
+          alignItems="center"
+          width="60%"
+          margin="0 auto"
+        >
+          <Grid item xs={6}>
             <Radio
-              checked={selectedValue === "b"}
+              checked={selectedValue === "a"}
               onChange={handleChange}
-              value="b"
+              value="a"
               name="radio-buttons"
-              inputProps={{ "aria-label": "B" }}
+              inputProps={{ "aria-label": "A" }}
             />
             £3.99
-          </div>
+          </Grid>
+          <Grid
+            item
+            container
+            flexDirection="column"
+            xs={6}
+            sx={{ fontSize: "12px" }}
+          >
+            <Grid item>Delivered By Thu 15 Nov</Grid>
+            <Grid item>Premium Delivery</Grid>
+          </Grid>
+        </Grid>
 
-          <div class={styles["delivery-subContainer"]}>
-            <div class={styles["delivery-time"]}>Delivered by Tue 15 Nov</div>
-            <div class={styles["delivery-type"]}>Premium Delivery</div>
-          </div>
-        </div>
-        <div class={styles["btn"]}>
+        <Grid
+          item
+          container
+          justifyContent="space-between"
+          sx={{ width: "85%" }}
+        >
           <Button
             variant="text"
             size="big"
-            onClick={props.onCount}
-            style={{ fontSize: "16px" }}
+            onClick={() => {
+              props.changeStep("back");
+            }}
+            style={{ paddingTop: "1rem" }}
+          >
+            Back
+          </Button>
+          <Button
+            variant="text"
+            size="big"
+            onClick={() => {
+              props.changeStep("forward");
+            }}
+            style={{ paddingTop: "1rem" }}
           >
             Continue
           </Button>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </>
   );
 }
 
-export default CheckoutStep2;
+export default CheckOutStep2;

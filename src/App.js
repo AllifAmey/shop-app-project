@@ -2,12 +2,12 @@ import NavBarNew from "./components/NavBarNew";
 import ShopPage from "./components/pages/ShopPage";
 import ProductInfoPage from "./components/pages/ProductInfoPage";
 import HomePage from "./components/pages/HomePage";
-import CheckoutPage from "./components/pages/CheckoutPage";
+
 import StoryPage from "./components/pages/StoryPage";
 import HelpPage from "./components/pages/HelpPage";
 import ContactPage from "./components/pages/ContactPage";
 import Footer from "./components/Footer";
-
+import CheckOutPage from "./components/pages/CheckOutPage";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
@@ -33,9 +33,9 @@ function App() {
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:productId" element={<ProductInfoPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/story" element={<StoryPage />} />
             <Route path="/support/faq" element={<HelpPage />} />
             <Route path="/support/contact" element={<ContactPage />} />

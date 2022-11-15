@@ -1,9 +1,8 @@
-import React from "react";
-import styles from "./CheckoutStep3.module.css";
+import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-function CheckoutStep3(props) {
+function CheckOutStep3(props) {
   /*
     Payment Step
 
@@ -22,83 +21,56 @@ function CheckoutStep3(props) {
     */
   return (
     <>
-      <div className={styles["section-container"]}>
-        <div className={styles["payment-cNumber"]}>
-          <div className={styles["payment-title"]}>Card Number</div>
-          <div className={styles["cardnumber-container"]}>
-            <TextField
-              id="outlined-basic"
-              label="Card Number"
-              variant="outlined"
-              size="small"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Card Number"
-              variant="outlined"
-              size="small"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Card Number"
-              variant="outlined"
-              size="small"
-            />
-            <TextField
-              id="outlined-basic"
-              label="Card Number"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-        </div>
-        <div className={styles["payment-cValid"]}>
-          <div className={styles["payment-title"]}>Valid Until</div>
-          <div className={styles["payment-field"]}>
-            <TextField
-              id="outlined-basic"
-              label="Valid Until"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-        </div>
-        <div className={styles["payment-cCVV"]}>
-          <div className={styles["payment-title"]}>CVV</div>
-          <div className={styles["payment-field"]}>
-            <TextField
-              id="outlined-basic"
-              label="CVV"
-              variant="outlined"
-              size="small"
-            />
-          </div>
-        </div>
-        <div className={styles["payment-cName"]}>
-          <div className={styles["payment-title"]}>Card Holder Name</div>
-          <div className={styles["payment-field"]}>
-            <TextField
-              id="outlined-basic"
-              label="Card Holder Name"
-              variant="outlined"
-              size="small"
-              fullWidth="true"
-            />
-          </div>
-        </div>
-        <div className={styles["btn"]}>
+      <Grid
+        item
+        container
+        xs={9}
+        flexDirection="column"
+        justifyContent="start"
+        gap={2}
+      >
+        <Grid
+          item
+          sx={{
+            paddingBottom: "1rem",
+            fontSize: "30px",
+            borderBottom: "0.5px solid #dee2e6",
+            width: "80%",
+          }}
+        >
+          Payment
+        </Grid>
+
+        <Grid
+          item
+          container
+          justifyContent="space-between"
+          sx={{ width: "85%" }}
+        >
           <Button
             variant="text"
             size="big"
-            onClick={props.onCount}
-            style={{ fontSize: "16px" }}
+            onClick={() => {
+              props.changeStep("back");
+            }}
+            style={{ paddingTop: "1rem" }}
           >
-            Continue
+            Back
           </Button>
-        </div>
-      </div>
+          <Button
+            variant="text"
+            size="big"
+            onClick={() => {
+              props.changeStep("forward");
+            }}
+            style={{ paddingTop: "1rem" }}
+          >
+            Complete
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 }
 
-export default CheckoutStep3;
+export default CheckOutStep3;
