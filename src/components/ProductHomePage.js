@@ -7,6 +7,7 @@ import scrunchyImg from "../img/Homepage/scrunchy-homepage.jpg";
 import { Grid } from "@mui/material";
 
 function ProductHomePage() {
+  // https://nl.pinterest.com/pin/254664553914081575/?mt=login - inspiration
   return (
     <>
       <Box height="auto" width={1}>

@@ -8,6 +8,7 @@ import ideaIcon from "../img/icons/idea-icon.png";
 import shopIcon from "../img/icons/shop-icon.png";
 
 function NavigationHomePage() {
+  // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration
   return (
     <>
       <Container maxWidth="md" height="auto">
