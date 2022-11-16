@@ -1,12 +1,12 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
-import AnimatedPage from "../utility/AnimatedPage";
 import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
 import LocationHomePage from "../LocationHomePage";
-
+import NavigationHomePage from "../NavigationHomePage";
+import ProductHomePage from "../ProductHomePage";
 import img from "../../img/icons/arrow-down.png";
 
 /*
@@ -52,6 +52,8 @@ function Hero() {
             </Link>
           </div>
         </section>
+        <NavigationHomePage></NavigationHomePage>
+        <ProductHomePage></ProductHomePage>
         <LocationHomePage></LocationHomePage>
       </AnimatedPopUpPage>
     </>

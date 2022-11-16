@@ -26,7 +26,7 @@
 - &#9745; Improve the look and feel of the navbar to reduce it's static feeling.
 - &#9745; Greatly improve help page by adding more than FAQ.
 - &#9745; Add a "Quick details" button to the product card with a pop up showing important details.
-- &#9744; Improve homepage by making it clearer on how to navigate the website.
+- &#9745; Improve homepage by making it clearer on how to navigate the website.
 - &#9744; Create account page.
 - &#9745; Add functionality to the filter system.
 - &#9745; Add dropdown menu to navbar support

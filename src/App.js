@@ -4,10 +4,10 @@ import ProductInfoPage from "./components/pages/ProductInfoPage";
 import HomePage from "./components/pages/HomePage";
 import Footer from "./components/Footer";
 import StoryPage from "./components/pages/StoryPage";
-
+import ProductHomePage from "./components/ProductHomePage";
 import ContactPage from "./components/pages/ContactPage";
 import FAQPage from "./components/pages/FAQPage";
-
+import NavigationHomePage from "./components/NavigationHomePage";
 import CheckOutPage from "./components/pages/CheckOutPage";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -35,7 +35,7 @@ function App() {
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/test" element={<FAQPage />} />
+            <Route path="/test" element={<ProductHomePage />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:productId" element={<ProductInfoPage />} />
