@@ -12,6 +12,7 @@ function CheckOutStep1_Part1(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
+        
       >
         <Grid
           item

@@ -74,11 +74,11 @@ function CheckOutStep2(props) {
         >
           <Grid item xs={6}>
             <Radio
-              checked={selectedValue === "a"}
+              checked={selectedValue === "b"}
               onChange={handleChange}
-              value="a"
+              value="b"
               name="radio-buttons"
-              inputProps={{ "aria-label": "A" }}
+              inputProps={{ "aria-label": "B" }}
             />
             £3.99
           </Grid>

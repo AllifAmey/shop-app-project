@@ -172,7 +172,7 @@ function CheckOutPage() {
               </Grid>
               <Grid item container justifyContent="space-between">
                 <Grid item>Delivery fee</Grid>
-                <Grid item>£2.00</Grid>
+                <Grid item>{subtotalNum() == 0 ? "" : "£2.00"}</Grid>
               </Grid>
               <Grid item container justifyContent="space-between">
                 <Grid item>Total to pay</Grid>

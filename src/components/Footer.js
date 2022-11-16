@@ -1,6 +1,8 @@
-import React from "react";
-import styles from "./Footer.module.css";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Grid } from "@mui/material";
+
+import Link from "@mui/material/Link";
+import Box from "@mui/material/Box";
 
 function Footer() {
   /*
@@ -10,14 +12,44 @@ function Footer() {
     https://tutorialzine.com/media/2015/01/large.jpg <-- the address may be included for the future. Keep this in mind.
     
     */
+  const mainContainerStyle = {
+    height: "auto",
+    width: "100%",
+    background: "#ffe4c4",
+  };
+
+  const FooterStyle = {
+    height: "20vh",
+  };
+
   return (
     <>
-      <div className={styles["footer-container"]}>
-        <div className={styles["footer-content"]}>
-          <div className={styles["footer-title"]}>Follow us on</div>
-          <div className={styles["footer-social"]}>
-            <div className={styles["social-youtube"]}>
-              <a href="https://www.youtube.com/user/manise29">
+      <Box sx={mainContainerStyle}>
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid
+            container
+            sx={FooterStyle}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            width={0.2}
+            gap={1}
+          >
+            <Grid item fontSize={14}>
+              Follow us on
+            </Grid>
+            <Grid
+              item
+              container
+              justifyContent="space-evenly"
+              alignItems="center"
+              width={0.6}
+            >
+              <Grid
+                item
+                component={Link}
+                href="https://www.youtube.com/user/manise29"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 48 48"
@@ -30,10 +62,12 @@ function Footer() {
                   />
                   <path fill="#FFF" d="M20 31L20 17 32 24z" />
                 </svg>
-              </a>
-            </div>
-            <div className={styles["social-etsy"]}>
-              <a href="https://www.etsy.com/shop/AmeyShopUK">
+              </Grid>
+              <Grid
+                item
+                component={Link}
+                href="https://www.etsy.com/shop/AmeyShopUK"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
@@ -54,19 +88,23 @@ function Footer() {
                     d="M450.7,213C450.6,213,450.6,213,450.7,213c-0.8-5-9-6.4-11.6-1c-0.2,0-0.3,0-0.5,0.1c-3.4,0-6.8,0.3-10,1.5c-6.5,2.3-5.2,11.3,1.6,11.8c1.4,0.1,2.8,0.2,4.2,0.2c-6.2,18.3-12.6,36.6-20.5,54.3c-4.2-8.4-8.4-16.8-12.1-25.4c-2.6-6.1-5-12.3-6.9-18.7c-1.1-4-2.3-8.9-1.2-11.8c0.4-1.2,0.3-2.4-0.1-3.5c1.2-3.4-0.6-7.7-5.5-8l-10-0.7c-6.7-0.5-8.2,10.6-1.5,11.8c0.1,0,0.3,0.1,0.4,0.1c0.8,1.4,2.2,2.4,4.1,2.4c-0.1,3.4,0.7,6.9,1.4,10.1c1.7,7.2,4.5,14.2,7.4,21c4.9,11.6,10.5,22.8,16.3,34c0.4,0.8,0.9,1.3,1.4,1.8c-0.6,1.2-1.2,2.4-1.9,3.6c-10.4,19.8-24.2,39.3-42.9,51.6c-4.2,0.9-9,0.8-12.9,1.6c-7.1,1.4-12.2,6.5-11.9,14c0.2,3.7,3.8,6.9,7.6,5.7c8-2.5,15.4-6,22.1-10.3c2.1-0.5,4.2-1.3,6.2-2.4c1.7-1,2.6-2.5,2.8-4c15.5-12.4,27.7-29.1,37.4-46.7c14.1-25.5,23.4-53.2,32.8-80.7c2.2-0.2,4.5-0.4,6.8-0.8C461.5,223.3,458.2,211.8,450.7,213z"
                   />
                 </svg>
-              </a>
-            </div>
-          </div>
+              </Grid>
+            </Grid>
 
-          <div className={styles["footer-bottom"]}>
-            <div className={styles["footer-privacy"]}>Privacy Policy</div>
-
-            <Link to="/story" className={styles["footer-story"]}>
-              Our Story
-            </Link>
-          </div>
-        </div>
-      </div>
+            <Grid
+              item
+              container
+              justifyContent="space-evenly"
+              alignItems="center"
+              fontSize={12}
+              width={0.7}
+            >
+              <Grid item>Privacy Policy</Grid>
+              <Grid item>Our Story</Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }

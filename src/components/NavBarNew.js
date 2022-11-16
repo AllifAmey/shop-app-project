@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import Drawer from "@mui/material/Drawer";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import img from "../img/Cards/Product/card-ring.avif";
 
 function NavBarNew() {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx investigate whether this is the inspiration.

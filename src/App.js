@@ -2,11 +2,12 @@ import NavBarNew from "./components/NavBarNew";
 import ShopPage from "./components/pages/ShopPage";
 import ProductInfoPage from "./components/pages/ProductInfoPage";
 import HomePage from "./components/pages/HomePage";
-
-import StoryPage from "./components/pages/StoryPage";
-import HelpPage from "./components/pages/HelpPage";
-import ContactPage from "./components/pages/ContactPage";
 import Footer from "./components/Footer";
+import StoryPage from "./components/pages/StoryPage";
+
+import ContactPage from "./components/pages/ContactPage";
+import FAQPage from "./components/pages/FAQPage";
+
 import CheckOutPage from "./components/pages/CheckOutPage";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
@@ -23,6 +24,7 @@ function App() {
   // hover over to pop up. 
   // consider using Navlink to make it obvious what is active. 
   // consider using : in the path for the support page. 
+  
   */
   const location = useLocation();
   return (
@@ -33,11 +35,12 @@ function App() {
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/test" element={<FAQPage />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:productId" element={<ProductInfoPage />} />
             <Route path="/story" element={<StoryPage />} />
-            <Route path="/support/faq" element={<HelpPage />} />
+            <Route path="/support/faq" element={<FAQPage />} />
             <Route path="/support/contact" element={<ContactPage />} />
           </Routes>
         </AnimatePresence>

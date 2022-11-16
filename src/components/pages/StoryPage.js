@@ -1,6 +1,8 @@
-import * as React from "react";
-import styles from "./StoryPage.module.css";
+import React, { useState } from "react";
+import { Grid } from "@mui/material";
+import natureImg from "../../img/Storypage/nature-inspiration.avif";
 import AnimatedPage from "../utility/AnimatedPage";
+import Box from "@mui/material/Box";
 
 function StoryPage() {
   /*
@@ -21,37 +23,88 @@ function StoryPage() {
   return (
     <>
       <AnimatedPage>
-        <div className={styles["section-container"]}>
-          <div className={styles["top-container"]}>
-            <div className={styles["top-subContainer"]}>
-              <div className={styles["top-title"]}>Our Story</div>
-              <div className={styles["top-info"]}>
+        <Box height="auto" width={1}>
+          <Grid
+            container
+            flexDirection="column"
+            height="100vh"
+            marginBottom="2rem"
+          >
+            <Grid
+              item
+              container
+              flexDirection="column"
+              gap={2}
+              justifyContent="start"
+              alignItems="center"
+              height="40%"
+              width={0.6}
+              textAlign="center"
+              alignSelf="center"
+            >
+              <Grid item fontWeight={800} fontSize={30}>
+                Our Story
+              </Grid>
+              <Grid item fontSize={16}>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
                 ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
                 sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
                 dolor sit, amet consectetur adipisicing elit. Minus ipsam id
                 vel, sit quaerat neque dolores eveniet eos minima nam?
-              </div>
-            </div>
-          </div>
-          <div className={styles["bottom-container"]}>
-            <div className={styles["article-container"]}>
-              <div className={styles["article-left"]}>
-                <div className={styles["article-title"]}>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              container
+              width={0.9}
+              justifyContent="center"
+              alignSelf="center"
+              gap={2}
+              flexWrap="nowrap"
+              height="60%"
+            >
+              <Grid
+                item
+                container
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                width={0.5}
+                textAlign="center"
+                gap={4}
+              >
+                <Grid item fontWeight={800} fontSize={30}>
                   Design Inspiration
-                </div>
-                <div className={styles["article-info"]}>
+                </Grid>
+                <Grid item fontSize={16}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
                   nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate
                   quas est, corrupti magnam aut.
-                </div>
-              </div>
-
-              <div className={styles["article-img"]}></div>
-            </div>
-          </div>
-        </div>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                container
+                justifyContent="center"
+                alignItems="center"
+                width={0.5}
+                height={1}
+              >
+                <Grid
+                  item
+                  width={0.9}
+                  height={0.95}
+                  borderRadius="20px"
+                  sx={{
+                    background: `url(${natureImg}) no-repeat
+                center center/cover`,
+                  }}
+                ></Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
       </AnimatedPage>
     </>
   );
