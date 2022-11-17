@@ -172,7 +172,7 @@ function NavBarNew() {
               underline="none"
               color="#343a40"
               component={RouterLink}
-              to="/account"
+              to="/account/login"
               sx={linkStyles}
             >
               <SvgIcon
