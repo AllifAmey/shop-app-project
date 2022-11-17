@@ -33,9 +33,20 @@
 - &#9745; Add Contact Page
 - &#9745; Improve FAQ page
 
-# Phase 4 - Consolidation, fixing bugs and adding Django backend.
+# Phase 4 - Backend development and connecting frontend to the backend - current phase
 
-TBA.
+- &#9744; Add Paypal API
+- &#9744; Add user authentication
+- &#9744; Add ability to create customer account
+- &#9744; Add ability to create "special" account and system associated with it
+- &#9744; Attach the frontend cart data to the user.
+- &#9744; Connect PostgreSQL database to backend framework
+- &#9744; Make it possible for user to track delivery status
+- &#9744; Provide email notification for certain actions for recovery or creating account.
+- &#9744; Finish Account System
+- &#9744; Make the contact form functionality work.
+
+# Phase 5 - React/SEO Optimization and backend deployment to AWS.
 
 # Getting Started with Create React App
 
