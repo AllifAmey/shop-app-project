@@ -31,6 +31,7 @@ function NavBar() {
     height: "100%",
     display: "flex",
     borderRadius: "0.2rem",
+    fontSize: "18px",
   };
 
   const gridLinkIcons = {
@@ -110,7 +111,7 @@ function NavBar() {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={7} sx={{ textAlign: "start" }}>
+          <Grid item xs={7} sx={{ textAlign: "start", fontSize: "20px" }}>
             Amey Jewellery
           </Grid>
           <Grid
@@ -156,6 +157,7 @@ function NavBar() {
               component={RouterLink}
               to="/help"
               onMouseOver={handleClick}
+              fontSize={18}
             >
               Support
             </Link>
@@ -357,7 +359,7 @@ function NavBar() {
           "& 	.MuiMenu-paper": {
             boxSizing: "border-box",
 
-            width: "5rem",
+            width: "6rem",
           },
           ".MuiMenu-root": {},
           "& 	.MuiMenu-list": {},
@@ -366,14 +368,14 @@ function NavBar() {
         <MenuItem
           component={RouterLink}
           to="/support/faq"
-          sx={{ fontSize: "0.8rem" }}
+          sx={{ fontSize: "1rem" }}
         >
           FAQ
         </MenuItem>
         <MenuItem
           component={RouterLink}
           to="/support/contact"
-          sx={{ fontSize: "0.8rem", whiteSpace: "normal" }}
+          sx={{ fontSize: "1rem", whiteSpace: "normal" }}
         >
           Contact Us
         </MenuItem>
