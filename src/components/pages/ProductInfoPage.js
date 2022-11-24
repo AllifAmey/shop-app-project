@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import img from "../../img/Cards/Product/card-ring.avif";
-import AnimatedPage from "../utility/AnimatedPage";
+
+import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
 import { useSelector } from "react-redux";
 
 function ProductInfoPage2() {
@@ -70,7 +70,7 @@ function ProductInfoPage2() {
 
   return (
     <>
-      <AnimatedPage>
+      <AnimatedPopUpPage>
         <Container maxWidth="lg" sx={mainContainerStyles}>
           <Grid
             container
@@ -147,9 +147,10 @@ function ProductInfoPage2() {
                 <Grid item>
                   <Button
                     variant="contained"
-                    size="small"
+                    size="big"
                     component={RouterLink}
                     to="/checkout"
+                    sx={{ fontSize: "16px" }}
                   >
                     Check Out
                   </Button>
@@ -157,9 +158,10 @@ function ProductInfoPage2() {
                 <Grid item>
                   <Button
                     variant="contained"
-                    size="small"
+                    size="big"
                     component={RouterLink}
                     to="/checkout"
+                    sx={{ fontSize: "16px" }}
                   >
                     Add Cart
                   </Button>
@@ -168,7 +170,7 @@ function ProductInfoPage2() {
             </Grid>
           </Grid>
         </Container>
-      </AnimatedPage>
+      </AnimatedPopUpPage>
     </>
   );
 }

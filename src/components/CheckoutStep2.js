@@ -12,6 +12,10 @@ function CheckOutStep2(props) {
     setSelectedValue(event.target.value);
   };
 
+  const itemStyles = {
+    fontSie: "18px",
+  };
+
   return (
     <>
       <Grid
@@ -21,12 +25,13 @@ function CheckOutStep2(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
+        height="60vh"
       >
         <Grid
           item
           sx={{
             padding: "1rem 0",
-            fontSize: "30px",
+            fontSize: "44px",
             borderBottom: "0.5px solid #dee2e6",
             width: "80%",
             textAlign: "center",
@@ -43,7 +48,7 @@ function CheckOutStep2(props) {
           width="60%"
           margin="0 auto"
         >
-          <Grid item xs={6}>
+          <Grid item xs={6} sx={itemStyles}>
             <Radio
               checked={selectedValue === "a"}
               onChange={handleChange}
@@ -53,13 +58,7 @@ function CheckOutStep2(props) {
             />
             £2.99
           </Grid>
-          <Grid
-            item
-            container
-            flexDirection="column"
-            sx={{ fontSize: "12px" }}
-            xs={6}
-          >
+          <Grid item container flexDirection="column" sx={itemStyles} xs={6}>
             <Grid item>Delivered By Thu 18 Nov</Grid>
             <Grid item>Standard Delivery</Grid>
           </Grid>
@@ -72,7 +71,7 @@ function CheckOutStep2(props) {
           width="60%"
           margin="0 auto"
         >
-          <Grid item xs={6}>
+          <Grid item xs={6} sx={itemStyles}>
             <Radio
               checked={selectedValue === "b"}
               onChange={handleChange}
@@ -82,13 +81,7 @@ function CheckOutStep2(props) {
             />
             £3.99
           </Grid>
-          <Grid
-            item
-            container
-            flexDirection="column"
-            xs={6}
-            sx={{ fontSize: "12px" }}
-          >
+          <Grid item container flexDirection="column" xs={6} sx={itemStyles}>
             <Grid item>Delivered By Thu 15 Nov</Grid>
             <Grid item>Premium Delivery</Grid>
           </Grid>

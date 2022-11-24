@@ -97,10 +97,10 @@ function CheckOutPage() {
   }
   // styles
 
-  const checkoutContainerStyles = { fontSize: "12px" };
+  const checkoutContainerStyles = { fontSize: "14px" };
 
   const titleStyle = {
-    fontSize: "20px",
+    fontSize: "30px",
     borderBottom: "0.5px solid #dee2e6",
     textAlign: "center",
     padding: "0.8rem 0",
@@ -117,7 +117,7 @@ function CheckOutPage() {
 
   return (
     <>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container flexDirection="column">
           <Grid item container justifyContent="center" alignItems="center">
             <Stepper

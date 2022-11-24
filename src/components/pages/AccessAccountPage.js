@@ -56,7 +56,7 @@ function AccessAccountPage(props) {
                 justifyContent="space-evenly"
                 alignItems="start"
                 width={0.8}
-                gap={1}
+                gap={2}
               >
                 <Grid item>Email Address</Grid>
                 <Grid item width={1}>
@@ -79,7 +79,7 @@ function AccessAccountPage(props) {
                   justifyContent="space-evenly"
                   alignItems="start"
                   width={0.8}
-                  gap={1}
+                  gap={2}
                 >
                   <Grid item textAlign="start">
                     Password

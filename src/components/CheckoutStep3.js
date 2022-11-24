@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 
 function CheckOutStep3(props) {
   /*
@@ -28,12 +27,13 @@ function CheckOutStep3(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
+        height="60vh"
       >
         <Grid
           item
           sx={{
             paddingBottom: "1rem",
-            fontSize: "30px",
+            fontSize: "44px",
             borderBottom: "0.5px solid #dee2e6",
             width: "80%",
           }}

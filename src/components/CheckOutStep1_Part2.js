@@ -3,6 +3,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 function CheckOutStep1_Part2(props) {
+  const miniContainerStyles = {
+    fontSize: "20px",
+  };
   return (
     <>
       <Grid
@@ -17,7 +20,7 @@ function CheckOutStep1_Part2(props) {
           item
           sx={{
             paddingBottom: "1rem",
-            fontSize: "30px",
+            fontSize: "44px",
             borderBottom: "0.5px solid #dee2e6",
             width: "80%",
           }}
@@ -25,7 +28,14 @@ function CheckOutStep1_Part2(props) {
           Address
         </Grid>
         <Grid item container>
-          <Grid item container flexDirection="column" xs={6} gap={1}>
+          <Grid
+            item
+            container
+            flexDirection="column"
+            xs={6}
+            gap={2}
+            sx={miniContainerStyles}
+          >
             <Grid item>Address</Grid>
             <Grid item>
               <TextField
@@ -47,8 +57,8 @@ function CheckOutStep1_Part2(props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item container flexDirection="column" xs={6} gap={1}>
+        <Grid container sx={miniContainerStyles}>
+          <Grid item container flexDirection="column" xs={6} gap={2}>
             <Grid item>City</Grid>
             <Grid item>
               <TextField
@@ -59,7 +69,7 @@ function CheckOutStep1_Part2(props) {
               />
             </Grid>
           </Grid>
-          <Grid item container flexDirection="column" xs={6} gap={1}>
+          <Grid item container flexDirection="column" xs={6} gap={2}>
             <Grid item>Post Code</Grid>
             <Grid item>
               <TextField
@@ -72,7 +82,13 @@ function CheckOutStep1_Part2(props) {
           </Grid>
         </Grid>
 
-        <Grid item container flexDirection="column" gap={1}>
+        <Grid
+          item
+          container
+          flexDirection="column"
+          gap={2}
+          sx={miniContainerStyles}
+        >
           <Grid item>Country</Grid>
           <Grid item>
             <TextField

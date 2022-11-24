@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./ContactPage.module.css";
 import TextField from "@mui/material/TextField";
-import CustomButton from "../utility/CustomButton";
+import Button from "@mui/material/Button";
 import AnimatedPage from "../utility/AnimatedPage";
 import { useParams } from "react-router-dom";
 
@@ -28,15 +28,21 @@ function ContactPage() {
                     <img
                       src="https://img.icons8.com/fluency/28/null/circled-envelope.png"
                       alt="email"
+                      className={styles["contactInfo-img"]}
                     />
-                    lorem@ipsum.com
+                    <div className={styles["contactInfo-text"]}>
+                      <div>lorem@ipsum.com</div>
+                    </div>
                   </div>
                   <div className={styles["contactInfo-item"]}>
                     <img
                       src="https://img.icons8.com/external-anggara-blue-anggara-putra/24/null/external-telephone-interface-anggara-blue-anggara-putra.png"
                       alt="Company phone number"
+                      className={styles["contactInfo-img"]}
                     />
-                    310-386-1623
+                    <div className={styles["contactInfo-text"]}>
+                      <div>310-386-1623</div>
+                    </div>
                   </div>
                 </div>
                 <div className={styles["contactInfo-links"]}>
@@ -82,7 +88,7 @@ function ContactPage() {
                     id="outlined-basic"
                     label="First Name"
                     variant="outlined"
-                    size="small"
+                    size="big"
                   />
                 </div>
                 <div className={styles["email-lName"]}>
@@ -90,7 +96,7 @@ function ContactPage() {
                     id="outlined-basic"
                     label="Last Name"
                     variant="outlined"
-                    size="small"
+                    size="big"
                   />
                 </div>
                 <div className={styles["email-address"]}>
@@ -98,7 +104,7 @@ function ContactPage() {
                     id="outlined-basic"
                     label="Email"
                     variant="outlined"
-                    size="small"
+                    size="big"
                   />
                 </div>
                 <div className={styles["email-mobile"]}>
@@ -106,7 +112,7 @@ function ContactPage() {
                     id="outlined-basic"
                     label="Phone"
                     variant="outlined"
-                    size="small"
+                    size="big"
                   />
                 </div>
                 <div className={styles["email-message"]}>
@@ -115,11 +121,17 @@ function ContactPage() {
                     label="Message"
                     multiline
                     fullWidth={true}
-                    size={"medium"}
+                    size="big"
                   />
                 </div>
                 <div className={styles["email-btn"]}>
-                  <CustomButton text="Send"></CustomButton>
+                  <Button
+                    variant="contained"
+                    size="big"
+                    sx={{ fontSize: "15px" }}
+                  >
+                    Send
+                  </Button>
                 </div>
               </div>
             </div>

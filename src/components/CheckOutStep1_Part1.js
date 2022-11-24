@@ -3,6 +3,9 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 function CheckOutStep1_Part1(props) {
+  const miniContainerStyles = {
+    fontSize: "20px",
+  };
   return (
     <>
       <Grid
@@ -12,21 +15,20 @@ function CheckOutStep1_Part1(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
-        
       >
         <Grid
           item
           sx={{
             paddingBottom: "1rem",
-            fontSize: "30px",
+            fontSize: "44px",
             borderBottom: "0.5px solid #dee2e6",
             width: "85%",
           }}
         >
           Contact Info
         </Grid>
-        <Grid item container>
-          <Grid item container flexDirection="column" xs={6} gap={1}>
+        <Grid item container sx={miniContainerStyles}>
+          <Grid item container flexDirection="column" xs={6} gap={2}>
             <Grid item>First Name</Grid>
             <Grid item>
               <TextField
@@ -37,7 +39,7 @@ function CheckOutStep1_Part1(props) {
               />
             </Grid>
           </Grid>
-          <Grid item container flexDirection="column" xs={6} gap={1}>
+          <Grid item container flexDirection="column" xs={6} gap={2}>
             <Grid item>Last Name</Grid>
             <Grid item>
               <TextField
@@ -50,7 +52,13 @@ function CheckOutStep1_Part1(props) {
           </Grid>
         </Grid>
 
-        <Grid item container flexDirection="column" gap={1}>
+        <Grid
+          item
+          container
+          flexDirection="column"
+          gap={2}
+          sx={miniContainerStyles}
+        >
           <Grid item>Email Address</Grid>
           <Grid item sx={{ width: "50%" }}>
             <TextField
@@ -62,7 +70,13 @@ function CheckOutStep1_Part1(props) {
             />
           </Grid>
         </Grid>
-        <Grid item container flexDirection="column" gap={1}>
+        <Grid
+          item
+          container
+          flexDirection="column"
+          gap={2}
+          sx={miniContainerStyles}
+        >
           <Grid item>Phone</Grid>
           <Grid item>
             <TextField

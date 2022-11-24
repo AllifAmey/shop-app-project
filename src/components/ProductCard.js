@@ -147,7 +147,7 @@ function ProductCard(props) {
           }}
         >
           <div className={styles["dialog-container"]}>
-            <DialogTitle>Quick Info </DialogTitle>
+            <DialogTitle fontSize={30}>Quick Info </DialogTitle>
             <div className={styles["dialog-item"]}>Handmade item </div>
             <div className={styles["dialog-item"]}>
               Handmade item Dispatches from a small business in United Kingdom
@@ -155,7 +155,9 @@ function ProductCard(props) {
             <div className={styles["dialog-item"]}>Materials: copper</div>
             <div className={styles["dialog-item"]}>FREE UK delivery</div>
             <DialogActions>
-              <Button onClick={handleClose}>Close</Button>
+              <Button onClick={handleClose} size="big">
+                Close
+              </Button>
             </DialogActions>
           </div>
         </DialogContent>
