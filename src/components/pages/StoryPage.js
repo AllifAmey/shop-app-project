@@ -35,17 +35,17 @@ function StoryPage() {
               container
               flexDirection="column"
               gap={2}
-              justifyContent="start"
+              justifyContent="center"
               alignItems="center"
               height="40%"
               width={0.6}
               textAlign="center"
               alignSelf="center"
             >
-              <Grid item fontWeight={800} fontSize={30}>
+              <Grid item fontWeight={800} fontSize={36}>
                 Our Story
               </Grid>
-              <Grid item fontSize={16}>
+              <Grid item fontSize={20}>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
                 ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
                 sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
@@ -73,10 +73,10 @@ function StoryPage() {
                 textAlign="center"
                 gap={4}
               >
-                <Grid item fontWeight={800} fontSize={30}>
+                <Grid item fontWeight={800} fontSize={36}>
                   Design Inspiration
                 </Grid>
-                <Grid item fontSize={16}>
+                <Grid item fontSize={20}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
                   nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate

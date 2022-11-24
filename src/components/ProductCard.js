@@ -95,13 +95,13 @@ function ProductCard(props) {
           <div className={styles["btn-purchase"]}>
             <Button
               variant="contained"
-              size="small"
+              size="big"
               component={RouterLink}
               to={`/product/handmade-${props.type.replaceAll(" ", "-")}`}
             >
               Buy Now
             </Button>
-            <Button variant="contained" size="small" onClick={addCartHandler}>
+            <Button variant="contained" size="medium" onClick={addCartHandler}>
               Add Cart
             </Button>
           </div>

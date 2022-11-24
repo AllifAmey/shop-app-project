@@ -31,7 +31,7 @@ function NavBar() {
     height: "100%",
     display: "flex",
     borderRadius: "0.2rem",
-    fontSize: "18px",
+    fontSize: "24px",
   };
 
   const gridLinkIcons = {
@@ -111,7 +111,7 @@ function NavBar() {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={7} sx={{ textAlign: "start", fontSize: "20px" }}>
+          <Grid item xs={7} sx={{ textAlign: "start", fontSize: "30px" }}>
             Amey Jewellery
           </Grid>
           <Grid
@@ -157,7 +157,7 @@ function NavBar() {
               component={RouterLink}
               to="/help"
               onMouseOver={handleClick}
-              fontSize={18}
+              fontSize={24}
             >
               Support
             </Link>

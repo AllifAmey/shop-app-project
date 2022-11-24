@@ -33,10 +33,10 @@ function AccessAccountPage(props) {
               alignItems="center"
               height={0.3}
             >
-              <Grid item fontSize={30}>
+              <Grid item fontSize={44}>
                 Amey Jewellery
               </Grid>
-              <Grid item fontSize={24} fontWeight={800}>
+              <Grid item fontSize={30} fontWeight={800}>
                 {props.accessType}
               </Grid>
             </Grid>
@@ -65,7 +65,7 @@ function AccessAccountPage(props) {
                     id="outlined-basic"
                     label="Email"
                     variant="outlined"
-                    size="small"
+                    size="big"
                   />
                 </Grid>
               </Grid>
@@ -90,14 +90,14 @@ function AccessAccountPage(props) {
                       id="outlined-basic"
                       label="Password"
                       variant="outlined"
-                      size="small"
+                      size="big"
                     />
                   </Grid>
                 </Grid>
               )}
 
               <Grid item width={0.5}>
-                <Button variant="outlined" size="small" fullWidth>
+                <Button variant="outlined" size="big" fullWidth>
                   {props.accessType}
                 </Button>
               </Grid>

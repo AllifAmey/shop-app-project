@@ -33,7 +33,7 @@ SHADOW SYSTEM (px)
   grid-template-rows: 150px 1fr 1fr 1fr;
   flex-direction: column;
   gap: 1rem;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .card-container .card-img {
@@ -45,7 +45,7 @@ SHADOW SYSTEM (px)
 
 .card-container .card-info {
   grid-area: info;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .card-container .card-price {

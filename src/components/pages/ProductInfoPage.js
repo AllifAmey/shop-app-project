@@ -37,11 +37,11 @@ function ProductInfoPage2() {
     alignItems: "center",
   };
   const mainGridContainerStyles = {
-    fontSize: "1rem",
+    fontSize: "20px",
   };
-  const imgStyle = { borderRadius: "50%", height: "350px", width: "350px" };
-  const mainHeaderStyle = { fontSize: "24px" };
-  const subTitleStyle = { fontSize: "20px" };
+  const imgStyle = { borderRadius: "50%", height: "500px", width: "500px" };
+  const mainHeaderStyle = { fontSize: "30px" };
+  const subTitleStyle = { fontSize: "24px" };
 
   // routing
 

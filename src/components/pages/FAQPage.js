@@ -33,15 +33,15 @@ function FAQPage() {
               flexDirection="column"
               justifyContent="space-evenly"
               alignItems="center"
-              gap={2}
+              gap={4}
             >
-              <Grid item alignSelf="center" fontSize={24} fontWeight={800}>
+              <Grid item alignSelf="center" fontSize={36} fontWeight={800}>
                 Frequently Asked Questions
               </Grid>
 
               <Grid item container gap={2} justifyContent="center">
                 <Grid item container flexDirection="column" width={0.4} gap={2}>
-                  <Grid item textAlign="center" fontSize={24} fontWeight={800}>
+                  <Grid item textAlign="center" fontSize={30} fontWeight={800}>
                     Delivery
                   </Grid>
                   <Grid item width>
@@ -86,7 +86,7 @@ function FAQPage() {
                   </Grid>
                 </Grid>
                 <Grid item container flexDirection="column" width={0.5} gap={2}>
-                  <Grid item textAlign="center" fontSize={24} fontWeight={800}>
+                  <Grid item textAlign="center" fontSize={30} fontWeight={800}>
                     Payment
                   </Grid>
                   <Grid item width>

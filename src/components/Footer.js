@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 
+import { NavLink as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 
@@ -21,6 +22,9 @@ function Footer() {
   const FooterStyle = {
     height: "20vh",
   };
+  const bottomLinkStyle = {
+    color: "inherit ",
+  };
 
   return (
     <>
@@ -35,7 +39,7 @@ function Footer() {
             width={0.2}
             gap={1}
           >
-            <Grid item fontSize={14}>
+            <Grid item fontSize={18}>
               Follow us on
             </Grid>
             <Grid
@@ -53,8 +57,8 @@ function Footer() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 48 48"
-                  width="28px"
-                  height="28px"
+                  width="34px"
+                  height="34px"
                 >
                   <path
                     fill="#FF3D00"
@@ -71,8 +75,8 @@ function Footer() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
-                  width="24px"
-                  height="24px"
+                  width="30px"
+                  height="30px"
                 >
                   <path
                     fill="#F6851F"
@@ -96,11 +100,20 @@ function Footer() {
               container
               justifyContent="space-evenly"
               alignItems="center"
-              fontSize={12}
+              fontSize={14}
               width={0.7}
             >
-              <Grid item>Privacy Policy</Grid>
-              <Grid item>Our Story</Grid>
+              <Grid item sx={bottomLinkStyle}>
+                Privacy Policy
+              </Grid>
+              <Grid
+                item
+                component={RouterLink}
+                to="/story"
+                sx={bottomLinkStyle}
+              >
+                Our Story
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
