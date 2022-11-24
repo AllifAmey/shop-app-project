@@ -32,9 +32,11 @@ function Hero() {
           <div className={styles["btn"]}>
             <Button
               variant="contained"
-              size="small"
+              size="big"
               component={RouterLink}
               to="/shop"
+              color="primary"
+              sx={{ fontSize: "15px", color: "#111122" }}
             >
               Explore Shop
             </Button>

@@ -28,15 +28,18 @@
 }
 
 .title {
-  font-size: 52px;
+  font-size: 86px;
 }
 
 .short-info {
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .location-container {
   position: absolute;
-  font-size: 12px;
   bottom: 2%;
+}
+
+.location-title {
+  font-size: 18px;
 }

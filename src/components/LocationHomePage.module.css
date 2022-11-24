@@ -47,6 +47,8 @@
 
 .article-weather {
   text-align: center;
+  padding-bottom: 1rem;
+  font-size: 20px;
 }
 
 .article-weatherStatus {
@@ -105,9 +107,11 @@
 
 .open-sign {
   position: absolute;
-  top: -10%;
+  top: -5%;
   left: 35%;
   right: 35%;
+  height: 70px;
+  width: 70px;
 }
 
 .article-timeBox {
@@ -127,16 +131,17 @@
 .article-subTitle {
   font-size: 20px;
   color: #303840;
+  font-weight: 600;
 }
 
 .article-address {
-  font-size: 12px;
+  font-size: 18px;
   color: #112a46;
 }
 .article-days {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 800;
 }
 .article-times {
-  font-size: 12px;
+  font-size: 16px;
 }

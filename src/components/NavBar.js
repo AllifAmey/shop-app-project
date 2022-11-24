@@ -12,7 +12,7 @@ import Drawer from "@mui/material/Drawer";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
-function NavBarNew() {
+function NavBar() {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx investigate whether this is the inspiration.
   // solution is to put the cart into a props or to use another component to filter that shit.
 
@@ -382,4 +382,4 @@ function NavBarNew() {
   );
 }
 
-export default NavBarNew;
+export default NavBar;

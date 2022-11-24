@@ -6,6 +6,11 @@ import { createTheme } from "@mui/material/styles";
 export const shopTheme = createTheme({
   components: {
     // Name of the component
+    palette: {
+      primary: {
+        main: "#111122",
+      },
+    },
     MuiButton: {
       styleOverrides: {
         // Name of the slot

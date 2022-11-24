@@ -9,21 +9,37 @@ import shopIcon from "../img/icons/shop-icon.png";
 
 function NavigationHomePage() {
   // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration
+
+  const navItemTitleStyle = {
+    fontSize: "30px",
+    fontWeight: 800,
+  };
+  const navItemImageStyle = {
+    height: "50px",
+    width: "50px",
+  };
+  const navItemTextStyle = {
+    fontSize: "20px",
+    width: "80%",
+    textAlign: "center",
+  };
   return (
     <>
-      <Container maxWidth="md" height="auto">
+      <Box height="auto" width={1}>
         <Grid
           container
           justifyContent="center"
           alignItems="center"
           height="50vh"
-          gap={2}
+          width={1}
         >
           <Grid
             item
             container
             flexDirection="column"
-            xs
+            justifyContent="center"
+            alignItems="center"
+            xs={4}
             height={0.8}
             gap={1}
             padding="1rem"
@@ -32,12 +48,12 @@ function NavigationHomePage() {
               item
               component="img"
               src={ideaIcon}
-              sx={{ height: "25px", width: "25px" }}
+              sx={navItemImageStyle}
             ></Grid>
-            <Grid item fontWeight={800} fontSize={18}>
+            <Grid item sx={navItemTitleStyle}>
               Our Philosophy
             </Grid>
-            <Grid item fontSize={14}>
+            <Grid item sx={navItemTextStyle}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
               explicabo beatae laudantium numquam magni natus?
             </Grid>
@@ -46,21 +62,23 @@ function NavigationHomePage() {
             item
             container
             flexDirection="column"
-            xs
+            xs={4}
             height={0.8}
             gap={1}
             padding="1rem"
+            justifyContent="center"
+            alignItems="center"
           >
             <Grid
               item
               component="img"
               src={shopIcon}
-              sx={{ height: "25px", width: "25px" }}
+              sx={navItemImageStyle}
             ></Grid>
-            <Grid item fontWeight={800} fontSize={18}>
+            <Grid item sx={navItemTitleStyle}>
               Shop
             </Grid>
-            <Grid item fontSize={14}>
+            <Grid item sx={navItemTextStyle}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
               explicabo beatae laudantium numquam magni natus?
             </Grid>
@@ -69,27 +87,29 @@ function NavigationHomePage() {
             item
             container
             flexDirection="column"
-            xs
+            xs={4}
             height={0.8}
             gap={1}
             padding="1rem"
+            justifyContent="center"
+            alignItems="center"
           >
             <Grid
               item
               component="img"
               src={supportIcon}
-              sx={{ height: "25px", width: "25px" }}
+              sx={navItemImageStyle}
             ></Grid>
-            <Grid item fontWeight={800} fontSize={18}>
+            <Grid item sx={navItemTitleStyle}>
               Support
             </Grid>
-            <Grid item fontSize={14}>
+            <Grid item sx={navItemTextStyle}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
               explicabo beatae laudantium numquam magni natus?
             </Grid>
           </Grid>
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 }

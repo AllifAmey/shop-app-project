@@ -46,7 +46,6 @@ function AccessAccountPage(props) {
               flexDirection="column"
               alignItems="center"
               justifyContent="space-evenly"
-              sx={{ background: "#e3fafc" }}
               padding="1rem"
               height={0.6}
             >

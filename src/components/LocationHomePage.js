@@ -64,7 +64,7 @@ function LocationHomePage() {
                   <div className={styles["article-bottom"]}>
                     <img
                       src={img}
-                      alt="jewellery"
+                      alt="open-sign"
                       className={styles["open-sign"]}
                     ></img>
                     <div className={styles["article-timeBox"]}>

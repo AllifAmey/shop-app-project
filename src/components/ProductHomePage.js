@@ -8,6 +8,9 @@ import { Grid } from "@mui/material";
 
 function ProductHomePage() {
   // https://nl.pinterest.com/pin/254664553914081575/?mt=login - inspiration
+
+  const TitleStyle = { fontSize: "36px", fontWeight: 800 };
+  const TextStyle = { fontSize: "24px" };
   return (
     <>
       <Box height="auto" width={1}>
@@ -39,8 +42,7 @@ function ProductHomePage() {
               >
                 <Grid
                   item
-                  fontSize={24}
-                  fontWeight={800}
+                  sx={TitleStyle}
                   borderBottom="1px solid grey"
                   paddingBottom="0.5rem"
                   width={0.8}
@@ -48,7 +50,7 @@ function ProductHomePage() {
                 >
                   Handcrafted to Perfection
                 </Grid>
-                <Grid item>
+                <Grid item sx={TextStyle}>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
                   repudiandae veniam labore quasi? Laudantium obcaecati vero vel
                   ullam hic adipisci!
@@ -88,12 +90,11 @@ function ProductHomePage() {
                   paddingBottom="0.5rem"
                   width={0.8}
                   textAlign="center"
-                  fontSize={24}
-                  fontWeight={800}
+                  sx={TitleStyle}
                 >
                   Created with Emotion
                 </Grid>
-                <Grid item>
+                <Grid item sx={TextStyle}>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
                   repudiandae veniam labore quasi? Laudantium obcaecati vero vel
                   ullam hic adipisci!
@@ -133,12 +134,11 @@ function ProductHomePage() {
                   paddingBottom="0.5rem"
                   width={0.8}
                   textAlign="center"
-                  fontSize={24}
-                  fontWeight={800}
+                  sx={TitleStyle}
                 >
                   Crafted with Care
                 </Grid>
-                <Grid item>
+                <Grid item sx={TextStyle}>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
                   repudiandae veniam labore quasi? Laudantium obcaecati vero vel
                   ullam hic adipisci!

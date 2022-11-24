@@ -152,9 +152,8 @@ function ProductCard(props) {
             <div className={styles["dialog-item"]}>
               Handmade item Dispatches from a small business in United Kingdom
             </div>
-            <div className={styles["dialog-item"]}>
-              Materials: copper FREE UK delivery
-            </div>
+            <div className={styles["dialog-item"]}>Materials: copper</div>
+            <div className={styles["dialog-item"]}>FREE UK delivery</div>
             <DialogActions>
               <Button onClick={handleClose}>Close</Button>
             </DialogActions>

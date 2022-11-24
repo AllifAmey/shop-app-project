@@ -1,9 +1,10 @@
-import NavBarNew from "./components/NavBarNew";
+import NavBar from "./components/NavBar";
 import ShopPage from "./components/pages/ShopPage";
 import ProductInfoPage from "./components/pages/ProductInfoPage";
 import HomePage from "./components/pages/HomePage";
 import Footer from "./components/Footer";
 import StoryPage from "./components/pages/StoryPage";
+import ProductImage from "./components/ProductImage";
 import ProductHomePage from "./components/ProductHomePage";
 import ContactPage from "./components/pages/ContactPage";
 import FAQPage from "./components/pages/FAQPage";
@@ -30,13 +31,13 @@ function App() {
   return (
     <>
       <ThemeProvider theme={shopTheme}>
-        <NavBarNew></NavBarNew>
+        <NavBar></NavBar>
         <AnimatePresence exitBeforeEnter>
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/account/:accessType" element={<AccountPage />} />
-            <Route path="/test" element={<ProductHomePage />} />
+            <Route path="/test" element={<ProductImage />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:productId" element={<ProductInfoPage />} />
