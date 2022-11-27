@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
+import PaymentButton from "./utility/PaymentButton";
 
 function CheckOutStep3(props) {
   /*
@@ -39,6 +40,9 @@ function CheckOutStep3(props) {
           }}
         >
           Payment
+        </Grid>
+        <Grid item>
+          <PaymentButton></PaymentButton>
         </Grid>
 
         <Grid

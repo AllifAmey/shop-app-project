@@ -4,14 +4,34 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import AnimatedPage from "../utility/AnimatedPage";
 import { useParams } from "react-router-dom";
+import { MuiTelInput } from "mui-tel-input";
 
 function ContactPage() {
   /**
    *https://i.ytimg.com/vi/ZafzM_z9PLs/maxresdefault.jpg
    Contact page with picture under the phone number.
+   https://viclafouch.github.io/mui-tel-input/docs/getting-started/ phone number. 
    */
 
+  const [phone, setPhone] = React.useState("");
+
+  const handleChange = (newPhone) => {
+    setPhone(newPhone);
+  };
+
   const params = useParams();
+  const handleChanged = (value, info) => {
+    /**
+    value: "+33123456789"
+    info: {
+      countryCallingCode: "33",
+      countryCode: "FR",
+      nationalNumber: "123456789",
+      numberValue: "+33123456789",
+      reason: "input"
+    }
+    **/
+  };
 
   return (
     <>
@@ -105,14 +125,14 @@ function ContactPage() {
                     label="Email"
                     variant="outlined"
                     size="big"
+                    type="email"
                   />
                 </div>
                 <div className={styles["email-mobile"]}>
-                  <TextField
-                    id="outlined-basic"
-                    label="Phone"
-                    variant="outlined"
-                    size="big"
+                  <MuiTelInput
+                    defaultCountry="GB"
+                    value={phone}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className={styles["email-message"]}>
@@ -120,6 +140,8 @@ function ContactPage() {
                     id="filled-multiline-flexible"
                     label="Message"
                     multiline
+                    rows={5}
+                    maxRows={10}
                     fullWidth={true}
                     size="big"
                   />

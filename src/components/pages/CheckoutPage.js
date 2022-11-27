@@ -117,8 +117,8 @@ function CheckOutPage() {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container flexDirection="column">
+      <Container maxWidth="lg" height="auto">
+        <Grid container flexDirection="column" height="100vh">
           <Grid item container justifyContent="center" alignItems="center">
             <Stepper
               alternativeLabel
