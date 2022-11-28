@@ -17,14 +17,17 @@ const cartSlice = createSlice({
         state.cart.push(action.payload);
         newList = state.cart;
       } else {
+        // current cart items
         const oldList = state.cart;
+        // recent item added
         const newCartItem = action.payload;
         let counter = 0;
         let newItem = true;
         // check if newCartItem is a new item with newItem variable.
         state.cart.forEach((cartItem) => {
-          // checks if item is new.
-          if (newCartItem.name == cartItem.name) {
+          console.log(cartItem.key);
+
+          if (newCartItem.key == cartItem.key) {
             newItem = false;
             // combines the objects and adds the price and quantity if new item.
             const calculatePrice = Object.entries(cartItem).reduce(

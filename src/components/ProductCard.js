@@ -18,16 +18,16 @@ function ProductCard(props) {
 
   /* --------- redux ------------*/
 
-  const shop = useSelector((state) => state.shop.shop);
-
   const dispatch = useDispatch();
 
   const addCartHandler = () => {
+    console.log(props.cardName);
     dispatch(
       cartActions.addCart({
-        name: props.cardName,
+        key: props.cardName,
         quantity: 1,
-        ...shop[props.cardName],
+        ...props.product,
+        price: Number(props.price),
       })
     );
   };
@@ -79,7 +79,7 @@ function ProductCard(props) {
             <CardMedia
               component="img"
               height="140"
-              image={props.img}
+              src={props.img}
               alt="ring"
               sx={{
                 height: "100%",

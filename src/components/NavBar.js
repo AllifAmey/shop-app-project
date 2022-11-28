@@ -93,7 +93,7 @@ function NavBar() {
     }
 
     cart.forEach((element) => {
-      itemNum += element.price;
+      itemNum += Number(element.price);
     });
     if (total == false) {
       return itemNum.toFixed(2);
@@ -275,7 +275,7 @@ function NavBar() {
                   >
                     <Box
                       component="img"
-                      src={item.img}
+                      src={item.image_url}
                       sx={{
                         width: "60px",
                         height: "60px",
@@ -291,12 +291,12 @@ function NavBar() {
                       <Grid item>
                         Handmade
                         {" " +
-                          item.type.charAt(0).toUpperCase() +
-                          item.type.substring(1)}
+                          item.name.charAt(0).toUpperCase() +
+                          item.name.substring(1)}
                       </Grid>
                       <Grid item>Quantity: {item.quantity}</Grid>
                     </Grid>
-                    <Grid item>{item.price.toFixed(2)}</Grid>
+                    <Grid item>{Number(item.price).toFixed(2)}</Grid>
                   </Grid>
                 );
               })}
