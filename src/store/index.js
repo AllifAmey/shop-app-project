@@ -88,6 +88,26 @@ const shopSlice = createSlice({
   },
 });
 
+const initialUserState = {
+  user: {
+    isAuthenticated: false,
+  },
+};
+
+const userSlice = createSlice({
+  name: "user",
+  initialState: initialUserState,
+  reducers: {
+    authenticate(state) {
+      state.isAuthenticated = true;
+    },
+
+    increase(state, action) {
+      state.counter = state.counter + action.payload;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: { cart: cartSlice.reducer, shop: shopSlice.reducer },
 });

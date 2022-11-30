@@ -334,7 +334,7 @@ function NavBar() {
                 <Grid container direction="row" justifyContent="center">
                   <Button
                     variant="contained"
-                    size="small"
+                    size="big"
                     component={RouterLink}
                     to="/checkout"
                     onClick={() => setIsDrawerOpen(false)}

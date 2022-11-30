@@ -153,12 +153,13 @@ function CheckOutPage() {
                 Order Summary
               </Grid>
               {cart.map((item) => {
+                console.log(item);
                 return (
                   <CheckOutOrderItem
-                    key={item.name}
-                    img={item.img}
+                    key={item.key}
+                    img={item.image_url}
                     quantity={item.quantity}
-                    type={item.type.toLowerCase()}
+                    type={item.name.toLowerCase()}
                     price={item.price}
                   ></CheckOutOrderItem>
                 );
