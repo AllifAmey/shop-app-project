@@ -6,7 +6,7 @@ import { Link as RouterLink } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
-import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
+import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import { useSelector } from "react-redux";
 
 function ProductInfoPage2() {

@@ -1,8 +1,8 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-import imgRing from "../img/Cards/Product/card-ring.avif";
-import imgScrunchy from "../img/Cards/Product/card-scrunchy.jpeg";
-import imgPinCushion from "../img/Cards/Product/card-pinCushion.avif";
+import imgRing from "../components/assets/img/Cards/Product/card-ring.avif";
+import imgScrunchy from "../components/assets/img/Cards/Product/card-scrunchy.jpeg";
+import imgPinCushion from "../components/assets/img/Cards/Product/card-pinCushion.avif";
 
 const initialCartState = { cart: [] };
 
@@ -63,31 +63,6 @@ const cartSlice = createSlice({
   },
 });
 
-const initialshopState = {
-  shop: {
-    card1: { type: "ring", img: imgRing, price: 3.99 },
-    card2: { type: "ring", img: imgRing, price: 3.99 },
-    card3: { type: "ring", img: imgRing, price: 3.99 },
-    card4: { type: "scrunchy", img: imgScrunchy, price: 3.99 },
-    card5: { type: "scrunchy", img: imgScrunchy, price: 3.99 },
-    card6: { type: "pin Cushion", img: imgPinCushion, price: 3.99 },
-  },
-};
-
-const shopSlice = createSlice({
-  name: "shop",
-  initialState: initialshopState,
-  reducers: {
-    addShop(state) {
-      state.shop.shop = [];
-    },
-
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
-    },
-  },
-});
-
 const initialUserState = {
   user: {
     isAuthenticated: false,
@@ -109,7 +84,7 @@ const userSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: { cart: cartSlice.reducer, shop: shopSlice.reducer },
+  reducer: { cart: cartSlice.reducer },
 });
 
 export const cartActions = cartSlice.actions;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ProductCard from "../ProductCard";
+import ProductCard from "./ProductCard";
 import Checkbox from "@mui/material/Checkbox";
 import { useSelector } from "react-redux";
-import imgPin from "../../img/icons/pinCushion-icon.png";
-import imgSrunchy from "../../img/icons/scrunchies-icon.png";
-import imgRing from "../../img/icons/ring-icon.png";
-import AnimatedPage from "../utility/AnimatedPage";
+import imgPin from "../../assets/img/icons/pinCushion-icon.png";
+import imgSrunchy from "../../assets/img/icons/scrunchies-icon.png";
+import imgRing from "../../assets/img/icons/ring-icon.png";
+import AnimatedPage from "../../utility/AnimatedPage";
 import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 

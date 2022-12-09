@@ -1,16 +1,16 @@
-import NavBar from "./components/NavBar";
+import NavBar from "./components/layouts/Navbar/NavBar";
 
-import ShopPage from "./components/pages/ShopPage";
-import ProductInfoPage from "./components/pages/ProductInfoPage";
-import HomePage from "./components/pages/HomePage";
-import Footer from "./components/Footer";
-import StoryPage from "./components/pages/StoryPage";
-import ProductImage from "./components/ProductImage";
-import ApiTest from "./components/ApiTest";
-import ContactPage from "./components/pages/ContactPage";
-import FAQPage from "./components/pages/FAQPage";
-import AccountPage from "./components/pages/AccountPage";
-import CheckOutPage from "./components/pages/CheckOutPage";
+import ShopPage from "./components/pages/Shop/ShopPage";
+import ProductInfoPage from "./components/pages/Product/ProductInfoPage";
+import HomePage from "./components/pages/Home/HomePage";
+import Footer from "./components/layouts/Footer/Footer";
+import StoryPage from "./components/pages/OurStory/StoryPage";
+import ProductImage from "./components/__test__/components/ProductImage";
+import ApiTest from "./components/__test__/components/ApiTest";
+import ContactPage from "./components/pages/ContactUs/ContactPage";
+import FAQPage from "./components/pages/FAQ/FAQPage";
+import AccountPage from "./components/pages/Account/AccountPage";
+import CheckOutPage from "./components/pages/Checkout/CheckOutPage";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";

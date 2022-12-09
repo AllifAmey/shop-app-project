@@ -2,7 +2,7 @@ import * as React from "react";
 import styles from "./ContactPage.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import AnimatedPage from "../utility/AnimatedPage";
+import AnimatedPage from "../../utility/AnimatedPage";
 import { useParams } from "react-router-dom";
 import { MuiTelInput } from "mui-tel-input";
 

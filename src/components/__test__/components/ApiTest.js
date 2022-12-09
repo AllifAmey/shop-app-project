@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../pages/Shop/ProductCard";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";

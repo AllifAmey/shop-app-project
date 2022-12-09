@@ -3,9 +3,9 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Grid } from "@mui/material";
-import supportIcon from "../img/icons/support-icon.png";
-import ideaIcon from "../img/icons/idea-icon.png";
-import shopIcon from "../img/icons/shop-icon.png";
+import supportIcon from "../../assets/img/icons/support-icon.png";
+import ideaIcon from "../../assets/img/icons/idea-icon.png";
+import shopIcon from "../../assets/img/icons/shop-icon.png";
 
 function NavigationHomePage() {
   // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration

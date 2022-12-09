@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
-import PaymentButton from "./utility/PaymentButton";
+import PaymentButton from "../../utility/PaymentButton";
 
 function CheckOutStep3(props) {
   /*

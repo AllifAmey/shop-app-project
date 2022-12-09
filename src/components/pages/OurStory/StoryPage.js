@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import natureImg from "../../img/Storypage/nature-inspiration.avif";
-import AnimatedPage from "../utility/AnimatedPage";
+import natureImg from "../../assets/img/Storypage/nature-inspiration.avif";
+import AnimatedPage from "../../utility/AnimatedPage";
 import Box from "@mui/material/Box";
 
 function StoryPage() {

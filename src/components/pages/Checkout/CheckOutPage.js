@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import Container from "@mui/material/container";
-import CheckOutOrderItem from "../CheckOutOrderItem";
+import CheckOutOrderItem from "./CheckOutOrderItem";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import CheckOutStep1_Part1 from "../CheckOutStep1_Part1";
-import CheckOutStep1_Part2 from "../CheckOutStep1_Part2";
-import CheckOutStep2 from "../CheckOutStep2";
-import CheckOutStep3 from "../CheckOutStep3";
+import CheckOutStep1_Part1 from "./CheckOutStep1_Part1";
+import CheckOutStep1_Part2 from "./CheckOutStep1_Part2";
+import CheckOutStep2 from "./CheckOutStep2";
+import CheckOutStep3 from "./CheckOutStep3";
 
 function CheckOutPage() {
   /*

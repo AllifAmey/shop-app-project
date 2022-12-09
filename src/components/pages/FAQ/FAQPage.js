@@ -5,7 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
+import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import { Grid } from "@mui/material";
 
 import Box from "@mui/material/Box";

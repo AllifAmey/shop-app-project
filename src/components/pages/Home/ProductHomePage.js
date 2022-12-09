@@ -1,8 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import ringImg from "../img/Homepage/ring-homepage.jpg";
-import pinCushionImg from "../img/Homepage/pin-cushion-homepage.jpg";
-import scrunchyImg from "../img/Homepage/scrunchy-homepage.jpg";
+import ringImg from "../../assets/img/Homepage/ring-homepage.jpg";
+import pinCushionImg from "../../assets/img/Homepage/pin-cushion-homepage.jpg";
+import scrunchyImg from "../../assets/img/Homepage/scrunchy-homepage.jpg";
 
 import { Grid } from "@mui/material";
 

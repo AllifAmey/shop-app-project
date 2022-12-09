@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./LocationHomePage.module.css";
-import img from "../img/icons/openSign-icon.png";
+import img from "../../assets/img/icons/openSign-icon.png";
 import CircularProgress from "@mui/material/CircularProgress";
 import OurLocation from "./googleMap";
 

@@ -11,7 +11,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../store/index";
+import { cartActions } from "../../../store/index";
 
 function ProductCard(props) {
   const [open, setOpen] = useState(false);

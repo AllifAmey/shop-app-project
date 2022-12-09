@@ -1,13 +1,13 @@
 import * as React from "react";
 import styles from "./HomePage.module.css";
-import AnimatedPopUpPage from "../utility/AnimatedPopUpPage";
+import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import LocationHomePage from "../LocationHomePage";
-import NavigationHomePage from "../NavigationHomePage";
-import ProductHomePage from "../ProductHomePage";
-import img from "../../img/icons/arrow-down.png";
+import LocationHomePage from "./LocationHomePage";
+import NavigationHomePage from "./NavigationHomePage";
+import ProductHomePage from "./ProductHomePage";
+import img from "../../assets/img/icons/arrow-down.png";
 
 /*
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8bc2cc5785b_6002086f72b7277a6401e43e_sobremesa.jpeg - look at the white arrow at the bottom. Maybe add that.
