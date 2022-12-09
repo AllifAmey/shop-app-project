@@ -7,7 +7,7 @@ import {
 
 // This values are the props in the UI
 const amount = "0.1";
-const currency = "USD";
+const currency = "GBP";
 const style = { layout: "vertical" };
 
 /*side-note:
@@ -68,15 +68,18 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
     </>
   );
 };
-
+// change the client-id for production I believe.
+// I have verified through debug=true in options
+// check the json to verify that the id is correctly being used
+// then check the sandbox accounts to see if payment is sent.
 export default function PaymentButton() {
   return (
     <div style={{ maxWidth: "750px", minHeight: "200px" }}>
       <PayPalScriptProvider
         options={{
-          "client-id": "test",
+          "client-id": process.env.REACT_APP_PAYPAL_API_KEY,
           components: "buttons",
-          currency: "USD",
+          currency: "GBP",
         }}
       >
         <ButtonWrapper currency={currency} showSpinner={false} />
