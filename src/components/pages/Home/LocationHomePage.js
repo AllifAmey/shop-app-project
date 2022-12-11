@@ -11,9 +11,14 @@ function LocationHomePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchWeatherHandler = useCallback(async () => {
+    const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
     setIsLoading(true);
-    const response = await fetch("http://localhost:8000/weather");
+    const response = await fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
+    );
     const data = await response.json();
+    console.log(data);
+    console.log(data.weather["0"].icon);
 
     const icon = data.weather["0"].icon;
 

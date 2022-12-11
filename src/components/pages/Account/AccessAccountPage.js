@@ -9,7 +9,7 @@ function AccessAccountPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [token, setToken] = useState("");
+
   const [cartId, setcartId] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,9 @@ function AccessAccountPage(props) {
       headers: { "Content-type": "application/json" },
     });
     let data = await response.json();
-    setToken(data.token);
+    // user data is then set in localStorage
+    localStorage.setItem("Token", data.token);
+    localStorage.setItem("isLogged", "LOGGED_IN");
 
     response = await fetch("http://localhost:8000/api/user/me/", {
       method: "GET",
@@ -55,6 +57,9 @@ function AccessAccountPage(props) {
   async function getCart() {
     setIsLoading(true);
 
+    const token = localStorage.getItem("Token");
+    console.log(`My token is ${token}`);
+
     const response = await fetch("http://localhost:8000/api/shop/cart/", {
       method: "GET",
       headers: {
@@ -65,65 +70,6 @@ function AccessAccountPage(props) {
     const data = await response.json();
     console.log(data);
     setcartId(data.id);
-
-    setIsLoading(false);
-  }
-
-  async function getCartFull() {
-    setIsLoading(true);
-
-    const response = await fetch(
-      `http://localhost:8000/api/shop/cart/${cartId}/`,
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-
-    setIsLoading(false);
-  }
-
-  async function editCart() {
-    setIsLoading(true);
-
-    const response = await fetch(
-      `http://localhost:8000/api/shop/cart/${cartId}/`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ user: 4, products: [1, 2] }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-
-    setIsLoading(false);
-  }
-
-  async function deleteCart() {
-    setIsLoading(true);
-
-    const response = await fetch(
-      `http://localhost:8000/api/shop/cart/${cartId}/`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({ user: 4, products: [2] }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${token}`,
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
 
     setIsLoading(false);
   }
@@ -273,38 +219,6 @@ function AccessAccountPage(props) {
                     onClick={handleSubmit}
                   >
                     {props.accessType}
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="big"
-                    fullWidth
-                    onClick={getCart}
-                  >
-                    check cart
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="big"
-                    fullWidth
-                    onClick={getCartFull}
-                  >
-                    check full cart
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="big"
-                    fullWidth
-                    onClick={editCart}
-                  >
-                    post cart
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    size="big"
-                    fullWidth
-                    onClick={deleteCart}
-                  >
-                    delete cart
                   </Button>
                 </Grid>
                 {props.accessType == "Login" ? (

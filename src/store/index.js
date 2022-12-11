@@ -1,9 +1,5 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-import imgRing from "../components/assets/img/Cards/Product/card-ring.avif";
-import imgScrunchy from "../components/assets/img/Cards/Product/card-scrunchy.jpeg";
-import imgPinCushion from "../components/assets/img/Cards/Product/card-pinCushion.avif";
-
 const initialCartState = { cart: [] };
 
 const cartSlice = createSlice({
