@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SvgIcon } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { useSelector } from "react-redux";
@@ -101,6 +101,10 @@ function NavBar() {
     return (itemNum + 2).toFixed(2);
   }
 
+  useEffect(() => {
+    // let cart = localStorage.getItem("Cart");
+  }, []);
+
   return (
     <>
       <Box sx={outerBoxStyles}>
@@ -174,7 +178,11 @@ function NavBar() {
               underline="none"
               color="#343a40"
               component={RouterLink}
-              to="/account/login"
+              to={`/account/${
+                localStorage.getItem("username") == undefined
+                  ? "login"
+                  : localStorage.getItem("username")
+              }`}
               sx={linkStyles}
             >
               <SvgIcon

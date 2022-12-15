@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
-import { json, Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function AccessAccountPage(props) {
   const [name, setName] = useState("");
@@ -16,6 +16,7 @@ function AccessAccountPage(props) {
 
   async function login() {
     setIsLoading(true);
+    // TODO: error handle the log out function.
 
     let response = await fetch("http://localhost:8000/api/user/token/", {
       method: "POST",
@@ -35,9 +36,11 @@ function AccessAccountPage(props) {
       },
     });
     data = await response.json();
-    console.log(data);
+    localStorage.setItem("username", data.name);
 
     setIsLoading(false);
+
+    props.login(true);
   }
 
   async function signUp() {
@@ -80,7 +83,8 @@ function AccessAccountPage(props) {
     if (props.accessType == "Login") {
       await login();
     } else if (props.accessType == "Sign Up") {
-      signUp();
+      await signUp();
+      await login();
     }
   };
 

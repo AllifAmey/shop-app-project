@@ -56,6 +56,9 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
       state.cart = state.cart + action.payload;
     },
+    replaceCart(state, action) {
+      state.cart = action.payload;
+    },
   },
 });
 

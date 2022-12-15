@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 
-function getCart() {
+function getCartBtn() {
   // basic template to creating test components.
 
   const [isLoading, setIsLoading] = useState(false);
@@ -35,4 +35,4 @@ function getCart() {
   );
 }
 
-export default getCart;
+export default getCartBtn;
