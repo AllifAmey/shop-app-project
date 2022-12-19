@@ -5,23 +5,17 @@ import Box from "@mui/material/Box";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useState, useEffect } from "react";
-import { SvgIcon } from "@mui/material";
-import Badge from "@mui/material/Badge";
-import { useSelector } from "react-redux";
-import Drawer from "@mui/material/Drawer";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
+
+import AccountIcon from "./utility/AccountIcon";
+import CartIcon from "./utility/CartIcon";
+import CartSidePopup from "./CartSidePopup";
 
 function NavBar() {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx investigate whether this is the inspiration.
-  // solution is to put the cart into a props or to use another component to filter that shit.
-
-  const cart = useSelector((state) => state.cart.cart);
+  // solution is to put the cart into a props or to use another component to filter that stuff.
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // styles
-  const linkStyles = {
-    display: "flex",
-  };
+
   const gridLinkStyles = {
     "&:hover": {
       backgroundColor: "#f1f3f5",
@@ -70,35 +64,6 @@ function NavBar() {
 
   function handleClose() {
     setAnchorEl(null);
-  }
-
-  function cartNum() {
-    let itemNum = 0;
-
-    if (cart.length == 0) {
-      return 0;
-    }
-
-    cart.forEach((element) => {
-      itemNum += element.quantity;
-    });
-    return itemNum;
-  }
-
-  function subtotalNum(total = false) {
-    let itemNum = 0;
-
-    if (cart.length == 0) {
-      return 0;
-    }
-
-    cart.forEach((element) => {
-      itemNum += Number(element.price);
-    });
-    if (total == false) {
-      return itemNum.toFixed(2);
-    }
-    return (itemNum + 2).toFixed(2);
   }
 
   useEffect(() => {
@@ -174,187 +139,15 @@ function NavBar() {
             xs={1}
             sx={gridLinkIcons}
           >
-            <Link
-              underline="none"
-              color="#343a40"
-              component={RouterLink}
-              to={`/account/${
-                localStorage.getItem("username") == undefined
-                  ? "login"
-                  : localStorage.getItem("username")
-              }`}
-              sx={linkStyles}
-            >
-              <SvgIcon
-                version="1.0"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20.000000pt"
-                height="20.000000pt"
-                viewBox="0 0 30.000000 30.000000"
-                preserveAspectRatio="xMidYMid meet"
-              >
-                <g
-                  transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
-                  fill="#000000"
-                  stroke="none"
-                >
-                  <path
-                    d="M110 250 c-11 -11 -20 -31 -20 -45 0 -30 32 -65 60 -65 28 0 60 35
-60 65 0 30 -32 65 -60 65 -11 0 -29 -9 -40 -20z"
-                  />
-                  <path
-                    d="M80 92 c-19 -9 -36 -25 -38 -34 -3 -16 7 -18 108 -18 101 0 111 2
-108 18 -4 23 -64 52 -108 52 -19 0 -51 -8 -70 -18z"
-                  />
-                </g>
-              </SvgIcon>
-            </Link>
-            <Badge
-              badgeContent={cartNum()}
-              color="primary"
-              sx={{
-                "& .MuiBadge-badge": {
-                  color: "white",
-                  backgroundColor: "blue",
-                },
-              }}
-            >
-              <Link
-                underline="none"
-                color="#343a40"
-                component={RouterLink}
-                onClick={() => setIsDrawerOpen(true)}
-                sx={linkStyles}
-              >
-                <SvgIcon
-                  version="1.0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20.000000pt"
-                  height="20.000000pt"
-                  viewBox="0 0 30.000000 30.000000"
-                  preserveAspectRatio="xMidYMid meet"
-                >
-                  <g
-                    transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
-                    fill="#000000"
-                    stroke="none"
-                  >
-                    <path
-                      d="M10 271 c0 -5 7 -11 16 -13 11 -2 26 -31 43 -83 l26 -80 73 -3 73 -3
-13 33 c8 18 17 48 21 66 l7 32 -106 0 c-95 0 -106 2 -106 18 0 10 -5 23 -12
-30 -14 14 -48 16 -48 3z m208 -113 c-3 -20 -9 -23 -48 -23 -39 0 -45 3 -48 23
--3 20 0 22 48 22 48 0 51 -2 48 -22z"
-                    />
-                    <path
-                      d="M104 59 c-10 -17 13 -36 27 -22 12 12 4 33 -11 33 -5 0 -12 -5 -16
--11z"
-                    />
-                    <path
-                      d="M204 59 c-10 -17 13 -36 27 -22 12 12 4 33 -11 33 -5 0 -12 -5 -16
--11z"
-                    />
-                  </g>
-                </SvgIcon>
-              </Link>
-            </Badge>
+            <AccountIcon />
+            <CartIcon setDrawerOpen={setIsDrawerOpen}></CartIcon>
           </Grid>
         </Grid>
       </Box>
-      <Drawer
-        anchor="right"
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}
-        sx={{
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: 400 },
-        }}
-      >
-        <Box sx={{ height: "80%", overflowY: "scroll" }}>
-          <Container sx={{}}>
-            <Grid container direction="column">
-              {cart.map((item) => {
-                return (
-                  <Grid
-                    container
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    sx={{ height: "5rem" }}
-                    key={item.name}
-                  >
-                    <Box
-                      component="img"
-                      src={item.image_url}
-                      sx={{
-                        width: "60px",
-                        height: "60px",
-                        borderRadius: "30%",
-                      }}
-                    ></Box>
-                    <Grid
-                      container
-                      direction="column"
-                      sx={{ width: "40%" }}
-                      gap={2}
-                    >
-                      <Grid item>
-                        Handmade
-                        {" " +
-                          item.name.charAt(0).toUpperCase() +
-                          item.name.substring(1)}
-                      </Grid>
-                      <Grid item>Quantity: {item.quantity}</Grid>
-                    </Grid>
-                    <Grid item>{Number(item.price).toFixed(2)}</Grid>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Container>
-        </Box>
-        <Box sx={{ height: "25%" }}>
-          <Container sx={{ padding: "1rem" }}>
-            <Grid
-              container
-              direction="column"
-              justifyContent="space-evenly"
-              alignItems="center"
-              gap={1}
-            >
-              <Grid container direction="row" justifyContent="space-between">
-                <Grid item>Subtotal</Grid>
-                <Grid item>
-                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum()}`}
-                </Grid>
-              </Grid>
-              <Grid container direction="row" justifyContent="space-between">
-                <Grid item>Delivery fee</Grid>
-                <Grid item>{cart.length == 0 ? "" : "£2.00"}</Grid>
-              </Grid>
-              <Grid container direction="row" justifyContent="space-between">
-                <Grid item>Total to pay</Grid>
-                <Grid item>
-                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
-                </Grid>
-              </Grid>
-              {subtotalNum() == 0 ? (
-                ""
-              ) : (
-                <Grid container direction="row" justifyContent="center">
-                  <Button
-                    variant="contained"
-                    size="big"
-                    component={RouterLink}
-                    to="/checkout"
-                    onClick={() => setIsDrawerOpen(false)}
-                  >
-                    Checkout
-                  </Button>
-                </Grid>
-              )}
-            </Grid>
-          </Container>
-        </Box>
-      </Drawer>
+      <CartSidePopup
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+      ></CartSidePopup>
       <Menu
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
