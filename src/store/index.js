@@ -21,8 +21,6 @@ const cartSlice = createSlice({
         let newItem = true;
         // check if newCartItem is a new item with newItem variable.
         state.cart.forEach((cartItem) => {
-          console.log(cartItem.key);
-
           if (newCartItem.key == cartItem.key) {
             newItem = false;
             // combines the objects and adds the price and quantity if new item.
@@ -43,6 +41,7 @@ const cartSlice = createSlice({
         });
         if (newItem) {
           // if it is a new item then add the item as a new element in the list.
+
           state.cart.push(action.payload);
           newList = state.cart;
         } else {

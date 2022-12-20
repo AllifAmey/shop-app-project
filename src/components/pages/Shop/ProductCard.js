@@ -12,16 +12,22 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/index";
+import {
+  getCart,
+  patchCartItem,
+  postCart,
+} from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import _ from "lodash";
 
 function ProductCard(props) {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   /* --------- redux ------------*/
 
   const dispatch = useDispatch();
 
   const addCartHandler = () => {
-    console.log(props.cardName);
     dispatch(
       cartActions.addCart({
         key: props.cardName,
@@ -30,6 +36,45 @@ function ProductCard(props) {
         price: Number(props.price),
       })
     );
+    if (localStorage.getItem("isLogged") == "LOGGED_IN") {
+      // grab user's cart and loop through returned data
+      // then compare the data.products and see if it is the same.
+      // if it is then record the id and then put it into the next api call.
+
+      getCart(setIsLoading).then((user_cart) => {
+        setIsLoading(true);
+
+        let cart_id = undefined;
+        let product_id = undefined;
+        let existing_quantity = undefined;
+        for (const [key, value] of Object.entries(user_cart)) {
+          console.log(value.product);
+          console.log(props.product);
+          if (_.isEqual(value.product, props.product)) {
+            cart_id = Number(key.slice(key.lastIndexOf(" ") + 1, key.length));
+            product_id = Number(value.product.id);
+            existing_quantity = Number(value.quantity);
+          }
+        }
+        setIsLoading(false);
+        if (
+          cart_id != undefined &&
+          product_id != undefined &&
+          existing_quantity != undefined
+        ) {
+          // then do a patch request
+          patchCartItem(setIsLoading, cart_id, product_id, existing_quantity);
+        } else if (
+          cart_id === undefined &&
+          product_id === undefined &&
+          existing_quantity === undefined
+        ) {
+          // then create a new cart item.
+
+          postCart(setIsLoading, props.product.id);
+        }
+      });
+    }
   };
 
   const handleClickOpen = () => {

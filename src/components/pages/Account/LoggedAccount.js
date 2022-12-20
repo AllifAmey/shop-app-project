@@ -90,7 +90,8 @@ function LoggedAccount(props) {
       let user_cart_row = [];
       for (const [key, value] of Object.entries(user_cart)) {
         const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-        const cardName = `card${card_id}`;
+        //const cardName = `card${card_id}`;
+        const cardName = `card${value.product.id}`;
         const price = Number(value.product.price);
         const quantity = Number(value.quantity);
         const totalPrice = (price * quantity).toFixed(2);

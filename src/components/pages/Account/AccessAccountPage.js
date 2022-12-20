@@ -37,6 +37,7 @@ function AccessAccountPage(props) {
     });
     data = await response.json();
     localStorage.setItem("username", data.name);
+    localStorage.setItem("user_id", data.user_id);
 
     setIsLoading(false);
 

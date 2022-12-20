@@ -29,7 +29,6 @@ function ShopPage() {
 
     const response = await fetch("http://localhost:8000/api/shop/products/");
     const data = await response.json();
-    console.log(data);
 
     setProducts(data);
     setIsLoading(false);
