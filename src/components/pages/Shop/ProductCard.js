@@ -48,8 +48,6 @@ function ProductCard(props) {
         let product_id = undefined;
         let existing_quantity = undefined;
         for (const [key, value] of Object.entries(user_cart)) {
-          console.log(value.product);
-          console.log(props.product);
           if (_.isEqual(value.product, props.product)) {
             cart_id = Number(key.slice(key.lastIndexOf(" ") + 1, key.length));
             product_id = Number(value.product.id);

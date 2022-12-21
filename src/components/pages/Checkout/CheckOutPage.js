@@ -88,7 +88,7 @@ function CheckOutPage() {
     }
 
     cart.forEach((element) => {
-      itemNum += element.price;
+      itemNum += Number(element.price);
     });
     if (total == false) {
       return itemNum.toFixed(2);

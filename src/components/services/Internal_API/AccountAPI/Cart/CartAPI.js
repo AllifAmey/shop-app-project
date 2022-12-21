@@ -76,3 +76,25 @@ export async function patchCartItem(
   setIsLoading(false);
   return data;
 }
+
+export async function deleteCartItem(setIsLoading, cart_id) {
+  // this grabs the
+  setIsLoading(true);
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(
+    `http://localhost:8000/api/shop/cart/items/${cart_id}/`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    }
+  );
+  const data = await response.json();
+
+  setIsLoading(false);
+  return data;
+}

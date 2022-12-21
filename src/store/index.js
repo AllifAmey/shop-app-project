@@ -23,18 +23,24 @@ const cartSlice = createSlice({
         state.cart.forEach((cartItem) => {
           if (newCartItem.key == cartItem.key) {
             newItem = false;
-            // combines the objects and adds the price and quantity if new item.
-            const calculatePrice = Object.entries(cartItem).reduce(
-              (acc, [key, value]) => {
-                if (key !== "price" && key !== "quantity") {
-                  // skip the keys if they are price and quantity.
-                  return { ...acc, [key]: acc[key] };
-                }
-                // if the key is the same then add the values together.
-                return { ...acc, [key]: (acc[key] || 0) + value };
-              },
-              { ...newCartItem }
-            );
+            // simply grabs a copy(referance?) of the current cartItem object
+            // adjust the price and quantity to reflect the user's wishes
+            // then inserts the adjusted cartItem object(calculatePrice) ,
+            // the index that would normally host the previous cartItem unadjusted object.
+            // This logic/code is far more readable and manageable compared to the previous.
+            let calculatePrice = cartItem;
+            calculatePrice.price = (
+              Number(calculatePrice.price) + Number(newCartItem.price)
+            ).toString();
+            calculatePrice.quantity += 1;
+
+            // calculatePrice is actually not the calculated price
+            // it is an object containing the calculated price in one of its keys.
+            // I am only interested in price and quantity
+            // that is why two objects are printed when I console.log them
+            // to resolve this is simple. Grab the object (cartItem) which accurately reflects the data
+            // and store it in a temporary variable, add the price to its keys then return it as the calculatePrice.
+
             oldList[counter] = calculatePrice;
           }
           counter++;
@@ -45,6 +51,7 @@ const cartSlice = createSlice({
           state.cart.push(action.payload);
           newList = state.cart;
         } else {
+          // if it is not a new item then return the whole list with the adjustments to quantity and price
           newList = oldList;
         }
       }

@@ -5,8 +5,10 @@ import { Grid } from "@mui/material";
 import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
+
 import LoginNav from "./utility/LoginNav";
 import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassDeleteAPI";
 import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
@@ -51,16 +53,6 @@ const cartColumns = [
     type: "number",
     width: 150,
   },
-  {
-    field: "delete",
-    headerName: "Delete",
-    width: 90,
-  },
-];
-
-const rows = [
-  { id: 1, order: "Snow", totalPrice: 5.25, deliveryStatus: 35 },
-  { id: 2, order: "Lannister", totalPrice: 5.5, deliveryStatus: 42 },
 ];
 
 function LoggedAccount(props) {
@@ -69,6 +61,8 @@ function LoggedAccount(props) {
   const [navValue, setNavValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [rowValue, setrowValue] = useState();
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [showDelete, setShowDelete] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -116,6 +110,14 @@ function LoggedAccount(props) {
     });
   }, []);
 
+  function deleteitems() {
+    // Here is the logic:
+    // Grab the ids of the selected rows and get rid of them.
+    // the ids presented will form the basis of delete method api calls.
+    const arr_selectedRows = [...selectedRows];
+    massDelete(setIsLoading, "cart", arr_selectedRows);
+  }
+
   function logOut() {
     localStorage.removeItem("Token");
     localStorage.removeItem("username");
@@ -145,6 +147,9 @@ function LoggedAccount(props) {
               alignItems="center"
               gap={2}
             >
+              <Grid item justifyContent="center">
+                Welcome back, {localStorage.getItem("username")}
+              </Grid>
               <Grid item container justifyContent="center">
                 <LoginNav
                   setIsLoading={setIsLoading}
@@ -161,10 +166,39 @@ function LoggedAccount(props) {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                     checkboxSelection
+                    onSelectionModelChange={(ids) => {
+                      const selectedIDs = new Set(ids);
+                      //console.log(ids);
+                      setSelectedRows(selectedIDs);
+                      console.log([...selectedIDs]);
+                      if ([...selectedIDs].length == 0) {
+                        console.log("hello");
+                        setShowDelete(false);
+                      } else {
+                        setShowDelete(true);
+                      }
+                    }}
                   />
                 </div>
               </Grid>
-              <Grid item container justifyContent="center">
+              <Grid
+                item
+                container
+                justifyContent={showDelete ? "space-between" : "center"}
+                width={0.2}
+                height={0.5}
+              >
+                {showDelete ? (
+                  <Button
+                    variant="contained"
+                    sx={{ color: "red" }}
+                    onClick={deleteitems}
+                  >
+                    Delete items
+                  </Button>
+                ) : (
+                  ""
+                )}
                 <Button
                   variant="contained"
                   component={RouterLink}
