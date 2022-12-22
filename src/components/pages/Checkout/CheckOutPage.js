@@ -66,6 +66,18 @@ function CheckOutPage() {
     */
   // consts
   const cart = useSelector((state) => state.cart.cart);
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: "",
+    post_code: "",
+    delivery_type: "",
+    delivery_msg: "",
+  });
   const [count, setCount] = useState(0);
 
   // functionality
@@ -109,16 +121,40 @@ function CheckOutPage() {
   // steps
 
   const steps = {
-    0: <CheckOutStep1_Part1 changeStep={changeStep}></CheckOutStep1_Part1>,
-    1: <CheckOutStep1_Part2 changeStep={changeStep}></CheckOutStep1_Part2>,
-    2: <CheckOutStep2 changeStep={changeStep}></CheckOutStep2>,
-    3: <CheckOutStep3 changeStep={changeStep}></CheckOutStep3>,
+    0: (
+      <CheckOutStep1_Part1
+        changeStep={changeStep}
+        setDeliveryInfo={setDeliveryInfo}
+        deliveryInfo={deliveryInfo}
+      ></CheckOutStep1_Part1>
+    ),
+    1: (
+      <CheckOutStep1_Part2
+        changeStep={changeStep}
+        setDeliveryInfo={setDeliveryInfo}
+        deliveryInfo={deliveryInfo}
+      ></CheckOutStep1_Part2>
+    ),
+    2: (
+      <CheckOutStep2
+        changeStep={changeStep}
+        setDeliveryInfo={setDeliveryInfo}
+        deliveryInfo={deliveryInfo}
+      ></CheckOutStep2>
+    ),
+    3: (
+      <CheckOutStep3
+        changeStep={changeStep}
+        setDeliveryInfo={setDeliveryInfo}
+        deliveryInfo={deliveryInfo}
+      ></CheckOutStep3>
+    ),
   };
 
   return (
     <>
       <Container maxWidth="lg" height="auto">
-        <Grid container flexDirection="column" height="100vh">
+        <Grid container flexDirection="column" height="auto">
           <Grid item container justifyContent="center" alignItems="center">
             <Stepper
               alternativeLabel
@@ -153,7 +189,6 @@ function CheckOutPage() {
                 Order Summary
               </Grid>
               {cart.map((item) => {
-                console.log(item);
                 return (
                   <CheckOutOrderItem
                     key={item.key}

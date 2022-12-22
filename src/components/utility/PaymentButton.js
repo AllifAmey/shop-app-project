@@ -74,7 +74,7 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
 // then check the sandbox accounts to see if payment is sent.
 export default function PaymentButton() {
   return (
-    <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+    <div style={{ maxWidth: "200px", minHeight: "200px" }}>
       <PayPalScriptProvider
         options={{
           "client-id": process.env.REACT_APP_PAYPAL_API_KEY,

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Radio from "@mui/material/Radio";
+import TextField from "@mui/material/TextField";
 
 function CheckOutStep2(props) {
   /*Inspiration: 
   https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
-  const [selectedValue, setSelectedValue] = useState("a");
+  const delivery_msg = useRef("");
+  const [selectedValue, setSelectedValue] = useState("Standard");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
+    console.log(event.target.value);
   };
 
   const itemStyles = {
@@ -25,7 +28,7 @@ function CheckOutStep2(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
-        height="60vh"
+        height="80vh"
       >
         <Grid
           item
@@ -37,7 +40,7 @@ function CheckOutStep2(props) {
             textAlign: "center",
           }}
         >
-          Delivery Type
+          Delivery
         </Grid>
 
         <Grid
@@ -50,17 +53,19 @@ function CheckOutStep2(props) {
         >
           <Grid item xs={6} sx={itemStyles}>
             <Radio
-              checked={selectedValue === "a"}
+              checked={selectedValue === "Standard"}
               onChange={handleChange}
-              value="a"
+              value="Standard"
               name="radio-buttons"
-              inputProps={{ "aria-label": "A" }}
+              inputProps={{ "aria-label": "Standard" }}
             />
             £2.99
           </Grid>
           <Grid item container flexDirection="column" sx={itemStyles} xs={6}>
             <Grid item>Delivered By Thu 18 Nov</Grid>
-            <Grid item>Standard Delivery</Grid>
+            <Grid item>
+              <b>Standard</b> Delivery
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -73,17 +78,34 @@ function CheckOutStep2(props) {
         >
           <Grid item xs={6} sx={itemStyles}>
             <Radio
-              checked={selectedValue === "b"}
+              checked={selectedValue === "Premium"}
               onChange={handleChange}
-              value="b"
+              value="Premium"
               name="radio-buttons"
-              inputProps={{ "aria-label": "B" }}
+              inputProps={{ "aria-label": "Premium" }}
             />
             £3.99
           </Grid>
           <Grid item container flexDirection="column" xs={6} sx={itemStyles}>
             <Grid item>Delivered By Thu 15 Nov</Grid>
-            <Grid item>Premium Delivery</Grid>
+            <Grid item>
+              <b>Premium</b> Delivery
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item container flexDirection="column" gap={2}>
+          <Grid item>Delivery Instructions</Grid>
+          <Grid item>
+            <TextField
+              id="filled-multiline-flexible"
+              label="Delivery Instructions"
+              multiline
+              rows={5}
+              maxRows={10}
+              fullWidth={true}
+              size="big"
+              inputRef={delivery_msg}
+            />
           </Grid>
         </Grid>
 
@@ -108,6 +130,11 @@ function CheckOutStep2(props) {
             size="big"
             onClick={() => {
               props.changeStep("forward");
+              props.setDeliveryInfo({
+                ...props.deliveryInfo,
+                delivery_type: selectedValue,
+                delivery_msg: delivery_msg.current.value,
+              });
             }}
             style={{ paddingTop: "1rem" }}
           >

@@ -17,6 +17,7 @@ function ContactPage() {
 
   const handleChange = (newPhone) => {
     setPhone(newPhone);
+    console.log(phone);
   };
 
   const params = useParams();

@@ -1,10 +1,55 @@
+import React, { useRef } from "react";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
+import { useForm } from "react-hook-form";
 
 function CheckOutStep1_Part1(props) {
+  const first_name = useRef(""),
+    last_name = useRef("");
+  const [phone, setPhone] = React.useState("");
+  const [phoneError, setPhoneError] = React.useState(false);
+  /*
+  const handleChange = (newPhone) => {
+    setPhone(newPhone);
+  };*/
   const miniContainerStyles = {
     fontSize: "20px",
+  };
+  /*
+  {
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    county: "",
+    post_code: "",
+    delivery_type: "",
+  }
+
+  */
+
+  //  setDeliveryInfo={setDeliveryInfo};
+  //  deliveryInfo={deliveryInfo};
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    if (!phoneError) {
+      props.changeStep("forward");
+      props.setDeliveryInfo({
+        ...props.deliveryInfo,
+        first_name: first_name.current.value,
+        last_name: last_name.current.value,
+        email: data.email,
+        phone: phone,
+      });
+    }
   };
   return (
     <>
@@ -15,6 +60,9 @@ function CheckOutStep1_Part1(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        height="100vh"
       >
         <Grid
           item
@@ -36,6 +84,7 @@ function CheckOutStep1_Part1(props) {
                 label="First Name"
                 variant="outlined"
                 size="small"
+                inputRef={first_name}
               />
             </Grid>
           </Grid>
@@ -47,6 +96,7 @@ function CheckOutStep1_Part1(props) {
                 label="Last Name"
                 variant="outlined"
                 size="small"
+                inputRef={last_name}
               />
             </Grid>
           </Grid>
@@ -62,11 +112,22 @@ function CheckOutStep1_Part1(props) {
           <Grid item>Email Address</Grid>
           <Grid item sx={{ width: "50%" }}>
             <TextField
-              fullWidth
               id="outlined-basic"
-              label="Email Address"
+              label="email"
               variant="outlined"
               size="small"
+              fullWidth
+              autoComplete="email"
+              autoFocus
+              {...register("email", {
+                required: "Required field",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              })}
+              error={!!errors?.email}
+              helperText={errors?.email ? errors.email.message : null}
             />
           </Grid>
         </Grid>
@@ -79,11 +140,17 @@ function CheckOutStep1_Part1(props) {
         >
           <Grid item>Phone</Grid>
           <Grid item>
-            <TextField
-              id="outlined-basic"
-              label="Phone"
-              variant="outlined"
-              size="small"
+            <MuiTelInput
+              defaultCountry="GB"
+              value={phone}
+              onChange={(newPhone) => {
+                setPhone(newPhone);
+                setPhoneError(!matchIsValidTel(newPhone));
+              }}
+              error={phoneError}
+              helperText={
+                phoneError ? "Invalid Phone number" : "Valid Phone Number"
+              }
             />
           </Grid>
         </Grid>
@@ -91,9 +158,7 @@ function CheckOutStep1_Part1(props) {
           <Button
             variant="text"
             size="big"
-            onClick={() => {
-              props.changeStep("forward");
-            }}
+            type="submit"
             style={{ paddingTop: "1rem" }}
           >
             Continue

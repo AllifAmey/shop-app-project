@@ -1,8 +1,14 @@
+import React, { useRef } from "react";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 function CheckOutStep1_Part2(props) {
+  const address_line1 = useRef(""),
+    address_line2 = useRef(""),
+    city = useRef(""),
+    country = useRef(""),
+    post_code = useRef("");
   const miniContainerStyles = {
     fontSize: "20px",
   };
@@ -15,6 +21,7 @@ function CheckOutStep1_Part2(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
+        height="100vh"
       >
         <Grid
           item
@@ -44,6 +51,7 @@ function CheckOutStep1_Part2(props) {
                 label="Address line 1"
                 variant="outlined"
                 size="small"
+                inputRef={address_line1}
               />
             </Grid>
             <Grid item>
@@ -53,6 +61,7 @@ function CheckOutStep1_Part2(props) {
                 label="Address line 2"
                 variant="outlined"
                 size="small"
+                inputRef={address_line2}
               />
             </Grid>
           </Grid>
@@ -66,6 +75,7 @@ function CheckOutStep1_Part2(props) {
                 label="City"
                 variant="outlined"
                 size="small"
+                inputRef={city}
               />
             </Grid>
           </Grid>
@@ -77,6 +87,7 @@ function CheckOutStep1_Part2(props) {
                 label="Post Code"
                 variant="outlined"
                 size="small"
+                inputRef={post_code}
               />
             </Grid>
           </Grid>
@@ -96,6 +107,7 @@ function CheckOutStep1_Part2(props) {
               label="Country"
               variant="outlined"
               size="small"
+              inputRef={country}
             />
           </Grid>
         </Grid>
@@ -120,6 +132,13 @@ function CheckOutStep1_Part2(props) {
             size="big"
             onClick={() => {
               props.changeStep("forward");
+              props.setDeliveryInfo({
+                ...props.deliveryInfo,
+                address: `${address_line1.current.value} ${address_line2.current.value}`,
+                city: city.current.value,
+                country: country.current.value,
+                post_code: post_code.current.value,
+              });
             }}
             style={{ paddingTop: "1rem" }}
           >

@@ -19,6 +19,7 @@ function CheckOutStep3(props) {
     fully comprehend the material ui component as opposed to looking at the site's documentation. 
 
     */
+
   return (
     <>
       <Grid
@@ -28,7 +29,7 @@ function CheckOutStep3(props) {
         flexDirection="column"
         justifyContent="start"
         gap={2}
-        height="60vh"
+        height="100vh"
       >
         <Grid
           item
@@ -41,8 +42,16 @@ function CheckOutStep3(props) {
         >
           Payment
         </Grid>
-        <Grid item>
+        <Grid item container width={0.8} justifyContent="space-between">
           <PaymentButton></PaymentButton>
+          <Grid item container flexDirection="column" width={0.5}>
+            {Object.entries(props.deliveryInfo).map(([key, value]) => (
+              <Grid item container gap={2}>
+                <Grid item>{key}</Grid>
+                <Grid item>{value}</Grid>
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
 
         <Grid
