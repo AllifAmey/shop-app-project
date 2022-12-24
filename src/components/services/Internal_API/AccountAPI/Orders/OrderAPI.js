@@ -17,7 +17,7 @@ export async function getOrders(setIsLoading) {
   return data;
 }
 
-export async function postOrders(setIsLoading, orderInfo) {
+export async function postOrders(setIsLoading, orderInfo, total_price) {
   // this grabs the
   setIsLoading(true);
   /*
@@ -33,18 +33,94 @@ export async function postOrders(setIsLoading, orderInfo) {
   "post_code": orderInfo.post_code,
   "delivery_type": orderInfo.post_code
 }
-  
+  {
+    "user": 2,
+    "first_name": "asdf",
+    "last_name": "asdfasdf",
+    "email": "asdff@dol.com",
+    "phone_number": "+44 7495 996322",
+    "address": "awefawef awefawef",
+    "city": "awef",
+    "country": "awefawef",
+    "post_code": "awefawef",
+    "delivery_type": "awefawefawef"
+  },
   */
 
   const token = localStorage.getItem("Token");
+  const user_id = localStorage.getItem("user_id");
+  const user_data = {
+    user: user_id,
+    first_name: orderInfo.first_name,
+    last_name: orderInfo.last_name,
+    email: orderInfo.email,
+    phone_number: orderInfo.phone_number,
+    address: orderInfo.address,
+    city: orderInfo.city,
+    country: orderInfo.country,
+    post_code: orderInfo.post_code,
+    delivery_type: orderInfo.delivery_type,
+  };
 
-  const response = await fetch("http://localhost:8000/api/shop/orders", {
-    method: "GET",
+  const response = await fetch("http://localhost:8000/api/shop/deliveryinfo/", {
+    method: "POST",
+    body: JSON.stringify([
+      user_data,
+      {
+        delivery_msg: orderInfo.delivery_msg,
+        total_price: total_price,
+      },
+    ]),
     headers: {
       "Content-type": "application/json",
       Authorization: `Token ${token}`,
     },
   });
+  const data = await response.json();
+
+  setIsLoading(false);
+  return data;
+}
+
+export async function postOrdersAnonymous(
+  setIsLoading,
+  orderInfo,
+  total_price,
+  user_cart
+) {
+  // this grabs the
+  setIsLoading(true);
+  let user_data = {
+    first_name: orderInfo.first_name,
+    last_name: orderInfo.last_name,
+    email: orderInfo.email,
+    phone_number: orderInfo.phone_number,
+    address: orderInfo.address,
+    city: orderInfo.city,
+    country: orderInfo.country,
+    post_code: orderInfo.post_code,
+    delivery_type: orderInfo.delivery_type,
+  };
+
+  const response = await fetch(
+    "http://localhost:8000/api/shop/post_orders/anonymous",
+    {
+      method: "POST",
+      body: JSON.stringify([
+        user_data,
+        {
+          delivery_msg: orderInfo.delivery_msg,
+          total_price: total_price,
+        },
+        {
+          products: user_cart,
+        },
+      ]),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
   const data = await response.json();
 
   setIsLoading(false);

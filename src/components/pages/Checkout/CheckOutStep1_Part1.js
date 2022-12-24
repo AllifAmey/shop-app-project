@@ -47,7 +47,7 @@ function CheckOutStep1_Part1(props) {
         first_name: first_name.current.value,
         last_name: last_name.current.value,
         email: data.email,
-        phone: phone,
+        phone_number: phone,
       });
     }
   };

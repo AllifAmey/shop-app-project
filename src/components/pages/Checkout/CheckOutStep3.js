@@ -1,8 +1,34 @@
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import PaymentButton from "../../utility/PaymentButton";
+import {
+  postOrders,
+  postOrdersAnonymous,
+} from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../store";
 
 function CheckOutStep3(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(cart);
+
+  function userCart() {
+    let initial_cart = [];
+    cart.forEach((cartItem) => {
+      const product_id = cartItem.id;
+      const quantity = cartItem.id;
+      initial_cart.push({
+        product_id: product_id,
+        quantity: quantity,
+      });
+    });
+    return initial_cart;
+  }
+
+  const dispatch = useDispatch();
   /*
     Payment Step
 
@@ -51,6 +77,33 @@ function CheckOutStep3(props) {
                 <Grid item>{value}</Grid>
               </Grid>
             ))}
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              size="big"
+              onClick={() => {
+                const logged = localStorage.getItem("isLogged");
+                if (logged === "LOGGED_IN") {
+                  postOrders(
+                    setIsLoading,
+                    props.deliveryInfo,
+                    props.total_price
+                  );
+                } else {
+                  postOrdersAnonymous(
+                    setIsLoading,
+                    props.deliveryInfo,
+                    props.total_price,
+                    userCart()
+                  );
+                }
+                dispatch(cartActions.replaceCart([]));
+              }}
+              style={{ paddingTop: "1rem" }}
+            >
+              Test Order
+            </Button>
           </Grid>
         </Grid>
 

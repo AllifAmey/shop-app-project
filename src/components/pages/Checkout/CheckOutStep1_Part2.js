@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import CountrySelect from "./utility/CountrySelect";
 
 function CheckOutStep1_Part2(props) {
   const address_line1 = useRef(""),
@@ -102,13 +103,7 @@ function CheckOutStep1_Part2(props) {
         >
           <Grid item>Country</Grid>
           <Grid item>
-            <TextField
-              id="outlined-basic"
-              label="Country"
-              variant="outlined"
-              size="small"
-              inputRef={country}
-            />
+            <CountrySelect inputRef={country}></CountrySelect>
           </Grid>
         </Grid>
         <Grid
@@ -134,7 +129,7 @@ function CheckOutStep1_Part2(props) {
               props.changeStep("forward");
               props.setDeliveryInfo({
                 ...props.deliveryInfo,
-                address: `${address_line1.current.value} ${address_line2.current.value}`,
+                address: `${address_line1.current.value} # ${address_line2.current.value}`,
                 city: city.current.value,
                 country: country.current.value,
                 post_code: post_code.current.value,

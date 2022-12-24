@@ -30,7 +30,7 @@ function CheckOutOrderItem(props) {
           <Grid item>Quantity: {props.quantity}</Grid>
         </Grid>
         <Grid item xs={2} sx={{ textAlign: "end" }}>
-          £{props.price}
+          £{Number(props.price).toFixed(2)}
         </Grid>
       </Grid>
     </>

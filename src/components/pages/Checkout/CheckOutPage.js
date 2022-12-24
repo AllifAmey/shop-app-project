@@ -70,7 +70,7 @@ function CheckOutPage() {
     first_name: "",
     last_name: "",
     email: "",
-    phone: "",
+    phone_number: "",
     address: "",
     city: "",
     country: "",
@@ -107,6 +107,8 @@ function CheckOutPage() {
     }
     return (itemNum + 2).toFixed(2);
   }
+
+  const total_price = subtotalNum(true);
   // styles
 
   const checkoutContainerStyles = { fontSize: "14px" };
@@ -147,6 +149,7 @@ function CheckOutPage() {
         changeStep={changeStep}
         setDeliveryInfo={setDeliveryInfo}
         deliveryInfo={deliveryInfo}
+        total_price={total_price}
       ></CheckOutStep3>
     ),
   };

@@ -122,6 +122,7 @@ function LoggedAccount(props) {
     localStorage.removeItem("Token");
     localStorage.removeItem("username");
     localStorage.removeItem("isLogged");
+    localStorage.removeItem("user_id");
 
     props.logOut(false);
   }
