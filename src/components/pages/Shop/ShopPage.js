@@ -38,33 +38,6 @@ function ShopPage() {
     fetchProductsHandler();
   }, [fetchProductsHandler]);
 
-  /*
-  referance
-
-  {Object.keys(shop)
-              .filter((cardName) => {
-                console.log(shop[cardName].type.replace(/\s/g, ""));
-                console.log(filters[shop[cardName].type.replace(/\s/g, "")]);
-                if (filters[shop[cardName].type.replace(/\s/g, "")]) {
-                  return true;
-                } else {
-                  return false;
-                }
-              })
-              .map((cardName) => {
-                return (
-                  <ProductCard
-                    key={cardName}
-                    type={shop[cardName].type.toLowerCase()}
-                    img={shop[cardName].img}
-                    price={`£  ${shop[cardName].price.toString()}`}
-                    cardName={cardName}
-                  ></ProductCard>
-                );
-              })}
-
-  */
-
   // functions and consts
 
   const [filters, setFilters] = useState({

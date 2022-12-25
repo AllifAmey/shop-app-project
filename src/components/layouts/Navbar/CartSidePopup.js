@@ -6,9 +6,17 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
-import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import {
+  getCart,
+  patchCartItem,
+  deleteCartItem,
+} from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import { getSpecificProduct } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import _ from "lodash";
 
 function CartSidePopup(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +47,7 @@ function CartSidePopup(props) {
             ...value.product,
             quantity: quantity,
             price: totalPrice,
+            data_id: card_id,
           });
         }
         dispatch(cartActions.replaceCart(user_cart_list));
@@ -64,6 +73,30 @@ function CartSidePopup(props) {
     }
     return (itemNum + 2).toFixed(2);
   }
+
+  const addCartHandler = (change_item, cart_item) => {
+    if (localStorage.getItem("isLogged") == "LOGGED_IN") {
+      // grab user's cart and loop through returned data
+      // then compare the data.products and see if it is the same.
+      // if it is then record the id and then put it into the next api call.
+      let cart_id = cart_item.data_id;
+      let product_id = cart_item.id;
+      let existing_quantity = cart_item.quantity;
+
+      if (change_item == "add") {
+        patchCartItem(setIsLoading, cart_id, product_id, existing_quantity);
+      } else if (change_item == "decrease") {
+        console.log(cart_id);
+        patchCartItem(
+          setIsLoading,
+          cart_id,
+          product_id,
+          existing_quantity,
+          true
+        );
+      }
+    }
+  };
 
   return (
     <Drawer
@@ -108,7 +141,59 @@ function CartSidePopup(props) {
                         item.name.charAt(0).toUpperCase() +
                         item.name.substring(1)}
                     </Grid>
-                    <Grid item>Quantity: {item.quantity}</Grid>
+                    <Grid item container justifyContent="space-evenly">
+                      <Grid item>Quantity: {item.quantity}</Grid>
+                      <Grid
+                        item
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => {
+                          getSpecificProduct(setIsLoading, item.id).then(
+                            (product) => {
+                              dispatch(
+                                cartActions.changeItem([
+                                  "add",
+                                  item.id,
+                                  product.price,
+                                ])
+                              );
+                            }
+                          );
+
+                          addCartHandler("add", item);
+                        }}
+                      >
+                        <AddIcon></AddIcon>
+                      </Grid>
+
+                      <Grid
+                        item
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => {
+                          if (item.quantity - 1 == 0) {
+                            console.log(item.data_id);
+                            deleteCartItem(setIsLoading, item.data_id);
+                            dispatch(
+                              cartActions.changeItem(["delete", item.id])
+                            );
+                          } else {
+                            getSpecificProduct(setIsLoading, item.id).then(
+                              (product) => {
+                                dispatch(
+                                  cartActions.changeItem([
+                                    "decrease",
+                                    item.id,
+                                    product.price,
+                                  ])
+                                );
+                              }
+                            );
+                            addCartHandler("decrease", item);
+                          }
+                        }}
+                      >
+                        <RemoveIcon></RemoveIcon>
+                      </Grid>
+                    </Grid>
                   </Grid>
                   <Grid item>{Number(item.price).toFixed(2)}</Grid>
                 </Grid>

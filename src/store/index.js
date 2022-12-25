@@ -58,9 +58,29 @@ const cartSlice = createSlice({
       state.cart = newList;
     },
 
-    increase(state, action) {
-      state.cart.push(action.payload);
-      state.cart = state.cart + action.payload;
+    changeItem(state, action) {
+      let old_cart = state.cart;
+      const product_id = action.payload[1];
+      const price = action.payload[2];
+      let counter = 0;
+      state.cart.forEach((cartItem) => {
+        if (cartItem.id == product_id) {
+          if (action.payload[0] === "add") {
+            old_cart[counter].price = (
+              Number(old_cart[counter].price) + Number(price)
+            ).toString();
+            old_cart[counter].quantity++;
+          } else if (action.payload[0] === "decrease") {
+            old_cart[counter].price = (
+              Number(old_cart[counter].price) - Number(price)
+            ).toString();
+            old_cart[counter].quantity--;
+          } else if (action.payload[0] == "delete") {
+            old_cart.splice(counter, 1);
+          }
+        }
+        counter++;
+      });
     },
     replaceCart(state, action) {
       state.cart = action.payload;

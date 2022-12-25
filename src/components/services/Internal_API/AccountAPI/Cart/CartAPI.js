@@ -48,13 +48,21 @@ export async function patchCartItem(
   setIsLoading,
   cart_id,
   product_id,
-  quantity
+  quantity,
+  subtract = false
 ) {
   // this grabs the
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("user_id");
+  let new_quantity = quantity;
+
+  if (subtract == true) {
+    new_quantity -= 1;
+  } else if (subtract == false) {
+    new_quantity += 1;
+  }
 
   const response = await fetch(
     `http://localhost:8000/api/shop/cart/items/${cart_id}/`,
@@ -63,7 +71,7 @@ export async function patchCartItem(
       body: JSON.stringify({
         user: user_id,
         products: product_id,
-        quantity: quantity + 1,
+        quantity: new_quantity,
       }),
       headers: {
         "Content-type": "application/json",
