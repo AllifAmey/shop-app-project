@@ -64,7 +64,14 @@ const cartSlice = createSlice({
       const price = action.payload[2];
       let counter = 0;
       state.cart.forEach((cartItem) => {
-        if (cartItem.id == product_id) {
+        // if user exist use the data_id as this is unique to every user.
+        if (product_id.includes(cartItem.data_id)) {
+          if (action.payload[0] == "delete") {
+            old_cart.splice(counter, 1);
+            return;
+          }
+        }
+        if (product_id.includes(cartItem.id)) {
           if (action.payload[0] === "add") {
             old_cart[counter].price = (
               Number(old_cart[counter].price) + Number(price)
@@ -76,6 +83,7 @@ const cartSlice = createSlice({
             ).toString();
             old_cart[counter].quantity--;
           } else if (action.payload[0] == "delete") {
+            console.log("I have been deleted");
             old_cart.splice(counter, 1);
           }
         }

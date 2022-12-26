@@ -17,6 +17,7 @@ import { cartActions } from "../../../store";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import _ from "lodash";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function CartSidePopup(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,7 @@ function CartSidePopup(props) {
 
         for (const [key, value] of Object.entries(user_cart)) {
           const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
+          console.log(card_id);
           //const cardName = `card${card_id}`;
           const cardName = `card${value.product.id}`;
           const price = Number(value.product.price);
@@ -81,12 +83,12 @@ function CartSidePopup(props) {
       // if it is then record the id and then put it into the next api call.
       let cart_id = cart_item.data_id;
       let product_id = cart_item.id;
+      console.log(cart_item);
       let existing_quantity = cart_item.quantity;
 
       if (change_item == "add") {
         patchCartItem(setIsLoading, cart_id, product_id, existing_quantity);
       } else if (change_item == "decrease") {
-        console.log(cart_id);
         patchCartItem(
           setIsLoading,
           cart_id,
@@ -152,7 +154,7 @@ function CartSidePopup(props) {
                               dispatch(
                                 cartActions.changeItem([
                                   "add",
-                                  item.id,
+                                  [item.id],
                                   product.price,
                                 ])
                               );
@@ -173,7 +175,7 @@ function CartSidePopup(props) {
                             console.log(item.data_id);
                             deleteCartItem(setIsLoading, item.data_id);
                             dispatch(
-                              cartActions.changeItem(["delete", item.id])
+                              cartActions.changeItem(["delete", [item.id]])
                             );
                           } else {
                             getSpecificProduct(setIsLoading, item.id).then(
@@ -181,7 +183,7 @@ function CartSidePopup(props) {
                                 dispatch(
                                   cartActions.changeItem([
                                     "decrease",
-                                    item.id,
+                                    [item.id],
                                     product.price,
                                   ])
                                 );

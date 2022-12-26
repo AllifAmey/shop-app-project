@@ -63,7 +63,7 @@ export async function patchCartItem(
   } else if (subtract == false) {
     new_quantity += 1;
   }
-
+  console.log(cart_id);
   const response = await fetch(
     `http://localhost:8000/api/shop/cart/items/${cart_id}/`,
     {

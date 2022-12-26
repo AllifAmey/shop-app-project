@@ -4,7 +4,7 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-
+// apis
 import { getCart } from "../../../services/Internal_API/AccountAPI/Cart/CartAPI";
 import { getOrders } from "../../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
@@ -75,18 +75,19 @@ function LoginNav(props) {
     } else if (navValue == 1) {
       props.setIsLoading(true);
       getOrders(props.setIsLoading).then((user_order) => {
-        console.log(user_order);
         let user_order_row = [];
+        let user_order_rowDetail = [];
         user_order.forEach((order) => {
-          console.log(order);
           user_order_row.push({
             id: order.id,
-            order: "whatever",
+            view: "Click me!",
             totalPrice: order.total_price,
             deliveryStatus: order.delivery_status,
           });
+          user_order_rowDetail.push(order);
         });
         props.setrowValue(user_order_row);
+        props.setRowDetail(user_order_rowDetail);
         props.setIsLoading(false);
       });
     }
@@ -98,7 +99,6 @@ function LoginNav(props) {
         showLabels
         value={props.navValue}
         onChange={(event, newValue) => {
-          console.log(newValue);
           changeRow(newValue);
           props.setNavValue(newValue);
         }}

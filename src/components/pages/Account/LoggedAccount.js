@@ -5,55 +5,13 @@ import { Grid } from "@mui/material";
 import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-
+import NestedModalOrder from "./utility/NestedModalOrder";
 import LoginNav from "./utility/LoginNav";
 import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
 import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassDeleteAPI";
-import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-
-const orderColumns = [
-  { field: "id", headerName: "ID", width: 70 },
-  {
-    field: "order",
-    headerName: "Order",
-
-    width: 90,
-  },
-  {
-    field: "totalPrice",
-    headerName: "Total Price",
-    type: "number",
-    width: 150,
-  },
-  {
-    field: "deliveryStatus",
-    headerName: "Delivery Status",
-    width: 150,
-  },
-];
-
-const cartColumns = [
-  { field: "id", headerName: "ID", width: 70 },
-  {
-    field: "product",
-    headerName: "Product",
-    width: 90,
-  },
-  {
-    field: "quantity",
-    headerName: "Quantity",
-    width: 90,
-  },
-  {
-    field: "totalPrice",
-    headerName: "Total Price",
-    type: "number",
-    width: 150,
-  },
-];
 
 function LoggedAccount(props) {
   // inspiration
@@ -62,10 +20,77 @@ function LoggedAccount(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [rowValue, setrowValue] = useState();
   const [selectedRows, setSelectedRows] = useState([]);
+  const [checkOrderId, setCheckOrderId] = useState();
+  const [rowDetail, setRowDetail] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const orderColumns = [
+    { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "view",
+      headerName: "View Order",
+      renderCell: (params) => (
+        <strong>
+          <Button
+            variant="contained"
+            size="small"
+            style={{ marginLeft: 16 }}
+            tabIndex={params.hasFocus ? 0 : -1}
+            onClick={() => {
+              setCheckOrderId(params.id);
+              handleOpen(true);
+            }}
+          >
+            Open
+          </Button>
+        </strong>
+      ),
+      width: 120,
+    },
+    {
+      field: "totalPrice",
+      headerName: "Total Price",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "deliveryStatus",
+      headerName: "Delivery Status",
+      width: 150,
+    },
+  ];
+
+  const cartColumns = [
+    { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "product",
+      headerName: "Product",
+      width: 90,
+    },
+    {
+      field: "quantity",
+      headerName: "Quantity",
+      width: 90,
+    },
+    {
+      field: "totalPrice",
+      headerName: "Total Price",
+      type: "number",
+      width: 150,
+    },
+  ];
 
   useEffect(() => {
     // grab user's name and place it in the url
@@ -95,6 +120,7 @@ function LoggedAccount(props) {
           ...value.product,
           quantity: quantity,
           price: totalPrice,
+          data_id: card_id,
         });
 
         user_cart_row.push({
@@ -114,7 +140,20 @@ function LoggedAccount(props) {
     // Here is the logic:
     // Grab the ids of the selected rows and get rid of them.
     // the ids presented will form the basis of delete method api calls.
+
     const arr_selectedRows = [...selectedRows];
+    const old_row = rowValue;
+    let new_row = [...rowValue];
+    let counter = 0;
+
+    dispatch(cartActions.changeItem(["delete", arr_selectedRows]));
+    old_row.forEach((row) => {
+      if (arr_selectedRows.includes(row.id)) {
+        new_row.splice(counter, 1);
+      }
+      counter++;
+    });
+    setrowValue(new_row);
     massDelete(setIsLoading, "cart", arr_selectedRows);
   }
 
@@ -125,6 +164,10 @@ function LoggedAccount(props) {
     localStorage.removeItem("user_id");
 
     props.logOut(false);
+  }
+
+  function fetchOrderbyid(order) {
+    return order.id == checkOrderId;
   }
 
   return (
@@ -157,6 +200,7 @@ function LoggedAccount(props) {
                   setrowValue={setrowValue}
                   setNavValue={setNavValue}
                   navValue={navValue}
+                  setRowDetail={setRowDetail}
                 ></LoginNav>
               </Grid>
               <Grid item container justifyContent="center" width="75vw">
@@ -167,13 +211,14 @@ function LoggedAccount(props) {
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                     checkboxSelection
+                    disableSelectionOnClick={true}
+                    disableColumnSelector={true}
                     onSelectionModelChange={(ids) => {
                       const selectedIDs = new Set(ids);
                       //console.log(ids);
                       setSelectedRows(selectedIDs);
-                      console.log([...selectedIDs]);
+
                       if ([...selectedIDs].length == 0) {
-                        console.log("hello");
                         setShowDelete(false);
                       } else {
                         setShowDelete(true);
@@ -212,6 +257,15 @@ function LoggedAccount(props) {
             </Grid>
           </Container>
         </Box>
+      )}
+      {navValue == 1 && (
+        <NestedModalOrder
+          open={open}
+          setOpen={setOpen}
+          handleClose={handleClose}
+          rowDetail={open ? rowDetail.filter(fetchOrderbyid) : rowDetail}
+          checkOrderId={checkOrderId}
+        ></NestedModalOrder>
       )}
     </>
   );

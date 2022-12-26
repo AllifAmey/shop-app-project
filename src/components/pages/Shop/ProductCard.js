@@ -28,14 +28,8 @@ function ProductCard(props) {
   const dispatch = useDispatch();
 
   const addCartHandler = () => {
-    dispatch(
-      cartActions.addCart({
-        key: props.cardName,
-        quantity: 1,
-        ...props.product,
-        price: Number(props.price),
-      })
-    );
+    // TODO: Error starts here. Find way to add data_id to cart to allow users to add and subtract items.
+
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
       // grab user's cart and loop through returned data
       // then compare the data.products and see if it is the same.
@@ -69,9 +63,29 @@ function ProductCard(props) {
         ) {
           // then create a new cart item.
 
-          postCart(setIsLoading, props.product.id);
+          postCart(setIsLoading, props.product.id).then((new_cartItem) => {
+            dispatch(
+              cartActions.addCart({
+                key: props.cardName,
+                quantity: 1,
+                ...props.product,
+                price: Number(props.price),
+                data_id: new_cartItem.id,
+              })
+            );
+          });
         }
       });
+    } else if (localStorage.getItem("isLogged") != "LOGGED_IN") {
+      // if user not logged in just pass the product id
+      dispatch(
+        cartActions.addCart({
+          key: props.cardName,
+          quantity: 1,
+          ...props.product,
+          price: Number(props.price),
+        })
+      );
     }
   };
 
