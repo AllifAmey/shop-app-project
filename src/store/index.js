@@ -96,30 +96,28 @@ const cartSlice = createSlice({
   },
 });
 
-const initialUserState = {
-  user: {
-    isAuthenticated: false,
-  },
+// to be decided later...
+
+// this code will possibly be used later but the temporary nature of redux makes it unreliable.
+const initialShopState = {
+  shop: [],
 };
 
-const userSlice = createSlice({
-  name: "user",
-  initialState: initialUserState,
+const shopSlice = createSlice({
+  name: "shop",
+  initialState: initialShopState,
   reducers: {
-    authenticate(state) {
-      state.isAuthenticated = true;
-    },
-
-    increase(state, action) {
-      state.counter = state.counter + action.payload;
+    replaceShop(state, action) {
+      state.shop = action.payload;
     },
   },
 });
 
 const store = configureStore({
-  reducer: { cart: cartSlice.reducer },
+  reducer: { cart: cartSlice.reducer, shop: shopSlice.reducer },
 });
 
 export const cartActions = cartSlice.actions;
+export const shopActions = shopSlice.actions;
 
 export default store;

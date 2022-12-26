@@ -83,7 +83,6 @@ function CartSidePopup(props) {
       // if it is then record the id and then put it into the next api call.
       let cart_id = cart_item.data_id;
       let product_id = cart_item.id;
-      console.log(cart_item);
       let existing_quantity = cart_item.quantity;
 
       if (change_item == "add") {

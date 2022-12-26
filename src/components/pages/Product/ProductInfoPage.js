@@ -1,13 +1,15 @@
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import { useSelector } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import { getSpecificProduct } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
 function ProductInfoPage2() {
   /*
@@ -29,6 +31,11 @@ function ProductInfoPage2() {
     price small letters 
 
     */
+  const [shop, setShop] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  // redux
+
   // styles
   const mainContainerStyles = {
     height: "auto",
@@ -47,130 +54,114 @@ function ProductInfoPage2() {
 
   const params = useParams();
 
-  // redux
+  // useEffect
 
-  const shop = useSelector((state) => state.shop.shop);
+  useEffect(() => {
+    const product_id = Number(
+      params.productId.slice(
+        params.productId.lastIndexOf("-") + 1,
+        params.productId.length
+      )
+    );
+    getSpecificProduct(setIsLoading, product_id).then((product_data) => {
+      console.log(product_data);
+      console.log(product_data.description_short.split("#"));
 
-  function findProductImg() {
-    // logic is to filter the shop to find the exact img.
-
-    // later a unique id would be placed on the product to better identify the product.
-    // this is a simple solution and a solid foundation for a bigger problem I will solve.
-
-    const img = Object.entries(shop).filter(
-      (e) =>
-        shop[e[0]].type.toLowerCase() ==
-        params.productId
-          .slice(params.productId.indexOf("-") + 1, params.productId.length)
-          .replace("-", " ")
-    )[0][1].img;
-
-    return img;
-  }
+      setShop(product_data);
+    });
+  }, []);
 
   return (
     <>
-      <AnimatedPopUpPage>
-        <Container maxWidth="lg" sx={mainContainerStyles}>
-          <Grid
-            container
-            justifyContent="space-around"
-            alignItems="center"
-            sx={mainGridContainerStyles}
-            padding="2rem 0"
-          >
+      {isLoading == true || shop == undefined ? (
+        <CircularProgress />
+      ) : (
+        <AnimatedPopUpPage>
+          <Container maxWidth="lg" sx={mainContainerStyles}>
             <Grid
-              item
               container
-              xs={8}
-              justifyContent="center"
+              justifyContent="space-around"
               alignItems="center"
+              sx={mainGridContainerStyles}
+              padding="2rem 0"
             >
-              <Box
-                component="img"
-                alt="jewellery"
-                src={findProductImg()}
-                sx={imgStyle}
-              ></Box>
-            </Grid>
-            <Grid
-              item
-              container
-              xs={4}
-              sx={mainContainerStyles}
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              gap={2}
-            >
-              <Grid item sx={mainHeaderStyle} alignSelf="start">
-                Handmade{" "}
-                {params.productId
-                  .slice(
-                    params.productId.indexOf("-") + 1,
-                    params.productId.length
-                  )
-                  .replace("-", " ")}
-              </Grid>
-              <Grid item sx={subTitleStyle} alignSelf="start">
-                Details
+              <Grid
+                item
+                container
+                xs={8}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Box
+                  component="img"
+                  alt="jewellery"
+                  src={shop.image_url}
+                  sx={imgStyle}
+                ></Box>
               </Grid>
               <Grid
                 item
                 container
-                justifyContent="space-evenly"
-                alignItems="start"
+                xs={4}
+                sx={mainContainerStyles}
+                justifyContent="center"
+                alignItems="center"
                 flexDirection="column"
-                gap={1.5}
-                paddingLeft="1rem"
+                gap={2}
               >
-                <Grid item>Handmade item</Grid>
-                <Grid item>
-                  Handmade item Dispatches from a small business in United
-                  Kingdom
+                <Grid item sx={mainHeaderStyle} alignSelf="start">
+                  Handmade {shop.name.toLowerCase()}
                 </Grid>
-                <Grid item>Materials: copper</Grid>
-                <Grid item>FREE UK delivery </Grid>
-              </Grid>
-              <Grid item sx={subTitleStyle} alignSelf="start">
-                Description
-              </Grid>
-              <Grid item>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Faucibus et molestie ac feugiat sed lectus. Ut lectus arcu
-                bibendum at varius. Velit scelerisque in dictum non. Sagittis eu
-                volutpat odio
-              </Grid>
-              <Grid item>£3.99</Grid>
-              <Grid item container justifyContent="space-evenly" gap={1.5}>
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    size="big"
-                    component={RouterLink}
-                    to="/checkout"
-                    sx={{ fontSize: "16px" }}
-                  >
-                    Check Out
-                  </Button>
+                <Grid item sx={subTitleStyle} alignSelf="start">
+                  Details
                 </Grid>
-                <Grid item>
-                  <Button
-                    variant="contained"
-                    size="big"
-                    component={RouterLink}
-                    to="/checkout"
-                    sx={{ fontSize: "16px" }}
-                  >
-                    Add Cart
-                  </Button>
+                <Grid
+                  item
+                  container
+                  justifyContent="space-evenly"
+                  alignItems="start"
+                  flexDirection="column"
+                  gap={1.5}
+                  paddingLeft="1rem"
+                >
+                  {shop.description_short.split("#").map((e) => {
+                    return <Grid item>{e}</Grid>;
+                  })}
+                </Grid>
+                <Grid item sx={subTitleStyle} alignSelf="start">
+                  Description
+                </Grid>
+                <Grid item>{shop.description_long}</Grid>
+                <Grid item>£3.99</Grid>
+                <Grid item container justifyContent="space-evenly" gap={1.5}>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="big"
+                      component={RouterLink}
+                      to="/checkout"
+                      sx={{ fontSize: "16px" }}
+                    >
+                      Check Out
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="big"
+                      component={RouterLink}
+                      to="/checkout"
+                      sx={{ fontSize: "16px" }}
+                    >
+                      Add Cart
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </AnimatedPopUpPage>
+          </Container>
+        </AnimatedPopUpPage>
+      )}
     </>
   );
 }

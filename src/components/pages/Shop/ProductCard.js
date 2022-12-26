@@ -10,8 +10,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../../../store/index";
+import { useDispatch } from "react-redux";
+import { cartActions, shopActions } from "../../../store/index";
 import {
   getCart,
   patchCartItem,
@@ -154,7 +154,9 @@ function ProductCard(props) {
               variant="contained"
               size="big"
               component={RouterLink}
-              to={`/product/handmade-${props.type.replaceAll(" ", "-")}`}
+              to={`/product/handmade-${props.type.replaceAll(" ", "-")}-${
+                props.product.id
+              }`}
             >
               Buy Now
             </Button>

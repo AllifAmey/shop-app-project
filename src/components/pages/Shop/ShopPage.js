@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ProductCard from "./ProductCard";
 import Checkbox from "@mui/material/Checkbox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import imgPin from "../../assets/img/icons/pinCushion-icon.png";
 import imgSrunchy from "../../assets/img/icons/scrunchies-icon.png";
 import imgRing from "../../assets/img/icons/ring-icon.png";
 import AnimatedPage from "../../utility/AnimatedPage";
 import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
+import { shopActions } from "../../../store";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -24,6 +25,8 @@ function ShopPage() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   const fetchProductsHandler = useCallback(async () => {
     setIsLoading(true);
 
@@ -31,6 +34,7 @@ function ShopPage() {
     const data = await response.json();
 
     setProducts(data);
+    dispatch(shopActions.replaceShop(data));
     setIsLoading(false);
   }, []);
 
