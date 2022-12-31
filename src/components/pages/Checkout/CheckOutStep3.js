@@ -13,13 +13,12 @@ import { cartActions } from "../../../store";
 function CheckOutStep3(props) {
   const [isLoading, setIsLoading] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart);
 
   function userCart() {
     let initial_cart = [];
     cart.forEach((cartItem) => {
       const product_id = cartItem.id;
-      const quantity = cartItem.id;
+      const quantity = cartItem.quantity;
       initial_cart.push({
         product_id: product_id,
         quantity: quantity,

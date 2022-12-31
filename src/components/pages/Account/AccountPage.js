@@ -7,6 +7,7 @@ import { Link as RouterLink, Route } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import AccessAccountPage from "./AccessAccountPage";
 import LoggedAccount from "./LoggedAccount";
+import AdminAccount from "./AdminAccount";
 
 function AccountPage() {
   // states
@@ -22,8 +23,10 @@ function AccountPage() {
     }
   }, []);
 
-  if (isLogged) {
+  if (isLogged && localStorage.getItem("user_status") == "member") {
     return <LoggedAccount logOut={setisLogged}></LoggedAccount>;
+  } else if (isLogged && localStorage.getItem("user_status") == "staff") {
+    return <AdminAccount logOut={setisLogged}></AdminAccount>;
   }
 
   if (params.accessType == "login") {

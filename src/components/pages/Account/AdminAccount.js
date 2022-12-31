@@ -6,15 +6,16 @@ import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import NestedModalOrder from "./utility/NestedModalOrder";
-import LoginNav from "./utility/LoginNav";
-import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+
 import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassDeleteAPI";
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import { postProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+import AdminLoginNav from "./utility/AdminLoginNav";
 
-function LoggedAccount(props) {
+import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+
+function AdminAccount(props) {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
   const [navValue, setNavValue] = useState(0);
@@ -39,6 +40,8 @@ function LoggedAccount(props) {
 
   const orderColumns = [
     { field: "id", headerName: "ID", width: 70 },
+    { field: "username", headerName: "User", width: 70 },
+    { field: "email", headerName: "Email", width: 200 },
     {
       field: "view",
       headerName: "View Order",
@@ -64,7 +67,7 @@ function LoggedAccount(props) {
       field: "totalPrice",
       headerName: "Total Price",
       type: "number",
-      width: 150,
+      width: 100,
     },
     {
       field: "deliveryStatus",
@@ -73,21 +76,27 @@ function LoggedAccount(props) {
     },
   ];
 
-  const cartColumns = [
+  const productColumns = [
     { field: "id", headerName: "ID", width: 70 },
     {
-      field: "product",
+      field: "product_name",
       headerName: "Product",
       width: 90,
     },
     {
-      field: "quantity",
-      headerName: "Quantity",
+      field: "price",
+      headerName: "Price",
       width: 90,
     },
     {
-      field: "totalPrice",
-      headerName: "Total Price",
+      field: "catagory",
+      headerName: "Catagory",
+      type: "number",
+      width: 150,
+    },
+    {
+      field: "detailed_view",
+      headerName: "View details",
       type: "number",
       width: 150,
     },
@@ -98,41 +107,22 @@ function LoggedAccount(props) {
     let username = localStorage.getItem("username");
     if (username != undefined) {
       navigate(`/account/${username}/`, { replace: true });
+      setrowValue([]);
     }
-    // grab the user's cart and store into frontend's cart
-    /* 
-    props.product = the whole product itself which explains why description_long is inside of Cart.. 
-    TODO: Look into props product later and prevent description long and short from being inside..
-    */
-    getCart(setIsLoading).then((user_cart) => {
+    getProducts(setIsLoading).then((products) => {
       setIsLoading(true);
-      let user_cart_list = [];
-      let user_cart_row = [];
-      for (const [key, value] of Object.entries(user_cart)) {
-        const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-        //const cardName = `card${card_id}`;
-        const cardName = `card${value.product.id}`;
-        const price = Number(value.product.price);
-        const quantity = Number(value.quantity);
-        const totalPrice = (price * quantity).toFixed(2);
 
-        user_cart_list.push({
-          key: cardName,
-          ...value.product,
-          quantity: quantity,
-          price: totalPrice,
-          data_id: card_id,
+      let user_product_row = [];
+      products.forEach((product) => {
+        user_product_row.push({
+          id: product.id,
+          product_name: product.name,
+          price: product.price,
+          catagory: product.catagory,
         });
+      });
 
-        user_cart_row.push({
-          id: card_id,
-          product: value.product.name,
-          quantity: quantity,
-          totalPrice: totalPrice,
-        });
-      }
-      dispatch(cartActions.replaceCart(user_cart_list));
-      setrowValue(user_cart_row);
+      setrowValue(user_product_row);
       setIsLoading(false);
     });
   }, []);
@@ -141,6 +131,9 @@ function LoggedAccount(props) {
     // Here is the logic:
     // Grab the ids of the selected rows and get rid of them.
     // the ids presented will form the basis of delete method api calls.
+
+    // I don't know if this is a good idea but add ability to delete product and order..
+    //
 
     const arr_selectedRows = [...selectedRows];
     const old_row = rowValue;
@@ -163,14 +156,23 @@ function LoggedAccount(props) {
     localStorage.removeItem("username");
     localStorage.removeItem("isLogged");
     localStorage.removeItem("user_id");
-    localStorage.removeItem("user_status");
-
     props.logOut(false);
   }
 
   function fetchOrderbyid(order) {
     return order.id == checkOrderId;
   }
+
+  /*
+    {
+  "name": "string",
+  "image_url": "string",
+  "price": "-578.91",
+  "description_short": "string",
+  "description_long": "string",
+  "catagory": "string"
+}
+    */
 
   return (
     <>
@@ -197,19 +199,19 @@ function LoggedAccount(props) {
                 Welcome back, {localStorage.getItem("username")}
               </Grid>
               <Grid item container justifyContent="center">
-                <LoginNav
+                <AdminLoginNav
                   setIsLoading={setIsLoading}
                   setrowValue={setrowValue}
                   setNavValue={setNavValue}
                   navValue={navValue}
                   setRowDetail={setRowDetail}
-                ></LoginNav>
+                ></AdminLoginNav>
               </Grid>
               <Grid item container justifyContent="center" width="75vw">
                 <div style={{ height: 400, width: "60%" }}>
                   <DataGrid
                     rows={rowValue}
-                    columns={navValue == 0 ? cartColumns : orderColumns}
+                    columns={navValue == 0 ? productColumns : orderColumns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
                     checkboxSelection
@@ -232,9 +234,9 @@ function LoggedAccount(props) {
               <Grid
                 item
                 container
-                justifyContent={showDelete ? "space-between" : "center"}
-                width={0.2}
-                height={0.5}
+                justifyContent={showDelete ? "space-between" : "space-evenly"}
+                height={0.2}
+                width={0.5}
               >
                 {showDelete ? (
                   <Button
@@ -243,6 +245,17 @@ function LoggedAccount(props) {
                     onClick={deleteitems}
                   >
                     Delete items
+                  </Button>
+                ) : (
+                  ""
+                )}
+                {navValue == 0 ? (
+                  <Button
+                    variant="contained"
+                    component={RouterLink}
+                    to="create/product"
+                  >
+                    Add Product
                   </Button>
                 ) : (
                   ""
@@ -274,4 +287,4 @@ function LoggedAccount(props) {
   );
 }
 
-export default LoggedAccount;
+export default AdminAccount;

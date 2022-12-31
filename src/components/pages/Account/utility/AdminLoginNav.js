@@ -5,55 +5,51 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 // apis
-import { getCart } from "../../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import { getProducts } from "../../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import { getOrders } from "../../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
-function LoginNav(props) {
+function AdminLoginNav(props) {
   function changeRow(navValue) {
     if (navValue == 0) {
-      getCart(props.setIsLoading).then((user_cart) => {
+      // products
+      // get the products
+      // then display the necessary information
+
+      getProducts(props.setIsLoading).then((products) => {
         props.setIsLoading(true);
-        let user_cart_list = [];
-        let user_cart_row = [];
-        for (const [key, value] of Object.entries(user_cart)) {
-          const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-          const cardName = `card${card_id}`;
-          const price = Number(value.product.price);
-          const quantity = Number(value.quantity);
-          const totalPrice = (price * quantity).toFixed(2);
 
-          user_cart_list.push({
-            key: cardName,
-            ...value.product,
-            quantity: quantity,
-            price: totalPrice,
+        let user_product_row = [];
+        products.forEach((product) => {
+          user_product_row.push({
+            id: product.id,
+            product_name: product.name,
+            price: product.price,
+            catagory: product.catagory,
           });
+        });
 
-          user_cart_row.push({
-            id: card_id,
-            product: value.product.name,
-            quantity: quantity,
-            totalPrice: totalPrice,
-          });
-        }
-
-        props.setrowValue(user_cart_row);
+        props.setrowValue(user_product_row);
         props.setIsLoading(false);
       });
     } else if (navValue == 1) {
-      props.setIsLoading(true);
+      // get the orders currently in the database
+      // then display all of the information to get a clear picture.
       getOrders(props.setIsLoading).then((user_order) => {
         let user_order_row = [];
         let user_order_rowDetail = [];
         user_order.forEach((order) => {
           user_order_row.push({
             id: order.id,
+            username: order.user,
+            email: order.email,
             view: "Click me!",
             totalPrice: order.total_price,
             deliveryStatus: order.delivery_status,
           });
           user_order_rowDetail.push(order);
         });
+        console.log(user_order_row);
+        console.log(user_order_rowDetail);
         props.setrowValue(user_order_row);
         props.setRowDetail(user_order_rowDetail);
         props.setIsLoading(false);
@@ -71,11 +67,11 @@ function LoginNav(props) {
           props.setNavValue(newValue);
         }}
       >
-        <BottomNavigationAction label="Cart" icon={<ShoppingCartIcon />} />
+        <BottomNavigationAction label="Products" icon={<ShoppingCartIcon />} />
         <BottomNavigationAction label="Orders" icon={<LocalShippingIcon />} />
       </BottomNavigation>
     </Box>
   );
 }
 
-export default LoginNav;
+export default AdminLoginNav;

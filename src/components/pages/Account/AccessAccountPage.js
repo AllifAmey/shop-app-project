@@ -36,8 +36,14 @@ function AccessAccountPage(props) {
       },
     });
     data = await response.json();
-    localStorage.setItem("username", data.name);
+
+    if (data.user_status == "member") {
+      localStorage.setItem("username", data.name);
+    } else if (data.user_status == "staff") {
+      localStorage.setItem("username", data.email);
+    }
     localStorage.setItem("user_id", data.user_id);
+    localStorage.setItem("user_status", data.user_status);
 
     setIsLoading(false);
 

@@ -18,6 +18,27 @@ function CheckOutStep2(props) {
   const itemStyles = {
     fontSie: "18px",
   };
+  // const nextDate = new Date( Date.now() + days * 24 * 60 * 60 * 1000)
+  const premiumDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const premiumMonth = premiumDate.toLocaleString("default", {
+    month: "short",
+  });
+  const premiumWeekDay = premiumDate.toLocaleString("default", {
+    weekday: "short",
+  });
+  const premiumDay = premiumDate.toLocaleString("default", {
+    day: "numeric",
+  });
+  const standardDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+  const standardMonth = standardDate.toLocaleString("default", {
+    month: "short",
+  });
+  const standardWeekDay = standardDate.toLocaleString("default", {
+    weekday: "short",
+  });
+  const standardDay = standardDate.toLocaleString("default", {
+    day: "numeric",
+  });
 
   return (
     <>
@@ -62,7 +83,10 @@ function CheckOutStep2(props) {
             £2.99
           </Grid>
           <Grid item container flexDirection="column" sx={itemStyles} xs={6}>
-            <Grid item>Delivered By Thu 18 Nov</Grid>
+            <Grid item>
+              Delivered By{" "}
+              {`${standardWeekDay} ${standardDay} ${standardMonth}`}
+            </Grid>
             <Grid item>
               <b>Standard</b> Delivery
             </Grid>
@@ -87,13 +111,15 @@ function CheckOutStep2(props) {
             £3.99
           </Grid>
           <Grid item container flexDirection="column" xs={6} sx={itemStyles}>
-            <Grid item>Delivered By Thu 15 Nov</Grid>
+            <Grid item>
+              Delivered By {`${premiumWeekDay} ${premiumDay} ${premiumMonth}`}
+            </Grid>
             <Grid item>
               <b>Premium</b> Delivery
             </Grid>
           </Grid>
         </Grid>
-        <Grid item container flexDirection="column" gap={2}>
+        <Grid item container flexDirection="column" width={0.6} gap={2}>
           <Grid item>Delivery Instructions</Grid>
           <Grid item>
             <TextField

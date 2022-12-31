@@ -33,20 +33,24 @@
 - &#9745; Add Contact Page
 - &#9745; Improve FAQ page
 
-# Phase 4 - Backend development and connecting frontend to the backend - current phase
+# Phase 4 - Backend development and connecting frontend to the backend
 
 - &#9745; Add Paypal API
 - &#9745; Add user authentication
 - &#9745; Add ability to create customer account
-- &#9744; Add ability to create "special" account and system associated with it
+- &#9745; Add ability to create "special" account and system associated with it
 - &#9745; Attach the frontend cart data to the user.
 - &#9745; Connect PostgreSQL database to backend framework
 - &#9745; Make it possible for user to track delivery status
-- &#9744; Provide email notification for certain actions for recovery or creating account.
-- &#9744; Finish Account System
-- &#9744; Make the contact form functionality work.
+- &#9745; Finish Account System
+- &#9745; Make the contact form functionality work.
 
-# Phase 5 - React/SEO Optimization and backend deployment to AWS.
+# Phase 5 - React/SEO Optimization and backend deployment to AWS - current phase
+
+- &#9744; Deploy new backend to AWS
+- &#9744; Reduce image files
+
+To be announced as time comes.
 
 # Getting Started with Create React App
 

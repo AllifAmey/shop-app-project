@@ -15,6 +15,7 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
+import CreateProduct from "./components/pages/Account/CreateProduct";
 
 function App() {
   /* 
@@ -38,6 +39,10 @@ function App() {
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/account/:accessType" element={<AccountPage />} />
+            <Route
+              path="/account/:accessType/create/product"
+              element={<CreateProduct />}
+            />
             <Route path="/test" element={<ApiTest />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />

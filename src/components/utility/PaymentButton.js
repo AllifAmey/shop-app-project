@@ -60,6 +60,8 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
             });
         }}
         onApprove={function (data, actions) {
+          console.log(data);
+          console.log(actions);
           return actions.order.capture().then(function () {
             // Your code here after capture the order
           });
@@ -72,12 +74,13 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
 // I have verified through debug=true in options
 // check the json to verify that the id is correctly being used
 // then check the sandbox accounts to see if payment is sent.
+// process.env.REACT_APP_PAYPAL_API_KEY should replace "test"
 export default function PaymentButton() {
   return (
     <div style={{ maxWidth: "200px", minHeight: "200px" }}>
       <PayPalScriptProvider
         options={{
-          "client-id": process.env.REACT_APP_PAYPAL_API_KEY,
+          "client-id": "test",
           components: "buttons",
           currency: "GBP",
         }}

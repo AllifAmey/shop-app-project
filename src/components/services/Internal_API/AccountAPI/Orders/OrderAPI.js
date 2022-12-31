@@ -102,6 +102,8 @@ export async function postOrdersAnonymous(
     delivery_type: orderInfo.delivery_type,
   };
 
+  console.log(user_cart);
+
   const response = await fetch(
     "http://localhost:8000/api/shop/post_orders/anonymous",
     {
