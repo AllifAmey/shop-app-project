@@ -54,8 +54,8 @@ function NavigationHomePage() {
               Our Philosophy
             </Grid>
             <Grid item sx={navItemTextStyle}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-              explicabo beatae laudantium numquam magni natus?
+              Less is more. Simple is good. Beauty is in the eye of the
+              beholder.
             </Grid>
           </Grid>
           <Grid
@@ -79,8 +79,8 @@ function NavigationHomePage() {
               Shop
             </Grid>
             <Grid item sx={navItemTextStyle}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-              explicabo beatae laudantium numquam magni natus?
+              My shop will be focussed on jewellery and findings I make. All
+              findings are good quality authentic material.
             </Grid>
           </Grid>
           <Grid
@@ -104,8 +104,8 @@ function NavigationHomePage() {
               Support
             </Grid>
             <Grid item sx={navItemTextStyle}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-              explicabo beatae laudantium numquam magni natus?
+              If there any inquiries regarding the product please visit the
+              contact us page or read the FAQs.
             </Grid>
           </Grid>
         </Grid>

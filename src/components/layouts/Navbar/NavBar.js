@@ -80,8 +80,12 @@ function NavBar() {
           justifyContent="center"
           alignItems="center"
         >
-          <Grid item xs={7} sx={{ textAlign: "start", fontSize: "30px" }}>
-            Amey Jewellery
+          <Grid
+            item
+            xs={7}
+            sx={{ textAlign: "start", fontSize: "30px", color: "red" }}
+          >
+            AmeyShopUK
           </Grid>
           <Grid
             item

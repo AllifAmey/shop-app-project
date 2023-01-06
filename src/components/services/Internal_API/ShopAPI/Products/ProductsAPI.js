@@ -1,19 +1,18 @@
+import domain from "../../../domain";
+
 export async function getSpecificProduct(setIsLoading, product_id) {
   // this grabs the
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
 
-  const response = await fetch(
-    `http://localhost:8000/api/shop/products/${product_id}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${domain}/api/shop/products/${product_id}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await response.json();
 
   setIsLoading(false);
@@ -26,7 +25,7 @@ export async function getProducts(setIsLoading) {
 
   const token = localStorage.getItem("Token");
 
-  const response = await fetch(`http://localhost:8000/api/shop/products/`, {
+  const response = await fetch(`${domain}/api/shop/products/`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -46,24 +45,21 @@ export async function postProducts(setIsLoading, product) {
 
   const token = localStorage.getItem("Token");
 
-  const response = await fetch(
-    `http://localhost:8000/api/shop/create/product`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        name: product.name,
-        image_url: product.image_url,
-        price: product.price,
-        description_short: product.description_short,
-        description_long: product.description_long,
-        catagory: product.catagory,
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${domain}/api/shop/create/product`, {
+    method: "POST",
+    body: JSON.stringify({
+      name: product.name,
+      image_url: product.image_url,
+      price: product.price,
+      description_short: product.description_short,
+      description_long: product.description_long,
+      catagory: product.catagory,
+    }),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await response.json();
 
   setIsLoading(false);

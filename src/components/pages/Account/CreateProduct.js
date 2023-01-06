@@ -142,6 +142,7 @@ function CreateProduct() {
       ...shortDescriptionDetail,
       short_description.current.value,
     ]);
+    short_description.current.value = "";
   }
   const {
     handleSubmit,
@@ -242,7 +243,7 @@ function CreateProduct() {
                     <Grid item>
                       <TextField
                         id="outlined-basic"
-                        label="Product price"
+                        label="Price"
                         variant="outlined"
                         size="small"
                         type="number"

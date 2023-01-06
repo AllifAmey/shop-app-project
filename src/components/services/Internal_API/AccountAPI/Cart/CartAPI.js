@@ -1,10 +1,13 @@
+import domain from "../../../domain";
+
 export async function getCart(setIsLoading) {
   // this grabs the
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
+  //https://maininfo.ameyshopukbackend.com
 
-  const response = await fetch("http://localhost:8000/api/shop/cart/items", {
+  const response = await fetch(`${domain}/api/shop/cart/items`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -26,7 +29,7 @@ export async function postCart(setIsLoading, product_id) {
   const user_id = localStorage.getItem("user_id");
   console.log(`the product id is ${product_id}`);
 
-  const response = await fetch("http://localhost:8000/api/shop/cart/items/", {
+  const response = await fetch(`${domain}/api/shop/cart/items/`, {
     method: "POST",
     body: JSON.stringify({
       user: user_id,
@@ -64,21 +67,18 @@ export async function patchCartItem(
     new_quantity += 1;
   }
   console.log(cart_id);
-  const response = await fetch(
-    `http://localhost:8000/api/shop/cart/items/${cart_id}/`,
-    {
-      method: "PATCH",
-      body: JSON.stringify({
-        user: user_id,
-        products: product_id,
-        quantity: new_quantity,
-      }),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${domain}/api/shop/cart/items/${cart_id}/`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      user: user_id,
+      products: product_id,
+      quantity: new_quantity,
+    }),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await response.json();
 
   setIsLoading(false);
@@ -91,16 +91,13 @@ export async function deleteCartItem(setIsLoading, cart_id) {
 
   const token = localStorage.getItem("Token");
 
-  const response = await fetch(
-    `http://localhost:8000/api/shop/cart/items/${cart_id}/`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    }
-  );
+  const response = await fetch(`${domain}/api/shop/cart/items/${cart_id}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
   const data = await response.json();
 
   setIsLoading(false);

@@ -18,23 +18,29 @@ function AccessAccountPage(props) {
     setIsLoading(true);
     // TODO: error handle the log out function.
 
-    let response = await fetch("http://localhost:8000/api/user/token/", {
-      method: "POST",
-      body: JSON.stringify({ email: email, password: pass }),
-      headers: { "Content-type": "application/json" },
-    });
+    let response = await fetch(
+      "https://maininfo.ameyshopukbackend.com/api/user/token/",
+      {
+        method: "POST",
+        body: JSON.stringify({ email: email, password: pass }),
+        headers: { "Content-type": "application/json" },
+      }
+    );
     let data = await response.json();
     // user data is then set in localStorage
     localStorage.setItem("Token", data.token);
     localStorage.setItem("isLogged", "LOGGED_IN");
 
-    response = await fetch("http://localhost:8000/api/user/me/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${data.token}`,
-      },
-    });
+    response = await fetch(
+      "https://maininfo.ameyshopukbackend.com/api/user/me/",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${data.token}`,
+        },
+      }
+    );
     data = await response.json();
 
     if (data.user_status == "member") {
@@ -53,11 +59,14 @@ function AccessAccountPage(props) {
   async function signUp() {
     setIsLoading(true);
 
-    const response = await fetch("http://localhost:8000/api/user/create/", {
-      method: "POST",
-      body: JSON.stringify({ name: name, email: email, password: pass }),
-      headers: { "Content-type": "application/json" },
-    });
+    const response = await fetch(
+      "https://maininfo.ameyshopukbackend.com/api/user/create/",
+      {
+        method: "POST",
+        body: JSON.stringify({ name: name, email: email, password: pass }),
+        headers: { "Content-type": "application/json" },
+      }
+    );
     const data = await response.json();
     console.log(data);
 

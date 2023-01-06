@@ -1,54 +1,56 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ProductCard from "./ProductCard";
-import Checkbox from "@mui/material/Checkbox";
 import { useDispatch, useSelector } from "react-redux";
-import imgPin from "../../assets/img/icons/pinCushion-icon.png";
-import imgSrunchy from "../../assets/img/icons/scrunchies-icon.png";
-import imgRing from "../../assets/img/icons/ring-icon.png";
 import AnimatedPage from "../../utility/AnimatedPage";
 import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { shopActions } from "../../../store";
 import FiltersIcon from "./utility/FiltersIcon";
 import _ from "lodash";
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
 function ShopPage() {
   /*
-
-  Make the shopping button light grey.
-
-  Product item title to be 12px.
-  Make the product info button light grey as well. 
+  The way the logic works in general:
+  There are two sides of the shop - filters on the left and products on right.
+  left - 
+  Each product has a catagory attached to its object.
+  Filters are created based on how many unique values of catagory there are.
+  Filters then allow for users to see or not to see the products with this catagory.
+  right - 
+  When data is grabbed from the product api,
+  the product's values goes through to the product component,
+  it is then this component that creates the product cards seen in the shop with all,
+  of its functionality.
   */
+
   // backend call
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [catagoriesAllowed, setCatagoriesAllowed] = useState({});
+
   const dispatch = useDispatch();
 
   const fetchProductsHandler = useCallback(async () => {
-    setIsLoading(true);
-
-    const response = await fetch("http://localhost:8000/api/shop/products/");
-    const data = await response.json();
-
-    let catagories = [];
-    data.map((product) => {
-      catagories.push(product.catagory);
+    // grabs the product with getproduct api call
+    getProducts(setIsLoading).then((data) => {
+      // Goes through each data and pushes through catagory of each product
+      let catagories = [];
+      data.map((product) => {
+        catagories.push(product.catagory);
+      });
+      // checks if they are unique using lodash's uniq function
+      const unique_catagories = _.uniq(catagories);
+      let catagories_allowed = {};
+      // set them false by default so checkboxes are unchecked.
+      unique_catagories.map((catagory) => {
+        catagories_allowed[catagory] = false;
+      });
+      setCatagoriesAllowed(catagories_allowed);
+      setProducts(data);
+      dispatch(shopActions.replaceShop(data));
     });
-    const unique_catagories = _.uniq(catagories);
-    let catagories_allowed = {};
-    unique_catagories.map((catagory) => {
-      catagories_allowed[catagory] = false;
-    });
-    setCatagoriesAllowed(catagories_allowed);
-    setProducts(data);
-    dispatch(shopActions.replaceShop(data));
-    setIsLoading(false);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchProductsHandler();
@@ -82,7 +84,6 @@ function ShopPage() {
             {!isLoading &&
               products
                 .filter((product) => {
-                  console.log(product);
                   if (!catagoriesAllowed[product.catagory]) {
                     return true;
                   } else {

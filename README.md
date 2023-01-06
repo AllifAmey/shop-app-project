@@ -47,7 +47,7 @@
 
 # Phase 5 - React/SEO Optimization and backend deployment to AWS - current phase
 
-- &#9744; Deploy new backend to AWS
+- &#9745; Deploy new backend to AWS
 - &#9744; Reduce image files
 
 To be announced as time comes.

@@ -51,9 +51,8 @@ function ProductHomePage() {
                   Handcrafted to Perfection
                 </Grid>
                 <Grid item sx={TextStyle}>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
-                  repudiandae veniam labore quasi? Laudantium obcaecati vero vel
-                  ullam hic adipisci!
+                  In every jewellery I create has been inspected and perfected
+                  by me with good quality tools I use to make my jewellery.
                 </Grid>
               </Grid>
             </Grid>
@@ -95,9 +94,8 @@ function ProductHomePage() {
                   Created with Emotion
                 </Grid>
                 <Grid item sx={TextStyle}>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
-                  repudiandae veniam labore quasi? Laudantium obcaecati vero vel
-                  ullam hic adipisci!
+                  Every piece brings me joy and happiness because the design
+                  takes a long time to finalise.
                 </Grid>
               </Grid>
             </Grid>
@@ -139,9 +137,8 @@ function ProductHomePage() {
                   Crafted with Care
                 </Grid>
                 <Grid item sx={TextStyle}>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit
-                  repudiandae veniam labore quasi? Laudantium obcaecati vero vel
-                  ullam hic adipisci!
+                  Whenever I assemble a product I ensure the jewellery will be
+                  unique and last for a long time.
                 </Grid>
               </Grid>
             </Grid>

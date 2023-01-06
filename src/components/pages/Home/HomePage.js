@@ -25,7 +25,7 @@ function Hero() {
     <>
       <AnimatedPopUpPage>
         <section className={styles["main"]}>
-          <div className={styles["title"]}>Amey Jewellery</div>
+          <div className={styles["title"]}>AmeyShopUK</div>
           <div className={styles["short-info"]}>
             The best handcrafted Jewellery money can buy at a affordable price.
           </div>

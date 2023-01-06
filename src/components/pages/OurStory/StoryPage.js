@@ -46,11 +46,10 @@ function StoryPage() {
                 Our Story
               </Grid>
               <Grid item fontSize={20}>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
-                ipsam id vel, sit quaerat neque dolores eveniet eos minima nam?
-                sit quaerat neque dolores eveniet eos minima nam? Lorem ipsum
-                dolor sit, amet consectetur adipisicing elit. Minus ipsam id
-                vel, sit quaerat neque dolores eveniet eos minima nam?
+                I am a jewellery designer maker milliner teacher and a artist
+                residing in the uk. I have many experience doing exhibitions in
+                London. The materials I use are brass,copper and silver.
+                Occasionally , I design and make mix media jewellery.
               </Grid>
             </Grid>
             <Grid
@@ -77,10 +76,10 @@ function StoryPage() {
                   Design Inspiration
                 </Grid>
                 <Grid item fontSize={20}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Veritatis perspiciatis commodi quos sunt doloribus illo, fugit
-                  nemo ipsa beatae? Eveniet odio quam voluptate quod cupiditate
-                  quas est, corrupti magnam aut.
+                  My inspiration comes from beautiful things I find in nature
+                  and blooming flowers. Initially, I will sketch my designs and
+                  then I will take into consideration of simplifying the
+                  jewellery as necessary.
                 </Grid>
               </Grid>
               <Grid

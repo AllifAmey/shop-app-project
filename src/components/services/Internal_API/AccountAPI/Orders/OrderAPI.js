@@ -1,10 +1,12 @@
+import domain from "../../../domain";
+
 export async function getOrders(setIsLoading) {
   // this grabs the
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
 
-  const response = await fetch("http://localhost:8000/api/shop/orders", {
+  const response = await fetch(`${domain}/api/shop/orders`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -62,7 +64,7 @@ export async function postOrders(setIsLoading, orderInfo, total_price) {
     delivery_type: orderInfo.delivery_type,
   };
 
-  const response = await fetch("http://localhost:8000/api/shop/deliveryinfo/", {
+  const response = await fetch(`${domain}/api/shop/deliveryinfo/`, {
     method: "POST",
     body: JSON.stringify([
       user_data,
@@ -102,27 +104,22 @@ export async function postOrdersAnonymous(
     delivery_type: orderInfo.delivery_type,
   };
 
-  console.log(user_cart);
-
-  const response = await fetch(
-    "http://localhost:8000/api/shop/post_orders/anonymous",
-    {
-      method: "POST",
-      body: JSON.stringify([
-        user_data,
-        {
-          delivery_msg: orderInfo.delivery_msg,
-          total_price: total_price,
-        },
-        {
-          products: user_cart,
-        },
-      ]),
-      headers: {
-        "Content-type": "application/json",
+  const response = await fetch(`${domain}/api/shop/post_orders/anonymous`, {
+    method: "POST",
+    body: JSON.stringify([
+      user_data,
+      {
+        delivery_msg: orderInfo.delivery_msg,
+        total_price: total_price,
       },
-    }
-  );
+      {
+        products: user_cart,
+      },
+    ]),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
   const data = await response.json();
 
   setIsLoading(false);
