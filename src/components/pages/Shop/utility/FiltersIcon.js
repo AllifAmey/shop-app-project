@@ -47,6 +47,23 @@ function FiltersIcon(props) {
                       props.setCatagoriesAllowed({
                         ...new_object,
                       });
+                      console.log({
+                        ...new_object,
+                      });
+                      const preFilteredProducts = props.products.filter(
+                        (product) => {
+                          if (
+                            !{
+                              ...new_object,
+                            }[product.catagory]
+                          ) {
+                            return true;
+                          } else {
+                            return false;
+                          }
+                        }
+                      );
+                      props.setFilteredProducts([...preFilteredProducts]);
                     }}
                   />
                   {filter_name}

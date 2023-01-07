@@ -27,8 +27,16 @@ function ShopPage() {
 
   // backend call
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [catagoriesAllowed, setCatagoriesAllowed] = useState({});
+  const [page, setPage] = React.useState(1);
+  const [pagination, setPagination] = useState(0);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+    console.log(value);
+  };
 
   const dispatch = useDispatch();
 
@@ -49,6 +57,13 @@ function ShopPage() {
       });
       setCatagoriesAllowed(catagories_allowed);
       setProducts(data);
+      setFilteredProducts(data);
+      const paginationNum = data.length / 8;
+      if (paginationNum == Number.isInteger(paginationNum)) {
+        setPagination(paginationNum);
+      } else {
+        setPagination(Math.trunc(paginationNum) + 1);
+      }
       dispatch(shopActions.replaceShop(data));
     });
   }, [dispatch]);
@@ -56,14 +71,6 @@ function ShopPage() {
   useEffect(() => {
     fetchProductsHandler();
   }, [fetchProductsHandler]);
-
-  // planned feature of enlarging the shop.
-
-  // the filter system will remain untouched as it is deemed sufficient.
-  // the resulting filtered list will then look at
-  /*
-  <Pagination count={10} shape="rounded" />
-  */
 
   return (
     <>
@@ -78,43 +85,59 @@ function ShopPage() {
           <FiltersIcon
             catagoriesAllowed={catagoriesAllowed}
             setCatagoriesAllowed={setCatagoriesAllowed}
+            products={products}
+            setFilteredProducts={setFilteredProducts}
           />
+          <Grid item container width={0.8} xs={9} flexDirection="column">
+            <Grid
+              item
+              container
+              gap={2}
+              justifyContent="start"
+              alignItems="start"
+              padding="0 0 48px 0"
+            >
+              {!isLoading &&
+                products
+                  .filter((product) => {
+                    const low_num = (page - 1) * 8;
+                    const high_num = low_num + 8;
 
-          <Grid
-            item
-            container
-            width={0.8}
-            gap={2}
-            justifyContent="start"
-            alignItems="start"
-            xs={9}
-            padding="0 0 48px 0"
-          >
-            {!isLoading &&
-              products
-                .filter((product) => {
-                  if (!catagoriesAllowed[product.catagory]) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                })
-                .map((productItem) => {
-                  return (
-                    <ProductCard
-                      key={`card${productItem.id}`}
-                      type={`${productItem.name.toLowerCase()}`}
-                      img={`${productItem.image_url}`}
-                      price={`${productItem.price}`}
-                      cardName={`card${productItem.id}`}
-                      product={productItem}
-                    ></ProductCard>
-                  );
-                })}
+                    if (
+                      !catagoriesAllowed[product.catagory] &&
+                      filteredProducts.indexOf(product) >= low_num &&
+                      filteredProducts.indexOf(product) < high_num
+                    ) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  })
+                  .map((productItem) => {
+                    return (
+                      <ProductCard
+                        key={`card${productItem.id}`}
+                        type={`${productItem.name.toLowerCase()}`}
+                        img={`${productItem.image_url}`}
+                        price={`${productItem.price}`}
+                        cardName={`card${productItem.id}`}
+                        product={productItem}
+                      ></ProductCard>
+                    );
+                  })}
 
-            {isLoading && (
-              <CircularProgress size="25rem" sx={{ margin: "auto" }} />
-            )}
+              {isLoading && (
+                <CircularProgress size="25rem" sx={{ margin: "auto" }} />
+              )}
+            </Grid>
+            <Grid item container justifyContent="center">
+              <Pagination
+                count={pagination}
+                page={page}
+                onChange={handleChange}
+                shape="rounded"
+              />
+            </Grid>
           </Grid>
         </Grid>
       </AnimatedPage>
