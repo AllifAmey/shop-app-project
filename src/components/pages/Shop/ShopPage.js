@@ -8,6 +8,7 @@ import { shopActions } from "../../../store";
 import FiltersIcon from "./utility/FiltersIcon";
 import _ from "lodash";
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+import Pagination from "@mui/material/Pagination";
 
 function ShopPage() {
   /*
@@ -56,6 +57,14 @@ function ShopPage() {
     fetchProductsHandler();
   }, [fetchProductsHandler]);
 
+  // planned feature of enlarging the shop.
+
+  // the filter system will remain untouched as it is deemed sufficient.
+  // the resulting filtered list will then look at
+  /*
+  <Pagination count={10} shape="rounded" />
+  */
+
   return (
     <>
       <AnimatedPage>
@@ -74,12 +83,12 @@ function ShopPage() {
           <Grid
             item
             container
-            height="100vh"
             width={0.8}
             gap={2}
             justifyContent="start"
             alignItems="start"
             xs={9}
+            padding="0 0 48px 0"
           >
             {!isLoading &&
               products

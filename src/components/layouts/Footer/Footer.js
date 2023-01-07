@@ -17,6 +17,7 @@ function Footer() {
     height: "auto",
     width: "100%",
     background: "#ffe4c4",
+    marginTop: "auto",
   };
 
   const FooterStyle = {

@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #343a40;
   background-color: #f8f9fa;
+  height: 100%;
 }
 
 a {
@@ -21,4 +26,10 @@ code {
 .map-container {
   height: 100%;
   width: 50%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }

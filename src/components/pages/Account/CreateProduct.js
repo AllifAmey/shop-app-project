@@ -176,9 +176,10 @@ function CreateProduct() {
   }
 
   async function onSubmit() {
+    const x = Math.random();
     let storageRef = ref(
       storage,
-      `gs://shop-app-project-366818.appspot.com/images/product/${product_name.current.value}-main`
+      `gs://shop-app-project-366818.appspot.com/images/product/${product_name.current.value}-main-${x}`
     );
     let productInfo = {
       name: product_name.current.value,
