@@ -15,6 +15,10 @@ import { useForm } from "react-hook-form";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import DropboxChooser from "react-dropbox-chooser";
+import SvgIcon from "@mui/material/SvgIcon";
+
+const APP_KEY = process.env.REACT_APP_DROPBOX_API_KEY;
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -51,6 +55,8 @@ function UploadButtons(props) {
       return;
     }
     const file = event.target.files[0];
+    console.log([URL.createObjectURL(file)]);
+    console.log(file);
 
     props.setMainImage([URL.createObjectURL(file)]);
     props.setStoreMainImage([file]);
@@ -110,6 +116,7 @@ function CreateProduct() {
   }
   */
   // URL.createObjectURL(event.target.files[0]);
+
   const [shortDescriptionDetail, setshortDescriptionDetail] = useState([]);
   const [mainImage, setMainImage] = useState([]);
   const [storeMainImage, setStoreMainImage] = useState([]);
@@ -162,13 +169,18 @@ function CreateProduct() {
       });
     });
   }
+  function handleSuccess(files) {
+    console.log(files[0]);
+    setMainImage([files[0].thumbnailLink]);
+    setStoreMainImage([]);
+  }
 
   async function onSubmit() {
     let storageRef = ref(
       storage,
       `gs://shop-app-project-366818.appspot.com/images/product/${product_name.current.value}-main`
     );
-    const productInfo = {
+    let productInfo = {
       name: product_name.current.value,
       price: product_prize.current.value,
       description_short: shortDescriptionDetail.join("#"),
@@ -176,15 +188,39 @@ function CreateProduct() {
       catagory: catagory,
     };
 
-    uploadedProduct(storageRef, storeMainImage[0], productInfo);
+    if (storeMainImage.length == 0) {
+      productInfo = {
+        name: product_name.current.value,
+        price: product_prize.current.value,
+        description_short: shortDescriptionDetail.join("#"),
+        description_long: long_description.current.value,
+        catagory: catagory,
+        image_url: mainImage[0],
+      };
+      console.log(productInfo);
+      postProducts(setIsLoading, productInfo).then((data) => {
+        console.log(data);
+      });
+    } else {
+      uploadedProduct(storageRef, storeMainImage[0], productInfo);
+    }
 
     // temporary a upload image api will be created later
     // use storeSideImages and loop through to upload all of it
     // TODO: STRONGLY consider using a api that processes the image and returns a compressed version or something.
     // or else this will cost a lot of money down the road.
   }
+
   return (
     <>
+      <div className="App">
+        <h1 style={{ textAlign: "center" }}>
+          Upload Or Choose Files to DropBox
+        </h1>
+        <br />
+        <br />
+        <Grid container justifyContent="center" className="container"></Grid>
+      </div>
       {isLoading ? (
         <Grid container justifyContent="center">
           <CircularProgress size="25rem" sx={{ margin: "auto" }} />
@@ -321,14 +357,41 @@ function CreateProduct() {
                       justifyContent="space-evenly"
                       gap={4}
                     >
-                      <Grid item>
-                        <UploadButtons
-                          main={"main"}
-                          setMainImage={setMainImage}
-                          setSideImages={setSideImages}
-                          setMainError={setMainError}
-                          setStoreMainImage={setStoreMainImage}
-                        />
+                      <Grid item container>
+                        <Grid item>
+                          <UploadButtons
+                            main={"main"}
+                            setMainImage={setMainImage}
+                            setSideImages={setSideImages}
+                            setMainError={setMainError}
+                            setStoreMainImage={setStoreMainImage}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <DropboxChooser
+                            appKey={APP_KEY}
+                            success={handleSuccess}
+                            cancel={() => console.log("closed")}
+                          >
+                            <SvgIcon>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 48 48"
+                                width="28px"
+                                height="28px"
+                              >
+                                <path
+                                  fill="#1E88E5"
+                                  d="M42 13.976L31.377 7.255 24 13.314 35.026 19.732zM6 25.647L16.933 32.055 24 26.633 13.528 19.969zM16.933 7.255L6 14.301 13.528 19.969 24 13.314zM24 26.633L31.209 32.055 42 25.647 35.026 19.732z"
+                                />
+                                <path
+                                  fill="#1E88E5"
+                                  d="M32.195 33.779L31.047 34.462 29.979 33.658 24 29.162 18.155 33.646 17.091 34.464 15.933 33.785 13 32.066 13 34.738 23.988 42 35 34.794 35 32.114z"
+                                />
+                              </svg>
+                            </SvgIcon>
+                          </DropboxChooser>
+                        </Grid>
                       </Grid>
                       <Grid item container>
                         {mainError

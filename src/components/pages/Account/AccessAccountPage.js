@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { loginAPI } from "../../services/Internal_API/AccountAPI/Access/LoginAPI";
 
 function AccessAccountPage(props) {
   const [name, setName] = useState("");
@@ -13,48 +14,6 @@ function AccessAccountPage(props) {
   const [cartId, setcartId] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-
-  async function login() {
-    setIsLoading(true);
-    // TODO: error handle the log out function.
-
-    let response = await fetch(
-      "https://maininfo.ameyshopukbackend.com/api/user/token/",
-      {
-        method: "POST",
-        body: JSON.stringify({ email: email, password: pass }),
-        headers: { "Content-type": "application/json" },
-      }
-    );
-    let data = await response.json();
-    // user data is then set in localStorage
-    localStorage.setItem("Token", data.token);
-    localStorage.setItem("isLogged", "LOGGED_IN");
-
-    response = await fetch(
-      "https://maininfo.ameyshopukbackend.com/api/user/me/",
-      {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Token ${data.token}`,
-        },
-      }
-    );
-    data = await response.json();
-
-    if (data.user_status == "member") {
-      localStorage.setItem("username", data.name);
-    } else if (data.user_status == "staff") {
-      localStorage.setItem("username", data.email);
-    }
-    localStorage.setItem("user_id", data.user_id);
-    localStorage.setItem("user_status", data.user_status);
-
-    setIsLoading(false);
-
-    props.login(true);
-  }
 
   async function signUp() {
     setIsLoading(true);
@@ -79,13 +38,16 @@ function AccessAccountPage(props) {
     const token = localStorage.getItem("Token");
     console.log(`My token is ${token}`);
 
-    const response = await fetch("http://localhost:8000/api/shop/cart/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
+    const response = await fetch(
+      "https://maininfo.ameyshopukbackend.com/api/shop/cart/",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
     const data = await response.json();
     console.log(data);
     setcartId(data.id);
@@ -95,12 +57,11 @@ function AccessAccountPage(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, pass);
     if (props.accessType == "Login") {
-      await login();
+      await loginAPI(setIsLoading, props.login, email, pass);
     } else if (props.accessType == "Sign Up") {
       await signUp();
-      await login();
+      await loginAPI(setIsLoading, props.login, email, pass);
     }
   };
 

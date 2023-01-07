@@ -156,6 +156,7 @@ function AdminAccount(props) {
     localStorage.removeItem("username");
     localStorage.removeItem("isLogged");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("user_status");
     props.logOut(false);
   }
 

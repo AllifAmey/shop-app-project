@@ -14,7 +14,7 @@ function LocationHomePage() {
     const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
     setIsLoading(true);
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
     );
     const data = await response.json();
     console.log(data);
