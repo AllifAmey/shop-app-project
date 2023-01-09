@@ -4,7 +4,10 @@ import Checkbox from "@mui/material/Checkbox";
 import { Grid } from "@mui/material";
 
 function FiltersIcon(props) {
-  // basic template to creating test components.
+  // the left side of the shop
+  // this side contains checkboxes which are used to determine
+  // in the shop whether to display or not the products the user wants.
+
   const filterItemStyle = {
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -28,9 +31,14 @@ function FiltersIcon(props) {
       >
         <Grid container flexDirection="column" height={0.5} width={0.9}>
           <Grid fontSize={30} textAlign="center" padding="20px 0 40px">
-            Items
+            Items you don't want to see.
           </Grid>
           {Object.keys(props.catagoriesAllowed).map((filter) => {
+            // looks through the catagoriesAllowed
+            // grabs the name of the filter
+            // grabs the value attached to the name
+            // inputs filter value in checked prop - false/true
+
             const filter_name = filter;
             const filter_val = props.catagoriesAllowed[filter];
             return (
@@ -40,14 +48,18 @@ function FiltersIcon(props) {
                     inputProps={{ "aria-label": "controlled" }}
                     checked={filter_val}
                     onChange={(event) => {
+                      // copies the current status to new_object
+                      // but most importantly does not refer to it in memory by ,
+                      // using ... operator.
+                      // changes the value in the copied object in accordance,
+                      // to event.target.checked
+                      // then sets the new object to the catagoriesallowed via
+                      // setCatagoriesAllowed
                       let new_object = {
                         ...props.catagoriesAllowed,
                       };
                       new_object[`${filter_name}`] = event.target.checked;
                       props.setCatagoriesAllowed({
-                        ...new_object,
-                      });
-                      console.log({
                         ...new_object,
                       });
                       const preFilteredProducts = props.products.filter(
