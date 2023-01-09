@@ -36,6 +36,7 @@
 # Phase 4 - Backend development and connecting frontend to the backend
 
 - &#9745; Add Paypal API
+- &#9745; Add Dropbox API
 - &#9745; Add user authentication
 - &#9745; Add ability to create customer account
 - &#9745; Add ability to create "special" account and system associated with it

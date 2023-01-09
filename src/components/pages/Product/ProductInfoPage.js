@@ -6,7 +6,6 @@ import { Link as RouterLink } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
-import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { getSpecificProduct } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
@@ -31,7 +30,18 @@ function ProductInfoPage2() {
     price small letters 
 
     */
-  const [shop, setShop] = useState();
+  /* 
+  Referance to this component can be seen in the route. 
+  It is directed when the user presses the "buy now" button . 
+
+  The way this works is the product id is grabbed from the url,
+  then that product id is used fetch that specific product's information.
+  It is then this product's information that is used to display the information in the ,
+  ProductInfoPage
+  
+  */
+
+  const [productInfo, setShop] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   // redux
@@ -57,15 +67,22 @@ function ProductInfoPage2() {
   // useEffect
 
   useEffect(() => {
+    // product id grabbed from url
     const product_id = Number(
       params.productId.slice(
         params.productId.lastIndexOf("-") + 1,
         params.productId.length
       )
     );
+    // product information fetched from the database and displayed entirely.
     getSpecificProduct(setIsLoading, product_id).then((product_data) => {
-      console.log(product_data);
-      console.log(product_data.description_short.split("#"));
+      // product_data is the entire data from that product.
+
+      //description_short is shown splitting the info by #
+      // # is used as a seperator
+      // TODO: Look into Django to see if there is a seperator for this instead of doing it
+      // on the frontend.
+      // product_data.description_short.split("#") is what will display the information.
 
       setShop(product_data);
     });
@@ -73,7 +90,7 @@ function ProductInfoPage2() {
 
   return (
     <>
-      {isLoading == true || shop == undefined ? (
+      {isLoading == true || productInfo == undefined ? (
         <CircularProgress />
       ) : (
         <AnimatedPopUpPage>
@@ -95,7 +112,7 @@ function ProductInfoPage2() {
                 <Box
                   component="img"
                   alt="jewellery"
-                  src={shop.image_url}
+                  src={productInfo.image_url}
                   sx={imgStyle}
                 ></Box>
               </Grid>
@@ -110,7 +127,7 @@ function ProductInfoPage2() {
                 gap={2}
               >
                 <Grid item sx={mainHeaderStyle} alignSelf="start">
-                  Handmade {shop.name.toLowerCase()}
+                  Handmade {productInfo.name.toLowerCase()}
                 </Grid>
                 <Grid item sx={subTitleStyle} alignSelf="start">
                   Details
@@ -124,15 +141,15 @@ function ProductInfoPage2() {
                   gap={1.5}
                   paddingLeft="1rem"
                 >
-                  {shop.description_short.split("#").map((e) => {
+                  {productInfo.description_short.split("#").map((e) => {
                     return <Grid item>{e}</Grid>;
                   })}
                 </Grid>
                 <Grid item sx={subTitleStyle} alignSelf="start">
                   Description
                 </Grid>
-                <Grid item>{shop.description_long}</Grid>
-                <Grid item>£3.99</Grid>
+                <Grid item>{productInfo.description_long}</Grid>
+                <Grid item>{productInfo.price}</Grid>
                 <Grid item container justifyContent="space-evenly" gap={1.5}>
                   <Grid item>
                     <Button
