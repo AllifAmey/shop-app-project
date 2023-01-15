@@ -31,7 +31,7 @@ function FiltersIcon(props) {
       >
         <Grid container flexDirection="column" height={0.5} width={0.9}>
           <Grid fontSize={30} textAlign="center" padding="20px 0 40px">
-            Items you don't want to see.
+            Filter Items
           </Grid>
           {Object.keys(props.catagoriesAllowed).map((filter) => {
             // looks through the catagoriesAllowed

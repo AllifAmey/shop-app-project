@@ -15,8 +15,7 @@ import { useForm } from "react-hook-form";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import DropboxChooser from "react-dropbox-chooser";
-import SvgIcon from "@mui/material/SvgIcon";
+import DropboxUploadBtn from "./utility/DropboxUploadBtn";
 
 const APP_KEY = process.env.REACT_APP_DROPBOX_API_KEY;
 
@@ -55,6 +54,7 @@ function UploadButtons(props) {
       return;
     }
     const file = event.target.files[0];
+    console.log(`file is ${file}`);
     console.log([URL.createObjectURL(file)]);
     console.log(file);
 
@@ -169,11 +169,6 @@ function CreateProduct() {
       });
     });
   }
-  function handleSuccess(files) {
-    console.log(files[0]);
-    setMainImage([files[0].thumbnailLink]);
-    setStoreMainImage([]);
-  }
 
   async function onSubmit() {
     const x = Math.random();
@@ -181,6 +176,7 @@ function CreateProduct() {
       storage,
       `gs://shop-app-project-366818.appspot.com/images/product/${product_name.current.value}-main-${x}`
     );
+
     let productInfo = {
       name: product_name.current.value,
       price: product_prize.current.value,
@@ -203,6 +199,8 @@ function CreateProduct() {
         console.log(data);
       });
     } else {
+      console.log("I am here");
+      console.log(`store main imagine is ${storeMainImage[0]}`);
       uploadedProduct(storageRef, storeMainImage[0], productInfo);
     }
 
@@ -369,29 +367,10 @@ function CreateProduct() {
                           />
                         </Grid>
                         <Grid item>
-                          <DropboxChooser
-                            appKey={APP_KEY}
-                            success={handleSuccess}
-                            cancel={() => console.log("closed")}
-                          >
-                            <SvgIcon>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 48 48"
-                                width="28px"
-                                height="28px"
-                              >
-                                <path
-                                  fill="#1E88E5"
-                                  d="M42 13.976L31.377 7.255 24 13.314 35.026 19.732zM6 25.647L16.933 32.055 24 26.633 13.528 19.969zM16.933 7.255L6 14.301 13.528 19.969 24 13.314zM24 26.633L31.209 32.055 42 25.647 35.026 19.732z"
-                                />
-                                <path
-                                  fill="#1E88E5"
-                                  d="M32.195 33.779L31.047 34.462 29.979 33.658 24 29.162 18.155 33.646 17.091 34.464 15.933 33.785 13 32.066 13 34.738 23.988 42 35 34.794 35 32.114z"
-                                />
-                              </svg>
-                            </SvgIcon>
-                          </DropboxChooser>
+                          <DropboxUploadBtn
+                            setMainImage={setMainImage}
+                            setStoreMainImage={setStoreMainImage}
+                          />
                         </Grid>
                       </Grid>
                       <Grid item container>
