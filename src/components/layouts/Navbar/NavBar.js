@@ -1,21 +1,28 @@
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import { NavLink as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import React, { useState, useEffect } from "react";
-
 import AccountIcon from "./utility/AccountIcon";
 import CartIcon from "./utility/CartIcon";
-import CartSidePopup from "./CartSidePopup";
+import CartSidePopup from "./utility/CartSidePopup";
+import SupportMenu from "./utility/SupportMenu";
 
 function NavBar() {
-  // https://codesandbox.io/s/6ncow?file=/src/App.tsx investigate whether this is the inspiration.
-  // solution is to put the cart into a props or to use another component to filter that stuff.
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // styles
+  /*
+  docs:
+  Logic for layout- 
+  The layout is based on flexbox.
 
+  future:
+
+  Adding a indicator when a user logs in
+
+   */
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // styles
   const gridLinkStyles = {
     "&:hover": {
       backgroundColor: "#f1f3f5",
@@ -54,9 +61,11 @@ function NavBar() {
     boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
   function handleClick(event) {
+    // MenuListProps={{ onMouseLeave: handleClose }} is key to understanding.
+    // when the mouse leaves the menu then execute this code and turn it to false.
+    // this in turn will close the menu as the menu is reliant on open={Boolean(anchorEl)}
+
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
     }
@@ -65,10 +74,6 @@ function NavBar() {
   function handleClose() {
     setAnchorEl(null);
   }
-
-  useEffect(() => {
-    // let cart = localStorage.getItem("Cart");
-  }, []);
 
   return (
     <>
@@ -152,39 +157,7 @@ function NavBar() {
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
       ></CartSidePopup>
-      <Menu
-        open={Boolean(anchorEl)}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        MenuListProps={{ onMouseLeave: handleClose }}
-        getContentAnchorEl={null}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        transformOrigin={{ vertical: "top", horizontal: "center" }}
-        sx={{
-          "& 	.MuiMenu-paper": {
-            boxSizing: "border-box",
-
-            width: "6rem",
-          },
-          ".MuiMenu-root": {},
-          "& 	.MuiMenu-list": {},
-        }}
-      >
-        <MenuItem
-          component={RouterLink}
-          to="/support/faq"
-          sx={{ fontSize: "1rem" }}
-        >
-          FAQ
-        </MenuItem>
-        <MenuItem
-          component={RouterLink}
-          to="/support/contact"
-          sx={{ fontSize: "1rem", whiteSpace: "normal" }}
-        >
-          Contact Us
-        </MenuItem>
-      </Menu>
+      <SupportMenu anchorEl={anchorEl} handleClose={handleClose} />
     </>
   );
 }

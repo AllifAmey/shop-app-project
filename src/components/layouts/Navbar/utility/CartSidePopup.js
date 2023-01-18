@@ -10,16 +10,18 @@ import {
   getCart,
   patchCartItem,
   deleteCartItem,
-} from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import { getSpecificProduct } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+} from "../../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import { getSpecificProduct } from "../../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import { useDispatch } from "react-redux";
-import { cartActions } from "../../../store";
+import { cartActions } from "../../../../store";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import _ from "lodash";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function CartSidePopup(props) {
+  // https://codesandbox.io/s/6ncow?file=/src/App.tsx inspiration for cartsidepopup
+
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
