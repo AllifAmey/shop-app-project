@@ -17,8 +17,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import DropboxUploadBtn from "./utility/DropboxUploadBtn";
 
-const APP_KEY = process.env.REACT_APP_DROPBOX_API_KEY;
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

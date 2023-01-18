@@ -46,9 +46,17 @@
 - &#9745; Finish Account System
 - &#9745; Make the contact form functionality work.
 
-# Phase 5 - React/SEO Optimization and backend deployment to AWS - current phase
+# Phase 5 - Future maintainability, scalability, security and simplifying logic - current phase
 
 - &#9745; Deploy new backend to AWS
+- &#9744; Add Google Autocomplete api to get the address.
+- &#9744; Add more documentation to different components explaining what logic does.
+- &#9744; Look for ways to split components to simplify logic
+- &#9744; Enhance the mass delete api to include products
+- &#9744; Add default product settings to allow for rapid product creation - backend related mostly.
+- &#9744; For scalability, look into testing and implement as much as possible
+- &#9744; Transfer the current way of development towards Test-driven development,
+- apply to both backend and frontend
 - &#9744; Reduce image files
 
 To be announced as time comes.

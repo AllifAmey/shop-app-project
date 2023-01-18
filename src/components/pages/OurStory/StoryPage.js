@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
 import natureImg from "../../assets/img/Storypage/nature-inspiration.avif";
 import AnimatedPage from "../../utility/AnimatedPage";
@@ -14,12 +14,24 @@ function StoryPage() {
     Use google map api to create the google map - scroll down to "Connect with one of our global offices"
     https://www.hubspot.com/company/contact?_ga=2.153440184.1862735785.1624414629-863205565.1624414629&hubs_post=blog.hubspot.com%2Fservice%2Fbest-contact-us-pages&hubs_post-cta=HubSpot 
 
-    update: 
-    Added some of the design , mother wanted such as increased boldness and size to the headline
-    Increase the fontsize of the article content by 2px.
-    She asked for the img to go up a bit. 
+    
+    docs:
+    The main component is wrapped around the animation component to bring out the animation.
+    The layout logic is based solely on flexbox. 
+
+    future plans:
+
+    Perhaps later showcasing the educational profile of the site's owner should be added.
+
 
     */
+  // the styles for the flexbox that contains text
+  const textContainerStyles = {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  };
   return (
     <>
       <AnimatedPage>
@@ -33,13 +45,10 @@ function StoryPage() {
             <Grid
               item
               container
-              flexDirection="column"
+              sx={textContainerStyles}
               gap={2}
-              justifyContent="center"
-              alignItems="center"
               height="40%"
               width={0.6}
-              textAlign="center"
               alignSelf="center"
             >
               <Grid item fontWeight={800} fontSize={36}>
@@ -62,16 +71,7 @@ function StoryPage() {
               flexWrap="nowrap"
               height="60%"
             >
-              <Grid
-                item
-                container
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-                width={0.5}
-                textAlign="center"
-                gap={4}
-              >
+              <Grid item container sx={textContainerStyles} width={0.5} gap={4}>
                 <Grid item fontWeight={800} fontSize={36}>
                   Design Inspiration
                 </Grid>
