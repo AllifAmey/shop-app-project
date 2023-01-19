@@ -20,14 +20,12 @@ export async function getCart(setIsLoading) {
   return data;
 }
 
-//add the ability to post and delete cart items later using this type of export.
 export async function postCart(setIsLoading, product_id) {
-  // this grabs the
+  // Updates the cart .
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("user_id");
-  console.log(`the product id is ${product_id}`);
 
   const response = await fetch(`${domain}/api/shop/cart/items/`, {
     method: "POST",
@@ -51,28 +49,20 @@ export async function patchCartItem(
   setIsLoading,
   cart_id,
   product_id,
-  quantity,
-  subtract = false
+  quantity
 ) {
-  // this grabs the
+  // updates a user's cart item.
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("user_id");
-  let new_quantity = quantity;
 
-  if (subtract == true) {
-    new_quantity -= 1;
-  } else if (subtract == false) {
-    new_quantity += 1;
-  }
-  console.log(cart_id);
   const response = await fetch(`${domain}/api/shop/cart/items/${cart_id}/`, {
     method: "PATCH",
     body: JSON.stringify({
       user: user_id,
       products: product_id,
-      quantity: new_quantity,
+      quantity: quantity,
     }),
     headers: {
       "Content-type": "application/json",
@@ -86,7 +76,7 @@ export async function patchCartItem(
 }
 
 export async function deleteCartItem(setIsLoading, cart_id) {
-  // this grabs the
+  // deletes a specific cart item.
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");

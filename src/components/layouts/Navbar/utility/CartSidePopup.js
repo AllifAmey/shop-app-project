@@ -22,8 +22,22 @@ import CircularProgress from "@mui/material/CircularProgress";
 function CartSidePopup(props) {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx inspiration for cartsidepopup
 
+  /*
+  docs:
+
+  A list of products pop up when the cart icon is clicked.
+  These products are dependant on redux
+  The drawer(popup) opens dependant on the parent component
+  props.isDrawerOpen
+  and the value of that prop is set in the draw as well when,
+  onClose is triggered.
+  
+  */
+
   const [isLoading, setIsLoading] = useState(false);
 
+  // redux
+  const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,13 +48,14 @@ function CartSidePopup(props) {
     */
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
       getCart(setIsLoading).then((user_cart) => {
+        // essentially grabs the user's cart in the database,
+        // then shoves the cart items it finds in redux and this component.
+
         setIsLoading(true);
         let user_cart_list = [];
 
         for (const [key, value] of Object.entries(user_cart)) {
           const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-          console.log(card_id);
-          //const cardName = `card${card_id}`;
           const cardName = `card${value.product.id}`;
           const price = Number(value.product.price);
           const quantity = Number(value.quantity);
@@ -60,8 +75,6 @@ function CartSidePopup(props) {
     }
   }, []);
 
-  const cart = useSelector((state) => state.cart.cart);
-
   function subtotalNum(total = false) {
     let itemNum = 0;
 
@@ -78,26 +91,23 @@ function CartSidePopup(props) {
     return (itemNum + 2).toFixed(2);
   }
 
-  const addCartHandler = (change_item, cart_item) => {
+  const CartHandler = (change_item, cart_item) => {
+    // this code only executes if the user is logged in
+    // if they are not logged in then updating the cart,
+    // is solely done on redux.
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
-      // grab user's cart and loop through returned data
-      // then compare the data.products and see if it is the same.
-      // if it is then record the id and then put it into the next api call.
+      // use the product id to send the patch request
+      // then change the current quantity dependant on the change_item value of the carthandler.
       let cart_id = cart_item.data_id;
       let product_id = cart_item.id;
-      let existing_quantity = cart_item.quantity;
+      let new_quantity = cart_item.quantity;
 
       if (change_item == "add") {
-        patchCartItem(setIsLoading, cart_id, product_id, existing_quantity);
+        new_quantity++;
       } else if (change_item == "decrease") {
-        patchCartItem(
-          setIsLoading,
-          cart_id,
-          product_id,
-          existing_quantity,
-          true
-        );
+        new_quantity--;
       }
+      patchCartItem(setIsLoading, cart_id, product_id, new_quantity);
     }
   };
 
@@ -162,7 +172,7 @@ function CartSidePopup(props) {
                             }
                           );
 
-                          addCartHandler("add", item);
+                          CartHandler("add", item);
                         }}
                       >
                         <AddIcon></AddIcon>
@@ -173,7 +183,7 @@ function CartSidePopup(props) {
                         sx={{ cursor: "pointer" }}
                         onClick={() => {
                           if (item.quantity - 1 == 0) {
-                            console.log(item.data_id);
+                            // if quantity is zero, delete the cart item from user and redux
                             deleteCartItem(setIsLoading, item.data_id);
                             dispatch(
                               cartActions.changeItem(["delete", [item.id]])
@@ -190,7 +200,7 @@ function CartSidePopup(props) {
                                 );
                               }
                             );
-                            addCartHandler("decrease", item);
+                            CartHandler("decrease", item);
                           }
                         }}
                       >

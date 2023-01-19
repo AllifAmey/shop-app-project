@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Drawer from "@mui/material/Drawer";
+import React from "react";
 import { NavLink as RouterLink } from "react-router-dom";
 import { SvgIcon } from "@mui/material";
 import Link from "@mui/material/Link";
@@ -7,17 +6,32 @@ import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
 
 function CartIcon(props) {
+  /*
+  docs:
+    The cart's redux data is grabbed and then number is calculated.
+    The reason why cartNum() doesn't run multiple times is that ,
+    redux rerenders the components that use redux and if redux changes,
+    then the component relying on redux will rerender.
+    This means the component does not rerender multiple times thereby,
+    calling function multiple times if redux does not change multiple times.
+  */
+
   const cart = useSelector((state) => state.cart.cart);
 
   function cartNum() {
+    // The number in the cart icon is calculated based on the
+    // quantity property of the product object.
     let itemNum = 0;
 
     if (cart.length == 0) {
       return 0;
     }
 
-    cart.forEach((element) => {
-      itemNum += element.quantity;
+    cart.forEach((product) => {
+      // each product object has a property called quantity.
+      // this is a actual number and added to the itemNum
+      // which is then returned to produce the number on the icon.
+      itemNum += product.quantity;
     });
     return itemNum;
   }

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink as RouterLink } from "react-router-dom";
 import { SvgIcon } from "@mui/material";
 import Link from "@mui/material/Link";
 
 function AccountIcon() {
-  /* Explanation of functionality:
+  /* docs:
   
-  the to property checks if localstorage has username when it is clicked on,
+  the to property of link component checks if localstorage has username when it is clicked on,
   if it does then the link changes to /account/username/  in username would be ,
   the value found in localStorage.getItem("username")
+  else go to /account/login
   
   */
   return (
@@ -33,7 +34,11 @@ function AccountIcon() {
       >
         <g
           transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
-          fill="#000000"
+          fill={
+            localStorage.getItem("username") == undefined
+              ? "#000000"
+              : "#0062ff"
+          }
           stroke="none"
         >
           <path
