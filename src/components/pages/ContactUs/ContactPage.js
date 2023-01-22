@@ -21,19 +21,6 @@ function ContactPage() {
     console.log(phone);
   };
 
-  const params = useParams();
-  const handleChanged = (value, info) => {
-    /**
-    value: "+33123456789"
-    info: {
-      countryCallingCode: "33",
-      countryCode: "FR",
-      nationalNumber: "123456789",
-      numberValue: "+33123456789",
-      reason: "input"
-    }
-    **/
-  };
   const form = useRef();
 
   function sendEmail(e) {

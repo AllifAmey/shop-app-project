@@ -14,10 +14,6 @@ function NavBar() {
   Logic for layout- 
   The layout is based on flexbox.
 
-  future:
-
-  Adding a indicator when a user logs in
-
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);

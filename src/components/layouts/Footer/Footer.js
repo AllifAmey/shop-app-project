@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@mui/material";
-
 import { NavLink as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
@@ -12,7 +11,18 @@ function Footer() {
     https://designshack.net/wp-content/uploads/agrac.jpg    
     https://tutorialzine.com/media/2015/01/large.jpg <-- the address may be included for the future. Keep this in mind.
     
+    docs:
+    logic for layout - 
+      Essentially this is a flexbox inside of a flexbox.
+      The main flexbox is used to center the child flexbox
+      Inside of the child flexbox are the items that are content for the footer.
+
+    Short footer was used as opposed to a long footer due to the lack of content needed,
+    for the footer. A short footer was fitting henceforth.
+
     */
+
+  // styles
   const mainContainerStyle = {
     height: "auto",
     width: "100%",

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import { Grid } from "@mui/material";
-
+import Question from "./utility/Question";
 import Box from "@mui/material/Box";
 
 function FAQPage() {
@@ -21,8 +21,64 @@ function FAQPage() {
 
     https://www.leadquizzes.com/wp-content/uploads/2020/07/screencapture-leadquizzes-pricing-2020-07-16-00_05_59.png - inspiration 
     
-    // contact us page 
+    docs - 
+      logic for layout - 
+        Accordians are used extensively to both showcase the question and the answer.
+        This layout for the FAQ was chosen due to the lack of questions I can think of.
+        scaling potential - 
+        I have seperated the questions on a seperate widget and layed out the formatting for a ,
+        future backend feature of the FAQ.
+        Catagory was not seperated due to layout for catagories being unstable.
+        What is stable are the questions and answers, they should look like this in the future.
+
+
+      If there are more and as the ecommerce, or if, the ecommerce expands then consider using,
+      a search bar type of layout. 
+      In the search bar type of layout perhaps the backend, has to be used to better handle the 
+      increasing amount of questions that would be posed . 
+
+
     */
+
+  // I believe this will be the future structure for a backend :
+  // faq_catagory model
+  // model field above -
+  // individual_catagory model attached to the above
+  // model field above - charfield for catagory
+  // question ( with answer) attached to the model above
+  // model field above - charfield for question and charfield for answer
+  const faq = {
+    catagory: {
+      delivery: {
+        questions: [
+          {
+            question: "How do I know my item has been delivered?",
+            answer:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+          },
+          {
+            question: "When can I expect to have my product delivered?",
+            answer:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+          },
+        ],
+      },
+      payment: {
+        questions: [
+          {
+            question: "How do I get a refund?",
+            answer:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+          },
+          {
+            question: "What type of payments do you accept?",
+            answer:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+          },
+        ],
+      },
+    },
+  };
   return (
     <>
       <AnimatedPopUpPage>
@@ -44,89 +100,27 @@ function FAQPage() {
                   <Grid item textAlign="center" fontSize={30} fontWeight={800}>
                     Delivery
                   </Grid>
-                  <Grid item width>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography>
-                          How do I know my item has been delivered?
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse malesuada lacus ex, sit amet blandit
-                          leo lobortis eget.
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Grid>
-                  <Grid item>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                      >
-                        <Typography>
-                          When can I expect to have my product delivered?
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse malesuada lacus ex, sit amet blandit
-                          leo lobortis eget.
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Grid>
+                  {faq.catagory.delivery.questions.map((inquiry) => {
+                    return (
+                      <Question
+                        question={inquiry.question}
+                        answer={inquiry.answer}
+                      />
+                    );
+                  })}
                 </Grid>
                 <Grid item container flexDirection="column" width={0.5} gap={2}>
                   <Grid item textAlign="center" fontSize={30} fontWeight={800}>
                     Payment
                   </Grid>
-                  <Grid item width>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography>How do I get a refund?</Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse malesuada lacus ex, sit amet blandit
-                          leo lobortis eget.
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Grid>
-                  <Grid item>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                      >
-                        <Typography>
-                          What type of payments do you accept?
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse malesuada lacus ex, sit amet blandit
-                          leo lobortis eget.
-                        </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  </Grid>
+                  {faq.catagory.payment.questions.map((inquiry) => {
+                    return (
+                      <Question
+                        question={inquiry.question}
+                        answer={inquiry.answer}
+                      />
+                    );
+                  })}
                 </Grid>
               </Grid>
             </Grid>
