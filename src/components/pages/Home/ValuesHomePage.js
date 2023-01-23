@@ -1,28 +1,41 @@
 import * as React from "react";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Grid } from "@mui/material";
 import supportIcon from "../../assets/img/icons/support-icon.png";
 import ideaIcon from "../../assets/img/icons/idea-icon.png";
 import shopIcon from "../../assets/img/icons/shop-icon.png";
 
-function NavigationHomePage() {
+function ValuesHomePage() {
   // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration
 
-  const navItemTitleStyle = {
+  /*
+  docs - 
+    Logic for layout -
+      Essentially there is a container that is 50vh and inside of that are 3 containers
+      each divded exactly by 3. Each of the divded containers contains the content which are ,
+      further centered.
+  
+  future - 
+
+  There is a case to split the components further but the case is very weak. Unlike the FAQ,
+  I don't see split components being used often nor would there be a need to scale for it in the future.
+  */
+
+  // styles
+  const valueTitleStyle = {
     fontSize: "30px",
     fontWeight: 800,
   };
-  const navItemImageStyle = {
+  const valueImageStyle = {
     height: "50px",
     width: "50px",
   };
-  const navItemTextStyle = {
+  const valueTextStyle = {
     fontSize: "20px",
     width: "80%",
     textAlign: "center",
   };
+
   return (
     <>
       <Box height="auto" width={1}>
@@ -48,12 +61,12 @@ function NavigationHomePage() {
               item
               component="img"
               src={ideaIcon}
-              sx={navItemImageStyle}
+              sx={valueImageStyle}
             ></Grid>
-            <Grid item sx={navItemTitleStyle}>
+            <Grid item sx={valueTitleStyle}>
               Our Philosophy
             </Grid>
-            <Grid item sx={navItemTextStyle}>
+            <Grid item sx={valueTextStyle}>
               Less is more. Simple is good. Beauty is in the eye of the
               beholder.
             </Grid>
@@ -73,12 +86,12 @@ function NavigationHomePage() {
               item
               component="img"
               src={shopIcon}
-              sx={navItemImageStyle}
+              sx={valueImageStyle}
             ></Grid>
-            <Grid item sx={navItemTitleStyle}>
+            <Grid item sx={valueTitleStyle}>
               Shop
             </Grid>
-            <Grid item sx={navItemTextStyle}>
+            <Grid item sx={valueTextStyle}>
               My shop will be focussed on jewellery and findings I make. All
               findings are good quality authentic material.
             </Grid>
@@ -98,12 +111,12 @@ function NavigationHomePage() {
               item
               component="img"
               src={supportIcon}
-              sx={navItemImageStyle}
+              sx={valueImageStyle}
             ></Grid>
-            <Grid item sx={navItemTitleStyle}>
+            <Grid item sx={valueTitleStyle}>
               Support
             </Grid>
-            <Grid item sx={navItemTextStyle}>
+            <Grid item sx={valueTextStyle}>
               If there any inquiries regarding the product please visit the
               contact us page or read the FAQs.
             </Grid>
@@ -114,4 +127,4 @@ function NavigationHomePage() {
   );
 }
 
-export default NavigationHomePage;
+export default ValuesHomePage;

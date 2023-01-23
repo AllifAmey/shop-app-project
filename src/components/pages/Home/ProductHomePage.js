@@ -9,6 +9,22 @@ import { Grid } from "@mui/material";
 function ProductHomePage() {
   // https://nl.pinterest.com/pin/254664553914081575/?mt=login - inspiration
 
+  /*
+  
+  docs - 
+    logic for layout -
+      A flexbox container that is a column container 3 other containers that are rows of height 50vh.
+      Each of those 50vh contain the content displayed.
+      One of the containers are row-reverse. 
+      
+    intention - 
+    To show snippets of each product and the care with which products are shown and created with.
+
+  future - 
+    I am uncertain whether to split the components to allow different types of product or to,
+    keep things as they are. This may be replaced with videos showing how each product is created.
+   */
+
   const TitleStyle = { fontSize: "36px", fontWeight: 800 };
   const TextStyle = { fontSize: "24px" };
   return (

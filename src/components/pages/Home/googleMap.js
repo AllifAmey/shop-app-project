@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import styles from "./LocationHomePage.module.css";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 export default function OurLocation() {

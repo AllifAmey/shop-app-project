@@ -22,7 +22,11 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.main * {
+.main .center-container {
+  z-index: 10;
+  color: #ffffff;
+}
+.main .location-container {
   z-index: 10;
   color: #ffffff;
 }
