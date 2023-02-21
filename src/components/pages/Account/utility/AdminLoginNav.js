@@ -35,8 +35,12 @@ function AdminLoginNav(props) {
       // get the orders currently in the database
       // then display all of the information to get a clear picture.
       getOrders(props.setIsLoading).then((user_order) => {
+        // will be in the form of a list of objects.
+        // in that there will be
         let user_order_row = [];
         let user_order_rowDetail = [];
+        console.log("orders are");
+        console.log(user_order);
         user_order.forEach((order) => {
           user_order_row.push({
             id: order.id,
@@ -58,7 +62,7 @@ function AdminLoginNav(props) {
   }
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: 800 }}>
       <BottomNavigation
         showLabels
         value={props.navValue}

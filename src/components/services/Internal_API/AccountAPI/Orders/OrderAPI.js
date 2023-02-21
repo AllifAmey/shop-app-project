@@ -19,6 +19,25 @@ export async function getOrders(setIsLoading) {
   return data;
 }
 
+export async function getSpecificOrder(setIsLoading, order_id) {
+  // retrieves specific order
+  setIsLoading(true);
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(`${domain}/api/shop/orders/${order_id}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
+  const data = await response.json();
+
+  setIsLoading(false);
+  return data;
+}
+
 export async function postOrders(setIsLoading, orderInfo, total_price) {
   // this grabs the
   setIsLoading(true);
@@ -118,6 +137,40 @@ export async function postOrdersAnonymous(
     ]),
     headers: {
       "Content-type": "application/json",
+    },
+  });
+  const data = await response.json();
+
+  setIsLoading(false);
+  return data;
+}
+
+export async function patchOrders(
+  setIsLoading,
+  order_id,
+  order_data,
+  dispatch_status
+) {
+  // Only admin is allowed to edit orders.
+  // The backend will verify that.
+  // This is primarily used to state that the order has been dispatched.
+  console.log(`dispatch status before ${order_data["delivery_status"]}`);
+  if (dispatch_status === false) {
+    order_data["delivery_status"] = "Processing Order";
+  } else if (dispatch_status === true) {
+    order_data["delivery_status"] = "Dispatched";
+  }
+  console.log(`dispatch status after ${order_data["delivery_status"]}`);
+  setIsLoading(true);
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(`${domain}/api/shop/orders/${order_id}/`, {
+    method: "PATCH",
+    body: JSON.stringify(order_data),
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
     },
   });
   const data = await response.json();

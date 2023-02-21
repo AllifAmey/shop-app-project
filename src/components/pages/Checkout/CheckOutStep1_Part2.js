@@ -47,6 +47,7 @@ function CheckOutStep1_Part2(props) {
             <Grid item>Address</Grid>
             <Grid item>
               <TextField
+                name="address"
                 fullWidth
                 id="outlined-basic"
                 label="Address line 1"
@@ -57,6 +58,7 @@ function CheckOutStep1_Part2(props) {
             </Grid>
             <Grid item>
               <TextField
+                name="address"
                 fullWidth
                 id="outlined-basic"
                 label="Address line 2"
@@ -72,6 +74,7 @@ function CheckOutStep1_Part2(props) {
             <Grid item>City</Grid>
             <Grid item>
               <TextField
+                name="city"
                 id="outlined-basic"
                 label="City"
                 variant="outlined"
@@ -84,6 +87,7 @@ function CheckOutStep1_Part2(props) {
             <Grid item>Post Code</Grid>
             <Grid item>
               <TextField
+                name="post code"
                 id="outlined-basic"
                 label="Post Code"
                 variant="outlined"

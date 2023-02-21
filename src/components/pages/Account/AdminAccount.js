@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Checkbox from "@mui/material/Checkbox";
 import { Grid } from "@mui/material";
 import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -14,6 +15,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import AdminLoginNav from "./utility/AdminLoginNav";
 
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+import {
+  getSpecificOrder,
+  patchOrders,
+} from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
 function AdminAccount(props) {
   // inspiration
@@ -74,6 +79,64 @@ function AdminAccount(props) {
       headerName: "Delivery Status",
       width: 150,
     },
+    {
+      field: "dispatch",
+      headerName: "Dispatched?",
+      renderCell: (params) => {
+        if (params.row.deliveryStatus == "Dispatched") {
+          return (
+            <strong>
+              <Checkbox
+                checked
+                onChange={(event) => {
+                  console.log(event.target.checked);
+
+                  const order_id = params.id;
+                  const delivery_status = event.target.checked;
+
+                  getSpecificOrder(setIsLoading, order_id).then(
+                    (order_data) => {
+                      console.log("order data is :");
+                      console.log(order_data);
+                      patchOrders(
+                        setIsLoading,
+                        order_id,
+                        order_data,
+                        delivery_status
+                      );
+                    }
+                  );
+                }}
+              />
+            </strong>
+          );
+        }
+        return (
+          <strong>
+            <Checkbox
+              onChange={(event) => {
+                console.log(event.target.checked);
+
+                const order_id = params.id;
+                const delivery_status = event.target.checked;
+
+                getSpecificOrder(setIsLoading, order_id).then((order_data) => {
+                  console.log("order data is :");
+                  console.log(order_data);
+                  patchOrders(
+                    setIsLoading,
+                    order_id,
+                    order_data,
+                    delivery_status
+                  );
+                });
+              }}
+            />
+          </strong>
+        );
+      },
+      width: 120,
+    },
   ];
 
   const productColumns = [
@@ -132,7 +195,7 @@ function AdminAccount(props) {
     // Grab the ids of the selected rows and get rid of them.
     // the ids presented will form the basis of delete method api calls.
 
-    // I don't know if this is a good idea but add ability to delete product and order..
+    // TODO: I don't know if this is a good idea but add ability to delete product and order..
     //
 
     const arr_selectedRows = [...selectedRows];

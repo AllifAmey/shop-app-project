@@ -80,6 +80,7 @@ function CheckOutStep1_Part1(props) {
             <Grid item>First Name</Grid>
             <Grid item>
               <TextField
+                name="fname"
                 id="outlined-basic"
                 label="First Name"
                 variant="outlined"
@@ -92,6 +93,7 @@ function CheckOutStep1_Part1(props) {
             <Grid item>Last Name</Grid>
             <Grid item>
               <TextField
+                name="lname"
                 id="outlined-basic"
                 label="Last Name"
                 variant="outlined"
@@ -141,6 +143,7 @@ function CheckOutStep1_Part1(props) {
           <Grid item>Phone</Grid>
           <Grid item>
             <MuiTelInput
+              name="phone"
               defaultCountry="GB"
               value={phone}
               onChange={(newPhone) => {
