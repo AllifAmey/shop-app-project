@@ -154,13 +154,11 @@ export async function patchOrders(
   // Only admin is allowed to edit orders.
   // The backend will verify that.
   // This is primarily used to state that the order has been dispatched.
-  console.log(`dispatch status before ${order_data["delivery_status"]}`);
   if (dispatch_status === false) {
     order_data["delivery_status"] = "Processing Order";
   } else if (dispatch_status === true) {
     order_data["delivery_status"] = "Dispatched";
   }
-  console.log(`dispatch status after ${order_data["delivery_status"]}`);
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");

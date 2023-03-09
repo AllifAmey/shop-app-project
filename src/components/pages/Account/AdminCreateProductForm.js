@@ -97,7 +97,7 @@ function UploadButtons(props) {
   );
 }
 
-function CreateProduct() {
+function AdminCreateProductForm() {
   // first test the post method api and make sure that it works,
   // do the test step by step.
   // then once the api fully works
@@ -465,4 +465,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct;
+export default AdminCreateProductForm;

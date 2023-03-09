@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Grid } from "@mui/material";
-import { Link as RouterLink, Route } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import AccessAccountPage from "./AccessAccountPage";
-import LoggedAccount from "./LoggedAccount";
+import CustomerAccount from "./CustomerAccount";
 import AdminAccount from "./AdminAccount";
 
-function AccountPage() {
+function AccountPageRouting() {
+  /*
+  This component redirects the user to the correct account page.
+  */
+
   // states
   const [isLogged, setisLogged] = useState(false);
   // formType
-
   const params = useParams();
 
   useEffect(() => {
@@ -24,7 +22,7 @@ function AccountPage() {
   }, []);
 
   if (isLogged && localStorage.getItem("user_status") == "member") {
-    return <LoggedAccount logOut={setisLogged}></LoggedAccount>;
+    return <CustomerAccount logOut={setisLogged}></CustomerAccount>;
   } else if (isLogged && localStorage.getItem("user_status") == "staff") {
     return <AdminAccount logOut={setisLogged}></AdminAccount>;
   }
@@ -64,4 +62,4 @@ function AccountPage() {
   return <>Hello</>;
 }
 
-export default AccountPage;
+export default AccountPageRouting;

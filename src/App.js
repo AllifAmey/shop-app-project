@@ -5,17 +5,15 @@ import ProductInfoPage from "./components/pages/Product/ProductInfoPage";
 import HomePage from "./components/pages/Home/HomePage";
 import Footer from "./components/layouts/Footer/Footer";
 import StoryPage from "./components/pages/OurStory/StoryPage";
-import ProductImage from "./components/__test__/components/ProductImage";
-import ApiTest from "./components/__test__/components/ApiTest";
 import ContactPage from "./components/pages/ContactUs/ContactPage";
 import FAQPage from "./components/pages/FAQ/FAQPage";
-import AccountPage from "./components/pages/Account/AccountPage";
+import AccountPageRouting from "./components/pages/Account/AccountPageRouting";
 import CheckOutPage from "./components/pages/Checkout/CheckOutPage";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
-import CreateProduct from "./components/pages/Account/CreateProduct";
+import CreateProduct from "./components/pages/Account/AdminCreateProductForm";
 
 function App() {
   /* 
@@ -38,12 +36,14 @@ function App() {
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/account/:accessType" element={<AccountPage />} />
+            <Route
+              path="/account/:accessType"
+              element={<AccountPageRouting />}
+            />
             <Route
               path="/account/:accessType/create/product"
               element={<CreateProduct />}
             />
-            <Route path="/test" element={<ApiTest />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:productId" element={<ProductInfoPage />} />

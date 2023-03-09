@@ -59,7 +59,10 @@
 - apply to both backend and frontend
 - &#9744; Reduce image files
 
-To be announced as time comes.
+Current activity -
+
+Trying to really simplify the account system
+then implement far more error handling for APIs and validation for input forms.
 
 # Getting Started with Create React App
 

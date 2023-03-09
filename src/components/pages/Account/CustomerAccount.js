@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import { postProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
-function LoggedAccount(props) {
+function CustomerAccount(props) {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
   const [navValue, setNavValue] = useState(0);
@@ -274,4 +274,4 @@ function LoggedAccount(props) {
   );
 }
 
-export default LoggedAccount;
+export default CustomerAccount;
