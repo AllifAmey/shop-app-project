@@ -20,6 +20,9 @@ const style = {
 };
 
 function ChildModal(props) {
+  // this specific modal is the child modal containing the products,
+  // the user ordered.
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -82,6 +85,8 @@ function ChildModal(props) {
 }
 
 export default function NestedModalOrder(props) {
+  // main modal the user sees
+
   const handleClose = () => {
     props.setOpen(false);
   };

@@ -12,7 +12,7 @@ import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassD
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import AdminLoginNav from "./utility/AdminLoginNav";
+import AdminDataGridnNavbar from "./utility/AdminDataGridNavbar";
 
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import {
@@ -28,7 +28,7 @@ function AdminAccount(props) {
   const [rowValue, setrowValue] = useState();
   const [selectedRows, setSelectedRows] = useState([]);
   const [checkOrderId, setCheckOrderId] = useState();
-  const [rowDetail, setRowDetail] = useState(false);
+  const [rowOrderDetail, setOrderRowDetail] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -224,19 +224,12 @@ function AdminAccount(props) {
   }
 
   function fetchOrderbyid(order) {
+    // As every id is unique, the id is used to return
+    // the exact order details to the NestedModalOrder
+    // the NestedModalOrder then translates all that data into a UI ,
+    // the user understands.
     return order.id == checkOrderId;
   }
-
-  /*
-    {
-  "name": "string",
-  "image_url": "string",
-  "price": "-578.91",
-  "description_short": "string",
-  "description_long": "string",
-  "catagory": "string"
-}
-    */
 
   return (
     <>
@@ -263,13 +256,13 @@ function AdminAccount(props) {
                 Welcome back, {localStorage.getItem("username")}
               </Grid>
               <Grid item container justifyContent="center">
-                <AdminLoginNav
+                <AdminDataGridnNavbar
                   setIsLoading={setIsLoading}
                   setrowValue={setrowValue}
                   setNavValue={setNavValue}
                   navValue={navValue}
-                  setRowDetail={setRowDetail}
-                ></AdminLoginNav>
+                  setRowDetail={setOrderRowDetail}
+                ></AdminDataGridnNavbar>
               </Grid>
               <Grid item container justifyContent="center" width="75vw">
                 <div style={{ height: 400, width: "60%" }}>
@@ -343,7 +336,7 @@ function AdminAccount(props) {
           open={open}
           setOpen={setOpen}
           handleClose={handleClose}
-          rowDetail={open ? rowDetail.filter(fetchOrderbyid) : rowDetail}
+          rowDetail={open && rowOrderDetail.filter(fetchOrderbyid)}
           checkOrderId={checkOrderId}
         ></NestedModalOrder>
       )}

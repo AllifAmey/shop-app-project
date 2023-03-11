@@ -6,13 +6,12 @@ import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import NestedModalOrder from "./utility/NestedModalOrder";
-import LoginNav from "./utility/LoginNav";
+import CustomerDataGridNavbar from "./utility/CustomerDataGridNavbar";
 import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
 import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassDeleteAPI";
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import { postProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
 function CustomerAccount(props) {
   // inspiration
@@ -22,8 +21,8 @@ function CustomerAccount(props) {
   const [rowValue, setrowValue] = useState();
   const [selectedRows, setSelectedRows] = useState([]);
   const [checkOrderId, setCheckOrderId] = useState();
-  const [rowDetail, setRowDetail] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
+  const [rowOrderDetail, setOrderRowDetail] = useState(false);
+  const [showDeletebtn, setShowDeletebtn] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -159,6 +158,9 @@ function CustomerAccount(props) {
   }
 
   function logOut() {
+    // this removes all of the localstorage as the data is no longer relevant.
+    // logout is also set to false in the parent component , AccounPageRouting
+    // this is to force a component to rerender to reflect new changes - usestate does that.
     localStorage.removeItem("Token");
     localStorage.removeItem("username");
     localStorage.removeItem("isLogged");
@@ -169,6 +171,10 @@ function CustomerAccount(props) {
   }
 
   function fetchOrderbyid(order) {
+    // As every id is unique, the id is used to return
+    // the exact order details to the NestedModalOrder
+    // the NestedModalOrder then translates all that data into a UI ,
+    // the user understands.
     return order.id == checkOrderId;
   }
 
@@ -197,13 +203,13 @@ function CustomerAccount(props) {
                 Welcome back, {localStorage.getItem("username")}
               </Grid>
               <Grid item container justifyContent="center">
-                <LoginNav
+                <CustomerDataGridNavbar
                   setIsLoading={setIsLoading}
                   setrowValue={setrowValue}
                   setNavValue={setNavValue}
                   navValue={navValue}
-                  setRowDetail={setRowDetail}
-                ></LoginNav>
+                  setOrderRowDetail={setOrderRowDetail}
+                ></CustomerDataGridNavbar>
               </Grid>
               <Grid item container justifyContent="center" width="75vw">
                 <div style={{ height: 400, width: "60%" }}>
@@ -221,9 +227,9 @@ function CustomerAccount(props) {
                       setSelectedRows(selectedIDs);
 
                       if ([...selectedIDs].length == 0) {
-                        setShowDelete(false);
+                        setShowDeletebtn(false);
                       } else {
-                        setShowDelete(true);
+                        setShowDeletebtn(true);
                       }
                     }}
                   />
@@ -232,11 +238,11 @@ function CustomerAccount(props) {
               <Grid
                 item
                 container
-                justifyContent={showDelete ? "space-between" : "center"}
+                justifyContent={showDeletebtn ? "space-between" : "center"}
                 width={0.2}
                 height={0.5}
               >
-                {showDelete ? (
+                {showDeletebtn && (
                   <Button
                     variant="contained"
                     sx={{ color: "red" }}
@@ -244,8 +250,6 @@ function CustomerAccount(props) {
                   >
                     Delete items
                   </Button>
-                ) : (
-                  ""
                 )}
 
                 <Button
@@ -266,7 +270,7 @@ function CustomerAccount(props) {
           open={open}
           setOpen={setOpen}
           handleClose={handleClose}
-          rowDetail={open ? rowDetail.filter(fetchOrderbyid) : rowDetail}
+          rowDetail={open && rowOrderDetail.filter(fetchOrderbyid)}
           checkOrderId={checkOrderId}
         ></NestedModalOrder>
       )}
