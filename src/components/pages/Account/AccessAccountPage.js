@@ -7,6 +7,21 @@ import { Link as RouterLink } from "react-router-dom";
 import { loginAPI } from "../../services/Internal_API/AccountAPI/Access/LoginAPI";
 import { SignUp } from "../../services/Internal_API/AccountAPI/Access/SignupAPI";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useParams } from "react-router-dom";
+
+function CapitaliseEachWord(text) {
+  // capitalises each word for params
+  // This is used to make the AccessAccountPage title relevant to the page.
+  const words = text.split("_");
+
+  const title = words
+    .map((word) => {
+      return word[0].toUpperCase() + word.substring(1);
+    })
+    .join(" ");
+
+  return title;
+}
 
 function AccessAccountPage(props) {
   /*
@@ -19,11 +34,15 @@ function AccessAccountPage(props) {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const params = useParams();
+
+  const title = CapitaliseEachWord(params.accessType);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (props.accessType == "Login") {
+    if (title == "Login") {
       await loginAPI(setIsLoading, props.login, email, pass);
-    } else if (props.accessType == "Sign Up") {
+    } else if (title == "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);
       await loginAPI(setIsLoading, props.login, email, pass);
     }
@@ -64,7 +83,7 @@ function AccessAccountPage(props) {
                     Amey Jewellery
                   </Grid>
                   <Grid item fontSize={30} fontWeight={800}>
-                    {props.accessType}
+                    {title}
                   </Grid>
                 </Grid>
                 <Grid
@@ -76,9 +95,7 @@ function AccessAccountPage(props) {
                   padding="1rem"
                   height={0.6}
                 >
-                  {props.accessType !== "Sign Up" ? (
-                    ""
-                  ) : (
+                  {title === "Sign Up" && (
                     <Grid
                       item
                       container
@@ -128,9 +145,7 @@ function AccessAccountPage(props) {
                       />
                     </Grid>
                   </Grid>
-                  {props.accessType == "Recover" ? (
-                    ""
-                  ) : (
+                  {["Login", "Sign Up"].includes(title) && (
                     <Grid
                       item
                       container
@@ -158,7 +173,6 @@ function AccessAccountPage(props) {
                       </Grid>
                     </Grid>
                   )}
-
                   <Grid item width={0.5}>
                     <Button
                       variant="outlined"
@@ -166,12 +180,12 @@ function AccessAccountPage(props) {
                       fullWidth
                       onClick={handleSubmit}
                     >
-                      {props.accessType}
+                      {title}
                     </Button>
                   </Grid>
-                  {props.accessType == "Login" ? (
+                  {title == "Login" ? (
                     <Grid item container justifyContent="space-evenly">
-                      <Grid item component={RouterLink} to="/account/signup">
+                      <Grid item component={RouterLink} to="/account/sign_up">
                         Don't have account?
                       </Grid>
                       <Grid item component={RouterLink} to="/account/recover">

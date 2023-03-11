@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import AccessAccountPage from "./AccessAccountPage";
 import CustomerAccount from "./CustomerAccount";
 import AdminAccount from "./AdminAccount";
+import { useParams } from "react-router-dom";
 
 function AccountPageRouting() {
   /*
@@ -11,8 +11,10 @@ function AccountPageRouting() {
 
   // states
   const [isLogged, setisLogged] = useState(false);
-  // formType
+
   const params = useParams();
+  const current_url = params.accessType;
+  const legimate_urls = ["login", "recover", "sign_up"];
 
   useEffect(() => {
     let logged = localStorage.getItem("isLogged");
@@ -27,39 +29,19 @@ function AccountPageRouting() {
     return <AdminAccount logOut={setisLogged}></AdminAccount>;
   }
 
-  if (params.accessType == "login") {
-    const accessType = "Login";
+  if (legimate_urls.includes(current_url)) {
     return (
       <>
-        <AccessAccountPage
-          accessType={accessType}
-          login={setisLogged}
-        ></AccessAccountPage>
+        <AccessAccountPage login={setisLogged}></AccessAccountPage>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div>Error</div>
       </>
     );
   }
-
-  if (params.accessType == "signup") {
-    const accessType = "Sign Up";
-    return (
-      <>
-        <AccessAccountPage
-          accessType={accessType}
-          login={setisLogged}
-        ></AccessAccountPage>
-      </>
-    );
-  }
-  if (params.accessType == "recover") {
-    const accessType = "Recover";
-    return (
-      <>
-        <AccessAccountPage accessType={accessType}></AccessAccountPage>
-      </>
-    );
-  }
-
-  return <>Hello</>;
 }
 
 export default AccountPageRouting;
