@@ -83,52 +83,31 @@ function AdminAccount(props) {
       field: "dispatch",
       headerName: "Dispatched?",
       renderCell: (params) => {
+        let checked = undefined;
         if (params.row.deliveryStatus == "Dispatched") {
-          return (
-            <strong>
-              <Checkbox
-                checked
-                onChange={(event) => {
-                  console.log(event.target.checked);
-
-                  const order_id = params.id;
-                  const delivery_status = event.target.checked;
-
-                  getSpecificOrder(setIsLoading, order_id).then(
-                    (order_data) => {
-                      console.log("order data is :");
-                      console.log(order_data);
-                      patchOrders(
-                        setIsLoading,
-                        order_id,
-                        order_data,
-                        delivery_status
-                      );
-                    }
-                  );
-                }}
-              />
-            </strong>
-          );
+          checked = true;
+        } else {
+          checked = false;
         }
         return (
           <strong>
             <Checkbox
+              checked={checked}
               onChange={(event) => {
-                console.log(event.target.checked);
-
                 const order_id = params.id;
                 const delivery_status = event.target.checked;
 
                 getSpecificOrder(setIsLoading, order_id).then((order_data) => {
-                  console.log("order data is :");
-                  console.log(order_data);
                   patchOrders(
                     setIsLoading,
                     order_id,
                     order_data,
                     delivery_status
-                  );
+                  ).then((data) => {
+                    if (!isLoading) {
+                      params.row.deliveryStatus = data.delivery_status;
+                    }
+                  });
                 });
               }}
             />

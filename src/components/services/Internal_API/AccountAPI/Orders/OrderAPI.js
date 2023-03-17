@@ -173,6 +173,8 @@ export async function patchOrders(
   });
   const data = await response.json();
 
-  setIsLoading(false);
+  if (response.ok) {
+    setIsLoading(false);
+  }
   return data;
 }
