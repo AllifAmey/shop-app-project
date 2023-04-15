@@ -114,6 +114,7 @@ function ProductCard(props) {
     alignItems: "center",
     backgroundColor: "#f8f9fa",
     borderRadius: "10px",
+    border: "1px solid #96f2d7",
   };
 
   return (
@@ -147,7 +148,7 @@ function ProductCard(props) {
           </Box>
 
           <div className={styles["card-info"]}>Handmade {props.type}</div>
-          <div className={styles["card-price"]}>{props.price}</div>
+          <div className={styles["card-price"]}>{`£${props.price}`}</div>
           <div className={styles["card-delivery"]}>FREE UK delivery</div>
           <div className={styles["btn-purchase"]}>
             <Button

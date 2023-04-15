@@ -54,8 +54,6 @@ function Hero() {
             color="primary"
             sx={{
               fontSize: "15px",
-              color: "#111122",
-              backgroundColor: "#ced4da",
             }}
           >
             Explore Shop

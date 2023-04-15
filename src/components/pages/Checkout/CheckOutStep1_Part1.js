@@ -115,7 +115,7 @@ function CheckOutStep1_Part1(props) {
           <Grid item sx={{ width: "50%" }}>
             <TextField
               id="outlined-basic"
-              label="email"
+              label="Email"
               variant="outlined"
               size="small"
               fullWidth

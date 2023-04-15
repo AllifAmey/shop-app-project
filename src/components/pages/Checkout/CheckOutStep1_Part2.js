@@ -90,6 +90,7 @@ function CheckOutStep1_Part2(props) {
                 name="post code"
                 id="outlined-basic"
                 label="Post Code"
+                autoComplete="postal-code"
                 variant="outlined"
                 size="small"
                 inputRef={post_code}

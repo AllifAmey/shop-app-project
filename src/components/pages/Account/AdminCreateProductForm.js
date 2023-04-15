@@ -161,6 +161,9 @@ function AdminCreateProductForm() {
         // Insert url into an <img> tag to "download"
         const full_productInfo = { ...productInfo, image_url: url };
 
+        // from here the url is grabbed from that storage and then placed inside of a django model
+        // It is using this django model where the url to the firebase storage storing that image,
+        // that will be referred and ripped from the json data and specified.
         postProducts(setIsLoading, full_productInfo).then((response) => {
           console.log(response);
         });
@@ -199,6 +202,8 @@ function AdminCreateProductForm() {
     } else {
       console.log("I am here");
       console.log(`store main imagine is ${storeMainImage[0]}`);
+      // This is executed if the storeMainImage length is more than 0.
+      // When that is the case then that means the image can be stored and we are using that image to upload to firebase.
       uploadedProduct(storageRef, storeMainImage[0], productInfo);
     }
 

@@ -16,11 +16,11 @@ export const shopTheme = createTheme({
         // Name of the slot
         contained: {
           // Some CSS
-          backgroundColor: "#ced4da",
+          backgroundColor: "#faa2c1",
           fontSize: "10px",
-          color: "#111122",
+          color: "#0E0E1B",
           "&:hover": {
-            backgroundColor: "#868e96",
+            backgroundColor: "#f783ac",
           },
         },
       },
