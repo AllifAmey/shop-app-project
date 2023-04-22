@@ -42,7 +42,7 @@ function FiltersIcon(props) {
             const filter_name = filter;
             const filter_val = props.catagoriesAllowed[filter];
             return (
-              <Grid container sx={filterItemStyle}>
+              <Grid container key={filter_name} sx={filterItemStyle}>
                 <Grid item sx={filterNameStyle}>
                   <Checkbox
                     inputProps={{ "aria-label": "controlled" }}

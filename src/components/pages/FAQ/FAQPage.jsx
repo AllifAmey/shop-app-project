@@ -1,10 +1,5 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import { Grid } from "@mui/material";
 import Question from "./utility/Question";
@@ -103,6 +98,7 @@ function FAQPage() {
                   {faq.catagory.delivery.questions.map((inquiry) => {
                     return (
                       <Question
+                        key={inquiry.question}
                         question={inquiry.question}
                         answer={inquiry.answer}
                       />
@@ -116,6 +112,7 @@ function FAQPage() {
                   {faq.catagory.payment.questions.map((inquiry) => {
                     return (
                       <Question
+                        key={inquiry.question}
                         question={inquiry.question}
                         answer={inquiry.answer}
                       />

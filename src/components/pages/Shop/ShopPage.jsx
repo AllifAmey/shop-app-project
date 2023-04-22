@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { shopActions } from "../../../store";
 import FiltersIcon from "./utility/FiltersIcon";
-import _ from "lodash";
+import uniq from "lodash/uniq";
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import Pagination from "@mui/material/Pagination";
 
@@ -49,7 +49,7 @@ function ShopPage() {
         catagories.push(product.catagory);
       });
       // checks if they are unique using lodash's uniq function
-      const unique_catagories = _.uniq(catagories);
+      const unique_catagories = uniq(catagories);
       let catagories_allowed = {};
       // set them false by default so checkboxes are unchecked.
       unique_catagories.map((catagory) => {

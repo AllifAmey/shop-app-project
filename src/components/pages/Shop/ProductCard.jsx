@@ -17,7 +17,7 @@ import {
   patchCartItem,
   postCart,
 } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import _ from "lodash";
+import isEqual from "lodash/isEqual";
 
 function ProductCard(props) {
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ function ProductCard(props) {
         let product_id = undefined;
         let existing_quantity = undefined;
         for (const [key, value] of Object.entries(user_cart)) {
-          if (_.isEqual(value.product, props.product)) {
+          if (isEqual(value.product, props.product)) {
             cart_id = Number(key.slice(key.lastIndexOf(" ") + 1, key.length));
             product_id = Number(value.product.id);
             existing_quantity = Number(value.quantity);

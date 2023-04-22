@@ -1,8 +1,7 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
-import ringImg from "../../assets/img/Homepage/ring-homepage.jpg";
-import pinCushionImg from "../../assets/img/Homepage/pin-cushion-homepage.jpg";
-import scrunchyImg from "../../assets/img/Homepage/scrunchy-homepage.jpg";
+import ringImg from "../../assets/img/Homepage/ring-homepage.avif";
+import pinCushionImg from "../../assets/img/Homepage/pin-cushion-homepage.avif";
+import scrunchyImg from "../../assets/img/Homepage/scrunchy-homepage.avif";
 
 import { Grid } from "@mui/material";
 
@@ -39,6 +38,7 @@ function ProductHomePage() {
                 background: `url(${ringImg}) no-repeat
                 center center/cover`,
               }}
+              alt="Ring image"
             ></Grid>
             <Grid
               item
@@ -81,6 +81,7 @@ function ProductHomePage() {
                 background: `url(${pinCushionImg}) no-repeat
                 center center/cover`,
               }}
+              alt="Pin Cushion Image"
             ></Grid>
             <Grid
               item
@@ -124,6 +125,7 @@ function ProductHomePage() {
                 background: `url(${scrunchyImg}) no-repeat
                 center center/cover`,
               }}
+              alt="Scrunchy Image"
             ></Grid>
             <Grid
               item

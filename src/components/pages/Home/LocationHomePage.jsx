@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./LocationHomePage.module.css";
 import img from "../../assets/img/icons/openSign-icon.png";
 import CircularProgress from "@mui/material/CircularProgress";
