@@ -22,7 +22,7 @@ import DropboxUploadBtn from "./utility/DropboxUploadBtn";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_STORAGE_API_KEY,
+  apiKey: import.meta.env.VITE_APP_FIREBASE_STORAGE_API_KEY,
   authDomain: "shop-app-project-366818.firebaseapp.com",
   projectId: "shop-app-project-366818",
   storageBucket: "shop-app-project-366818.appspot.com",

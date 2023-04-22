@@ -30,7 +30,7 @@ function LocationHomePage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchWeatherHandler = useCallback(async () => {
-    const apiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
+    const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
     setIsLoading(true);
     // weather data is fetched from the openweathermap api
     const response = await fetch(

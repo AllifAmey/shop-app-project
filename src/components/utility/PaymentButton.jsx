@@ -6,7 +6,7 @@ import {
 } from "@paypal/react-paypal-js";
 
 // This values are the props in the UI
-const amount = "0.1";
+const amount = "0.01";
 const currency = "GBP";
 const style = { layout: "vertical" };
 

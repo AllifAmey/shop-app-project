@@ -5,7 +5,7 @@ import SvgIcon from "@mui/material/SvgIcon";
 function DropboxUploadBtn(props) {
   // grabs the file from dropbox updates state on main create productpage
 
-  const APP_KEY = process.env.REACT_APP_DROPBOX_API_KEY;
+  const APP_KEY = import.meta.env.VITE_DROPBOX_API_KEY;
 
   function grabDataSimple(url) {
     fetch(url)

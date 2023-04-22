@@ -49,7 +49,7 @@ function ContactPage() {
         "service_cwfc9gm",
         "template_2406ad3",
         form.current,
-        process.env.REACT_APP_EMAILJS_API_KEY
+        import.meta.env.VITE_EMAILJS_API_KEY
       )
       .then(
         (result) => {

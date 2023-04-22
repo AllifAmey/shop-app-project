@@ -32,7 +32,7 @@ function App() {
     <>
       <ThemeProvider theme={shopTheme}>
         <NavBar></NavBar>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<HomePage />} />
