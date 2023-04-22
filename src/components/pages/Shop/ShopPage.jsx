@@ -6,7 +6,6 @@ import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { shopActions } from "../../../store";
 import FiltersIcon from "./utility/FiltersIcon";
-import uniq from "lodash/uniq";
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import Pagination from "@mui/material/Pagination";
 
@@ -43,19 +42,19 @@ function ShopPage() {
   const fetchProductsHandler = useCallback(async () => {
     // grabs the product with getproduct api call
     getProducts(setIsLoading).then((data) => {
-      // Goes through each data and pushes through catagory of each product
-      let catagories = [];
-      data.map((product) => {
-        catagories.push(product.catagory);
-      });
-      // checks if they are unique using lodash's uniq function
-      const unique_catagories = uniq(catagories);
-      let catagories_allowed = {};
       // set them false by default so checkboxes are unchecked.
-      unique_catagories.map((catagory) => {
-        catagories_allowed[catagory] = false;
-      });
-      setCatagoriesAllowed(catagories_allowed);
+      const new_uniques = [
+        ...new Set(data.map((product) => product.catagory)),
+      ].reduce((s, a) => {
+        // explain to my future self.
+        // initial value is {}
+        // on the first iteration s is {} a is a unique catagory.
+        // always returning s as s has an object.
+        // I am just adding an object key using each unique value (a)
+        s[a] = false;
+        return s;
+      }, {});
+      setCatagoriesAllowed(new_uniques);
       setProducts(data);
       setFilteredProducts(data);
       const paginationNum = data.length / 8;
