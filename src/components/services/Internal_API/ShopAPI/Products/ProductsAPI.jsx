@@ -4,13 +4,10 @@ export async function getSpecificProduct(setIsLoading, product_id) {
   // this grabs the
   setIsLoading(true);
 
-  const token = localStorage.getItem("Token");
-
   const response = await fetch(`${domain}/api/shop/products/${product_id}`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
-      Authorization: `Token ${token}`,
     },
   });
   const data = await response.json();
@@ -23,13 +20,10 @@ export async function getProducts(setIsLoading) {
   // this grabs the
   setIsLoading(true);
 
-  const token = localStorage.getItem("Token");
-
   const response = await fetch(`${domain}/api/shop/products/`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
-      Authorization: `Token ${token}`,
     },
   });
   const data = await response.json();

@@ -1,11 +1,11 @@
+import { lazy, Suspense } from "react";
 import styles from "./HomePage.module.css";
-import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import LocationHomePage from "./LocationHomePage";
-import ValuesHomePage from "./ValuesHomePage";
-import ProductHomePage from "./ProductHomePage";
+
+import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
+
 import img from "../../assets/img/icons/arrow-down.png";
 
 /*
@@ -34,6 +34,10 @@ function Hero() {
     possible improvements could be the styling of the button but other than that not much.
   
   */
+  const LocationHomePage = lazy(() => import("./LocationHomePage"));
+  const ValuesHomePage = lazy(() => import("./ValuesHomePage"));
+  const ProductHomePage = lazy(() => import("./ProductHomePage"));
+
   return (
     <>
       <AnimatedPopUpPage>
@@ -67,13 +71,20 @@ function Hero() {
               offset={0}
               duration={500}
             >
-              <img src={img} alt="arrow" className={styles["arrow"]}></img>
+              <img
+                src={img}
+                alt="arrow"
+                className={styles["arrow"]}
+                lazy="loading"
+              ></img>
             </Link>
           </div>
         </section>
-        <ValuesHomePage></ValuesHomePage>
-        <ProductHomePage></ProductHomePage>
-        <LocationHomePage></LocationHomePage>
+        <Suspense fallback={<p>Loading</p>}>
+          <ValuesHomePage></ValuesHomePage>
+          <ProductHomePage></ProductHomePage>
+          <LocationHomePage></LocationHomePage>
+        </Suspense>
       </AnimatedPopUpPage>
     </>
   );

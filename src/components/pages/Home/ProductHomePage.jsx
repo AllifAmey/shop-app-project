@@ -22,6 +22,13 @@ function ProductHomePage() {
   future - 
     I am uncertain whether to split the components to allow different types of product or to,
     keep things as they are. This may be replaced with videos showing how each product is created.
+    
+
+    sx={{
+                background: `url(${pinCushionImg}) no-repeat
+                center center/cover`,
+              }}
+              alt="Pin Cushion Image"
    */
 
   const TitleStyle = { fontSize: "36px", fontWeight: 800 };
@@ -31,15 +38,18 @@ function ProductHomePage() {
       <Box height="auto" width={1}>
         <Grid container flexDirection="column">
           <Grid item container height="50vh">
-            <Grid
-              item
-              xs={6}
-              sx={{
-                background: `url(${ringImg}) no-repeat
-                center center/cover`,
-              }}
-              alt="Ring image"
-            ></Grid>
+            <Grid item xs={6}>
+              <img
+                src={ringImg}
+                style={{
+                  height: "50vh",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+                alt="Ring image"
+                lazy="loading"
+              />
+            </Grid>
             <Grid
               item
               container
@@ -74,15 +84,18 @@ function ProductHomePage() {
             </Grid>
           </Grid>
           <Grid item direction="row-reverse" container height="50vh">
-            <Grid
-              item
-              xs={6}
-              sx={{
-                background: `url(${pinCushionImg}) no-repeat
-                center center/cover`,
-              }}
-              alt="Pin Cushion Image"
-            ></Grid>
+            <Grid item xs={6}>
+              <img
+                src={pinCushionImg}
+                style={{
+                  height: "50vh",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+                alt="Pin Cushion Image"
+                lazy="loading"
+              />
+            </Grid>
             <Grid
               item
               container
@@ -118,15 +131,18 @@ function ProductHomePage() {
             </Grid>
           </Grid>
           <Grid item container height="50vh">
-            <Grid
-              item
-              xs={6}
-              sx={{
-                background: `url(${scrunchyImg}) no-repeat
-                center center/cover`,
-              }}
-              alt="Scrunchy Image"
-            ></Grid>
+            <Grid item xs={6}>
+              <img
+                src={scrunchyImg}
+                style={{
+                  height: "50vh",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+                alt="Scrunchy Image"
+                lazy="loading"
+              />
+            </Grid>
             <Grid
               item
               container

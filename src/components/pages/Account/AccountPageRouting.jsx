@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AccessAccountPage from "./AccessAccountPage";
 import CustomerAccount from "./CustomerAccount";
 import AdminAccount from "./AdminAccount";
+
 import { useParams } from "react-router-dom";
 
 function AccountPageRouting() {
@@ -10,6 +11,11 @@ function AccountPageRouting() {
   */
 
   // states
+
+  // <Suspense fallback={<p>Loading</p>}> </Suspense>
+
+  // const AdminAccount = lazy(() => import("./AdminAccount"));
+
   const [isLogged, setisLogged] = useState(false);
 
   const params = useParams();

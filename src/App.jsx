@@ -1,19 +1,15 @@
-import NavBar from "./components/layouts/Navbar/NavBar";
-
-import ShopPage from "./components/pages/Shop/ShopPage";
-import ProductInfoPage from "./components/pages/Product/ProductInfoPage";
-import HomePage from "./components/pages/Home/HomePage";
-import Footer from "./components/layouts/Footer/Footer";
-import StoryPage from "./components/pages/OurStory/StoryPage";
-import ContactPage from "./components/pages/ContactUs/ContactPage";
-import FAQPage from "./components/pages/FAQ/FAQPage";
-import AccountPageRouting from "./components/pages/Account/AccountPageRouting";
-import CheckOutPage from "./components/pages/Checkout/CheckOutPage";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import {
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
 import CreateProduct from "./components/pages/Account/AdminCreateProductForm";
+import RootLayout from "./RootLayout";
+import ErrorPage from "./components/pages/Error/ErrorPage";
 
 function App() {
   /* 
@@ -27,32 +23,108 @@ function App() {
   // consider using : in the path for the support page. 
   
   */
-  const location = useLocation();
+
+  const HomePage = lazy(() => import("./components/pages/Home/HomePage"));
+  const ShopPage = lazy(() => import("./components/pages/Shop/ShopPage"));
+  const ProductInfoPage = lazy(() =>
+    import("./components/pages/Product/ProductInfoPage")
+  );
+  const AccountPageRouting = lazy(() =>
+    import("./components/pages/Account/AccountPageRouting")
+  );
+  const StoryPage = lazy(() => import("./components/pages/OurStory/StoryPage"));
+  const ContactPage = lazy(() =>
+    import("./components/pages/ContactUs/ContactPage")
+  );
+  const FAQPage = lazy(() => import("./components/pages/FAQ/FAQPage"));
+  const CheckOutPage = lazy(() =>
+    import("./components/pages/Checkout/CheckOutPage")
+  );
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      errorElement: <ErrorPage />,
+      children: [
+        { path: "/", element: <Navigate to="/home" /> },
+        {
+          path: "/home",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <HomePage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/shop",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <ShopPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/story",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <StoryPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/checkout",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <CheckOutPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/support/faq",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <FAQPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/support/contact",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <ContactPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/account/:accessType",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <AccountPageRouting />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/account/:accessType/create/product",
+          element: <CreateProduct />,
+        },
+        {
+          path: "/product/:productId",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <ProductInfoPage />
+            </Suspense>
+          ),
+        },
+      ],
+    },
+  ]);
   return (
     <>
       <ThemeProvider theme={shopTheme}>
-        <NavBar></NavBar>
         <AnimatePresence mode="wait">
-          <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route
-              path="/account/:accessType"
-              element={<AccountPageRouting />}
-            />
-            <Route
-              path="/account/:accessType/create/product"
-              element={<CreateProduct />}
-            />
-            <Route path="/checkout" element={<CheckOutPage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/product/:productId" element={<ProductInfoPage />} />
-            <Route path="/story" element={<StoryPage />} />
-            <Route path="/support/faq" element={<FAQPage />} />
-            <Route path="/support/contact" element={<ContactPage />} />
-          </Routes>
+          <RouterProvider router={router} />
         </AnimatePresence>
-        <Footer></Footer>
       </ThemeProvider>
     </>
   );
