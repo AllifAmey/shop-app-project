@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
+import { useInView } from "react-intersection-observer";
 import supportIcon from "../../assets/img/icons/support-icon.png";
 import ideaIcon from "../../assets/img/icons/idea-icon.png";
 import shopIcon from "../../assets/img/icons/shop-icon.png";
@@ -35,92 +36,102 @@ function ValuesHomePage() {
     textAlign: "center",
   };
 
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    fallbackInView: true,
+  });
+
   return (
     <>
-      <Box height="auto" width={1}>
-        <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          height="50vh"
-          width={1}
-        >
+      <Box height="auto" width={1} ref={ref}>
+        {inView ? (
           <Grid
-            item
             container
-            flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            xs={4}
-            height={0.8}
-            gap={1}
-            padding="1rem"
+            height="50vh"
+            width={1}
           >
             <Grid
               item
-              component="img"
-              src={ideaIcon}
-              sx={valueImageStyle}
-            ></Grid>
-            <Grid item sx={valueTitleStyle}>
-              Our Philosophy
+              container
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              xs={4}
+              height={0.8}
+              gap={1}
+              padding="1rem"
+            >
+              <Grid
+                item
+                component="img"
+                src={ideaIcon}
+                sx={valueImageStyle}
+                loading="lazy"
+              ></Grid>
+              <Grid item sx={valueTitleStyle}>
+                Our Philosophy
+              </Grid>
+              <Grid item sx={valueTextStyle}>
+                Less is more. Simple is good. Beauty is in the eye of the
+                beholder.
+              </Grid>
             </Grid>
-            <Grid item sx={valueTextStyle}>
-              Less is more. Simple is good. Beauty is in the eye of the
-              beholder.
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            flexDirection="column"
-            xs={4}
-            height={0.8}
-            gap={1}
-            padding="1rem"
-            justifyContent="center"
-            alignItems="center"
-          >
             <Grid
               item
-              component="img"
-              src={shopIcon}
-              sx={valueImageStyle}
-            ></Grid>
-            <Grid item sx={valueTitleStyle}>
-              Shop
+              container
+              flexDirection="column"
+              xs={4}
+              height={0.8}
+              gap={1}
+              padding="1rem"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid
+                item
+                component="img"
+                src={shopIcon}
+                sx={valueImageStyle}
+                loading="lazy"
+              ></Grid>
+              <Grid item sx={valueTitleStyle}>
+                Shop
+              </Grid>
+              <Grid item sx={valueTextStyle}>
+                My shop will be focussed on jewellery and findings I make. All
+                findings are good quality authentic material.
+              </Grid>
             </Grid>
-            <Grid item sx={valueTextStyle}>
-              My shop will be focussed on jewellery and findings I make. All
-              findings are good quality authentic material.
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            flexDirection="column"
-            xs={4}
-            height={0.8}
-            gap={1}
-            padding="1rem"
-            justifyContent="center"
-            alignItems="center"
-          >
             <Grid
               item
-              component="img"
-              src={supportIcon}
-              sx={valueImageStyle}
-            ></Grid>
-            <Grid item sx={valueTitleStyle}>
-              Support
-            </Grid>
-            <Grid item sx={valueTextStyle}>
-              If there any inquiries regarding the product please visit the
-              contact us page or read the FAQs.
+              container
+              flexDirection="column"
+              xs={4}
+              height={0.8}
+              gap={1}
+              padding="1rem"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid
+                item
+                component="img"
+                src={supportIcon}
+                sx={valueImageStyle}
+                loading="lazy"
+              ></Grid>
+              <Grid item sx={valueTitleStyle}>
+                Support
+              </Grid>
+              <Grid item sx={valueTextStyle}>
+                If there any inquiries regarding the product please visit the
+                contact us page or read the FAQs.
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        ) : null}
       </Box>
     </>
   );

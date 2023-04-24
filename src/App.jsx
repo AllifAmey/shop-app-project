@@ -40,6 +40,9 @@ function App() {
   const CheckOutPage = lazy(() =>
     import("./components/pages/Checkout/CheckOutPage")
   );
+  const CreateProduct = lazy(() =>
+    import("./components/pages/Account/AdminCreateProductForm")
+  );
 
   const router = createBrowserRouter([
     {
@@ -106,7 +109,11 @@ function App() {
         },
         {
           path: "/account/:accessType/create/product",
-          element: <CreateProduct />,
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <CreateProduct />
+            </Suspense>
+          ),
         },
         {
           path: "/product/:productId",

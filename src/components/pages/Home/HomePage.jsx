@@ -1,9 +1,11 @@
-import { lazy, Suspense } from "react";
 import styles from "./HomePage.module.css";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
-
+import LocationHomePage from "./LocationHomePage";
+import ValuesHomePage from "./ValuesHomePage";
+import ProductHomePage from "./ProductHomePage";
+import { useInView } from "react-intersection-observer";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 
 import img from "../../assets/img/icons/arrow-down.png";
@@ -34,9 +36,10 @@ function Hero() {
     possible improvements could be the styling of the button but other than that not much.
   
   */
-  const LocationHomePage = lazy(() => import("./LocationHomePage"));
-  const ValuesHomePage = lazy(() => import("./ValuesHomePage"));
-  const ProductHomePage = lazy(() => import("./ProductHomePage"));
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    fallbackInView: true,
+  });
 
   return (
     <>
@@ -75,16 +78,17 @@ function Hero() {
                 src={img}
                 alt="arrow"
                 className={styles["arrow"]}
-                lazy="loading"
+                style={{ width: "50px", height: "50px" }}
               ></img>
             </Link>
           </div>
         </section>
-        <Suspense fallback={<p>Loading</p>}>
-          <ValuesHomePage></ValuesHomePage>
-          <ProductHomePage></ProductHomePage>
-          <LocationHomePage></LocationHomePage>
-        </Suspense>
+
+        <ValuesHomePage></ValuesHomePage>
+        <span ref={ref}>
+          {inView ? <ProductHomePage></ProductHomePage> : null}
+        </span>
+        <LocationHomePage></LocationHomePage>
       </AnimatedPopUpPage>
     </>
   );

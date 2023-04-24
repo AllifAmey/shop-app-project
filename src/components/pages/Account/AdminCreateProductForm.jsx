@@ -213,6 +213,14 @@ function AdminCreateProductForm() {
     // or else this will cost a lot of money down the road.
   }
 
+  const check_admin =
+    localStorage.getItem("user_status") === "staff" ||
+    localStorage.getItem("user_status") === undefined;
+
+  if (!check_admin) {
+    return <div>Unauthorised</div>;
+  }
+
   return (
     <>
       <div className="App">

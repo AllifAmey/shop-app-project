@@ -47,7 +47,7 @@ function ProductHomePage() {
                   objectFit: "cover",
                 }}
                 alt="Ring image"
-                lazy="loading"
+                loading="lazy"
               />
             </Grid>
             <Grid
@@ -93,7 +93,7 @@ function ProductHomePage() {
                   objectFit: "cover",
                 }}
                 alt="Pin Cushion Image"
-                lazy="loading"
+                loading="lazy"
               />
             </Grid>
             <Grid
@@ -140,7 +140,7 @@ function ProductHomePage() {
                   objectFit: "cover",
                 }}
                 alt="Scrunchy Image"
-                lazy="loading"
+                loading="lazy"
               />
             </Grid>
             <Grid
