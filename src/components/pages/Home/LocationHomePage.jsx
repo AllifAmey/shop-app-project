@@ -1,11 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
 import styles from "./LocationHomePage.module.css";
 import img from "../../assets/img/icons/openSign-icon.png";
-import CircularProgress from "@mui/material/CircularProgress";
 import { useInView } from "react-intersection-observer";
 import googlemap from "../../assets/img/Homepage/our-location-google-map.avif";
 
-function LocationHomePage() {
+function LocationHomePage(props) {
   // https://i.pinimg.com/originals/65/e7/63/65e763df894b30b767e3134675d83767.jpg <-- inspiration
 
   /*
@@ -30,34 +28,9 @@ function LocationHomePage() {
   not really necessary. Upon the expansion of the business, I will include google map,
   api again. 
   Instead a snapshot has been taken and a img tag is used to display it.
-  Weather api remains unchanged unlike the google map api it is not static and needs update.
+  Weather api remains unchanged unlike the google map api it is not static and needs update.  
 
   */
-
-  const [weatherIcon, setWeatherIcon] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchWeatherHandler = useCallback(async () => {
-    const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
-    setIsLoading(true);
-    // weather data is fetched from the openweathermap api
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
-    );
-    const data = await response.json();
-    // this returned json data is then used to grab the weather icon
-    const icon = data.weather["0"].icon;
-    // this icon is then set and used in the jsx code to display the icon.
-    setWeatherIcon(icon);
-    setIsLoading(false);
-  }, []);
-
-  useEffect(() => {
-    // this is currently only fetched once as I anticipate,
-    // users will not stay on the homepage for long time.
-    // if they do then I may call it every hour to fully update the weather properly.
-    fetchWeatherHandler();
-  }, [fetchWeatherHandler]);
   const { ref, inView } = useInView({
     triggerOnce: true,
     fallbackInView: true,
@@ -82,16 +55,11 @@ function LocationHomePage() {
                   </div>
                   <div className={styles["article-weather"]}>Weather</div>
                   <div className={styles["article-weatherStatus"]}>
-                    {!isLoading && (
-                      <img
-                        src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-                        alt="Weather icon"
-                        className={styles["weather-icon"]}
-                      />
-                    )}
-                    {isLoading && (
-                      <CircularProgress size="1.5rem" sx={{ margin: 1 }} />
-                    )}
+                    <img
+                      src={`https://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
+                      alt="Weather icon"
+                      className={styles["weather-icon"]}
+                    />
                   </div>
                 </div>
 

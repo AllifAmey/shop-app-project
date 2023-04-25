@@ -60,6 +60,10 @@ function App() {
               <HomePage />
             </Suspense>
           ),
+          async loader({ request, params }) {
+            let { loader } = await import("./components/pages/Home/HomePage");
+            return loader({ request, params });
+          },
         },
         {
           path: "/shop",

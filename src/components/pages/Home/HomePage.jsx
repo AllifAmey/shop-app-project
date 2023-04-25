@@ -1,7 +1,15 @@
-import styles from "./HomePage.module.css";
-import Button from "@mui/material/Button";
-import { Link as RouterLink } from "react-router-dom";
+import { Suspense } from "react";
+import {
+  Link as RouterLink,
+  useLoaderData,
+  defer,
+  Await,
+} from "react-router-dom";
 import { Link } from "react-scroll";
+import styles from "./HomePage.module.css";
+
+import Button from "@mui/material/Button";
+
 import LocationHomePage from "./LocationHomePage";
 import ValuesHomePage from "./ValuesHomePage";
 import ProductHomePage from "./ProductHomePage";
@@ -21,7 +29,7 @@ https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f23208b459
 Add video to the homepage to show examples of making the jewellery.
 */
 
-function Hero() {
+function HomePage() {
   /*
   docs - 
     Logic for layout - 
@@ -41,57 +49,91 @@ function Hero() {
     fallbackInView: true,
   });
 
+  const { weather } = useLoaderData();
+
   return (
     <>
-      <AnimatedPopUpPage>
-        <section className={styles["main"]}>
-          <div className={styles["center-container"]}>
-            <div className={styles["title"]}>AmeyShopUK</div>
-            <div className={styles["short-info"]}>
-              The best handcrafted Jewellery money can buy at a affordable
-              price.
-            </div>
-          </div>
-          <Button
-            variant="contained"
-            size="big"
-            component={RouterLink}
-            to="/shop"
-            color="primary"
-            sx={{
-              fontSize: "15px",
-            }}
-          >
-            Explore Shop
-          </Button>
+      <Suspense fallback={<div style={{ textAlign: "center" }}>loading..</div>}>
+        <Await resolve={weather}>
+          {(loadedWeather) => (
+            <AnimatedPopUpPage>
+              <section className={styles["main"]}>
+                <div className={styles["center-container"]}>
+                  <div className={styles["title"]}>AmeyShopUK</div>
+                  <div className={styles["short-info"]}>
+                    The best handcrafted Jewellery money can buy at a affordable
+                    price.
+                  </div>
+                </div>
+                <Button
+                  variant="contained"
+                  size="big"
+                  component={RouterLink}
+                  to="/shop"
+                  color="primary"
+                  sx={{
+                    fontSize: "15px",
+                  }}
+                >
+                  Explore Shop
+                </Button>
 
-          <div className={styles["location-container"]}>
-            <div className={styles["location-title"]}>Our Physical shop</div>
-            <Link
-              to="location"
-              spy={true}
-              smooth={true}
-              offset={0}
-              duration={500}
-            >
-              <img
-                src={img}
-                alt="arrow"
-                className={styles["arrow"]}
-                style={{ width: "50px", height: "50px" }}
-              ></img>
-            </Link>
-          </div>
-        </section>
+                <div className={styles["location-container"]}>
+                  <div className={styles["location-title"]}>
+                    Our Physical shop
+                  </div>
+                  <Link
+                    to="location"
+                    spy={true}
+                    smooth={true}
+                    offset={0}
+                    duration={500}
+                  >
+                    <img
+                      src={img}
+                      alt="arrow"
+                      className={styles["arrow"]}
+                      style={{ width: "50px", height: "50px" }}
+                    ></img>
+                  </Link>
+                </div>
+              </section>
 
-        <ValuesHomePage></ValuesHomePage>
-        <span ref={ref}>
-          {inView ? <ProductHomePage></ProductHomePage> : null}
-        </span>
-        <LocationHomePage></LocationHomePage>
-      </AnimatedPopUpPage>
+              <ValuesHomePage></ValuesHomePage>
+              <span ref={ref}>
+                {inView ? <ProductHomePage></ProductHomePage> : null}
+              </span>
+              <LocationHomePage weatherIcon={loadedWeather}></LocationHomePage>
+            </AnimatedPopUpPage>
+          )}
+        </Await>
+      </Suspense>
     </>
   );
 }
 
-export default Hero;
+export default HomePage;
+
+async function loadWeatherData() {
+  const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
+  // weather data is fetched from the openweathermap api
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
+  );
+  if (!response.ok) {
+    throw json(
+      { message: "Could not fetch weather" },
+      { status: response.status }
+    );
+  } else {
+    const data = await response.json();
+    const icon = data.weather["0"].icon;
+    return icon;
+  }
+}
+
+export function loader() {
+  return defer({
+    weather: loadWeatherData(),
+  });
+}

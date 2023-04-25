@@ -33,7 +33,7 @@ function ProductCard(props) {
       // grab user's cart and loop through returned data
       // then compare the data.products and see if it is the same.
       // if it is then record the id and then put it into the next api call.
-
+      console.log()
       getCart(setIsLoading).then((user_cart) => {
         setIsLoading(true);
 

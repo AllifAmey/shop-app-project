@@ -35,7 +35,7 @@ async function loadProducts() {
   });
   if (!response.ok) {
     throw json(
-      { message: "Count not fetch products" },
+      { message: "Could not fetch products" },
       { status: response.status }
     );
   } else {
