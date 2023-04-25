@@ -1,0 +1,1 @@
+import{j as t}from"./index-2a7b92ef.js";import{m as a}from"./motion-c222d449.js";const n={initial:{opacity:0,x:0},animate:{opacity:1,x:0},exit:{opacity:0,x:0}},e=({children:i})=>t(a.div,{variants:n,initial:"initial",animate:"animate",exit:"exit",transition:{duration:1},children:i});export{e as A};

@@ -137,13 +137,10 @@ function ProductCard(props) {
             <CardMedia
               component="img"
               height="140"
+              width="184"
               src={props.img}
               alt="ring"
-              sx={{
-                height: "100%",
-                width: "100%",
-                borderRadius: "20px",
-              }}
+              borderRadius="20px"
             />
           </Box>
 

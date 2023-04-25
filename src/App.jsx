@@ -7,7 +7,6 @@ import {
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
-import CreateProduct from "./components/pages/Account/AdminCreateProductForm";
 import RootLayout from "./RootLayout";
 import ErrorPage from "./components/pages/Error/ErrorPage";
 
@@ -44,6 +43,9 @@ function App() {
     import("./components/pages/Account/AdminCreateProductForm")
   );
 
+  // loader function works by getting the data before loading the element.
+  //
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -66,6 +68,10 @@ function App() {
               <ShopPage />
             </Suspense>
           ),
+          async loader({ request, params }) {
+            let { loader } = await import("./components/pages/Shop/ShopPage");
+            return loader({ request, params });
+          },
         },
         {
           path: "/story",

@@ -69,6 +69,7 @@ function ValuesHomePage() {
                 src={ideaIcon}
                 sx={valueImageStyle}
                 loading="lazy"
+                alt="Philosophy icon"
               ></Grid>
               <Grid item sx={valueTitleStyle}>
                 Our Philosophy
@@ -95,6 +96,7 @@ function ValuesHomePage() {
                 src={shopIcon}
                 sx={valueImageStyle}
                 loading="lazy"
+                alt="Shop icon"
               ></Grid>
               <Grid item sx={valueTitleStyle}>
                 Shop
@@ -121,6 +123,7 @@ function ValuesHomePage() {
                 src={supportIcon}
                 sx={valueImageStyle}
                 loading="lazy"
+                alt="Support Icon"
               ></Grid>
               <Grid item sx={valueTitleStyle}>
                 Support
