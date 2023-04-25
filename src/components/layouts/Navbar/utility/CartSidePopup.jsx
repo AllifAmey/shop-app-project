@@ -16,8 +16,6 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../../../store";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import _ from "lodash";
-import CircularProgress from "@mui/material/CircularProgress";
 
 function CartSidePopup(props) {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx inspiration for cartsidepopup

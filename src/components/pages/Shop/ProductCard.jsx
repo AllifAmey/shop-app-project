@@ -17,7 +17,6 @@ import {
   patchCartItem,
   postCart,
 } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import isEqual from "lodash/isEqual";
 
 function ProductCard(props) {
   const [open, setOpen] = useState(false);
@@ -42,7 +41,7 @@ function ProductCard(props) {
         let product_id = undefined;
         let existing_quantity = undefined;
         for (const [key, value] of Object.entries(user_cart)) {
-          if (isEqual(value.product, props.product)) {
+          if (props.product.id == value.product.id) {
             cart_id = Number(key.slice(key.lastIndexOf(" ") + 1, key.length));
             product_id = Number(value.product.id);
             existing_quantity = Number(value.quantity);
@@ -55,7 +54,21 @@ function ProductCard(props) {
           existing_quantity != undefined
         ) {
           // then do a patch request
-          patchCartItem(setIsLoading, cart_id, product_id, existing_quantity);
+          patchCartItem(
+            setIsLoading,
+            cart_id,
+            product_id,
+            existing_quantity + 1
+          );
+          dispatch(
+            cartActions.addCart({
+              key: props.cardName,
+              quantity: existing_quantity + 1,
+              ...props.product,
+              price: Number(props.price),
+              data_id: cart_id.id,
+            })
+          );
         } else if (
           cart_id === undefined &&
           product_id === undefined &&
@@ -140,7 +153,9 @@ function ProductCard(props) {
               width="184"
               src={props.img}
               alt="ring"
-              borderRadius="20px"
+              sx={{
+                borderRadius: "20px",
+              }}
             />
           </Box>
 

@@ -3,12 +3,20 @@ import { json, defer, Await, useLoaderData } from "react-router-dom";
 
 import domain from "../../services/domain";
 import ShopContent from "./ShopContent";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function ShopPage() {
   const { products } = useLoaderData();
 
   return (
-    <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+    <Suspense
+      fallback={
+        <CircularProgress
+          size="25rem"
+          sx={{ margin: "auto" }}
+        ></CircularProgress>
+      }
+    >
       <Await resolve={products}>
         {(loadedProducts) => <ShopContent products={loadedProducts} />}
       </Await>
