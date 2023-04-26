@@ -17,8 +17,6 @@ function CartIcon(props) {
   */
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log("I am the cart data!!");
-  console.log(cart);
 
   function cartNum() {
     // The number in the cart icon is calculated based on the

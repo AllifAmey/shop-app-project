@@ -132,6 +132,12 @@ function App() {
               <ProductInfoPage />
             </Suspense>
           ),
+          async loader({ request, params }) {
+            let { loader } = await import(
+              "./components/pages/Product/ProductInfoPage"
+            );
+            return loader({ request, params });
+          },
         },
       ],
     },

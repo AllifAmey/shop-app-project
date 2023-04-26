@@ -1,14 +1,18 @@
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Suspense } from "react";
+import {
+  Link as RouterLink,
+  useLoaderData,
+  json,
+  Await,
+  defer,
+} from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import CircularProgress from "@mui/material/CircularProgress";
-
-import { getSpecificProduct } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+import domain from "../../services/domain";
 
 function ProductInfoPage2() {
   /*
@@ -41,9 +45,6 @@ function ProductInfoPage2() {
   
   */
 
-  const [productInfo, setShop] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-
   // redux
 
   // styles
@@ -60,127 +61,151 @@ function ProductInfoPage2() {
   const mainHeaderStyle = { fontSize: "30px" };
   const subTitleStyle = { fontSize: "24px" };
 
-  // routing
+  // TODO: Look into Django to see if there is a seperator for this instead of doing it
+  // on the frontend.
 
-  const params = useParams();
-
-  // useEffect
-
-  useEffect(() => {
-    // product id grabbed from url
-    const product_id = Number(
-      params.productId.slice(
-        params.productId.lastIndexOf("-") + 1,
-        params.productId.length
-      )
-    );
-    // product information fetched from the database and displayed entirely.
-    getSpecificProduct(setIsLoading, product_id).then((product_data) => {
-      // product_data is the entire data from that product.
-
-      //description_short is shown splitting the info by #
-      // # is used as a seperator
-      // TODO: Look into Django to see if there is a seperator for this instead of doing it
-      // on the frontend.
-      // product_data.description_short.split("#") is what will display the information.
-
-      setShop(product_data);
-    });
-  }, []);
+  const { productDetail } = useLoaderData();
 
   return (
     <>
-      {isLoading == true || productInfo == undefined ? (
-        <CircularProgress />
-      ) : (
-        <AnimatedPopUpPage>
-          <Container maxWidth="lg" sx={mainContainerStyles}>
-            <Grid
-              container
-              justifyContent="space-around"
-              alignItems="center"
-              sx={mainGridContainerStyles}
-              padding="2rem 0"
-            >
-              <Grid
-                item
-                container
-                xs={8}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Box
-                  component="img"
-                  alt="jewellery"
-                  src={productInfo.image_url}
-                  sx={imgStyle}
-                ></Box>
-              </Grid>
-              <Grid
-                item
-                container
-                xs={4}
-                sx={mainContainerStyles}
-                justifyContent="center"
-                alignItems="center"
-                flexDirection="column"
-                gap={2}
-              >
-                <Grid item sx={mainHeaderStyle} alignSelf="start">
-                  Handmade {productInfo.name.toLowerCase()}
-                </Grid>
-                <Grid item sx={subTitleStyle} alignSelf="start">
-                  Details
-                </Grid>
+      <Suspense
+        fallback={
+          <CircularProgress
+            size="25rem"
+            sx={{ margin: "auto" }}
+          ></CircularProgress>
+        }
+      >
+        <Await resolve={productDetail}>
+          {(loadedProductDetail) => (
+            <AnimatedPopUpPage>
+              <Container maxWidth="lg" sx={mainContainerStyles}>
                 <Grid
-                  item
                   container
-                  justifyContent="space-evenly"
-                  alignItems="start"
-                  flexDirection="column"
-                  gap={1.5}
-                  paddingLeft="1rem"
+                  justifyContent="space-around"
+                  alignItems="center"
+                  sx={mainGridContainerStyles}
+                  padding="2rem 0"
                 >
-                  {productInfo.description_short.split("#").map((e) => {
-                    return <Grid item>{e}</Grid>;
-                  })}
-                </Grid>
-                <Grid item sx={subTitleStyle} alignSelf="start">
-                  Description
-                </Grid>
-                <Grid item>{productInfo.description_long}</Grid>
-                <Grid item>{productInfo.price}</Grid>
-                <Grid item container justifyContent="space-evenly" gap={1.5}>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="big"
-                      component={RouterLink}
-                      to="/checkout"
-                      sx={{ fontSize: "16px" }}
-                    >
-                      Check Out
-                    </Button>
+                  <Grid
+                    item
+                    container
+                    xs={8}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Box
+                      component="img"
+                      alt="jewellery"
+                      src={loadedProductDetail.image_url}
+                      sx={imgStyle}
+                    ></Box>
                   </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="big"
-                      component={RouterLink}
-                      to="/checkout"
-                      sx={{ fontSize: "16px" }}
+                  <Grid
+                    item
+                    container
+                    xs={4}
+                    sx={mainContainerStyles}
+                    justifyContent="center"
+                    alignItems="center"
+                    flexDirection="column"
+                    gap={2}
+                  >
+                    <Grid item sx={mainHeaderStyle} alignSelf="start">
+                      Handmade {loadedProductDetail.name.toLowerCase()}
+                    </Grid>
+                    <Grid item sx={subTitleStyle} alignSelf="start">
+                      Details
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      justifyContent="space-evenly"
+                      alignItems="start"
+                      flexDirection="column"
+                      gap={1.5}
+                      paddingLeft="1rem"
                     >
-                      Add Cart
-                    </Button>
+                      {loadedProductDetail.description_short
+                        .split("#")
+                        .map((e) => {
+                          return <Grid item>{e}</Grid>;
+                        })}
+                    </Grid>
+                    <Grid item sx={subTitleStyle} alignSelf="start">
+                      Description
+                    </Grid>
+                    <Grid item>{loadedProductDetail.description_long}</Grid>
+                    <Grid item>{loadedProductDetail.price}</Grid>
+                    <Grid
+                      item
+                      container
+                      justifyContent="space-evenly"
+                      gap={1.5}
+                    >
+                      <Grid item>
+                        <Button
+                          variant="contained"
+                          size="big"
+                          component={RouterLink}
+                          to="/checkout"
+                          sx={{ fontSize: "16px" }}
+                        >
+                          Check Out
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Button
+                          variant="contained"
+                          size="big"
+                          component={RouterLink}
+                          to="/checkout"
+                          sx={{ fontSize: "16px" }}
+                        >
+                          Add Cart
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
-              </Grid>
-            </Grid>
-          </Container>
-        </AnimatedPopUpPage>
-      )}
+              </Container>
+            </AnimatedPopUpPage>
+          )}
+        </Await>
+      </Suspense>
     </>
   );
 }
 
 export default ProductInfoPage2;
+
+async function loadProductDetail(product_id) {
+  const response = await fetch(`${domain}/api/shop/products/${product_id}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  if (!response.ok) {
+    throw json(
+      { message: "Could not fetch products" },
+      { status: response.status }
+    );
+  } else {
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }
+}
+
+export function loader({ params, request }) {
+  const product_id = Number(
+    params.productId.slice(
+      params.productId.lastIndexOf("-") + 1,
+      params.productId.length
+    )
+  );
+  return defer({
+    productDetail: loadProductDetail(product_id),
+  });
+}
