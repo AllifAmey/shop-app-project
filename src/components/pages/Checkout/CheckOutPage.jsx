@@ -15,53 +15,7 @@ function CheckOutPage() {
   /*
     https://boltfinancial.wpengine.com/wp-content/uploads/2019/10/made-checkout-example-progress-indicator-1.png
 
-    Is the inspiration. I love the progress indicator. 
     
-    Future-proofing & DRY:
-
-    1. Make the Order item in the summary form a seperate component at least
-    2. Make the Order Summary or at least the payment a seperator component to calculate price individually.
-    3. Make individual contact sections ( like Last Name ) into a seperate component.
-
-    When pressing continue , move to the next component and update the progress component.
-    After Address and Delivery stage are completed.
-
-    current idea on implementation of Stepper:
-
-    I don't want to dwell into functionality too much at this stage, I want a foundation to build upon. To adhere to that, use the bare minimum.
-
-    First use of functionality will be the use of states.
-
-    Use useState to track the state of the step. Show the component corresponding to the state.
-
-    Further investigation into made shows the full steps 
-
-    Address contains 2 parts with no indicator, I could add that through animation.
-
-    2nd part - 
-
-    Address
-    2 textinputfields
-    City
-    1 Textinputfield
-    PostCode
-    1 short Textinputfield
-    Country
-    Select widget from material UI is very similar.
-
-    Delivery
-
-    A list of products , I assume, is shown above. 
-    Shows different standards of delivery
-    Standard 
-    Saturday Delivery
-    Sunday Delivery
-
-    Idea of delivery : show fast vs slow or estimate the time.
-
-    Payment
-
-    This is typical payment form that can be implemented much later.
 
     */
   // consts
@@ -99,8 +53,8 @@ function CheckOutPage() {
       return 0;
     }
 
-    cart.forEach((element) => {
-      itemNum += Number(element.price);
+    cart.forEach((cartItem) => {
+      itemNum += Number(cartItem.product.price * cartItem.quantity);
     });
     if (total == false) {
       return itemNum.toFixed(2);
@@ -191,14 +145,11 @@ function CheckOutPage() {
               <Grid item sx={titleStyle} width={1}>
                 Order Summary
               </Grid>
-              {cart.map((item) => {
+              {cart.map((cartItem) => {
                 return (
                   <CheckOutOrderItem
-                    key={item.key}
-                    img={item.image_url}
-                    quantity={item.quantity}
-                    type={item.name.toLowerCase()}
-                    price={item.price}
+                    key={cartItem.product.id}
+                    cartItem={cartItem}
                   ></CheckOutOrderItem>
                 );
               })}

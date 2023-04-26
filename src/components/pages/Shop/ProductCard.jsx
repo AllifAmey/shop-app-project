@@ -10,8 +10,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import { useDispatch } from "react-redux";
-import { cartActions, shopActions } from "../../../store/index";
+import { useDispatch, useSelector } from "react-redux";
+import { cartActions } from "../../../store/index";
 import {
   getCart,
   patchCartItem,
@@ -23,82 +23,54 @@ function ProductCard(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   /* --------- redux ------------*/
-
+  const cartRedux = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
   const addCartHandler = () => {
-    // TODO: Error starts here. Find way to add data_id to cart to allow users to add and subtract items.
-
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
-      // grab user's cart and loop through returned data
-      // then compare the data.products and see if it is the same.
-      // if it is then record the id and then put it into the next api call.
-      console.log()
       getCart(setIsLoading).then((user_cart) => {
         setIsLoading(true);
-
-        let cart_id = undefined;
-        let product_id = undefined;
-        let existing_quantity = undefined;
-        for (const [key, value] of Object.entries(user_cart)) {
-          if (props.product.id == value.product.id) {
-            cart_id = Number(key.slice(key.lastIndexOf(" ") + 1, key.length));
-            product_id = Number(value.product.id);
-            existing_quantity = Number(value.quantity);
-          }
-        }
-        setIsLoading(false);
-        if (
-          cart_id != undefined &&
-          product_id != undefined &&
-          existing_quantity != undefined
-        ) {
-          // then do a patch request
+        const existingCartItem = user_cart.find(
+          (cart_item) => cart_item.product.id === props.product.id
+        );
+        if (!existingCartItem) {
+          postCart(setIsLoading, props.product.id).then((new_cartItem) => {
+            dispatch(cartActions.addNewCartItem(new_cartItem));
+          });
+        } else {
           patchCartItem(
             setIsLoading,
-            cart_id,
-            product_id,
-            existing_quantity + 1
-          );
-          dispatch(
-            cartActions.addCart({
-              key: props.cardName,
-              quantity: existing_quantity + 1,
-              ...props.product,
-              price: Number(props.price),
-              data_id: cart_id.id,
-            })
-          );
-        } else if (
-          cart_id === undefined &&
-          product_id === undefined &&
-          existing_quantity === undefined
-        ) {
-          // then create a new cart item.
-
-          postCart(setIsLoading, props.product.id).then((new_cartItem) => {
+            existingCartItem.cart_item_id,
+            props.product.id,
+            existingCartItem.quantity + 1
+          ).then((new_cartItem) => {
             dispatch(
-              cartActions.addCart({
-                key: props.cardName,
-                quantity: 1,
-                ...props.product,
-                price: Number(props.price),
-                data_id: new_cartItem.id,
-              })
+              cartActions.changeExistingItem(["increase", new_cartItem.id])
             );
           });
         }
       });
     } else if (localStorage.getItem("isLogged") != "LOGGED_IN") {
       // if user not logged in just pass the product id
-      dispatch(
-        cartActions.addCart({
-          key: props.cardName,
-          quantity: 1,
-          ...props.product,
-          price: Number(props.price),
-        })
+      const existingCartItem = cartRedux.find(
+        (cart_item) => cart_item.product.id === props.product.id
       );
+      if (!existingCartItem) {
+        dispatch(
+          cartActions.addNewCartItem({
+            quantity: 1,
+            product: props.product,
+          })
+        );
+      } else {
+        dispatch(
+          cartActions.changeExistingItem([
+            "increase",
+            props.product.id,
+            "anonymous",
+          ])
+        );
+      }
     }
   };
 
@@ -129,7 +101,6 @@ function ProductCard(props) {
     borderRadius: "10px",
     border: "1px solid #96f2d7",
   };
-
   return (
     <>
       <Card sx={paperStyles} elevation={2}>
@@ -151,27 +122,31 @@ function ProductCard(props) {
               component="img"
               height="140"
               width="184"
-              src={props.img}
-              alt="ring"
+              src={props.product.image_url}
+              alt={props.product.catagory}
               sx={{
                 borderRadius: "20px",
               }}
             />
           </Box>
 
-          <div className={styles["card-info"]}>Handmade {props.type}</div>
-          <div className={styles["card-price"]}>{`£${props.price}`}</div>
+          <div className={styles["card-info"]}>
+            Handmade {props.product.type}
+          </div>
+          <div
+            className={styles["card-price"]}
+          >{`£${props.product.price}`}</div>
           <div className={styles["card-delivery"]}>FREE UK delivery</div>
           <div className={styles["btn-purchase"]}>
             <Button
               variant="contained"
               size="big"
               component={RouterLink}
-              to={`/product/handmade-${props.type.replaceAll(" ", "-")}-${
-                props.product.id
-              }`}
+              to={`/product/handmade-${props.product.name
+                .toLowerCase()
+                .replaceAll(" ", "-")}-${props.product.id}`}
             >
-              Buy Now
+              Details
             </Button>
             <Button variant="contained" size="medium" onClick={addCartHandler}>
               Add Cart
@@ -200,8 +175,8 @@ function ProductCard(props) {
       >
         <CardMedia
           component="img"
-          image={props.img}
-          alt="ring"
+          image={props.product.image_url}
+          alt={props.product.catagory}
           sx={{
             height: "80%",
             width: "80vh",

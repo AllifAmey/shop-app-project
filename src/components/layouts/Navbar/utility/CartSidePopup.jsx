@@ -11,7 +11,6 @@ import {
   patchCartItem,
   deleteCartItem,
 } from "../../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import { getSpecificProduct } from "../../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../../store";
 import AddIcon from "@mui/icons-material/Add";
@@ -40,34 +39,10 @@ function CartSidePopup(props) {
 
   useEffect(() => {
     // grab the user's cart and store into frontend's cart
-    /* 
-    props.product = the whole product itself which explains why description_long is inside of Cart.. 
-    TODO: Look into props product later and prevent description long and short from being inside..
-    */
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
       getCart(setIsLoading).then((user_cart) => {
-        // essentially grabs the user's cart in the database,
-        // then shoves the cart items it finds in redux and this component.
-
         setIsLoading(true);
-        let user_cart_list = [];
-
-        for (const [key, value] of Object.entries(user_cart)) {
-          const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-          const cardName = `card${value.product.id}`;
-          const price = Number(value.product.price);
-          const quantity = Number(value.quantity);
-          const totalPrice = (price * quantity).toFixed(2);
-
-          user_cart_list.push({
-            key: cardName,
-            ...value.product,
-            quantity: quantity,
-            price: totalPrice,
-            data_id: card_id,
-          });
-        }
-        dispatch(cartActions.replaceCart(user_cart_list));
+        dispatch(cartActions.replaceCart(user_cart));
         setIsLoading(false);
       });
     }
@@ -80,8 +55,8 @@ function CartSidePopup(props) {
       return 0;
     }
 
-    cart.forEach((element) => {
-      itemNum += Number(element.price);
+    cart.forEach((cartItem) => {
+      itemNum += Number(cartItem.product.price * cartItem.quantity);
     });
     if (total == false) {
       return itemNum.toFixed(2);
@@ -90,22 +65,51 @@ function CartSidePopup(props) {
   }
 
   const CartHandler = (change_item, cart_item) => {
-    // this code only executes if the user is logged in
-    // if they are not logged in then updating the cart,
-    // is solely done on redux.
     if (localStorage.getItem("isLogged") == "LOGGED_IN") {
-      // use the product id to send the patch request
-      // then change the current quantity dependant on the change_item value of the carthandler.
-      let cart_id = cart_item.data_id;
-      let product_id = cart_item.id;
-      let new_quantity = cart_item.quantity;
+      let cart_item_id = cart_item.cart_item_id;
+      let product_id = cart_item.product.id;
+      let existing_quantity = cart_item.quantity;
 
-      if (change_item == "add") {
-        new_quantity++;
-      } else if (change_item == "decrease") {
-        new_quantity--;
+      if (change_item == "delete") {
+        deleteCartItem(setIsLoading, cart_item_id);
+        dispatch(cartActions.deleteSpecificCartItem(cart_item_id));
+        return;
       }
-      patchCartItem(setIsLoading, cart_id, product_id, new_quantity);
+      if (change_item == "increase") {
+        existing_quantity++;
+      } else if (change_item == "decrease") {
+        existing_quantity--;
+      }
+      patchCartItem(
+        setIsLoading,
+        cart_item_id,
+        product_id,
+        existing_quantity
+      ).then((_) => {
+        dispatch(
+          cartActions.changeExistingItem([
+            change_item,
+            cartcart_item_id_item__id,
+          ])
+        );
+      });
+    } else {
+      if (change_item == "delete") {
+        dispatch(
+          cartActions.deleteSpecificCartItem([
+            cart_item.product.id,
+            "anonymous",
+          ])
+        );
+      } else {
+        dispatch(
+          cartActions.changeExistingItem([
+            change_item,
+            cart_item.product.id,
+            "anonymous",
+          ])
+        );
+      }
     }
   };
 
@@ -129,16 +133,17 @@ function CartSidePopup(props) {
                   justifyContent="space-between"
                   alignItems="center"
                   sx={{ height: "5rem" }}
-                  key={item.key}
+                  key={item.product.id}
                 >
                   <Box
                     component="img"
-                    src={item.image_url}
+                    src={item.product.image_url}
                     sx={{
                       width: "60px",
                       height: "60px",
                       borderRadius: "30%",
                     }}
+                    loading="lazy"
                   ></Box>
                   <Grid
                     container
@@ -149,8 +154,8 @@ function CartSidePopup(props) {
                     <Grid item>
                       Handmade
                       {" " +
-                        item.name.charAt(0).toUpperCase() +
-                        item.name.substring(1)}
+                        item.product.name.charAt(0).toUpperCase() +
+                        item.product.name.substring(1)}
                     </Grid>
                     <Grid item container justifyContent="space-evenly">
                       <Grid item>Quantity: {item.quantity}</Grid>
@@ -158,19 +163,7 @@ function CartSidePopup(props) {
                         item
                         sx={{ cursor: "pointer" }}
                         onClick={() => {
-                          getSpecificProduct(setIsLoading, item.id).then(
-                            (product) => {
-                              dispatch(
-                                cartActions.changeItem([
-                                  "add",
-                                  [item.id],
-                                  product.price,
-                                ])
-                              );
-                            }
-                          );
-
-                          CartHandler("add", item);
+                          CartHandler("increase", item);
                         }}
                       >
                         <AddIcon></AddIcon>
@@ -181,23 +174,8 @@ function CartSidePopup(props) {
                         sx={{ cursor: "pointer" }}
                         onClick={() => {
                           if (item.quantity - 1 == 0) {
-                            // if quantity is zero, delete the cart item from user and redux
-                            deleteCartItem(setIsLoading, item.data_id);
-                            dispatch(
-                              cartActions.changeItem(["delete", [item.id]])
-                            );
+                            CartHandler("delete", item);
                           } else {
-                            getSpecificProduct(setIsLoading, item.id).then(
-                              (product) => {
-                                dispatch(
-                                  cartActions.changeItem([
-                                    "decrease",
-                                    [item.id],
-                                    product.price,
-                                  ])
-                                );
-                              }
-                            );
                             CartHandler("decrease", item);
                           }
                         }}
@@ -206,7 +184,9 @@ function CartSidePopup(props) {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item>{Number(item.price).toFixed(2)}</Grid>
+                  <Grid item>
+                    {Number(item.product.price * item.quantity).toFixed(2)}
+                  </Grid>
                 </Grid>
               );
             })}

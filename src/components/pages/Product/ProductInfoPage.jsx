@@ -14,7 +14,7 @@ import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import CircularProgress from "@mui/material/CircularProgress";
 import domain from "../../services/domain";
 
-function ProductInfoPage2() {
+function ProductInfoPage() {
   /*
    comment from the old code: 
     Vision:
@@ -177,7 +177,7 @@ function ProductInfoPage2() {
   );
 }
 
-export default ProductInfoPage2;
+export default ProductInfoPage;
 
 async function loadProductDetail(product_id) {
   const response = await fetch(`${domain}/api/shop/products/${product_id}`, {
@@ -193,7 +193,6 @@ async function loadProductDetail(product_id) {
     );
   } else {
     const data = await response.json();
-    console.log(data);
     return data;
   }
 }

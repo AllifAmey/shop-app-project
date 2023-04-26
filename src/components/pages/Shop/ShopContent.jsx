@@ -1,14 +1,12 @@
-import React, { useState, useEffect, Suspense } from "react";
-import { useLoaderData, json, defer, Await } from "react-router-dom";
+import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AnimatedPage from "../../utility/AnimatedPage";
 import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { shopActions } from "../../../store";
 import FiltersIcon from "./utility/FiltersIcon";
 import Pagination from "@mui/material/Pagination";
-import domain from "../../services/domain";
 
 function ShopContent(props) {
   /*
@@ -94,7 +92,6 @@ function ShopContent(props) {
                   .filter((product) => {
                     const low_num = (page - 1) * 8;
                     const high_num = low_num + 8;
-
                     if (
                       !catagoriesAllowed[product.catagory] &&
                       filteredProducts.indexOf(product) >= low_num &&
@@ -105,15 +102,11 @@ function ShopContent(props) {
                       return false;
                     }
                   })
-                  .map((productItem) => {
+                  .map((product) => {
                     return (
                       <ProductCard
-                        key={`card${productItem.id}`}
-                        type={`${productItem.name.toLowerCase()}`}
-                        img={`${productItem.image_url}`}
-                        price={`${productItem.price}`}
-                        cardName={`card${productItem.id}`}
-                        product={productItem}
+                        key={product.id}
+                        product={product}
                       ></ProductCard>
                     );
                   })}
