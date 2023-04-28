@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useState, useRef } from "react";
 import styles from "./ContactPage.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -32,7 +32,7 @@ function ContactPage() {
 
    */
 
-  const [phone, setPhone] = React.useState("");
+  const [phone, setPhone] = useState("");
 
   const handleChange = (newPhone) => {
     setPhone(newPhone);

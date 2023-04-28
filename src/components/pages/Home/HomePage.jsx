@@ -8,11 +8,10 @@ import {
 import { Link } from "react-scroll";
 import styles from "./HomePage.module.css";
 
-import Button from "@mui/material/Button";
-
-import LocationHomePage from "./LocationHomePage";
-import ValuesHomePage from "./ValuesHomePage";
 import ProductHomePage from "./ProductHomePage";
+import ValuesHomePage from "./ValuesHomePage";
+import LocationHomePage from "./LocationHomePage";
+import Button from "@mui/material/Button";
 import { useInView } from "react-intersection-observer";
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 
@@ -98,7 +97,6 @@ function HomePage() {
                   </Link>
                 </div>
               </section>
-
               <ValuesHomePage></ValuesHomePage>
               <span ref={ref}>
                 {inView ? <ProductHomePage></ProductHomePage> : null}

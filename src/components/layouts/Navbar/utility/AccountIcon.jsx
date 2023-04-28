@@ -20,7 +20,9 @@ function AccountIcon() {
       to={`/account/${
         localStorage.getItem("username") == undefined
           ? "login"
-          : localStorage.getItem("username")
+          : localStorage.getItem("user_status") +
+            "/" +
+            localStorage.getItem("username")
       }`}
       display="flex"
     >

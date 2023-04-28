@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { loginAPI } from "../../services/Internal_API/AccountAPI/Access/LoginAPI";
 import { SignUp } from "../../services/Internal_API/AccountAPI/Access/SignupAPI";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -33,6 +33,7 @@ function AccessAccountPage(props) {
   const [pass, setPass] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const params = useParams();
 
@@ -41,7 +42,20 @@ function AccessAccountPage(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title == "Login") {
-      await loginAPI(setIsLoading, props.login, email, pass);
+      const data = await loginAPI(setIsLoading, email, pass);
+      if (data == "error") {
+        // set error
+        console.log("me here haha");
+      } else {
+        if (data.user_status == "member") {
+          localStorage.setItem("username", data.name);
+        } else if (data.user_status == "staff") {
+          localStorage.setItem("username", data.email);
+        }
+        localStorage.setItem("user_id", data.user_id);
+        localStorage.setItem("user_status", data.user_status);
+        navigate(`/account/${data.user_status}/${data.name}`);
+      }
     } else if (title == "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);
       await loginAPI(setIsLoading, props.login, email, pass);

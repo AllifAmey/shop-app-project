@@ -9,7 +9,6 @@ import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
 import RootLayout from "./RootLayout";
 import ErrorPage from "./components/pages/Error/ErrorPage";
-
 function App() {
   /* 
   Use react-helmet-async, it's the updated version of react-helmet to change web title. 
@@ -28,9 +27,6 @@ function App() {
   const ProductInfoPage = lazy(() =>
     import("./components/pages/Product/ProductInfoPage")
   );
-  const AccountPageRouting = lazy(() =>
-    import("./components/pages/Account/AccountPageRouting")
-  );
   const StoryPage = lazy(() => import("./components/pages/OurStory/StoryPage"));
   const ContactPage = lazy(() =>
     import("./components/pages/ContactUs/ContactPage")
@@ -41,6 +37,15 @@ function App() {
   );
   const CreateProduct = lazy(() =>
     import("./components/pages/Account/AdminCreateProductForm")
+  );
+  const AccessAccountPage = lazy(() =>
+    import("./components/pages/Account/AccessAccountPage")
+  );
+  const CustomerAccount = lazy(() =>
+    import("./components/pages/Account/CustomerAccount")
+  );
+  const AdminAccount = lazy(() =>
+    import("./components/pages/Account/AdminAccount")
   );
 
   // loader function works by getting the data before loading the element.
@@ -113,7 +118,23 @@ function App() {
           path: "/account/:accessType",
           element: (
             <Suspense fallback={<p>Loading...</p>}>
-              <AccountPageRouting />
+              <AccessAccountPage />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/account/member/:accountName",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <CustomerAccount />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/account/staff/:accountName",
+          element: (
+            <Suspense fallback={<p>Loading...</p>}>
+              <AdminAccount />
             </Suspense>
           ),
         },

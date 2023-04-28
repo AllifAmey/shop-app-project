@@ -1,161 +1,326 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { Grid } from "@mui/material";
-import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
-import NestedModalOrder from "./utility/NestedModalOrder";
-import CustomerDataGridNavbar from "./utility/CustomerDataGridNavbar";
-import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import { massDelete } from "../../services/Internal_API/AccountAPI/utility/MassDeleteAPI";
-import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-material.css";
+// modal
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import CardMedia from "@mui/material/CardMedia";
+import NewCustomerNavBar from "./utility/CustomerNavBar";
+import { cartActions } from "../../../store";
+import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
+import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
-function CustomerAccount(props) {
+function ProductButtonRender(props) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const dialogContainerStyles = {
+    height: "100%",
+    width: "100%",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    fontSize: "18px",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  };
+  return (
+    <>
+      {props.value !== "" && (
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleOpen();
+          }}
+        >
+          Product Details
+        </Button>
+      )}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            height: "90%",
+            maxWidth: "70%",
+
+            display: "flex",
+            flexDirection: "row",
+            flex: "1 1 50%",
+            borderRadius: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={props.value.image_url}
+          alt={props.value.catagory}
+          sx={{
+            height: "80%",
+            width: "80vh",
+            marginLeft: "4%",
+            borderRadius: "20px",
+          }}
+        ></CardMedia>
+        <DialogContent
+          sx={{
+            height: "60vh",
+            lineHeight: "1.5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid sx={dialogContainerStyles}>
+            <DialogTitle fontSize={30}>Quick Info </DialogTitle>
+            <Grid>Handmade item </Grid>
+            <Grid>
+              Handmade item Dispatches from a small business in United Kingdom
+            </Grid>
+            <Grid>Materials: copper</Grid>
+            <Grid>FREE UK delivery</Grid>
+            <DialogActions>
+              <Button onClick={handleClose} size="big">
+                Close
+              </Button>
+            </DialogActions>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function TotalAmountRender(props) {
+  return (
+    <>
+      <div>
+        {props.value === undefined &&
+          `£${(props.data.quantity * Number(props.data.product.price)).toFixed(
+            2
+          )}`}
+        {props.value !== undefined && props.value}
+      </div>
+    </>
+  );
+}
+
+function OrderDetailRender(params) {
+  console.log("I am order detail!!");
+  console.log(params);
+  /**Inspirations so far:
+   * https://startfoodbooking.com/wp-content/uploads/2021/03/1-2-2.png
+   * Most Likely design --> https://community.magento.com/t5/image/serverpage/image-id/15214i492EBBB8C3839898/image-size/large?v=v2&px=999
+   * https://mdbcdn.b-cdn.net/docs/standard/extended/order-details/assets/featured.png
+   */
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const total_order_amount = params.data.order.reduce(
+    (initialValue, currentOrderItem) => {
+      const currentTotalPrice = Number(
+        (
+          Number(currentOrderItem.product.price) * currentOrderItem.quantity
+        ).toFixed(2)
+      );
+      return initialValue + currentTotalPrice;
+    },
+    0
+  );
+  console.log(total_order_amount);
+  return (
+    <>
+      <Button
+        variant="contained"
+        onClick={() => {
+          handleOpen();
+        }}
+      >
+        Order details
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            height: "90%",
+            maxWidth: "70%",
+            display: "flex",
+            flexDirection: "row",
+            borderRadius: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "#e7f5ff",
+          },
+        }}
+      >
+        <DialogContent
+          sx={{
+            height: "90%",
+            lineHeight: "1.5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid container sx={{ width: "100%" }}>
+            <Grid container flexDirection="Column" textAlign="center">
+              <Grid>AmeyShopUk</Grid>
+              <Grid>Thank you for ordering!</Grid>
+            </Grid>
+            <Grid
+              container
+              flexDirection="column"
+              width="50%"
+              marginBottom="1rem"
+            >
+              <Grid item>Personal Information</Grid>
+              <Grid item>
+                {`${params.data.personal_info_used.first_name} ${params.data.personal_info_used.last_name}`}
+              </Grid>
+              <Grid item>{params.data.personal_info_used.email}</Grid>
+              <Grid item>{params.data.personal_info_used.phone_number}</Grid>
+            </Grid>
+            <Grid
+              container
+              flexDirection="column"
+              width="50%"
+              textAlign="end"
+              height="30%"
+              marginBottom="1rem"
+            >
+              <Grid item>Delivery Information</Grid>
+              <Grid item>
+                {params.data.personal_info_used.address.replace("#", "")}
+              </Grid>
+              <Grid item>{params.data.personal_info_used.city}</Grid>
+              <Grid item>{params.data.personal_info_used.post_code}</Grid>
+            </Grid>
+            <Grid container flexDirection="column">
+              <Grid container width="space-between" marginBottom="1rem">
+                <Grid container flexDirection="column" width="50%">
+                  <Grid item>Payment Method</Grid>
+                  <Grid item>Paypal</Grid>
+                </Grid>
+                <Grid
+                  container
+                  flexDirection="column"
+                  width="50%"
+                  textAlign="end"
+                >
+                  <Grid item>Delivery Type</Grid>
+                  <Grid item>
+                    {params.data.personal_info_used.delivery_type}
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid container flexDirection="column">
+                  <Grid
+                    container
+                    justifyContent="space-between"
+                    textAlign="end"
+                  >
+                    <Grid item flex="1" textAlign="start">
+                      Items
+                    </Grid>
+                    <Grid item flex="1">
+                      Qty
+                    </Grid>
+                    <Grid item flex="1">
+                      Price
+                    </Grid>
+                  </Grid>
+                  {params.data.order.map((productOrdered) => {
+                    return (
+                      <Grid
+                        container
+                        justifyContent="space-between"
+                        textAlign="end"
+                      >
+                        <Grid item flex="1" textAlign="start">
+                          Handmade {productOrdered.product.name}
+                        </Grid>
+                        <Grid item flex="1">
+                          {productOrdered.quantity}
+                        </Grid>
+                        <Grid item flex="1">
+                          £
+                          {(
+                            productOrdered.quantity *
+                            productOrdered.product.price
+                          ).toFixed(2)}
+                        </Grid>
+                      </Grid>
+                    );
+                  })}
+                  <Grid
+                    container
+                    justifyContent="space-between"
+                    textAlign="end"
+                  >
+                    <Grid item flex="1" textAlign="start"></Grid>
+                    <Grid item flex="1">
+                      Total Amount:
+                    </Grid>
+                    <Grid item flex="1">
+                      £{total_order_amount}
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    textAlign="Center"
+                    marginTop="2rem"
+                  >
+                    Your Delivery Instructions!
+                  </Grid>
+                  <Grid container justifyContent="center">
+                    {params.data.delivery_instructions}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
+function CustomerAccount() {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
   const [navValue, setNavValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [rowValue, setrowValue] = useState();
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [checkOrderId, setCheckOrderId] = useState();
-  const [rowOrderDetail, setOrderRowDetail] = useState(false);
-  const [showDeletebtn, setShowDeletebtn] = useState(false);
-  const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const orderColumns = [
-    { field: "id", headerName: "ID", width: 70 },
-    {
-      field: "view",
-      headerName: "View Order",
-      renderCell: (params) => (
-        <strong>
-          <Button
-            variant="contained"
-            size="small"
-            style={{ marginLeft: 16 }}
-            tabIndex={params.hasFocus ? 0 : -1}
-            onClick={() => {
-              setCheckOrderId(params.id);
-              handleOpen(true);
-            }}
-          >
-            Open
-          </Button>
-        </strong>
-      ),
-      width: 120,
-    },
-    {
-      field: "totalPrice",
-      headerName: "Total Price",
-      type: "number",
-      width: 150,
-    },
-    {
-      field: "deliveryStatus",
-      headerName: "Delivery Status",
-      width: 150,
-    },
-  ];
-
-  const cartColumns = [
-    { field: "id", headerName: "ID", width: 70 },
-    {
-      field: "product",
-      headerName: "Product",
-      width: 90,
-    },
-    {
-      field: "quantity",
-      headerName: "Quantity",
-      width: 90,
-    },
-    {
-      field: "totalPrice",
-      headerName: "Total Price",
-      type: "number",
-      width: 150,
-    },
-  ];
-
-  useEffect(() => {
-    // grab user's name and place it in the url
-    let username = localStorage.getItem("username");
-    if (username != undefined) {
-      navigate(`/account/${username}/`, { replace: true });
-    }
-    // grab the user's cart and store into frontend's cart
-    /* 
-    props.product = the whole product itself which explains why description_long is inside of Cart.. 
-    TODO: Look into props product later and prevent description long and short from being inside..
-    */
-    getCart(setIsLoading).then((user_cart) => {
-      setIsLoading(true);
-      let user_cart_list = [];
-      let user_cart_row = [];
-      for (const [key, value] of Object.entries(user_cart)) {
-        const card_id = key.slice(key.lastIndexOf(" ") + 1, key.length);
-        //const cardName = `card${card_id}`;
-        const cardName = `card${value.product.id}`;
-        const price = Number(value.product.price);
-        const quantity = Number(value.quantity);
-        const totalPrice = (price * quantity).toFixed(2);
-
-        user_cart_list.push({
-          key: cardName,
-          ...value.product,
-          quantity: quantity,
-          price: totalPrice,
-          data_id: card_id,
-        });
-
-        user_cart_row.push({
-          id: card_id,
-          product: value.product.name,
-          quantity: quantity,
-          totalPrice: totalPrice,
-        });
-      }
-      dispatch(cartActions.replaceCart(user_cart_list));
-      setrowValue(user_cart_row);
-      setIsLoading(false);
-    });
-  }, []);
-
-  function deleteitems() {
-    // Here is the logic:
-    // Grab the ids of the selected rows and get rid of them.
-    // the ids presented will form the basis of delete method api calls.
-
-    const arr_selectedRows = [...selectedRows];
-    const old_row = rowValue;
-    let new_row = [...rowValue];
-    let counter = 0;
-
-    dispatch(cartActions.changeItem(["delete", arr_selectedRows]));
-    old_row.forEach((row) => {
-      if (arr_selectedRows.includes(row.id)) {
-        new_row.splice(counter, 1);
-      }
-      counter++;
-    });
-    setrowValue(new_row);
-    massDelete(setIsLoading, "cart", arr_selectedRows);
-  }
+  const navigate = useNavigate();
 
   function logOut() {
     // this removes all of the localstorage as the data is no longer relevant.
@@ -166,25 +331,102 @@ function CustomerAccount(props) {
     localStorage.removeItem("isLogged");
     localStorage.removeItem("user_id");
     localStorage.removeItem("user_status");
+    navigate("/account/login/", { replace: true });
+    dispatch(cartActions.replaceCart([]));
+  }
+  const [rowData, setRowData] = useState();
 
-    props.logOut(false);
+  const gridRef = useRef();
+
+  const [columnDefs, setColumnDefs] = useState([
+    { field: "cart_item_id", headerName: "Cart item id" },
+    { field: "product", cellRenderer: ProductButtonRender },
+    { field: "quantity" },
+    { field: "total price", cellRenderer: TotalAmountRender },
+  ]);
+
+  const defaultColDef = useMemo(() => ({
+    sortable: true,
+    filter: true,
+  }));
+
+  const cellClickedListener = useCallback((event) => {
+    console.log("cellClicked", event);
+  }, []);
+
+  if (navValue == 0 && columnDefs[0].field !== "cart_item_id") {
+    setColumnDefs([
+      { field: "cart_item_id", headerName: "Cart item id" },
+      { field: "product", cellRenderer: ProductButtonRender },
+      { field: "quantity" },
+      { field: "total price", cellRenderer: TotalAmountRender },
+    ]);
+    getCart(setIsLoading).then((userCart) => {
+      const total_cart_amount = userCart.reduce(
+        (initialValue, currentCartItem) => {
+          const currentTotalPrice = Number(
+            (
+              Number(currentCartItem.product.price) * currentCartItem.quantity
+            ).toFixed(2)
+          );
+          return initialValue + currentTotalPrice;
+        },
+        0
+      );
+      dispatch(cartActions.replaceCart(userCart));
+
+      const lastRowData = {
+        cart_item_id: "",
+        product: "",
+        quantity: "",
+        "total price":
+          userCart.length === 0 ? "" : `Total amount : £${total_cart_amount}`,
+      };
+      setRowData([...userCart, lastRowData]);
+    });
+  } else if (navValue == 1 && columnDefs[0].field !== "id") {
+    setColumnDefs([
+      { field: "id", headerName: "Order id" },
+      { field: "order detail", cellRenderer: OrderDetailRender },
+      {
+        field: "date_ordered",
+        headerName: "Date Ordered",
+      },
+      { field: "delivery_status", headerName: "Delivery Status" },
+    ]);
+    getOrders(setIsLoading).then((orders) => {
+      setRowData([...orders]);
+    });
   }
 
-  function fetchOrderbyid(order) {
-    // As every id is unique, the id is used to return
-    // the exact order details to the NestedModalOrder
-    // the NestedModalOrder then translates all that data into a UI ,
-    // the user understands.
-    return order.id == checkOrderId;
-  }
+  useEffect(() => {
+    getCart(setIsLoading).then((userCart) => {
+      const total_cart_amount = userCart.reduce(
+        (initialValue, currentCartItem) => {
+          const currentTotalPrice = Number(
+            (
+              Number(currentCartItem.product.price) * currentCartItem.quantity
+            ).toFixed(2)
+          );
+          return initialValue + currentTotalPrice;
+        },
+        0
+      );
+      dispatch(cartActions.replaceCart(userCart));
+
+      const lastRowData = {
+        cart_item_id: "",
+        product: "",
+        quantity: "",
+        "total price": total_cart_amount,
+      };
+      setRowData([...userCart, lastRowData]);
+    });
+  }, []);
 
   return (
     <>
       {isLoading ? (
-        <Grid container justifyContent="center">
-          <CircularProgress size="25rem" sx={{ margin: "auto" }} />
-        </Grid>
-      ) : rowValue == undefined ? (
         <Grid container justifyContent="center">
           <CircularProgress size="25rem" sx={{ margin: "auto" }} />
         </Grid>
@@ -202,56 +444,27 @@ function CustomerAccount(props) {
               <Grid item justifyContent="center">
                 Welcome back, {localStorage.getItem("username")}
               </Grid>
-              <Grid item container justifyContent="center">
-                <CustomerDataGridNavbar
-                  setIsLoading={setIsLoading}
-                  setrowValue={setrowValue}
-                  setNavValue={setNavValue}
-                  navValue={navValue}
-                  setOrderRowDetail={setOrderRowDetail}
-                ></CustomerDataGridNavbar>
-              </Grid>
-              <Grid item container justifyContent="center" width="75vw">
-                <div style={{ height: 400, width: "60%" }}>
-                  <DataGrid
-                    rows={rowValue}
-                    columns={navValue == 0 ? cartColumns : orderColumns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
-                    checkboxSelection
-                    disableSelectionOnClick={true}
-                    disableColumnSelector={true}
-                    onSelectionModelChange={(ids) => {
-                      const selectedIDs = new Set(ids);
-                      //console.log(ids);
-                      setSelectedRows(selectedIDs);
-
-                      if ([...selectedIDs].length == 0) {
-                        setShowDeletebtn(false);
-                      } else {
-                        setShowDeletebtn(true);
-                      }
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid
-                item
-                container
-                justifyContent={showDeletebtn ? "space-between" : "center"}
-                width={0.2}
-                height={0.5}
+              <NewCustomerNavBar
+                setNavValue={setNavValue}
+                navValue={navValue}
+              />
+              <div
+                className="ag-theme-material"
+                style={{ width: 800, height: 500 }}
               >
-                {showDeletebtn && (
-                  <Button
-                    variant="contained"
-                    sx={{ color: "red" }}
-                    onClick={deleteitems}
-                  >
-                    Delete items
-                  </Button>
-                )}
-
+                <AgGridReact
+                  ref={gridRef}
+                  rowData={rowData}
+                  columnDefs={columnDefs}
+                  animateRows={true}
+                  rowSelection="multiple"
+                  onCellClicked={cellClickedListener}
+                  defaultColDef={defaultColDef}
+                  ProductButtonRender={ProductButtonRender}
+                  TotalAmountRender={TotalAmountRender}
+                />
+              </div>
+              <Grid item container justifyContent="center" width="75vw">
                 <Button
                   variant="contained"
                   component={RouterLink}
@@ -264,15 +477,6 @@ function CustomerAccount(props) {
             </Grid>
           </Container>
         </Box>
-      )}
-      {navValue == 1 && (
-        <NestedModalOrder
-          open={open}
-          setOpen={setOpen}
-          handleClose={handleClose}
-          rowDetail={open && rowOrderDetail.filter(fetchOrderbyid)}
-          checkOrderId={checkOrderId}
-        ></NestedModalOrder>
       )}
     </>
   );

@@ -28,7 +28,7 @@ function ShopContent(props) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [catagoriesAllowed, setCatagoriesAllowed] = useState({});
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState(0);
 
   const handleChange = (event, value) => {
