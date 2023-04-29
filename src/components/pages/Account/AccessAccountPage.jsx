@@ -52,9 +52,10 @@ function AccessAccountPage(props) {
         } else if (data.user_status == "staff") {
           localStorage.setItem("username", data.email);
         }
+        const userName = localStorage.getItem("username");
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("user_status", data.user_status);
-        navigate(`/account/${data.user_status}/${data.name}`);
+        navigate(`/account/${data.user_status}/${userName}`);
       }
     } else if (title == "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);

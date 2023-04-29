@@ -47,6 +47,9 @@ function App() {
   const AdminAccount = lazy(() =>
     import("./components/pages/Account/AdminAccount")
   );
+  const NewAdminAccount = lazy(() =>
+    import("./components/pages/Account/NewAdminAccount")
+  );
 
   // loader function works by getting the data before loading the element.
   //
@@ -134,7 +137,7 @@ function App() {
           path: "/account/staff/:accountName",
           element: (
             <Suspense fallback={<p>Loading...</p>}>
-              <AdminAccount />
+              <NewAdminAccount />
             </Suspense>
           ),
         },

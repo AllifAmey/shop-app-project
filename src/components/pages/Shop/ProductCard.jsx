@@ -131,7 +131,7 @@ function ProductCard(props) {
           </Box>
 
           <div className={styles["card-info"]}>
-            Handmade {props.product.type}
+            Handmade {props.product.name}
           </div>
           <div
             className={styles["card-price"]}

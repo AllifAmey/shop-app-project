@@ -460,8 +460,6 @@ function CustomerAccount() {
                   rowSelection="multiple"
                   onCellClicked={cellClickedListener}
                   defaultColDef={defaultColDef}
-                  ProductButtonRender={ProductButtonRender}
-                  TotalAmountRender={TotalAmountRender}
                 />
               </div>
               <Grid item container justifyContent="center" width="75vw">
