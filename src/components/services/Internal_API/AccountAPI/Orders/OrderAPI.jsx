@@ -145,20 +145,10 @@ export async function postOrdersAnonymous(
   return data;
 }
 
-export async function patchOrders(
-  setIsLoading,
-  order_id,
-  order_data,
-  dispatch_status
-) {
+export async function patchOrders(setIsLoading, order_id, order_data) {
   // Only admin is allowed to edit orders.
   // The backend will verify that.
   // This is primarily used to state that the order has been dispatched.
-  if (dispatch_status === false) {
-    order_data["delivery_status"] = "Processing Order";
-  } else if (dispatch_status === true) {
-    order_data["delivery_status"] = "Dispatched";
-  }
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
@@ -172,9 +162,10 @@ export async function patchOrders(
     },
   });
   const data = await response.json();
-
+  setIsLoading(false);
   if (response.ok) {
-    setIsLoading(false);
+    return data;
+  } else {
+    return "error";
   }
-  return data;
 }
