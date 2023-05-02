@@ -35,6 +35,7 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import {
   getProducts,
   postProducts,
+  deleteProducts,
 } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import {
   getOrders,
@@ -130,7 +131,8 @@ function DispatchedRender(props) {
             return order.order_item_id;
           });
           const patch_id = data_to_update.id;
-          // potential error, check this out later.
+          // TODO: Backend error related to timing or is it an error?
+          // when dispatched the timing seemingly resets.
           const patchData = {
             user: data_to_update.user,
             email: data_to_update.email,
@@ -512,6 +514,15 @@ function ProductEditRender(props) {
 }
 function ProductDeleteRender(props) {
   // red button with the "Are you sure? pop up final warning"
+  console.log("me da delete props");
+  console.log(props);
+  /*
+   cellRendererParams: {
+              setRowData: setRowData,
+              setIsLoading: setIsLoading,
+              rowData: orderData,
+            },
+  */
   return (
     <>
       <Button
@@ -519,6 +530,16 @@ function ProductDeleteRender(props) {
         style={{
           background: "#e03131",
           color: "#fff",
+        }}
+        onClick={() => {
+          const current_index = props.rowData.indexOf(props.data);
+          props.rowData.splice(current_index, 1);
+
+          deleteProducts(props.setIsLoading, props.data.id).then((res) => {
+            if (res !== "error") {
+              props.setRowData([...props.rowData]);
+            }
+          });
         }}
       >
         Product Delete
@@ -545,16 +566,6 @@ function AddProductForm() {
   });
   const [descriptionShortSnippet, setDescriptionShortSnippet] = useState("");
 
-  /*
-  {
-  "name": "string",
-  "image_url": "string",
-  "price": "46.33",
-  "description_short": "string",
-  "description_long": "string",
-  "catagory": "string"
-}
-  */
   function UploadProduct() {
     const x = Math.random();
     let storageRef = ref(
@@ -952,7 +963,15 @@ function VerticalTabs(props) {
           { field: "id", headerName: "Product Id" },
           { field: "Details", cellRenderer: ProductDetailRender },
           { field: "Edit", cellRenderer: ProductEditRender },
-          { field: "Delete", cellRenderer: ProductDeleteRender },
+          {
+            field: "Delete",
+            cellRenderer: ProductDeleteRender,
+            cellRendererParams: {
+              setRowData: setRowData,
+              setIsLoading: setIsLoading,
+              rowData: productsData,
+            },
+          },
         ]);
         setRowData(productsData);
       });

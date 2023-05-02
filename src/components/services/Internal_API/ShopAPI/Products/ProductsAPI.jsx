@@ -59,3 +59,26 @@ export async function postProducts(setIsLoading, product) {
   setIsLoading(false);
   return data;
 }
+
+export async function deleteProducts(setIsLoading, pk) {
+  // this grabs the
+
+  setIsLoading(true);
+
+  const token = localStorage.getItem("Token");
+
+  const response = await fetch(`${domain}/api/shop/products/delete/${pk}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    },
+  });
+  setIsLoading(false);
+  if (!response.ok) {
+    return "error";
+  } else {
+    const data = await response.json();
+    return data;
+  }
+}
