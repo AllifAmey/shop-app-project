@@ -32,13 +32,17 @@ import { cartActions } from "../../../store";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
-import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
+import {
+  getProducts,
+  postProducts,
+} from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import {
   getOrders,
   patchOrders,
 } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 import DropboxChooser from "react-dropbox-chooser";
 import SvgIcon from "@mui/material/SvgIcon";
+import Compressor from "compressorjs";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_STORAGE_API_KEY,
@@ -528,6 +532,7 @@ function AddProductForm() {
   // https://toolset.com/wp-content/uploads/2020/09/add-product-front-end-1.png
 
   const [activeStep, setActiveStep] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const [storeImage, setStoreImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [productInfo, setProductInfo] = useState({
@@ -550,15 +555,35 @@ function AddProductForm() {
   "catagory": "string"
 }
   */
-  function UploadImageToFireBase() {
+  function UploadProduct() {
     const x = Math.random();
     let storageRef = ref(
       storage,
-      `gs://shop-app-project-366818.appspot.com/images/product/test-main-${x}`
+      `gs://shop-app-project-366818.appspot.com/images/product/${productInfo.name}-${x}`
     );
-    uploadBytes(storageRef, storeImage).then((data) => {
-      console.log(data);
-      console.log("I attempt to upload image");
+    new Compressor(storeImage, {
+      quality: 0.6,
+      width: 500,
+      height: 500,
+      success(result) {
+        uploadBytes(storageRef, result).then((_) => {
+          getDownloadURL(storageRef).then((url) => {
+            // Insert url into an <img> tag to "download"
+            const full_productInfo = { ...productInfo, image_url: url };
+
+            // from here the url is grabbed from that storage and then placed inside of a django model
+            // It is using this django model where the url to the firebase storage storing that image,
+            // that will be referred and ripped from the json data and specified.
+
+            postProducts(setIsLoading, full_productInfo).then((response) => {
+              console.log(response);
+            });
+          });
+        });
+      },
+      error(err) {
+        console.log(err.message);
+      },
     });
   }
 
@@ -666,6 +691,7 @@ function AddProductForm() {
                     label="Price"
                     variant="outlined"
                     type="number"
+                    value={productInfo.price}
                     onChange={(e) => {
                       setProductInfo({
                         ...productInfo,
@@ -708,17 +734,6 @@ function AddProductForm() {
                         setImagePreview={setImagePreview}
                       />
                     </Grid>
-                  </Grid>
-                  <Grid container flexDirection="column">
-                    <Grid item> Test Image Upload </Grid>
-                    <Button
-                      variant="contained"
-                      onClick={() => {
-                        UploadImageToFireBase();
-                      }}
-                    >
-                      Test
-                    </Button>
                   </Grid>
                 </Grid>
                 <Grid item>
@@ -803,6 +818,7 @@ function AddProductForm() {
                     maxRows={10}
                     size="big"
                     name="description_long"
+                    value={productInfo.description_long}
                     onChange={(e) => {
                       setProductInfo({
                         ...productInfo,
@@ -849,7 +865,14 @@ function AddProductForm() {
                 </Grid>
               </Grid>
               <Grid item>
-                <Button variant="contained">Submit</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    UploadProduct();
+                  }}
+                >
+                  Submit
+                </Button>
               </Grid>
             </>
           )}
