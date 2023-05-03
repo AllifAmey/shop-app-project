@@ -164,8 +164,8 @@ export async function patchOrders(setIsLoading, order_id, order_data) {
   const data = await response.json();
   setIsLoading(false);
   if (response.ok) {
-    return data;
-  } else {
     return "error";
+  } else {
+    return data;
   }
 }

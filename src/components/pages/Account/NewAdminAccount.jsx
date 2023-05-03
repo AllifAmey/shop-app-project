@@ -44,6 +44,17 @@ import {
 import DropboxChooser from "react-dropbox-chooser";
 import SvgIcon from "@mui/material/SvgIcon";
 import Compressor from "compressorjs";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_FIREBASE_STORAGE_API_KEY,
@@ -134,6 +145,7 @@ function DispatchedRender(props) {
           // TODO: Backend error related to timing or is it an error?
           // when dispatched the timing seemingly resets.
           const patchData = {
+            id: patch_id,
             user: data_to_update.user,
             email: data_to_update.email,
             order: list_order,
@@ -146,6 +158,7 @@ function DispatchedRender(props) {
           patchOrders(props.setIsLoading, patch_id, patchData).then((data) => {
             if (data == "error") {
               console.log("There is an error");
+              console.log(data);
             } else {
               props.setRowData([...props.rowData]);
             }
@@ -945,6 +958,7 @@ function AddProductForm() {
 
 function VerticalTabs(props) {
   const [value, setValue] = useState(0);
+  const [innerValueTab, setInnerValueTab] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [rowData, setRowData] = useState([]);
   const [columnDefs, setColumnDefs] = useState([
@@ -953,6 +967,10 @@ function VerticalTabs(props) {
     { field: "quantity" },
     { field: "total price" },
   ]);
+
+  const handleInnerTabChange = (event, newValue) => {
+    setInnerValueTab(newValue);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -1066,11 +1084,12 @@ function VerticalTabs(props) {
         />
       </Tabs>
       {value == 0 && (
-        <Box>
+        <Box flex={1}>
           <Tabs
-            value={value}
-            textColor="secondary"
+            value={innerValueTab}
+            textColor="primary"
             aria-label="Vertical tabs example"
+            onChange={handleInnerTabChange}
             sx={{
               borderColor: "divider",
               height: "20px",
@@ -1079,6 +1098,8 @@ function VerticalTabs(props) {
             <Tab label="Sales per month" />
             <Tab label="Most popular" />
           </Tabs>
+          {innerValueTab == 0 && <SalesChart />}
+          {innerValueTab == 1 && <div>Hello</div>}
         </Box>
       )}
       {value == 1 && (
@@ -1115,6 +1136,81 @@ function VerticalTabs(props) {
         </div>
       )}
     </Box>
+  );
+}
+
+function SalesChart() {
+  // shows says per month
+
+  const data = [
+    {
+      name: "Page A",
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "Page B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Page C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "Page D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "Page E",
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "Page F",
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "Page G",
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
+  return (
+    <>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="pv" fill="#8884d8" />
+          <Bar dataKey="uv" fill="#82ca9d" />
+        </BarChart>
+      </ResponsiveContainer>
+    </>
   );
 }
 
