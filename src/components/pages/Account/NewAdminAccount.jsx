@@ -41,6 +41,7 @@ import {
   getOrders,
   patchOrders,
 } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
+import { getShopAnalysis } from "../../services/Internal_API/ShopAPI/Analysis/AnalysisAPI";
 import DropboxChooser from "react-dropbox-chooser";
 import SvgIcon from "@mui/material/SvgIcon";
 import Compressor from "compressorjs";
@@ -527,8 +528,6 @@ function ProductEditRender(props) {
 }
 function ProductDeleteRender(props) {
   // red button with the "Are you sure? pop up final warning"
-  console.log("me da delete props");
-  console.log(props);
   /*
    cellRendererParams: {
               setRowData: setRowData,
@@ -956,11 +955,41 @@ function AddProductForm() {
   );
 }
 
+function SalesChart(props) {
+  // shows says per month
+
+  return (
+    <>
+      <ResponsiveContainer width="100%" height="90%">
+        <BarChart
+          width={500}
+          height={300}
+          data={props.analysisData.sales_per_month}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="sale" fill="#82ca9d" />
+        </BarChart>
+      </ResponsiveContainer>
+    </>
+  );
+}
+
 function VerticalTabs(props) {
   const [value, setValue] = useState(0);
   const [innerValueTab, setInnerValueTab] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [rowData, setRowData] = useState([]);
+  const [analysisData, setAnalysisData] = useState([]);
   const [columnDefs, setColumnDefs] = useState([
     { field: "cart_item_id", headerName: "Cart item id" },
     { field: "product" },
@@ -972,9 +1001,20 @@ function VerticalTabs(props) {
     setInnerValueTab(newValue);
   };
 
+  useEffect(() => {
+    getShopAnalysis(setIsLoading).then((data) => {
+      setAnalysisData(data);
+    });
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // it is here where I do the logic for ag grid react.
+    if (newValue == 0) {
+      getShopAnalysis(setIsLoading).then((data) => {
+        setAnalysisData(data);
+      });
+    }
     if (newValue == 1) {
       getProducts(setIsLoading).then((productsData) => {
         setColumnDefs([
@@ -1098,8 +1138,98 @@ function VerticalTabs(props) {
             <Tab label="Sales per month" />
             <Tab label="Most popular" />
           </Tabs>
-          {innerValueTab == 0 && <SalesChart />}
-          {innerValueTab == 1 && <div>Hello</div>}
+          {innerValueTab == 0 && <SalesChart analysisData={analysisData} />}
+          {innerValueTab == 1 && (
+            <Grid
+              container
+              height={0.92}
+              width={1}
+              flex={1}
+              bgcolor="yellow"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid
+                container
+                width={0.8}
+                height={0.8}
+                bgcolor="white"
+                textAlign="center"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid
+                  container
+                  flexDirection="column"
+                  xs
+                  justifyContent="space-evenly"
+                  height={1}
+                >
+                  <Grid item fontSize="30px">
+                    Most popular product
+                  </Grid>
+                  <Grid item fontSize="24px" fontStyle="italic">
+                    Handmade{" "}
+                    {analysisData.popularity_metric[0].most_popular.name}
+                  </Grid>
+                  <Grid item>
+                    <img
+                      src={
+                        analysisData.popularity_metric[0].most_popular.image_url
+                      }
+                      alt={analysisData.popularity_metric[0].most_popular.name}
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "20px",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item fontSize="24px">
+                    How many bought so far
+                  </Grid>
+                  <Grid item fontSize="20px">
+                    {analysisData.popularity_metric[0].occurance}
+                  </Grid>
+                </Grid>
+                <Grid
+                  container
+                  flexDirection="column"
+                  xs
+                  justifyContent="space-evenly"
+                  height={1}
+                >
+                  <Grid item fontSize="30px">
+                    Least popular product
+                  </Grid>
+                  <Grid item fontSize="24px" fontStyle="italic">
+                    Handmade{" "}
+                    {analysisData.popularity_metric[1].least_popular.name}
+                  </Grid>
+                  <Grid item>
+                    <img
+                      src={
+                        analysisData.popularity_metric[1].least_popular
+                          .image_url
+                      }
+                      alt={analysisData.popularity_metric[1].least_popular.name}
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        borderRadius: "20px",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item fontSize="24px">
+                    How many bought so far
+                  </Grid>
+                  <Grid item fontSize="20px">
+                    {analysisData.popularity_metric[1].occurance}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
         </Box>
       )}
       {value == 1 && (
@@ -1139,81 +1269,6 @@ function VerticalTabs(props) {
   );
 }
 
-function SalesChart() {
-  // shows says per month
-
-  const data = [
-    {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
-  return (
-    <>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" />
-          <Bar dataKey="uv" fill="#82ca9d" />
-        </BarChart>
-      </ResponsiveContainer>
-    </>
-  );
-}
-
 function NewAdminAccount(props) {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
@@ -1231,8 +1286,6 @@ function NewAdminAccount(props) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {}, []);
 
   function logOut() {
     localStorage.removeItem("Token");
