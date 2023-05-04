@@ -35,20 +35,14 @@ function App() {
   const CheckOutPage = lazy(() =>
     import("./components/pages/Checkout/CheckOutPage")
   );
-  const CreateProduct = lazy(() =>
-    import("./components/pages/Account/AdminCreateProductForm")
-  );
   const AccessAccountPage = lazy(() =>
     import("./components/pages/Account/AccessAccountPage")
   );
   const CustomerAccount = lazy(() =>
     import("./components/pages/Account/CustomerAccount")
   );
-  const AdminAccount = lazy(() =>
-    import("./components/pages/Account/AdminAccount")
-  );
-  const NewAdminAccount = lazy(() =>
-    import("./components/pages/Account/NewAdminAccount")
+  const AdminAccountPage = lazy(() =>
+    import("./components/pages/Account/AdminAccountPage")
   );
 
   // loader function works by getting the data before loading the element.
@@ -137,15 +131,7 @@ function App() {
           path: "/account/staff/:accountName",
           element: (
             <Suspense fallback={<p>Loading...</p>}>
-              <NewAdminAccount />
-            </Suspense>
-          ),
-        },
-        {
-          path: "/account/:accessType/create/product",
-          element: (
-            <Suspense fallback={<p>Loading...</p>}>
-              <CreateProduct />
+              <AdminAccountPage />
             </Suspense>
           ),
         },

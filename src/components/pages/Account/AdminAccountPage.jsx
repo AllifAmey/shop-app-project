@@ -1145,7 +1145,6 @@ function VerticalTabs(props) {
               height={0.92}
               width={1}
               flex={1}
-              bgcolor="yellow"
               justifyContent="center"
               alignItems="center"
             >
@@ -1153,7 +1152,6 @@ function VerticalTabs(props) {
                 container
                 width={0.8}
                 height={0.8}
-                bgcolor="white"
                 textAlign="center"
                 justifyContent="center"
                 alignItems="center"
@@ -1269,7 +1267,7 @@ function VerticalTabs(props) {
   );
 }
 
-function NewAdminAccount(props) {
+function AdminAccountPage(props) {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
   const [navValue, setNavValue] = useState(0);
@@ -1333,4 +1331,4 @@ function NewAdminAccount(props) {
   );
 }
 
-export default NewAdminAccount;
+export default AdminAccountPage;
