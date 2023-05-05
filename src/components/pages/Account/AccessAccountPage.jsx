@@ -45,7 +45,6 @@ function AccessAccountPage(props) {
       const data = await loginAPI(setIsLoading, email, pass);
       if (data == "error") {
         // set error
-        console.log("me here haha");
       } else {
         if (data.user_status == "member") {
           localStorage.setItem("username", data.name);

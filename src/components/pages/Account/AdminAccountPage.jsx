@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import Container from "@mui/material/Container";
-import { Grid } from "@mui/material";
+import { Grid, Container, Box, Tab, Tabs } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import { cartActions } from "../../../store";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
@@ -16,7 +12,6 @@ import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAP
 import { getShopAnalysis } from "../../services/Internal_API/ShopAPI/Analysis/AnalysisAPI";
 
 // utility
-import SideTabs from "./utility/Admin/SideTabs";
 import SalesChart from "./utility/Admin/SalesChart";
 import PopularityMetric from "./utility/Admin/PopularityMetric";
 import ProductDetailRender from "./utility/Admin/ProductDetailRender";
@@ -125,7 +120,43 @@ function VerticalTabs(props) {
           width: "12%",
         }}
       >
-        <SideTabs logout={props.logOut()} />
+        <Tab
+          label="DashBoard"
+          icon={<i className="fa-solid fa-chart-line"></i>}
+          iconPosition="end"
+        />
+        <Tab
+          label="Products"
+          sx={{ justifyContent: "space-evenly" }}
+          icon={<i className="fa-sharp fa-solid fa-gem"></i>}
+          iconPosition="end"
+        />
+        <Tab
+          label="Add Product"
+          icon={<i className="fa-solid fa-basket-shopping"></i>}
+          iconPosition="end"
+        />
+        <Tab
+          label="Orders"
+          sx={{ justifyContent: "space-evenly" }}
+          icon={<i className="fa-sharp fa-solid fa-truck"></i>}
+          iconPosition="end"
+        />
+        <Tab
+          label="Refunds sent"
+          sx={{ justifyContent: "space-evenly" }}
+          icon={<i className="fa-solid fa-money-bill-wave"></i>}
+          iconPosition="end"
+        />
+        <Tab
+          label="Logout"
+          onClick={() => {
+            props.logOut();
+            console.log("hello");
+          }}
+          icon={<i className="fa-solid fa-right-from-bracket"></i>}
+          iconPosition="end"
+        />
       </Tabs>
       {value == 0 && (
         <Box flex={1}>
@@ -185,7 +216,7 @@ function VerticalTabs(props) {
   );
 }
 
-function AdminAccountPage(props) {
+function AdminAccountPage() {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
   const navigate = useNavigate();

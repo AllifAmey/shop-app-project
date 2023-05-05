@@ -66,12 +66,16 @@ function PopularityMetric(props) {
               Least popular product
             </Grid>
             <Grid item fontSize="24px" fontStyle="italic">
-              Handmade {analysisData.popularity_metric[1].least_popular.name}
+              Handmade{" "}
+              {props.analysisData.popularity_metric[1].least_popular.name}
             </Grid>
             <Grid item>
               <img
-                src={analysisData.popularity_metric[1].least_popular.image_url}
-                alt={analysisData.popularity_metric[1].least_popular.name}
+                src={
+                  props.analysisData.popularity_metric[1].least_popular
+                    .image_url
+                }
+                alt={props.analysisData.popularity_metric[1].least_popular.name}
                 style={{
                   height: "100px",
                   width: "100px",
@@ -83,7 +87,7 @@ function PopularityMetric(props) {
               How many bought so far
             </Grid>
             <Grid item fontSize="20px">
-              {analysisData.popularity_metric[1].occurance}
+              {props.analysisData.popularity_metric[1].occurance}
             </Grid>
           </Grid>
         </Grid>
