@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import Container from "@mui/material/Container";
-import { Grid, Input } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -16,7 +16,9 @@ import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAP
 import { getShopAnalysis } from "../../services/Internal_API/ShopAPI/Analysis/AnalysisAPI";
 
 // utility
+import SideTabs from "./utility/Admin/SideTabs";
 import SalesChart from "./utility/Admin/SalesChart";
+import PopularityMetric from "./utility/Admin/PopularityMetric";
 import ProductDetailRender from "./utility/Admin/ProductDetailRender";
 import ProductEditRender from "./utility/Admin/ProductEditRender";
 import ProductDeleteRender from "./utility/Admin/ProductDeleteRender";
@@ -31,12 +33,7 @@ function VerticalTabs(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [rowData, setRowData] = useState([]);
   const [analysisData, setAnalysisData] = useState([]);
-  const [columnDefs, setColumnDefs] = useState([
-    { field: "cart_item_id", headerName: "Cart item id" },
-    { field: "product" },
-    { field: "quantity" },
-    { field: "total price" },
-  ]);
+  const [columnDefs, setColumnDefs] = useState();
 
   const handleInnerTabChange = (event, newValue) => {
     setInnerValueTab(newValue);
@@ -58,7 +55,7 @@ function VerticalTabs(props) {
     }
     if (newValue == 1) {
       getProducts(setIsLoading).then((productsData) => {
-        setColumnDefs([
+        const productColumnDefs = [
           { field: "id", headerName: "Product Id" },
           { field: "Details", cellRenderer: ProductDetailRender },
           { field: "Edit", cellRenderer: ProductEditRender },
@@ -71,13 +68,13 @@ function VerticalTabs(props) {
               rowData: productsData,
             },
           },
-        ]);
+        ];
+        setColumnDefs(productColumnDefs);
         setRowData(productsData);
       });
     } else if (newValue == 3) {
       getOrders(setIsLoading).then((orderData) => {
-        setRowData(orderData);
-        setColumnDefs([
+        const orderColumnDefs = [
           { field: "id", headerName: "Order id" },
           { field: "Items ordered", cellRenderer: ItemsOrderedRender },
           { field: "Urgency level", cellRenderer: UrgencyLevelRender },
@@ -91,7 +88,9 @@ function VerticalTabs(props) {
               rowData: orderData,
             },
           },
-        ]);
+        ];
+        setRowData(orderData);
+        setColumnDefs(orderColumnDefs);
       });
     }
   };
@@ -126,43 +125,7 @@ function VerticalTabs(props) {
           width: "12%",
         }}
       >
-        <Tab
-          label="DashBoard"
-          icon={<i className="fa-solid fa-chart-line"></i>}
-          iconPosition="end"
-        />
-        <Tab
-          label="Products"
-          sx={{ justifyContent: "space-evenly" }}
-          icon={<i className="fa-sharp fa-solid fa-gem"></i>}
-          iconPosition="end"
-        />
-        <Tab
-          label="Add Product"
-          icon={<i className="fa-solid fa-basket-shopping"></i>}
-          iconPosition="end"
-        />
-        <Tab
-          label="Orders"
-          sx={{ justifyContent: "space-evenly" }}
-          icon={<i className="fa-sharp fa-solid fa-truck"></i>}
-          iconPosition="end"
-        />
-        <Tab
-          label="Refunds sent"
-          sx={{ justifyContent: "space-evenly" }}
-          icon={<i className="fa-solid fa-money-bill-wave"></i>}
-          iconPosition="end"
-        />
-        <Tab
-          label="Logout"
-          onClick={() => {
-            props.logOut();
-            console.log("hello");
-          }}
-          icon={<i className="fa-solid fa-right-from-bracket"></i>}
-          iconPosition="end"
-        />
+        <SideTabs logout={props.logOut()} />
       </Tabs>
       {value == 0 && (
         <Box flex={1}>
@@ -181,93 +144,7 @@ function VerticalTabs(props) {
           </Tabs>
           {innerValueTab == 0 && <SalesChart analysisData={analysisData} />}
           {innerValueTab == 1 && (
-            <Grid
-              container
-              height={0.92}
-              width={1}
-              flex={1}
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Grid
-                container
-                width={0.8}
-                height={0.8}
-                textAlign="center"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid
-                  container
-                  flexDirection="column"
-                  xs
-                  justifyContent="space-evenly"
-                  height={1}
-                >
-                  <Grid item fontSize="30px">
-                    Most popular product
-                  </Grid>
-                  <Grid item fontSize="24px" fontStyle="italic">
-                    Handmade{" "}
-                    {analysisData.popularity_metric[0].most_popular.name}
-                  </Grid>
-                  <Grid item>
-                    <img
-                      src={
-                        analysisData.popularity_metric[0].most_popular.image_url
-                      }
-                      alt={analysisData.popularity_metric[0].most_popular.name}
-                      style={{
-                        height: "100px",
-                        width: "100px",
-                        borderRadius: "20px",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item fontSize="24px">
-                    How many bought so far
-                  </Grid>
-                  <Grid item fontSize="20px">
-                    {analysisData.popularity_metric[0].occurance}
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  flexDirection="column"
-                  xs
-                  justifyContent="space-evenly"
-                  height={1}
-                >
-                  <Grid item fontSize="30px">
-                    Least popular product
-                  </Grid>
-                  <Grid item fontSize="24px" fontStyle="italic">
-                    Handmade{" "}
-                    {analysisData.popularity_metric[1].least_popular.name}
-                  </Grid>
-                  <Grid item>
-                    <img
-                      src={
-                        analysisData.popularity_metric[1].least_popular
-                          .image_url
-                      }
-                      alt={analysisData.popularity_metric[1].least_popular.name}
-                      style={{
-                        height: "100px",
-                        width: "100px",
-                        borderRadius: "20px",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item fontSize="24px">
-                    How many bought so far
-                  </Grid>
-                  <Grid item fontSize="20px">
-                    {analysisData.popularity_metric[1].occurance}
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+            <PopularityMetric analysisData={analysisData} />
           )}
         </Box>
       )}
