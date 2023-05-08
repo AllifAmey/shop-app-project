@@ -101,7 +101,7 @@ function CheckOutStep3(props) {
               }}
               style={{ paddingTop: "1rem" }}
             >
-              Test Order
+              Submit Order
             </Button>
           </Grid>
         </Grid>

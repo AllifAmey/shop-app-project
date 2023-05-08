@@ -8,7 +8,7 @@ import CartIcon from "./utility/CartIcon";
 import CartSidePopup from "./utility/CartSidePopup";
 import SupportMenu from "./utility/SupportMenu";
 
-function NavBar() {
+function NavBar(props) {
   /*
   docs:
   Logic for layout- 
@@ -86,7 +86,7 @@ function NavBar() {
             xs={7}
             sx={{ textAlign: "start", fontSize: "30px", color: "red" }}
           >
-            AmeyShopUK
+            SahrahJewellery
           </Grid>
           <Grid
             item
@@ -149,6 +149,11 @@ function NavBar() {
           </Grid>
         </Grid>
       </Box>
+      <p>
+        {props.isDesktop && "Desktop"}
+        {props.isMobile && "Mobile"}
+        {props.isTablet && "Tablet"}
+      </p>
       <CartSidePopup
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}

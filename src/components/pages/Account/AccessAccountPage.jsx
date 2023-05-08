@@ -58,7 +58,16 @@ function AccessAccountPage(props) {
       }
     } else if (title == "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);
-      await loginAPI(setIsLoading, props.login, email, pass);
+      const data = await loginAPI(setIsLoading, email, pass);
+      if (data.user_status == "member") {
+        localStorage.setItem("username", data.name);
+      } else if (data.user_status == "staff") {
+        localStorage.setItem("username", data.email);
+      }
+      const userName = localStorage.getItem("username");
+      localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("user_status", data.user_status);
+      navigate(`/account/${data.user_status}/${userName}`);
     }
   };
 
