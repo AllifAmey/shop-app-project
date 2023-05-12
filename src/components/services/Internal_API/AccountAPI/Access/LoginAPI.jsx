@@ -1,6 +1,9 @@
 import domain from "../../../domain";
 
 export async function loginAPI(setIsLoading, email, pass) {
+  /* 
+  Logs in 
+  */
   setIsLoading(true);
   let response = await fetch(`${domain}/api/user/token/`, {
     method: "POST",

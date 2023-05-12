@@ -41,6 +41,7 @@ function ProductDetailRender(props) {
               container
               item
               flexDirection="column"
+              justifyContent="center"
               alignItems="center"
               xs={6}
               gap="8px"

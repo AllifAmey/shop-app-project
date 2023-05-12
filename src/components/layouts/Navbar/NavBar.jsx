@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import { useState, forwardRef } from "react";
 import { Grid } from "@mui/material";
-import { NavLink as RouterLink } from "react-router-dom";
-import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import AccountIcon from "./utility/AccountIcon";
 import CartIcon from "./utility/CartIcon";
 import CartSidePopup from "./utility/CartSidePopup";
 import SupportMenu from "./utility/SupportMenu";
+import PrimaryLinks from "./utility/PrimaryLinks";
+import PrimaryMobileLinks from "./utility/PrimaryMobileLinks";
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
+import Dialog from "@mui/material/Dialog";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function NavBar(props) {
   /*
@@ -14,22 +23,25 @@ function NavBar(props) {
   Logic for layout- 
   The layout is based on flexbox.
 
+  {props.isDesktop && "Desktop"}
+  {props.isMobile && "Mobile"}
+  {props.isTablet && "Tablet"}
+
    */
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openMobile, setOpenMobile] = useState(false);
+
+  const handleMobileOpen = () => {
+    setOpenMobile(true);
+  };
+
+  const handleMobileClose = () => {
+    setOpenMobile(false);
+  };
 
   // styles
-  const gridLinkStyles = {
-    "&:hover": {
-      backgroundColor: "#f1f3f5",
-      boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
-    },
-    color: "#343a40",
-    height: "100%",
-    display: "flex",
-    borderRadius: "0.2rem",
-    fontSize: "24px",
-  };
 
   const gridLinkIcons = {
     height: "100%",
@@ -51,10 +63,8 @@ function NavBar(props) {
     textAlign: "center",
   };
 
-  const isActiveStyle = {
-    color: "#4dabf7",
-    backgroundColor: "#dee2e6",
-    boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
   function handleClick(event) {
@@ -78,65 +88,17 @@ function NavBar(props) {
           container
           sx={gridStyle}
           direction="row"
-          justifyContent="center"
+          justifyContent="space-between"
           alignItems="center"
         >
           <Grid
             item
-            xs={7}
+            flex={1}
             sx={{ textAlign: "start", fontSize: "30px", color: "red" }}
           >
             SahrahJewellery
           </Grid>
-          <Grid
-            item
-            justifyContent="center"
-            alignItems="center"
-            sx={gridLinkStyles}
-            xs={1}
-            component={RouterLink}
-            to="/home"
-            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
-          >
-            Home
-          </Grid>
-          <Grid
-            item
-            xs={1}
-            justifyContent="center"
-            alignItems="center"
-            sx={gridLinkStyles}
-            component={RouterLink}
-            to="/shop"
-            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
-          >
-            Shop
-          </Grid>
-          <Grid
-            item
-            xs={1}
-            justifyContent="center"
-            alignItems="center"
-            sx={gridLinkStyles}
-            component={RouterLink}
-            to="/story"
-            style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
-          >
-            Our Story
-          </Grid>
-          <Grid item xs={1}>
-            <Link
-              color="#343a40"
-              underline="none"
-              component={RouterLink}
-              to="/help"
-              onMouseOver={handleClick}
-              fontSize={24}
-            >
-              Support
-            </Link>
-          </Grid>
-
+          {props.isDesktop && <PrimaryLinks handleClick={handleClick} />}
           <Grid
             item
             justifyContent="center"
@@ -147,13 +109,41 @@ function NavBar(props) {
             <AccountIcon />
             <CartIcon setDrawerOpen={setIsDrawerOpen}></CartIcon>
           </Grid>
+
+          {(props.isTablet || props.isMobile) && (
+            <>
+              <Grid item sx={1}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMobileOpen}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Grid>
+              <Dialog
+                fullScreen
+                open={openMobile}
+                onClose={handleMobileClose}
+                TransitionComponent={Transition}
+              >
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={handleMobileClose}
+                  aria-label="close"
+                >
+                  <CloseIcon />
+                </IconButton>
+                <PrimaryMobileLinks handleMobileClose={handleMobileClose} />
+              </Dialog>
+            </>
+          )}
         </Grid>
       </Box>
-      <p>
-        {props.isDesktop && "Desktop"}
-        {props.isMobile && "Mobile"}
-        {props.isTablet && "Tablet"}
-      </p>
       <CartSidePopup
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
