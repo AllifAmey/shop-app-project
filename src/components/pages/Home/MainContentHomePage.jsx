@@ -7,6 +7,13 @@ import img from "../../assets/img/icons/arrow-down.png";
 function MainContentHomePage() {
   return (
     <>
+      <button
+        style={{
+          backgroundColor: "red",
+        }}
+      >
+        Change to blue
+      </button>
       <section className={styles["main"]}>
         <div className={styles["center-container"]}>
           <div className={styles["title"]}>SahrahJewellery</div>
@@ -17,14 +24,18 @@ function MainContentHomePage() {
         <Button
           variant="contained"
           size="big"
-          component={RouterLink}
-          to="/shop"
           color="primary"
           sx={{
             fontSize: "15px",
           }}
         >
-          Explore Shop
+          <RouterLink
+            to="/shop"
+            title="Explore Shop"
+            aria-label="link to Product Page"
+          >
+            Explore Shop
+          </RouterLink>
         </Button>
 
         <div className={styles["location-container"]}>

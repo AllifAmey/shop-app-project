@@ -26,7 +26,6 @@ function CartIcon(props) {
     if (cart.length == 0) {
       return 0;
     }
-
     cart.forEach((product) => {
       // each product object has a property called quantity.
       // this is a actual number and added to the itemNum

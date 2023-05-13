@@ -11,8 +11,17 @@ describe("HomePage component", () => {
         <MainContentHomePage />
       </BrowserRouter>
     );
-    const contactPageText = screen.getByText("AmeyShopUK");
-    console.log(contactPageText);
+    const contactPageText = screen.getByText("SahrahJewellery");
     expect(contactPageText).toBeDefined();
+  });
+  test("check if correct text is rendered", () => {
+    //arrange
+    render(
+      <BrowserRouter>
+        <MainContentHomePage />
+      </BrowserRouter>
+    );
+    const colorButton = screen.getByRole("button", { name: "Change to blue" });
+    expect(colorButton).toHaveStyle({ backgroundColor: "red" });
   });
 });
