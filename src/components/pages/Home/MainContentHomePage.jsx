@@ -7,14 +7,10 @@ import img from "../../assets/img/icons/arrow-down.png";
 function MainContentHomePage() {
   return (
     <>
-      <button
-        style={{
-          backgroundColor: "red",
-        }}
+      <section
+        className={styles["main"]}
+        title="Jewellery hammered in background"
       >
-        Change to blue
-      </button>
-      <section className={styles["main"]}>
         <div className={styles["center-container"]}>
           <div className={styles["title"]}>SahrahJewellery</div>
           <div className={styles["short-info"]}>
@@ -28,12 +24,9 @@ function MainContentHomePage() {
           sx={{
             fontSize: "15px",
           }}
+          aria-label="Button link to Product Page"
         >
-          <RouterLink
-            to="/shop"
-            title="Explore Shop"
-            aria-label="link to Product Page"
-          >
+          <RouterLink to="/shop" title="Explore Shop">
             Explore Shop
           </RouterLink>
         </Button>

@@ -1,11 +1,5 @@
 import { Suspense } from "react";
-import {
-  Link as RouterLink,
-  useLoaderData,
-  defer,
-  Await,
-} from "react-router-dom";
-
+import { useLoaderData, defer, Await, json } from "react-router-dom";
 import MainContentHomePage from "./MainContentHomePage";
 import ProductHomePage from "./ProductHomePage";
 import ValuesHomePage from "./ValuesHomePage";

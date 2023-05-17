@@ -61,7 +61,9 @@
 
 Current activity -
 
-Implement far more error handling for APIs and validation for input forms.
+high priority -
 Learning testing to implement future TDD approach for frontend; backend already uses TDD.
+optimising sql and reworking api infrastructure
+error handling on more apis
+medium priority -
 Captcha/throttling to deal with brute force login attempts.
-Optimising SQL and reworking API infrastracture.

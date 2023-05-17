@@ -46,7 +46,7 @@ function ProductHomePage() {
                   width: "100%",
                   objectFit: "cover",
                 }}
-                alt="Ring image"
+                alt="Ring"
                 loading="lazy"
               />
             </Grid>
@@ -92,7 +92,7 @@ function ProductHomePage() {
                   width: "100%",
                   objectFit: "cover",
                 }}
-                alt="Pin Cushion Image"
+                alt="Pin Cushion"
                 loading="lazy"
               />
             </Grid>
@@ -139,7 +139,7 @@ function ProductHomePage() {
                   width: "100%",
                   objectFit: "cover",
                 }}
-                alt="Scrunchy Image"
+                alt="Scrunchy"
                 loading="lazy"
               />
             </Grid>
