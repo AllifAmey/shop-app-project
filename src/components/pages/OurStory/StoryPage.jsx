@@ -95,10 +95,12 @@ function StoryPage() {
                   width={0.9}
                   height={0.95}
                   borderRadius="20px"
+                  component="img"
+                  src={natureImg}
                   sx={{
-                    background: `url(${natureImg}) no-repeat
-                center center/cover`,
+                    objectFit: "cover",
                   }}
+                  alt="Nature"
                 ></Grid>
               </Grid>
             </Grid>
