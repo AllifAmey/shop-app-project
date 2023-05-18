@@ -47,14 +47,14 @@ function FAQPage() {
       delivery: {
         questions: [
           {
-            question: "How do I know my item has been delivered?",
+            question: "How do I know my item has been dispatched?",
             answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+              "If you signed up to the shop, you can log in and find out if your orders have been dispatched on the order section. If not then a email should be sent upon dispatch.",
           },
           {
             question: "When can I expect to have my product delivered?",
             answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+              "Unfortunately, once dispatched, how and when your product is delivered out of our control. We try to dispatch the product as soon as possible.",
           },
         ],
       },
@@ -63,12 +63,12 @@ function FAQPage() {
           {
             question: "How do I get a refund?",
             answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+              "You can email the owner via the contact page to request a refund.",
           },
           {
             question: "What type of payments do you accept?",
             answer:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget",
+              "We only accept Paypal at the moment but are looking to implement more down the line.",
           },
         ],
       },
