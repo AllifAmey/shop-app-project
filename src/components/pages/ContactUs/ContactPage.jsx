@@ -75,6 +75,7 @@ function ContactPage() {
                     </div>
                     <div className={styles["contactInfo-item"]}>
                       <MailOutlineIcon
+                        titleAccess="Email"
                         sx={{ height: "40px", width: "40px", color: "#112A46" }}
                       />
                       <div className={styles["contactInfo-text"]}>
@@ -83,6 +84,7 @@ function ContactPage() {
                     </div>
                     <div className={styles["contactInfo-item"]}>
                       <PhoneIcon
+                        titleAccess="Phone"
                         sx={{ height: "40px", width: "40px", color: "#112A46" }}
                       />
                       <div className={styles["contactInfo-text"]}>
@@ -96,7 +98,12 @@ function ContactPage() {
                       viewBox="0 0 48 48"
                       width="40px"
                       height="40px"
+                      aria-labelledby="youtubeTitle youtubeDesc"
                     >
+                      <title id="youtubeTitle">Youtube Icon</title>
+                      <desc id="youtubeDesc">
+                        A icon representing Youtube's logo
+                      </desc>
                       <path
                         fill="#FF3D00"
                         d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z"
@@ -108,7 +115,13 @@ function ContactPage() {
                       viewBox="0 0 512 512"
                       width="35px"
                       height="35px"
+                      aria-labelledby="etsyTitle etsyDesc"
                     >
+                      <title id="etsyTitle">Etsy Icon</title>
+                      <desc id="etsyDesc">
+                        A illustrated orange circle with the word Etsy in white
+                        letters representing Etsy
+                      </desc>
                       <path
                         fill="#F6851F"
                         d="M474.2,161.7c-16.1-46.6-46.7-87.1-91.3-109.6c-50.9-25.6-111-28.1-166.4-19.3C166.7,40.8,114.2,58.8,76.9,94c-19.6,18.5-34.7,40.9-42.7,66.8c-8,26-10.4,53.1-12.1,80.1c-0.1,1.1-0.4,2-1,2.7c0,0.2,0.1,0.5,0.1,0.8c0,52.9-1.1,108.3,30.1,153.9c25.3,37.1,64.5,61.5,107.2,73.7c88,25.2,194.2,9.6,264.9-50.8C497.5,357.9,504.3,248.9,474.2,161.7z"
@@ -170,7 +183,6 @@ function ContactPage() {
                       label="Message"
                       multiline
                       rows={5}
-                      maxRows={10}
                       fullWidth={true}
                       size="big"
                       name="message"
