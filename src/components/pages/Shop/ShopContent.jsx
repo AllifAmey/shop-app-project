@@ -54,7 +54,7 @@ function ShopContent(props) {
     setProducts(props.products);
     setFilteredProducts(props.products);
     const paginationNum = props.products.length / 8;
-    if (paginationNum == Number.isInteger(paginationNum)) {
+    if (paginationNum === Number.isInteger(paginationNum)) {
       setPagination(paginationNum);
     } else {
       setPagination(Math.trunc(paginationNum) + 1);

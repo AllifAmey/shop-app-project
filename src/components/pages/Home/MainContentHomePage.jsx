@@ -17,19 +17,19 @@ function MainContentHomePage() {
             The best handcrafted Jewellery money can buy at a affordable price.
           </div>
         </div>
-        <Button
-          variant="contained"
-          size="big"
-          color="primary"
-          sx={{
-            fontSize: "15px",
-          }}
-          aria-label="Button link to Product Page"
-        >
-          <RouterLink to="/shop" title="Explore Shop">
+        <RouterLink to="/shop" title="Explore Shop">
+          <Button
+            variant="contained"
+            size="big"
+            color="primary"
+            sx={{
+              fontSize: "15px",
+            }}
+            aria-label="Button link to Product Page"
+          >
             Explore Shop
-          </RouterLink>
-        </Button>
+          </Button>
+        </RouterLink>
 
         <div className={styles["location-container"]}>
           <div className={styles["location-title"]}>Our Physical shop</div>

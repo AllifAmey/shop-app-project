@@ -117,13 +117,14 @@ function ProductCard(props) {
             }}
             onClick={handleClickOpen}
             disableRipple
+            aria-label="Popup for more product info"
           >
             <CardMedia
               component="img"
               height="140"
               width="184"
               src={props.product.image_url}
-              alt={props.product.catagory}
+              alt={props.product.name}
               sx={{
                 borderRadius: "20px",
               }}
@@ -131,24 +132,33 @@ function ProductCard(props) {
           </Box>
 
           <div className={styles["card-info"]}>
-            Handmade {props.product.name}
+            {`Handmade ${props.product.name}`}
           </div>
           <div
             className={styles["card-price"]}
           >{`£${props.product.price}`}</div>
           <div className={styles["card-delivery"]}>FREE UK delivery</div>
           <div className={styles["btn-purchase"]}>
-            <Button
-              variant="contained"
-              size="big"
-              component={RouterLink}
+            <RouterLink
               to={`/product/handmade-${props.product.name
                 .toLowerCase()
                 .replaceAll(" ", "-")}-${props.product.id}`}
+              title="Details"
             >
-              Details
-            </Button>
-            <Button variant="contained" size="medium" onClick={addCartHandler}>
+              <Button
+                variant="contained"
+                size="big"
+                aria-label={`Button link to ${props.product.name} detail page`}
+              >
+                Details
+              </Button>
+            </RouterLink>
+            <Button
+              variant="contained"
+              size="medium"
+              onClick={addCartHandler}
+              aria-label={`Add ${props.product.name} to cart`}
+            >
               Add Cart
             </Button>
           </div>
@@ -176,7 +186,7 @@ function ProductCard(props) {
         <CardMedia
           component="img"
           image={props.product.image_url}
-          alt={props.product.catagory}
+          alt={`Large ${props.product.name}`}
           sx={{
             height: "80%",
             width: "80vh",
@@ -194,15 +204,15 @@ function ProductCard(props) {
           }}
         >
           <div className={styles["dialog-container"]}>
-            <DialogTitle fontSize={30}>Quick Info </DialogTitle>
-            <div className={styles["dialog-item"]}>Handmade item </div>
+            <DialogTitle fontSize={30}>Quick Info</DialogTitle>
+            <div className={styles["dialog-item"]}>Handcrafted item</div>
             <div className={styles["dialog-item"]}>
-              Handmade item Dispatches from a small business in United Kingdom
+              Dispatches from a small business in United Kingdom
             </div>
             <div className={styles["dialog-item"]}>Materials: copper</div>
             <div className={styles["dialog-item"]}>FREE UK delivery</div>
             <DialogActions>
-              <Button onClick={handleClose} size="big">
+              <Button onClick={handleClose} size="big" aria-label="Close Popup">
                 Close
               </Button>
             </DialogActions>

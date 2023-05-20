@@ -45,7 +45,9 @@ function FiltersIcon(props) {
               <Grid container key={filter_name} sx={filterItemStyle}>
                 <Grid item sx={filterNameStyle}>
                   <Checkbox
-                    inputProps={{ "aria-label": "controlled" }}
+                    inputProps={{
+                      "aria-label": `filter ${filter_name} checkbox`,
+                    }}
                     checked={filter_val}
                     onChange={(event) => {
                       // copies the current status to new_object

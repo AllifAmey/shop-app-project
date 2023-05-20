@@ -1,8 +1,8 @@
 import {
-  fireEvent,
   render,
   screen,
 } from "../../../../../test-utils/testing-library-utils";
+import userEvent from "@testing-library/user-event";
 
 import MainContentHomePage from "../MainContentHomePage";
 
@@ -25,7 +25,8 @@ describe("MainContentHomePage component", () => {
     expect(BriefCompanyText).toBeInTheDocument();
     expect(CompanDirectionText).toBeInTheDocument();
   });
-  test("button has correct initial color and background", () => {
+  test("button has correct initial color and background", async () => {
+    const user = userEvent.setup();
     render(<MainContentHomePage />);
     // grab button by name.
     const colorButton = screen.getByRole("button", {
@@ -34,7 +35,7 @@ describe("MainContentHomePage component", () => {
     // check original style is as such.
     expect(colorButton).toHaveStyle({ backgroundColor: "rgb(250, 162, 193);" });
     // click button
-    fireEvent.click(colorButton);
+    await user.click(colorButton);
     // background changes
     expect(colorButton).toHaveStyle({ backgroundColor: "rgb(247, 131, 172);" });
   });
