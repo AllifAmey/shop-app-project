@@ -23,7 +23,7 @@ function CartIcon(props) {
     // quantity property of the product object.
     let itemNum = 0;
 
-    if (cart.length == 0) {
+    if (cart.length === 0) {
       return 0;
     }
     cart.forEach((product) => {
@@ -62,7 +62,12 @@ function CartIcon(props) {
           height="20.000000pt"
           viewBox="0 0 30.000000 30.000000"
           preserveAspectRatio="xMidYMid meet"
+          aria-labelledby="cartTitle cartDesc"
         >
+          <title id="cartTitle">Cart Icon</title>
+          <desc id="cartDesc">
+            A black coloured illustration of a shopping trolley.
+          </desc>
           <g
             transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
             fill="#000000"

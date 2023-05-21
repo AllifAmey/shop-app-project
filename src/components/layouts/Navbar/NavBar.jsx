@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState } from "react";
 import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import AccountIcon from "./utility/AccountIcon";
@@ -6,16 +6,7 @@ import CartIcon from "./utility/CartIcon";
 import CartSidePopup from "./utility/CartSidePopup";
 import SupportMenu from "./utility/SupportMenu";
 import PrimaryLinks from "./utility/PrimaryLinks";
-import PrimaryMobileLinks from "./utility/PrimaryMobileLinks";
-import MenuIcon from "@mui/icons-material/Menu";
-import IconButton from "@mui/material/IconButton";
-import Dialog from "@mui/material/Dialog";
-import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
-
-const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import HamburgerMenu from "./utility/HamburgerMenu";
 
 function NavBar(props) {
   /*
@@ -28,7 +19,6 @@ function NavBar(props) {
   {props.isTablet && "Tablet"}
 
    */
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMobile, setOpenMobile] = useState(false);
@@ -61,10 +51,6 @@ function NavBar(props) {
     height: "100%",
     marginLeft: "5%",
     textAlign: "center",
-  };
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
   };
 
   function handleClick(event) {
@@ -113,33 +99,12 @@ function NavBar(props) {
           {(props.isTablet || props.isMobile) && (
             <>
               <Grid item sx={1}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMobileOpen}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
+                <HamburgerMenu
+                  handleMobileOpen={handleMobileOpen}
+                  openMobile={openMobile}
+                  handleMobileClose={handleMobileClose}
+                />
               </Grid>
-              <Dialog
-                fullScreen
-                open={openMobile}
-                onClose={handleMobileClose}
-                TransitionComponent={Transition}
-              >
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  onClick={handleMobileClose}
-                  aria-label="close"
-                >
-                  <CloseIcon />
-                </IconButton>
-                <PrimaryMobileLinks handleMobileClose={handleMobileClose} />
-              </Dialog>
             </>
           )}
         </Grid>

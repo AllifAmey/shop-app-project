@@ -18,7 +18,7 @@ function AccountIcon() {
       color="#343a40"
       component={RouterLink}
       to={`/account/${
-        localStorage.getItem("username") == undefined
+        localStorage.getItem("username") === undefined
           ? "login"
           : localStorage.getItem("user_status") +
             "/" +
@@ -33,11 +33,16 @@ function AccountIcon() {
         height="20.000000pt"
         viewBox="0 0 30.000000 30.000000"
         preserveAspectRatio="xMidYMid meet"
+        aria-labelledby="accountTitle accountDesc"
       >
+        <title id="accountTitle">Account Icon</title>
+        <desc id="accountDesc">
+          A black coloured representing the upper body of a stick man
+        </desc>
         <g
           transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
           fill={
-            localStorage.getItem("username") == undefined
+            localStorage.getItem("username") === undefined
               ? "#000000"
               : "#0062ff"
           }

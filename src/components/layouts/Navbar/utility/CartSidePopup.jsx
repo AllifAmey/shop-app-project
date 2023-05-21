@@ -39,7 +39,7 @@ function CartSidePopup(props) {
 
   useEffect(() => {
     // grab the user's cart and store into frontend's cart
-    if (localStorage.getItem("isLogged") == "LOGGED_IN") {
+    if (localStorage.getItem("isLogged") === "LOGGED_IN") {
       getCart(setIsLoading).then((user_cart) => {
         setIsLoading(true);
         dispatch(cartActions.replaceCart(user_cart));
@@ -51,33 +51,33 @@ function CartSidePopup(props) {
   function subtotalNum(total = false) {
     let itemNum = 0;
 
-    if (cart.length == 0) {
+    if (cart.length === 0) {
       return 0;
     }
 
     cart.forEach((cartItem) => {
       itemNum += Number(cartItem.product.price * cartItem.quantity);
     });
-    if (total == false) {
+    if (total === false) {
       return itemNum.toFixed(2);
     }
     return (itemNum + 2).toFixed(2);
   }
 
   const CartHandler = (change_item, cart_item) => {
-    if (localStorage.getItem("isLogged") == "LOGGED_IN") {
+    if (localStorage.getItem("isLogged") === "LOGGED_IN") {
       let cart_item_id = cart_item.cart_item_id;
       let product_id = cart_item.product.id;
       let existing_quantity = cart_item.quantity;
 
-      if (change_item == "delete") {
+      if (change_item === "delete") {
         deleteCartItem(setIsLoading, cart_item_id);
         dispatch(cartActions.deleteSpecificCartItem(cart_item_id));
         return;
       }
-      if (change_item == "increase") {
+      if (change_item === "increase") {
         existing_quantity++;
-      } else if (change_item == "decrease") {
+      } else if (change_item === "decrease") {
         existing_quantity--;
       }
       patchCartItem(
@@ -86,15 +86,10 @@ function CartSidePopup(props) {
         product_id,
         existing_quantity
       ).then((_) => {
-        dispatch(
-          cartActions.changeExistingItem([
-            change_item,
-            cartcart_item_id_item__id,
-          ])
-        );
+        dispatch(cartActions.changeExistingItem([change_item, cart_item_id]));
       });
     } else {
-      if (change_item == "delete") {
+      if (change_item === "delete") {
         dispatch(
           cartActions.deleteSpecificCartItem([
             cart_item.product.id,
@@ -138,6 +133,7 @@ function CartSidePopup(props) {
                   <Box
                     component="img"
                     src={item.product.image_url}
+                    alt={item.product.name}
                     sx={{
                       width: "60px",
                       height: "60px",
@@ -166,21 +162,21 @@ function CartSidePopup(props) {
                           CartHandler("increase", item);
                         }}
                       >
-                        <AddIcon></AddIcon>
+                        <AddIcon titleAccess="Add item by 1"></AddIcon>
                       </Grid>
 
                       <Grid
                         item
                         sx={{ cursor: "pointer" }}
                         onClick={() => {
-                          if (item.quantity - 1 == 0) {
+                          if (item.quantity - 1 === 0) {
                             CartHandler("delete", item);
                           } else {
                             CartHandler("decrease", item);
                           }
                         }}
                       >
-                        <RemoveIcon></RemoveIcon>
+                        <RemoveIcon titleAccess="Reduce item by 1"></RemoveIcon>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -204,19 +200,21 @@ function CartSidePopup(props) {
           >
             <Grid container direction="row" justifyContent="space-between">
               <Grid item>Subtotal</Grid>
-              <Grid item>{subtotalNum() == 0 ? "" : `£ ${subtotalNum()}`}</Grid>
+              <Grid item>
+                {subtotalNum() === 0 ? "" : `£ ${subtotalNum()}`}
+              </Grid>
             </Grid>
             <Grid container direction="row" justifyContent="space-between">
               <Grid item>Delivery fee</Grid>
-              <Grid item>{cart.length == 0 ? "" : "£2.00"}</Grid>
+              <Grid item>{cart.length === 0 ? "" : "£2.00"}</Grid>
             </Grid>
             <Grid container direction="row" justifyContent="space-between">
               <Grid item>Total to pay</Grid>
               <Grid item>
-                {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
+                {subtotalNum() === 0 ? "" : `£ ${subtotalNum(true)}`}
               </Grid>
             </Grid>
-            {subtotalNum() == 0 ? (
+            {subtotalNum() === 0 ? (
               ""
             ) : (
               <Grid container direction="row" justifyContent="center">

@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import { NavLink as RouterLink } from "react-router-dom";
-import Link from "@mui/material/Link";
 
 function PrimaryMobileLinks(props) {
   /*
@@ -36,7 +35,7 @@ function PrimaryMobileLinks(props) {
         component={RouterLink}
         to="/home"
         onClick={() => {
-          handleMobileClose();
+          props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
@@ -48,7 +47,7 @@ function PrimaryMobileLinks(props) {
         component={RouterLink}
         to="/shop"
         onClick={() => {
-          handleMobileClose();
+          props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
@@ -60,7 +59,7 @@ function PrimaryMobileLinks(props) {
         component={RouterLink}
         to="/story"
         onClick={() => {
-          handleMobileClose();
+          props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
@@ -72,7 +71,7 @@ function PrimaryMobileLinks(props) {
         component={RouterLink}
         to="/support/faq"
         onClick={() => {
-          handleMobileClose();
+          props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
@@ -84,7 +83,7 @@ function PrimaryMobileLinks(props) {
         component={RouterLink}
         to="/support/contact"
         onClick={() => {
-          handleMobileClose();
+          props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
