@@ -29,7 +29,6 @@ describe("Testing ShopContent component inside of ShopPage component", () => {
   }
   test("check productCard is rendered", () => {
     render(<ShopContent products={FAKE_TEST_DATA} />);
-    //screen.debug();
     const productCardName = screen.getByText(`Handmade ${product.name}`);
     const productCardImage = screen.getByAltText(`${product.name}`);
     const productCardDetailsButton = screen.getByRole("button", {
