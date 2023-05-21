@@ -36,19 +36,20 @@ function AccessAccountPage(props) {
   const navigate = useNavigate();
 
   const params = useParams();
+  console.log(params.accessType);
 
   const title = CapitaliseEachWord(params.accessType);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title == "Login") {
+    if (title === "Login") {
       const data = await loginAPI(setIsLoading, email, pass);
-      if (data == "error") {
+      if (data === "error") {
         // set error
       } else {
-        if (data.user_status == "member") {
+        if (data.user_status === "member") {
           localStorage.setItem("username", data.name);
-        } else if (data.user_status == "staff") {
+        } else if (data.user_status === "staff") {
           localStorage.setItem("username", data.email);
         }
         const userName = localStorage.getItem("username");
@@ -56,12 +57,12 @@ function AccessAccountPage(props) {
         localStorage.setItem("user_status", data.user_status);
         navigate(`/account/${data.user_status}/${userName}`);
       }
-    } else if (title == "Sign Up") {
+    } else if (title === "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);
       const data = await loginAPI(setIsLoading, email, pass);
-      if (data.user_status == "member") {
+      if (data.user_status === "member") {
         localStorage.setItem("username", data.name);
-      } else if (data.user_status == "staff") {
+      } else if (data.user_status === "staff") {
         localStorage.setItem("username", data.email);
       }
       const userName = localStorage.getItem("username");
@@ -103,7 +104,7 @@ function AccessAccountPage(props) {
                   height={0.3}
                 >
                   <Grid item fontSize={44}>
-                    Amey Jewellery
+                    SahrahJewellery
                   </Grid>
                   <Grid item fontSize={30} fontWeight={800}>
                     {title}
@@ -140,6 +141,9 @@ function AccessAccountPage(props) {
                             setName(e.target.value);
                           }}
                           required
+                          inputProps={{
+                            "aria-label": "Name",
+                          }}
                         />
                       </Grid>
                     </Grid>
@@ -161,6 +165,9 @@ function AccessAccountPage(props) {
                         label="Email"
                         variant="outlined"
                         size="big"
+                        inputProps={{
+                          "aria-label": "Email",
+                        }}
                         onChange={(e) => {
                           setEmail(e.target.value);
                         }}
@@ -188,6 +195,9 @@ function AccessAccountPage(props) {
                           label="Password"
                           variant="outlined"
                           size="big"
+                          inputProps={{
+                            "aria-label": "Password",
+                          }}
                           onChange={(e) => {
                             setPass(e.target.value);
                           }}
@@ -202,21 +212,37 @@ function AccessAccountPage(props) {
                       size="big"
                       fullWidth
                       onClick={handleSubmit}
+                      aria-label={title}
                     >
                       {title}
                     </Button>
                   </Grid>
-                  {title == "Login" ? (
+                  {title === "Login" ? (
                     <Grid item container justifyContent="space-evenly">
-                      <Grid item component={RouterLink} to="/account/sign_up">
+                      <Grid
+                        item
+                        component={RouterLink}
+                        to="/account/sign_up"
+                        aria-label="Link to sign up to shop"
+                      >
                         Don't have account?
                       </Grid>
-                      <Grid item component={RouterLink} to="/account/recover">
+                      <Grid
+                        item
+                        component={RouterLink}
+                        to="/account/recover"
+                        aria-label="Link to recover account by email"
+                      >
                         Forgot password?
                       </Grid>
                     </Grid>
                   ) : (
-                    <Grid item component={RouterLink} to="/account/login">
+                    <Grid
+                      item
+                      component={RouterLink}
+                      to="/account/login"
+                      aria-label="Link to Log in to shop"
+                    >
                       Have an account?
                     </Grid>
                   )}

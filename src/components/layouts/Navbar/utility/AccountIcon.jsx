@@ -12,13 +12,14 @@ function AccountIcon() {
   else go to /account/login
   
   */
+  /* eslint-disable */
   return (
     <Link
       underline="none"
       color="#343a40"
       component={RouterLink}
       to={`/account/${
-        localStorage.getItem("username") === undefined
+        localStorage.getItem("username") == undefined
           ? "login"
           : localStorage.getItem("user_status") +
             "/" +
@@ -42,7 +43,7 @@ function AccountIcon() {
         <g
           transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
           fill={
-            localStorage.getItem("username") === undefined
+            localStorage.getItem("username") == undefined
               ? "#000000"
               : "#0062ff"
           }
