@@ -7,24 +7,29 @@ import userEvent from "@testing-library/user-event";
 import ShopContent from "../ShopContent";
 
 describe("Testing ShopContent component inside of ShopPage component", () => {
-  const FAKE_TEST_DATA = [
-    {
-      catagory: "Ring",
-      description_long:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus et molestie ac feugiat sed lectus. Ut lectus arcu bibendum at varius. Velit scelerisque in dictum non. Sagittis eu volutpat odio",
-      description_short:
-        "Handmade item#Dispatches from a small business in United Kingdom#Materials: copper#FREE UK delivery",
-      id: 1,
-      image_url:
-        "https://firebasestorage.googleapis.com/v0/b/shop-app-project-366818.appspot.com/o/images%2Fproduct%2Fcard1.avif?alt=media&token=c90c8f68-e3af-406b-a728-e2b1991eab85",
-      name: "ring",
-      price: "3.99",
-    },
-  ];
+  const product = {
+    catagory: "Ring",
+    description_long:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus et molestie ac feugiat sed lectus. Ut lectus arcu bibendum at varius. Velit scelerisque in dictum non. Sagittis eu volutpat odio",
+    description_short:
+      "Handmade item#Dispatches from a small business in United Kingdom#Materials: copper#FREE UK delivery",
+    id: 1,
+    image_url:
+      "https://firebasestorage.googleapis.com/v0/b/shop-app-project-366818.appspot.com/o/images%2Fproduct%2Fcard1.avif?alt=media&token=c90c8f68-e3af-406b-a728-e2b1991eab85",
+    name: "ring",
+    price: "3.99",
+  };
+  const FAKE_TEST_DATA = [product];
+  let BIG_FAKE_TEST_DATA = [];
+
+  for (var i = 0; i < 10; i++) {
+    const new_product = { ...product };
+    new_product.id = i;
+    BIG_FAKE_TEST_DATA.push(new_product);
+  }
   test("check productCard is rendered", () => {
     render(<ShopContent products={FAKE_TEST_DATA} />);
     //screen.debug();
-    const product = FAKE_TEST_DATA[0];
     const productCardName = screen.getByText(`Handmade ${product.name}`);
     const productCardImage = screen.getByAltText(`${product.name}`);
     const productCardDetailsButton = screen.getByRole("button", {
@@ -46,7 +51,6 @@ describe("Testing ShopContent component inside of ShopPage component", () => {
   });
   test("check filters are correctly rendered", () => {
     render(<ShopContent products={FAKE_TEST_DATA} />);
-    const product = FAKE_TEST_DATA[0];
     const filterSectionTitle = screen.getByText(`Filter Items`);
     const filterCheckBox = screen.getByRole("checkbox", {
       name: `filter ${product.catagory} checkbox`,
@@ -60,7 +64,6 @@ describe("Testing ShopContent component inside of ShopPage component", () => {
   test("check filter functionality works", async () => {
     const user = userEvent.setup();
     render(<ShopContent products={FAKE_TEST_DATA} />);
-    const product = FAKE_TEST_DATA[0];
     const filterCheckBox = screen.getByRole("checkbox", {
       name: `filter ${product.catagory} checkbox`,
     });
@@ -89,7 +92,6 @@ describe("Testing ShopContent component inside of ShopPage component", () => {
   });
 
   test("check model/popup functionality works on ProductCard", async () => {
-    const product = FAKE_TEST_DATA[0];
     const user = userEvent.setup();
     render(<ShopContent products={FAKE_TEST_DATA} />);
     // check modelButton exist
@@ -136,5 +138,26 @@ describe("Testing ShopContent component inside of ShopPage component", () => {
     expect(ModelInfoPiece3).toBeInTheDocument();
     expect(ModelInfoPiece4.length).toEqual(2);
     expect(ModelCloseButton).toBeInTheDocument();
+  });
+  test("check pagination functionality works", async () => {
+    // there are 10 products in BIG_FAKE_TEST_DATA
+    const user = userEvent.setup();
+    render(<ShopContent products={BIG_FAKE_TEST_DATA} />);
+    const filterSectionTitle = screen.getByText(`Filter Items`);
+    // check there are 2 buttons for each page
+    const page1Button = screen.getByRole("button", { name: "page 1" });
+    const page2Button = screen.getByRole("button", { name: "Go to page 2" });
+    expect(page1Button).toBeInTheDocument();
+    expect(page2Button).toBeInTheDocument();
+    // check 8 productCards are rendered.
+    const productCardArrayPage1 = screen.getAllByText("FREE UK delivery");
+    expect(productCardArrayPage1.length).toEqual(8);
+    // click second page of shop
+    await user.click(page2Button);
+    // check 2 productCards are rendered.
+    const productCardArrayPage2 = screen.getAllByText("FREE UK delivery");
+    expect(productCardArrayPage2.length).toEqual(2);
+
+    expect(filterSectionTitle).toBeInTheDocument();
   });
 });

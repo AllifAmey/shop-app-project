@@ -4,12 +4,13 @@ import styles from "./ProductCard.module.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { Link as RouterLink } from "react-router-dom";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/index";
 import {
@@ -27,7 +28,7 @@ function ProductCard(props) {
   const dispatch = useDispatch();
 
   const addCartHandler = () => {
-    if (localStorage.getItem("isLogged") == "LOGGED_IN") {
+    if (localStorage.getItem("isLogged") === "LOGGED_IN") {
       getCart(setIsLoading).then((user_cart) => {
         setIsLoading(true);
         const existingCartItem = user_cart.find(
@@ -50,7 +51,7 @@ function ProductCard(props) {
           });
         }
       });
-    } else if (localStorage.getItem("isLogged") != "LOGGED_IN") {
+    } else if (localStorage.getItem("isLogged") !== "LOGGED_IN") {
       // if user not logged in just pass the product id
       const existingCartItem = cartRedux.find(
         (cart_item) => cart_item.product.id === props.product.id
@@ -153,14 +154,18 @@ function ProductCard(props) {
                 Details
               </Button>
             </RouterLink>
-            <Button
-              variant="contained"
-              size="medium"
-              onClick={addCartHandler}
-              aria-label={`Add ${props.product.name} to cart`}
-            >
-              Add Cart
-            </Button>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <Button
+                variant="contained"
+                size="medium"
+                onClick={addCartHandler}
+                aria-label={`Add ${props.product.name} to cart`}
+              >
+                Add Cart
+              </Button>
+            )}
           </div>
         </div>
       </Card>
