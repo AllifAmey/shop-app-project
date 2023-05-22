@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef, useState } from "react";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form";
 function CheckOutStep1_Part1(props) {
   const first_name = useRef(""),
     last_name = useRef("");
-  const [phone, setPhone] = React.useState("");
-  const [phoneError, setPhoneError] = React.useState(false);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState(false);
   /*
   const handleChange = (newPhone) => {
     setPhone(newPhone);
@@ -40,7 +40,9 @@ function CheckOutStep1_Part1(props) {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    if (!phoneError) {
+    if (!matchIsValidTel(phone)) {
+      setPhoneError(true);
+    } else if (!phoneError) {
       props.changeStep("forward");
       props.setDeliveryInfo({
         ...props.deliveryInfo,
@@ -86,6 +88,10 @@ function CheckOutStep1_Part1(props) {
                 variant="outlined"
                 size="small"
                 inputRef={first_name}
+                inputProps={{
+                  "aria-label": "First Name",
+                }}
+                required
               />
             </Grid>
           </Grid>
@@ -99,6 +105,10 @@ function CheckOutStep1_Part1(props) {
                 variant="outlined"
                 size="small"
                 inputRef={last_name}
+                inputProps={{
+                  "aria-label": "Last Name",
+                }}
+                required
               />
             </Grid>
           </Grid>
@@ -130,6 +140,11 @@ function CheckOutStep1_Part1(props) {
               })}
               error={!!errors?.email}
               helperText={errors?.email ? errors.email.message : null}
+              inputProps={{
+                "aria-label": "Email",
+                "aria-invalid": `${errors?.email ? "true" : "false"}`,
+              }}
+              required
             />
           </Grid>
         </Grid>
@@ -152,8 +167,18 @@ function CheckOutStep1_Part1(props) {
               }}
               error={phoneError}
               helperText={
-                phoneError ? "Invalid Phone number" : "Valid Phone Number"
+                phoneError
+                  ? "Invalid Phone number"
+                  : phone === ""
+                  ? "Empty Phone Number"
+                  : "Valid Phone Number"
               }
+              inputProps={{
+                "aria-label": "Phone",
+                "aria-invalid": `${
+                  phoneError || phone === "" ? "true" : "false"
+                }`,
+              }}
             />
           </Grid>
         </Grid>
@@ -163,6 +188,7 @@ function CheckOutStep1_Part1(props) {
             size="big"
             type="submit"
             style={{ paddingTop: "1rem" }}
+            aria-label="Go to physical address page"
           >
             Continue
           </Button>

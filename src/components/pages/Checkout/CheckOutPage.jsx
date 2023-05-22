@@ -49,14 +49,14 @@ function CheckOutPage() {
   function subtotalNum(total = false) {
     let itemNum = 0;
 
-    if (cart.length == 0) {
+    if (cart.length === 0) {
       return 0;
     }
 
     cart.forEach((cartItem) => {
       itemNum += Number(cartItem.product.price * cartItem.quantity);
     });
-    if (total == false) {
+    if (total === false) {
       return itemNum.toFixed(2);
     }
     return (itemNum + 2).toFixed(2);
@@ -76,6 +76,7 @@ function CheckOutPage() {
 
   // steps
 
+  /* eslint-disable */
   const steps = {
     0: (
       <CheckOutStep1_Part1
@@ -108,6 +109,7 @@ function CheckOutPage() {
     ),
   };
 
+  /* eslint-enable */
   return (
     <>
       <Container maxWidth="lg" height="auto">
@@ -115,17 +117,27 @@ function CheckOutPage() {
           <Grid item container justifyContent="center" alignItems="center">
             <Stepper
               alternativeLabel
-              activeStep={count == 1 || count == 0 ? 0 : count - 1}
+              activeStep={count === 1 || count === 0 ? 0 : count - 1}
               sx={{ width: "50%", paddingTop: "2rem" }}
             >
               <Step>
-                <StepLabel>Address</StepLabel>
+                <StepLabel
+                  StepIconProps={{
+                    titleAccess: "Step 1",
+                  }}
+                >
+                  Address
+                </StepLabel>
               </Step>
               <Step>
-                <StepLabel>Delivery</StepLabel>
+                <StepLabel StepIconProps={{ titleAccess: "Step 2" }}>
+                  Delivery
+                </StepLabel>
               </Step>
               <Step>
-                <StepLabel>Payments</StepLabel>
+                <StepLabel StepIconProps={{ titleAccess: "Step 3" }}>
+                  Payments
+                </StepLabel>
               </Step>
             </Stepper>
           </Grid>
@@ -157,17 +169,17 @@ function CheckOutPage() {
               <Grid item container justifyContent="space-between">
                 <Grid item>Subtotal</Grid>
                 <Grid item>
-                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum()}`}
+                  {subtotalNum() === 0 ? "" : `£ ${subtotalNum()}`}
                 </Grid>
               </Grid>
               <Grid item container justifyContent="space-between">
                 <Grid item>Delivery fee</Grid>
-                <Grid item>{subtotalNum() == 0 ? "" : "£2.00"}</Grid>
+                <Grid item>{subtotalNum() === 0 ? "" : "£2.00"}</Grid>
               </Grid>
               <Grid item container justifyContent="space-between">
                 <Grid item>Total to pay</Grid>
                 <Grid item>
-                  {subtotalNum() == 0 ? "" : `£ ${subtotalNum(true)}`}
+                  {subtotalNum() === 0 ? "" : `£ ${subtotalNum(true)}`}
                 </Grid>
               </Grid>
             </Grid>
