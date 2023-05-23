@@ -164,6 +164,7 @@ function CheckOutStep2(props) {
               });
             }}
             style={{ paddingTop: "1rem" }}
+            aria-label="Go back to payment step"
           >
             Continue
           </Button>

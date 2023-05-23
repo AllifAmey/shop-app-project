@@ -45,6 +45,10 @@ function CheckOutStep3(props) {
 
     */
 
+  // This needs a lot of work
+  // TODO: Ensure the current delivery information is clear.
+  // TODO: Ensure the payment button works completely and on success submit orders
+
   return (
     <>
       <Grid
@@ -71,7 +75,7 @@ function CheckOutStep3(props) {
           <PaymentButton></PaymentButton>
           <Grid item container flexDirection="column" width={0.5}>
             {Object.entries(props.deliveryInfo).map(([key, value]) => (
-              <Grid item container gap={2}>
+              <Grid item container gap={2} key={key}>
                 <Grid item>{key}</Grid>
                 <Grid item>{value}</Grid>
               </Grid>
@@ -100,6 +104,7 @@ function CheckOutStep3(props) {
                 dispatch(cartActions.replaceCart([]));
               }}
               style={{ paddingTop: "1rem" }}
+              aria-label="Submit Order"
             >
               Submit Order
             </Button>
@@ -119,6 +124,7 @@ function CheckOutStep3(props) {
               props.changeStep("back");
             }}
             style={{ paddingTop: "1rem" }}
+            aria-label="Go back Delivery step"
           >
             Back
           </Button>
@@ -129,6 +135,7 @@ function CheckOutStep3(props) {
               props.changeStep("forward");
             }}
             style={{ paddingTop: "1rem" }}
+            aria-label="Complete Order"
           >
             Complete
           </Button>
