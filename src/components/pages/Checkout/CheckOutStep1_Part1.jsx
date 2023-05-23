@@ -188,7 +188,7 @@ function CheckOutStep1_Part1(props) {
             size="big"
             type="submit"
             style={{ paddingTop: "1rem" }}
-            aria-label="Go to physical address page"
+            aria-label="Go to physical address step"
           >
             Continue
           </Button>

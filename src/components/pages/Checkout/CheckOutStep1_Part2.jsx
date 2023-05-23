@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CountrySelect from "./utility/CountrySelect";
+import { useForm } from "react-hook-form";
 
 function CheckOutStep1_Part2(props) {
   const address_line1 = useRef(""),
@@ -13,6 +14,23 @@ function CheckOutStep1_Part2(props) {
   const miniContainerStyles = {
     fontSize: "20px",
   };
+  const {
+    _,
+    handleSubmit,
+    formState: { __ },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    props.changeStep("forward");
+    props.setDeliveryInfo({
+      ...props.deliveryInfo,
+      address: `${address_line1.current.value} # ${address_line2.current.value}`,
+      city: city.current.value,
+      country: country.current.value,
+      post_code: post_code.current.value,
+    });
+  };
+
   return (
     <>
       <Grid
@@ -23,6 +41,8 @@ function CheckOutStep1_Part2(props) {
         justifyContent="start"
         gap={2}
         height="100vh"
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Grid
           item
@@ -54,6 +74,10 @@ function CheckOutStep1_Part2(props) {
                 variant="outlined"
                 size="small"
                 inputRef={address_line1}
+                inputProps={{
+                  "aria-label": "Address Line 1",
+                }}
+                required
               />
             </Grid>
             <Grid item>
@@ -65,6 +89,9 @@ function CheckOutStep1_Part2(props) {
                 variant="outlined"
                 size="small"
                 inputRef={address_line2}
+                inputProps={{
+                  "aria-label": "Address Line 2",
+                }}
               />
             </Grid>
           </Grid>
@@ -80,6 +107,10 @@ function CheckOutStep1_Part2(props) {
                 variant="outlined"
                 size="small"
                 inputRef={city}
+                inputProps={{
+                  "aria-label": "City",
+                }}
+                required
               />
             </Grid>
           </Grid>
@@ -94,6 +125,10 @@ function CheckOutStep1_Part2(props) {
                 variant="outlined"
                 size="small"
                 inputRef={post_code}
+                inputProps={{
+                  "aria-label": "Post Code",
+                }}
+                required
               />
             </Grid>
           </Grid>
@@ -124,23 +159,16 @@ function CheckOutStep1_Part2(props) {
               props.changeStep("back");
             }}
             style={{ paddingTop: "1rem" }}
+            aria-label="Go back to Contact Step"
           >
             Back
           </Button>
           <Button
             variant="text"
             size="big"
-            onClick={() => {
-              props.changeStep("forward");
-              props.setDeliveryInfo({
-                ...props.deliveryInfo,
-                address: `${address_line1.current.value} # ${address_line2.current.value}`,
-                city: city.current.value,
-                country: country.current.value,
-                post_code: post_code.current.value,
-              });
-            }}
+            type="submit"
             style={{ paddingTop: "1rem" }}
+            aria-label="Go to Delivery step"
           >
             Continue
           </Button>

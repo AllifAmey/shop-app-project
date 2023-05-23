@@ -148,6 +148,7 @@ function CheckOutStep2(props) {
               props.changeStep("back");
             }}
             style={{ paddingTop: "1rem" }}
+            aria-label="Go back to physical address step"
           >
             Back
           </Button>
