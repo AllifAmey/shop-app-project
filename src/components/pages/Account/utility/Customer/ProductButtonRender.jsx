@@ -1,13 +1,13 @@
 import { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogTitle,
-  DialogContent,
-  CardMedia,
-  Grid,
-} from "@mui/material";
+
+// 3rd party components.
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
 
 function ProductButtonRender(props) {
   const [open, setOpen] = useState(false);
@@ -35,6 +35,7 @@ function ProductButtonRender(props) {
           onClick={() => {
             handleOpen();
           }}
+          aria-label="Product Detail"
         >
           Product Details
         </Button>

@@ -3,8 +3,7 @@ import { rest } from "msw";
 
 export const handlers = [
   // handles GET product request
-  rest.get("http://localhost:8000/api/shop/products/"),
-  (req, res, ctx) => {
+  rest.get("http://localhost:8000/api/shop/products/", (req, res, ctx) => {
     return res(
       ctx.json([
         {
@@ -21,6 +20,6 @@ export const handlers = [
         },
       ])
     );
-  },
-  // Handles GET product request by id
+  }),
+  // Handles GET Cart request
 ];

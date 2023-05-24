@@ -1,20 +1,19 @@
 import { useState } from "react";
-import DropboxChooser from "react-dropbox-chooser";
 
-import {
-  Button,
-  SvgIcon,
-  Grid,
-  Stepper,
-  Step,
-  StepButton,
-  TextField,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  IconButton,
-} from "@mui/material";
+// 3rd party components.
+import DropboxChooser from "react-dropbox-chooser";
+import Button from "@mui/icons-material/Button";
+import SvgIcon from "@mui/icons-material/SvgIcon";
+import Grid from "@mui/icons-material/Grid";
+import Stepper from "@mui/icons-material/Stepper";
+import Step from "@mui/icons-material/Step";
+import StepButton from "@mui/icons-material/StepButton";
+import TextField from "@mui/icons-material/TextField";
+import InputLabel from "@mui/icons-material/InputLabel";
+import MenuItem from "@mui/icons-material/MenuItem";
+import FormControl from "@mui/icons-material/FormControl";
+import Select from "@mui/icons-material/Select";
+import IconButton from "@mui/icons-material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 

@@ -23,7 +23,7 @@ function OrderDetailRender(params) {
     setOpen(false);
   };
   const total_order_amount = calculateTotalAmount(params.data.order);
-
+  console.log(params.data.order);
   return (
     <>
       <Button
@@ -31,6 +31,7 @@ function OrderDetailRender(params) {
         onClick={() => {
           handleOpen();
         }}
+        aria-label="Order detail"
       >
         Order details
       </Button>
