@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 function CheckOutOrderItem(props) {
   const styleImg = { height: "40px", width: "40px", borderRadius: "30%" };

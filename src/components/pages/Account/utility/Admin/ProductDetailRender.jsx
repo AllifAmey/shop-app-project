@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Button, Dialog, DialogContent, Grid } from "@mui/material";
+
+// 3rd party components.
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import Grid from "@mui/material/Grid";
 
 function ProductDetailRender(props) {
   // add buttons to allow to edit???

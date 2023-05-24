@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 function UrgencyLevelRender(params) {
   const date1 = new Date(params.data.date_ordered);

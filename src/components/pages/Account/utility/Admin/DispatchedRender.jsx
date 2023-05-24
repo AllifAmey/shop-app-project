@@ -24,8 +24,6 @@ function DispatchedRender(props) {
             return order.order_item_id;
           });
           const patch_id = data_to_update.id;
-          // TODO: Backend error related to timing or is it an error?
-          // when dispatched the timing seemingly resets.
           const patchData = {
             id: patch_id,
             user: data_to_update.user,
@@ -38,7 +36,7 @@ function DispatchedRender(props) {
             total_price: data_to_update.total_price,
           };
           patchOrders(props.setIsLoading, patch_id, patchData).then((data) => {
-            if (data == "error") {
+            if (data === "error") {
               console.log("There is an error");
               console.log(data);
             } else {

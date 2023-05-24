@@ -1,12 +1,22 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Grid, Container, Box, Tab, Tabs } from "@mui/material";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import CircularProgress from "@mui/material/CircularProgress";
-import { cartActions } from "../../../store";
+
+// 3rd party components.
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import CircularProgress from "@mui/material/CircularProgress";
+
+// store
+import { cartActions } from "../../../store";
+
+// apis
 import { getProducts } from "../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 import { getShopAnalysis } from "../../services/Internal_API/ShopAPI/Analysis/AnalysisAPI";
@@ -43,12 +53,12 @@ function VerticalTabs(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
     // it is here where I do the logic for ag grid react.
-    if (newValue == 0) {
+    if (newValue === 0) {
       getShopAnalysis(setIsLoading).then((data) => {
         setAnalysisData(data);
       });
     }
-    if (newValue == 1) {
+    if (newValue === 1) {
       getProducts(setIsLoading).then((productsData) => {
         const productColumnDefs = [
           { field: "id", headerName: "Product Id" },
@@ -67,7 +77,7 @@ function VerticalTabs(props) {
         setColumnDefs(productColumnDefs);
         setRowData(productsData);
       });
-    } else if (newValue == 3) {
+    } else if (newValue === 3) {
       getOrders(setIsLoading).then((orderData) => {
         const orderColumnDefs = [
           { field: "id", headerName: "Order id" },
@@ -158,7 +168,7 @@ function VerticalTabs(props) {
           iconPosition="end"
         />
       </Tabs>
-      {value == 0 && (
+      {value === 0 && (
         <Box flex={1}>
           <Tabs
             value={innerValueTab}
@@ -173,13 +183,13 @@ function VerticalTabs(props) {
             <Tab label="Sales per month" />
             <Tab label="Most popular" />
           </Tabs>
-          {innerValueTab == 0 && <SalesChart analysisData={analysisData} />}
-          {innerValueTab == 1 && (
+          {innerValueTab === 0 && <SalesChart analysisData={analysisData} />}
+          {innerValueTab === 1 && (
             <PopularityMetric analysisData={analysisData} />
           )}
         </Box>
       )}
-      {value == 1 && (
+      {value === 1 && (
         <div className="ag-theme-material" style={{ flex: 1, height: "100%" }}>
           {isLoading ? (
             <CircularProgress />
@@ -195,8 +205,8 @@ function VerticalTabs(props) {
           )}
         </div>
       )}
-      {value == 2 && <AddProductForm />}
-      {value == 3 && (
+      {value === 2 && <AddProductForm />}
+      {value === 3 && (
         <div className="ag-theme-material" style={{ flex: 1, height: "100%" }}>
           {isLoading ? (
             <CircularProgress />

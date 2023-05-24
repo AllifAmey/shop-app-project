@@ -188,7 +188,7 @@ function AddProductForm() {
           position="relative"
           gap="1rem"
         >
-          {activeStep == 0 && (
+          {activeStep === 0 && (
             <>
               <Grid container justifyContent="space-between">
                 <Grid container flexDirection="column" width={0.2} gap="1rem">
@@ -289,7 +289,7 @@ function AddProductForm() {
                 <Grid item>
                   <img
                     src={imagePreview}
-                    alt="Product Image"
+                    alt="Product"
                     style={{
                       width: "250px",
                       height: "250px",
@@ -300,7 +300,7 @@ function AddProductForm() {
               </Grid>
             </>
           )}
-          {activeStep == 1 && (
+          {activeStep === 1 && (
             <>
               <Grid container gap="1rem">
                 <Grid container flexDirection="column" xs gap="0.5rem">
@@ -331,7 +331,7 @@ function AddProductForm() {
                   {productInfo.description_short
                     .split("#")
                     .map((snippet, index) => {
-                      if (snippet == "") {
+                      if (snippet === "") {
                         return;
                       }
                       return (
@@ -380,36 +380,36 @@ function AddProductForm() {
               </Grid>
             </>
           )}
-          {activeStep == 2 && (
+          {activeStep === 2 && (
             <>
               <Grid container flexDirection="column">
                 <Grid item>Name</Grid>
                 <Grid item color="orange">
-                  {productInfo.name == "" ? "Empty" : productInfo.name}
+                  {productInfo.name === "" ? "Empty" : productInfo.name}
                 </Grid>
                 <Grid item>Price</Grid>
                 <Grid item color="orange">
-                  {productInfo.price == "" ? "Empty" : productInfo.price}
+                  {productInfo.price === "" ? "Empty" : productInfo.price}
                 </Grid>
                 <Grid item>Catagory:</Grid>
                 <Grid item color="orange">
-                  {productInfo.catagory == "" ? "Empty" : productInfo.catagory}
+                  {productInfo.catagory === "" ? "Empty" : productInfo.catagory}
                 </Grid>
                 <Grid item>Image</Grid>
                 <Grid item color="orange">
-                  {productInfo.image_url == ""
+                  {productInfo.image_url === ""
                     ? "Empty"
                     : productInfo.image_url}
                 </Grid>
                 <Grid item>Description Long</Grid>
                 <Grid item color="orange">
-                  {productInfo.description_long == ""
+                  {productInfo.description_long === ""
                     ? "Empty"
                     : productInfo.description_long}
                 </Grid>
                 <Grid item>Description Short</Grid>
                 <Grid item color="orange">
-                  {productInfo.description_short == ""
+                  {productInfo.description_short === ""
                     ? "Empty"
                     : productInfo.description_short}
                 </Grid>

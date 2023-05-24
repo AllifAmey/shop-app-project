@@ -1,4 +1,6 @@
-import { Button } from "@mui/material";
+// 3rd party components.
+import Button from "@mui/material/Button";
+// apis
 import { deleteProducts } from "../../../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
 function ProductDeleteRender(props) {

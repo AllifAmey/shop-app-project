@@ -1,4 +1,4 @@
-import { Tab } from "@mui/material";
+import Tab from "@mui/material/Tab";
 
 function SideTabs() {
   return (
@@ -34,7 +34,7 @@ function SideTabs() {
       <Tab
         label="Logout"
         onClick={() => {
-          props.logOut();
+          //props.logOut();
           console.log("hello");
         }}
         icon={<i className="fa-solid fa-right-from-bracket"></i>}

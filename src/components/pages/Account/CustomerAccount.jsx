@@ -3,12 +3,16 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 // 3rd party components.
-import { Button, Container, Grid, Box, CircularProgress } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
-// apis
+// apis & store
 import { cartActions } from "../../../store";
 import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
 import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
@@ -59,7 +63,7 @@ function CustomerAccount() {
     console.log("cellClicked", event);
   }, []);
 
-  if (navValue == 0 && columnDefs[0].field !== "cart_item_id") {
+  if (navValue === 0 && columnDefs[0].field !== "cart_item_id") {
     setColumnDefs(cartColumnDefs);
     getCart(setIsLoading).then((userCart) => {
       const total_cart_amount = calculateTotalAmount(userCart);
@@ -73,7 +77,7 @@ function CustomerAccount() {
       };
       setRowData([...userCart, lastRowData]);
     });
-  } else if (navValue == 1 && columnDefs[0].field !== "id") {
+  } else if (navValue === 1 && columnDefs[0].field !== "id") {
     setColumnDefs(orderColumnDefs);
     getOrders(setIsLoading).then((orders) => {
       setRowData([...orders]);

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, Grid, Dialog, DialogContent } from "@mui/material";
+
+// 3rd party components.
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+
+// utility
 import calculateTotalAmount from "./calculateTotalAmount";
 
 function OrderDetailRender(params) {

@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-import { Button, Dialog, DialogContent, Grid } from "@mui/material";
+// 3rd party components.
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import Grid from "@mui/material/Grid";
 
 function ItemsOrderedRender(params) {
   // renders item ordered on the admin page
@@ -141,6 +145,7 @@ function ItemsOrderedRender(params) {
                       >
                         <img
                           src={productOrdered.product.image_url}
+                          alt={productOrdered.product.name}
                           loading="lazy"
                           style={{
                             height: "100px",
@@ -222,7 +227,7 @@ function ItemsOrderedRender(params) {
         >
           <img
             src={storePic}
-            alt="product picture"
+            alt="product"
             style={{
               height: "90%",
               maxWidth: "100%",

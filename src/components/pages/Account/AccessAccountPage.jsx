@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+
+// 3rd party components.
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Grid } from "@mui/material";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+
+// apis
 import { loginAPI } from "../../services/Internal_API/AccountAPI/Access/LoginAPI";
 import { SignUp } from "../../services/Internal_API/AccountAPI/Access/SignupAPI";
-import CircularProgress from "@mui/material/CircularProgress";
-import { useParams } from "react-router-dom";
 
 function CapitaliseEachWord(text) {
   // capitalises each word for params
@@ -31,12 +34,9 @@ function AccessAccountPage(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
   const params = useParams();
-  console.log(params.accessType);
 
   const title = CapitaliseEachWord(params.accessType);
 

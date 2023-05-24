@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 function PopularityMetric(props) {
   // shows says per month
