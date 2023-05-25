@@ -1,9 +1,8 @@
 import * as React from "react";
-import Container from "@mui/material/Container";
-import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
-import { Grid } from "@mui/material";
-import Question from "./utility/Question";
-import Box from "@mui/material/Box";
+import { useOutletContext } from "react-router-dom";
+import FAQPageDesktop from "./FAQPageDesktop";
+import FAQPageTablet from "./FAQPageTablet";
+import FAQPageMobile from "./FAQPageMobile";
 
 function FAQPage() {
   /*
@@ -42,88 +41,12 @@ function FAQPage() {
   // model field above - charfield for catagory
   // question ( with answer) attached to the model above
   // model field above - charfield for question and charfield for answer
-  const faq = {
-    catagory: {
-      delivery: {
-        questions: [
-          {
-            question: "How do I know my item has been dispatched?",
-            answer:
-              "If you signed up to the shop, you can log in and find out if your orders have been dispatched on the order section. If not then a email should be sent upon dispatch.",
-          },
-          {
-            question: "When can I expect to have my product delivered?",
-            answer:
-              "Unfortunately, once dispatched, how and when your product is delivered out of our control. We try to dispatch the product as soon as possible.",
-          },
-        ],
-      },
-      payment: {
-        questions: [
-          {
-            question: "How do I get a refund?",
-            answer:
-              "You can email the owner via the contact page to request a refund.",
-          },
-          {
-            question: "What type of payments do you accept?",
-            answer:
-              "We only accept Paypal at the moment but are looking to implement more down the line.",
-          },
-        ],
-      },
-    },
-  };
+  const context = useOutletContext();
   return (
     <>
-      <AnimatedPopUpPage>
-        <Box height="auto" width={1} margin="1rem">
-          <Container maxWidth="md" sx={{ height: "100vh" }}>
-            <Grid
-              container
-              flexDirection="column"
-              justifyContent="space-evenly"
-              alignItems="center"
-              gap={4}
-            >
-              <Grid item alignSelf="center" fontSize={36} fontWeight={800}>
-                Frequently Asked Questions
-              </Grid>
-
-              <Grid item container gap={2} justifyContent="center">
-                <Grid item container flexDirection="column" width={0.4} gap={2}>
-                  <Grid item textAlign="center" fontSize={30} fontWeight={800}>
-                    Delivery
-                  </Grid>
-                  {faq.catagory.delivery.questions.map((inquiry) => {
-                    return (
-                      <Question
-                        key={inquiry.question}
-                        question={inquiry.question}
-                        answer={inquiry.answer}
-                      />
-                    );
-                  })}
-                </Grid>
-                <Grid item container flexDirection="column" width={0.5} gap={2}>
-                  <Grid item textAlign="center" fontSize={30} fontWeight={800}>
-                    Payment
-                  </Grid>
-                  {faq.catagory.payment.questions.map((inquiry) => {
-                    return (
-                      <Question
-                        key={inquiry.question}
-                        question={inquiry.question}
-                        answer={inquiry.answer}
-                      />
-                    );
-                  })}
-                </Grid>
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
-      </AnimatedPopUpPage>
+      {context.isDesktop && <FAQPageDesktop />}
+      {context.isTablet && <FAQPageTablet />}
+      {context.isMobile && <FAQPageMobile />}
     </>
   );
 }

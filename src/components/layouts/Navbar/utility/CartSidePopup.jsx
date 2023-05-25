@@ -114,7 +114,7 @@ function CartSidePopup(props) {
       open={props.isDrawerOpen}
       onClose={() => props.setIsDrawerOpen(false)}
       sx={{
-        "& .MuiDrawer-paper": { boxSizing: "border-box", width: 400 },
+        "& .MuiDrawer-paper": { boxSizing: "border-box", width: "80%" },
       }}
     >
       <Box sx={{ height: "80%", overflowY: "scroll" }}>

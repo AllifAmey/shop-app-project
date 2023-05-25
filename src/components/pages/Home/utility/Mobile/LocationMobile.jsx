@@ -69,7 +69,7 @@ function LocationMobile(props) {
                 src={googlemap}
                 alt="google map"
                 loading="lazy"
-                style={{ height: "80%", width: "90%" }}
+                style={{ height: "80%", width: "90%", objectFit: "cover" }}
               />
             )}
             {!checked && (

@@ -67,13 +67,11 @@ function NavBar(props) {
             <CartIcon setDrawerOpen={setIsDrawerOpen}></CartIcon>
           </Grid>
 
-          <Grid item>
-            <HamburgerMenu
-              handleMobileOpen={handleMobileOpen}
-              openMobile={openMobile}
-              handleMobileClose={handleMobileClose}
-            />
-          </Grid>
+          <HamburgerMenu
+            handleMobileOpen={handleMobileOpen}
+            openMobile={openMobile}
+            handleMobileClose={handleMobileClose}
+          />
         </Grid>
       </Box>
       <CartSidePopup
