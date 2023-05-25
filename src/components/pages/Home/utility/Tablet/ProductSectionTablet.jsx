@@ -1,11 +1,11 @@
+import ringImg from "../../../../assets/img/Homepage/ring-homepage.avif";
+import pinCushionImg from "../../../../assets/img/Homepage/pin-cushion-homepage.avif";
+import scrunchyImg from "../../../../assets/img/Homepage/scrunchy-homepage.avif";
+
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import ringImg from "../../assets/img/Homepage/ring-homepage.avif";
-import pinCushionImg from "../../assets/img/Homepage/pin-cushion-homepage.avif";
-import scrunchyImg from "../../assets/img/Homepage/scrunchy-homepage.avif";
 
-import { Grid } from "@mui/material";
-
-function ProductHomePage() {
+function ProductSectionTablet() {
   // https://nl.pinterest.com/pin/254664553914081575/?mt=login - inspiration
 
   /*
@@ -183,4 +183,4 @@ function ProductHomePage() {
   );
 }
 
-export default ProductHomePage;
+export default ProductSectionTablet;

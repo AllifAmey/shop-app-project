@@ -8,7 +8,7 @@ import HamburgerMenu from "../utility/HamburgerMenu";
 
 describe("Testing NavBar component", () => {
   test("check Navbar renders company name and svgs", () => {
-    render(<NavBar />);
+    render(<NavBar isDesktop={true} />);
 
     // consistent contents in navbar
     const companyName = screen.getByText("SahrahJewellery");

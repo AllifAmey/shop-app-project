@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { useInView } from "react-intersection-observer";
-import supportIcon from "../../assets/img/icons/support-icon.png";
-import ideaIcon from "../../assets/img/icons/idea-icon.png";
-import shopIcon from "../../assets/img/icons/shop-icon.png";
+import supportIcon from "../../../../assets/img/icons/support-icon.png";
+import ideaIcon from "../../../../assets/img/icons/idea-icon.png";
+import shopIcon from "../../../../assets/img/icons/shop-icon.png";
 
-function ValuesHomePage() {
+function ValuesSectionMobile() {
   // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration
 
   /*
@@ -23,7 +23,7 @@ function ValuesHomePage() {
 
   // styles
   const valueTitleStyle = {
-    fontSize: "30px",
+    fontSize: "20px",
     fontWeight: 800,
   };
   const valueImageStyle = {
@@ -31,7 +31,7 @@ function ValuesHomePage() {
     width: "50px",
   };
   const valueTextStyle = {
-    fontSize: "20px",
+    fontSize: "16px",
     width: "80%",
     textAlign: "center",
   };
@@ -45,22 +45,14 @@ function ValuesHomePage() {
     <>
       <Box height="auto" width={1} ref={ref}>
         {inView ? (
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            height="50vh"
-            width={1}
-          >
+          <Grid container justifyContent="center" alignItems="center" width={1}>
             <Grid
               item
               container
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
-              xs={4}
               height={0.8}
-              gap={1}
               padding="1rem"
             >
               <Grid
@@ -83,9 +75,7 @@ function ValuesHomePage() {
               item
               container
               flexDirection="column"
-              xs={4}
               height={0.8}
-              gap={1}
               padding="1rem"
               justifyContent="center"
               alignItems="center"
@@ -110,9 +100,7 @@ function ValuesHomePage() {
               item
               container
               flexDirection="column"
-              xs={4}
               height={0.8}
-              gap={1}
               padding="1rem"
               justifyContent="center"
               alignItems="center"
@@ -140,4 +128,4 @@ function ValuesHomePage() {
   );
 }
 
-export default ValuesHomePage;
+export default ValuesSectionMobile;

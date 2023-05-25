@@ -1,11 +1,9 @@
 import { Suspense } from "react";
 import { useLoaderData, defer, Await, json } from "react-router-dom";
-import MainContentHomePage from "./MainContentHomePage";
-import ProductHomePage from "./ProductHomePage";
-import ValuesHomePage from "./ValuesHomePage";
-import LocationHomePage from "./LocationHomePage";
-import { useInView } from "react-intersection-observer";
-import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
+import HomePageDesktop from "./HomePageDesktop";
+import HomePageTablet from "./HomePageTablet";
+import HomePageMobile from "./HomePageMobile";
+import { useOutletContext } from "react-router-dom";
 
 /*
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8bc2cc5785b_6002086f72b7277a6401e43e_sobremesa.jpeg - look at the white arrow at the bottom. Maybe add that.
@@ -33,27 +31,28 @@ function HomePage() {
     possible improvements could be the styling of the button but other than that not much.
   
   */
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    fallbackInView: true,
-  });
 
+  const context = useOutletContext();
   const { weather } = useLoaderData();
-
   return (
     <>
       <Suspense fallback={<div style={{ textAlign: "center" }}>loading..</div>}>
         <Await resolve={weather}>
-          {(loadedWeather) => (
-            <AnimatedPopUpPage>
-              <MainContentHomePage />
-              <ValuesHomePage></ValuesHomePage>
-              <span ref={ref}>
-                {inView ? <ProductHomePage></ProductHomePage> : null}
-              </span>
-              <LocationHomePage weatherIcon={loadedWeather}></LocationHomePage>
-            </AnimatedPopUpPage>
-          )}
+          {(loadedWeather) => {
+            return (
+              <>
+                {context.isDesktop && (
+                  <HomePageDesktop loadedWeather={loadedWeather} />
+                )}
+                {context.isTablet && (
+                  <HomePageTablet loadedWeather={loadedWeather} />
+                )}
+                {context.isMobile && (
+                  <HomePageMobile loadedWeather={loadedWeather} />
+                )}
+              </>
+            );
+          }}
         </Await>
       </Suspense>
     </>

@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import styles from "./MainContentHomePage.module.css";
-import img from "../../assets/img/icons/arrow-down.png";
+import styles from "./MainSectionMobile.module.css";
+import img from "../../../../assets/img/icons/arrow-down.png";
 
-function MainContentHomePage() {
+function MainSectionMobile() {
   return (
     <>
       <section
@@ -53,4 +53,4 @@ function MainContentHomePage() {
   );
 }
 
-export default MainContentHomePage;
+export default MainSectionMobile;

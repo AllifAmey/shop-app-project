@@ -13,7 +13,13 @@ function RootLayout() {
         <NavBar isDesktop={isDesktop} isMobile={isMobile} isTablet={isTablet} />
       </nav>
       <main>
-        <Outlet isDesktop={isDesktop} isMobile={isMobile} isTablet={isTablet} />
+        <Outlet
+          context={{
+            isDesktop: isDesktop,
+            isMobile: isMobile,
+            isTablet: isTablet,
+          }}
+        />
       </main>
       <footer style={{ marginTop: "auto" }}>
         <Footer isDesktop={isDesktop} isMobile={isMobile} isTablet={isTablet} />
