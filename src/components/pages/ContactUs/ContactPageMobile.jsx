@@ -59,6 +59,9 @@ function ContactPageMobile() {
         }
       );
   }
+  // TODO: clear data after send
+  // TODO: Provide indication of success.
+  // TODO: Provide indication of error.
 
   return (
     <>
