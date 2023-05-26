@@ -74,13 +74,12 @@ function FAQPageMobile() {
       },
     },
   };
-  console.log(faq.catagory.delivery.questions[0].question);
-  console.log(faq.catagory.delivery.questions[0].answer);
+
   return (
     <>
       <AnimatedPopUpPage>
         <Box height="auto" margin="1rem">
-          <Container maxWidth="md" sx={{ height: "100vh" }}>
+          <Container maxWidth="md">
             <Grid
               container
               flexDirection="Column"
