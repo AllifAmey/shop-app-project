@@ -2,7 +2,11 @@ import { Suspense } from "react";
 import { useLoaderData, json, Await, defer } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import domain from "../../services/domain";
-import ProductInfoContent from "./ProductInfoContent";
+import { useOutletContext } from "react-router-dom";
+
+import ProductDetailDesktop from "./ProductDetailDesktop";
+import ProductDetailTablet from "./ProductDetailTablet";
+import ProductDetailMobile from "./ProductDetailMobile";
 
 function ProductInfoPage() {
   /*
@@ -40,6 +44,8 @@ function ProductInfoPage() {
 
   const { productDetail } = useLoaderData();
 
+  const context = useOutletContext();
+
   return (
     <>
       <Suspense
@@ -52,7 +58,17 @@ function ProductInfoPage() {
       >
         <Await resolve={productDetail}>
           {(loadedProductDetail) => (
-            <ProductInfoContent product={loadedProductDetail} />
+            <>
+              {context.isDesktop && (
+                <ProductDetailDesktop product={loadedProductDetail} />
+              )}
+              {context.isTablet && (
+                <ProductDetailTablet product={loadedProductDetail} />
+              )}
+              {context.isMobile && (
+                <ProductDetailMobile product={loadedProductDetail} />
+              )}
+            </>
           )}
         </Await>
       </Suspense>

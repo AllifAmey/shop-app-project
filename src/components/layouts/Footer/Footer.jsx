@@ -3,7 +3,6 @@ import FooterMobile from "./FooterMobile";
 import FooterTablet from "./FooterTablet";
 
 function Footer(props) {
-  console.log(props.isDesktop);
   return (
     <>
       {props.isDesktop && <FooterDesktop />}
