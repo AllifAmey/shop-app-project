@@ -11,11 +11,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Pagination from "@mui/material/Pagination";
 
-// test
-
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-
 // store
 import { shopActions } from "../../../store";
 

@@ -177,34 +177,38 @@ function ProductCardTablet(props) {
         PaperProps={{
           sx: {
             height: "90%",
-            maxWidth: "70%",
+            maxWidth: "90%",
             display: "flex",
             flexDirection: "row",
-            flex: "1 1 50%",
             borderRadius: "20px",
             justifyContent: "center",
             alignItems: "center",
           },
         }}
       >
-        <CardMedia
-          component="img"
-          image={props.product.image_url}
-          alt={`Large ${props.product.name}`}
-          sx={{
-            height: "80%",
-            width: "80vh",
-            marginLeft: "4%",
-            borderRadius: "20px",
-          }}
-        ></CardMedia>
+        <Grid item>
+          <CardMedia
+            component="img"
+            image={props.product.image_url}
+            alt={`Large ${props.product.name}`}
+            sx={{
+              width: "30vw",
+              marginLeft: "4%",
+              borderRadius: "20px",
+            }}
+          ></CardMedia>
+        </Grid>
+
         <DialogContent
           sx={{
             height: "60vh",
+
             lineHeight: "1.5rem",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "space-evenly",
             alignItems: "center",
+            flexDirection: "column",
+            fontSize: "20px",
           }}
         >
           <DialogTitle fontSize={30}>Quick Info</DialogTitle>
@@ -213,7 +217,12 @@ function ProductCardTablet(props) {
           <div>Materials: copper</div>
           <div>FREE UK delivery</div>
           <DialogActions>
-            <Button onClick={handleClose} size="big" aria-label="Close Popup">
+            <Button
+              onClick={handleClose}
+              size="big"
+              aria-label="Close Popup"
+              sx={{ fontSize: "20px" }}
+            >
               Close
             </Button>
           </DialogActions>

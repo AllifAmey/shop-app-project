@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 
 import Grid from "@mui/material/Grid";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
 import SvgIcon from "@mui/material/SvgIcon";
+import Slide from "@mui/material/Slide";
 import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../../../store/index";
@@ -19,6 +19,10 @@ import {
   patchCartItem,
   postCart,
 } from "../../../../services/Internal_API/AccountAPI/Cart/CartAPI";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function ProductCardMobile(props) {
   const [open, setOpen] = useState(false);
@@ -212,54 +216,59 @@ function ProductCardMobile(props) {
       </Grid>
 
       <Dialog
+        fullScreen
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         PaperProps={{
-          sx: {
-            height: "90%",
-            maxWidth: "70%",
-            display: "flex",
-            flexDirection: "row",
-            flex: "1 1 50%",
-            borderRadius: "20px",
-            justifyContent: "center",
-            alignItems: "center",
-          },
+          sx: {},
         }}
+        TransitionComponent={Transition}
       >
-        <CardMedia
-          component="img"
-          image={props.product.image_url}
-          alt={`Large ${props.product.name}`}
-          sx={{
-            height: "80%",
-            width: "80vh",
-            marginLeft: "4%",
-            borderRadius: "20px",
-          }}
-        ></CardMedia>
-        <DialogContent
-          sx={{
-            height: "60vh",
-            lineHeight: "1.5rem",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <Grid
+          container
+          flexDirection="column"
+          alignItems="center"
+          sx={{ height: "100%" }}
         >
-          <DialogTitle fontSize={30}>Quick Info</DialogTitle>
-          <div>Handcrafted item</div>
-          <div>Dispatches from a small business in United Kingdom</div>
-          <div>Materials: copper</div>
-          <div>FREE UK delivery</div>
-          <DialogActions>
-            <Button onClick={handleClose} size="big" aria-label="Close Popup">
-              Close
-            </Button>
-          </DialogActions>
-        </DialogContent>
+          <Grid item alignSelf="end">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              size="large"
+              aria-label="Close Popup"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+          <Grid
+            item
+            sx={{ height: "200px", width: "200px", paddingBottom: "20px" }}
+          >
+            <CardMedia
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "10px",
+              }}
+              component="img"
+              image={props.product.image_url}
+              alt={`Large ${props.product.name}`}
+            ></CardMedia>
+          </Grid>
+          <Grid container flexDirection="column" width={0.8} gap={1}>
+            <Grid item fontSize={30} textAlign="center">
+              Quick Info
+            </Grid>
+            <Grid item>Handcrafted item</Grid>
+            <Grid item>Dispatches from a small business in United Kingdom</Grid>
+            <Grid item>Materials: copper</Grid>
+            <Grid item>FREE UK delivery</Grid>
+          </Grid>
+        </Grid>
       </Dialog>
     </>
   );
