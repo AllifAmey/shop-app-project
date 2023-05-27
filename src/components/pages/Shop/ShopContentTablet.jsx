@@ -132,7 +132,7 @@ function ShopContentTablet(props) {
                 <CircularProgress size="25rem" sx={{ margin: "auto" }} />
               )}
             </Grid>
-            <Grid item container justifyContent="center">
+            <Grid item container justifyContent="center" paddingTop="1rem">
               <Pagination
                 count={pagination}
                 page={page}
