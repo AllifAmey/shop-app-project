@@ -42,6 +42,7 @@ function FAQPage() {
   // question ( with answer) attached to the model above
   // model field above - charfield for question and charfield for answer
   const context = useOutletContext();
+
   return (
     <>
       {context.isDesktop && <FAQPageDesktop />}

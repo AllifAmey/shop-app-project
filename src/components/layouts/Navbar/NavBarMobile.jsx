@@ -77,6 +77,9 @@ function NavBar(props) {
       <CartSidePopup
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
+        isDesktop={props.isDesktop}
+        isTablet={props.isTablet}
+        isMobile={props.isMobile}
       ></CartSidePopup>
     </>
   );

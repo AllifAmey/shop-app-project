@@ -107,6 +107,14 @@ function CartSidePopup(props) {
       }
     }
   };
+  let cartSidePopupWidth = 400;
+  if (props.isDesktop) {
+    cartSidePopupWidth = "35%";
+  } else if (props.isTablet) {
+    cartSidePopupWidth = "50%";
+  } else if (props.isMobile) {
+    cartSidePopupWidth = "80%";
+  }
 
   return (
     <Drawer
@@ -114,7 +122,10 @@ function CartSidePopup(props) {
       open={props.isDrawerOpen}
       onClose={() => props.setIsDrawerOpen(false)}
       sx={{
-        "& .MuiDrawer-paper": { boxSizing: "border-box", width: "80%" },
+        "& .MuiDrawer-paper": {
+          boxSizing: "border-box",
+          width: cartSidePopupWidth,
+        },
       }}
     >
       <Box sx={{ height: "80%", overflowY: "scroll" }}>

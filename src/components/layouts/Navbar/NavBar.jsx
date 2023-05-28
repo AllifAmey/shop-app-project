@@ -5,7 +5,7 @@ import NavBarTablet from "./NavBarTablet";
 function NavBar(props) {
   return (
     <>
-      {props.isDesktop && <NavBarDesktop />}
+      {props.isDesktop && <NavBarDesktop isDesktop={props.isDesktop} />}
       {props.isTablet && <NavBarTablet />}
       {props.isMobile && <NavBarMobile />}
     </>

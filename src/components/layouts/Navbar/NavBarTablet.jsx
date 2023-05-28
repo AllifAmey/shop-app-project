@@ -96,6 +96,9 @@ function NavBarTablet(props) {
       <CartSidePopup
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
+        isDesktop={props.isDesktop}
+        isTablet={props.isTablet}
+        isMobile={props.isMobile}
       ></CartSidePopup>
       <SupportMenu anchorEl={anchorEl} handleClose={handleClose} />
     </>
