@@ -1,9 +1,5 @@
 import { lazy, Suspense } from "react";
-import {
-  Navigate,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import { shopTheme } from "./shopTheme";
 import { AnimatePresence } from "framer-motion";
@@ -54,9 +50,8 @@ function App() {
       element: <RootLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { path: "/", element: <Navigate to="/home" /> },
         {
-          path: "/home",
+          path: "/",
           element: (
             <Suspense fallback={<p>Loading...</p>}>
               <HomePage />

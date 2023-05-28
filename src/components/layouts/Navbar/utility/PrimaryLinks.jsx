@@ -33,7 +33,7 @@ function PrimaryLinks(props) {
         sx={gridLinkStyles}
         xs={1}
         component={RouterLink}
-        to="/home"
+        to="/"
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
       >
         Home

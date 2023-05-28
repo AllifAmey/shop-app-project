@@ -33,7 +33,7 @@ function PrimaryMobileLinks(props) {
         item
         sx={gridLinkStyles}
         component={RouterLink}
-        to="/home"
+        to="/"
         onClick={() => {
           props.handleMobileClose();
         }}
