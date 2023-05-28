@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AccountIcon from "./utility/AccountIcon";
 import CartIcon from "./utility/CartIcon";
 import CartSidePopup from "./utility/CartSidePopup";
-import SupportMenu from "./utility/SupportMenu";
-import PrimaryLinks from "./utility/PrimaryLinks";
 import HamburgerMenu from "./utility/HamburgerMenu";
 
 function NavBar(props) {
@@ -14,9 +12,7 @@ function NavBar(props) {
   Logic for layout- 
   The layout is based on flexbox.
 
-  {props.isDesktop && "Desktop"}
-  {props.isMobile && "Mobile"}
-  {props.isTablet && "Tablet"}
+  Navbar items are spaced move to make it easier for mobile users.
 
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -32,9 +28,6 @@ function NavBar(props) {
 
   // styles
 
-  const gridLinkIcons = {
-    height: "100%",
-  };
   const outerBoxStyles = {
     width: "100%",
     height: "10vh",
@@ -45,33 +38,26 @@ function NavBar(props) {
       <Box sx={outerBoxStyles}>
         <Grid
           container
-          justifyContent="space-between"
+          justifyContent="space-around"
           alignItems="center"
-          padding="0 20px"
+          height="100%"
         >
-          <Grid
-            item
-            sx={{ textAlign: "start", fontSize: "26px", color: "red" }}
-          >
+          <Grid item sx={{ fontSize: "26px", color: "red" }}>
             SahrahJewellery
           </Grid>
           <Grid item>
             <AccountIcon />
           </Grid>
-          <Grid
-            item
-            justifyContent="center"
-            alignItems="center"
-            sx={gridLinkIcons}
-          >
+          <Grid item>
             <CartIcon setDrawerOpen={setIsDrawerOpen}></CartIcon>
           </Grid>
-
-          <HamburgerMenu
-            handleMobileOpen={handleMobileOpen}
-            openMobile={openMobile}
-            handleMobileClose={handleMobileClose}
-          />
+          <Grid item>
+            <HamburgerMenu
+              handleMobileOpen={handleMobileOpen}
+              openMobile={openMobile}
+              handleMobileClose={handleMobileClose}
+            />
+          </Grid>
         </Grid>
       </Box>
       <CartSidePopup

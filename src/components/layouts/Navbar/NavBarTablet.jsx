@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import AccountIcon from "./utility/AccountIcon";
 import CartIcon from "./utility/CartIcon";
@@ -13,9 +13,6 @@ function NavBarTablet(props) {
   Logic for layout- 
   The layout is based on flexbox.
 
-  {props.isDesktop && "Desktop"}
-  {props.isMobile && "Mobile"}
-  {props.isTablet && "Tablet"}
 
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

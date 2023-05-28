@@ -5,7 +5,6 @@ function ErrorPage() {
   const error = useRouteError();
   let title = "Something went wrong!";
   let message = "";
-
   if (error.status === 404) {
     title = "Not found!";
     message = "Could not find resource or page.";

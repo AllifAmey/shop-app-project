@@ -64,6 +64,8 @@ export default HomePage;
 async function loadWeatherData() {
   const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
   // weather data is fetched from the openweathermap api
+  // TODO: Make the request in the backend
+  // TODO: Restrict access to apis allowed_host to particular websites.
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
   );

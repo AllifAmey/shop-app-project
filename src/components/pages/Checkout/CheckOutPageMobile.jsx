@@ -13,7 +13,6 @@ import CheckOutStep1_Part1Mobile from "./utility/Mobile/CheckOutStep1_Part1Mobil
 import CheckOutStep1_Part2Mobile from "./utility/Mobile/CheckOutStep1_Part2Mobile";
 import CheckOutStep2Mobile from "./utility/Mobile/CheckOutStep2Mobile";
 import CheckOutStep3Mobile from "./utility/Mobile/CheckOutStep3Mobile";
-import CheckOutOrderItemMobile from "./utility/Mobile/CheckOutOrderItemMobile";
 
 function CheckOutPageMobile() {
   /*

@@ -44,6 +44,8 @@ function ContactPageDesktop() {
   function sendEmail(e) {
     e.preventDefault();
 
+    //TODO: maybe try django to send emails.
+    // from django.core.mail import send_mail
     emailjs
       .sendForm(
         "service_cwfc9gm",
