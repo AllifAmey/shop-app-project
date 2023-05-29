@@ -4,12 +4,12 @@ import {
 } from "../../../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 
-import CheckOutPage from "../CheckOutPage";
+import CheckOutPageDesktop from "../CheckOutPageDesktop";
 
 describe("Testing CheckOutPage3 component", () => {
   test("Ensure CheckoutPage3 renders correctly", async () => {
     const user = userEvent.setup();
-    render(<CheckOutPage />);
+    render(<CheckOutPageDesktop />);
     // fill out the information for CheckOutStep1_Part1
     const Step1_Part1ContinueButton = screen.getByRole("button", {
       name: "Go to physical address step",

@@ -117,7 +117,7 @@ describe("Testing parts of the CustomerAccount component", () => {
   test("Ensure TotalAmountRender renders total amount of cart items", () => {
     render(<TotalAmountRender value={15.96} data={FAKE_CART_DATA_EMPTY} />);
 
-    const totalAmountOfCartItems = screen.getByText("15.96");
+    const totalAmountOfCartItems = screen.getByText("Total amount : £15.96");
 
     expect(totalAmountOfCartItems).toBeInTheDocument();
   });

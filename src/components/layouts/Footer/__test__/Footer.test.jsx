@@ -7,7 +7,7 @@ import Footer from "../Footer";
 
 describe("Testing Footer component", () => {
   test("check texts are rendered correctly.", () => {
-    render(<Footer />);
+    render(<Footer isDesktop={true} />);
     const footerTextTop = screen.getByText("Follow us on");
     const footerTextBottom1 = screen.getByText("Privacy Policy");
     const footerTextBottom2 = screen.getByText("Our Story");
@@ -17,7 +17,7 @@ describe("Testing Footer component", () => {
     expect(footerTextBottom2).toBeInTheDocument();
   });
   test("check svgs are rendered correctly.", () => {
-    render(<Footer />);
+    render(<Footer isDesktop={true} />);
     const youtubeSVGTitle = screen.getByTitle("Youtube Icon");
     const etsySVGTitle = screen.getByTitle("Etsy Icon");
 

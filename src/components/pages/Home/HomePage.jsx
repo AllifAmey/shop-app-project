@@ -4,6 +4,7 @@ import HomePageDesktop from "./HomePageDesktop";
 import HomePageTablet from "./HomePageTablet";
 import HomePageMobile from "./HomePageMobile";
 import { useOutletContext } from "react-router-dom";
+import domain from "../../services/domain";
 
 /*
 https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f22e96be8bc2cc5785b_6002086f72b7277a6401e43e_sobremesa.jpeg - look at the white arrow at the bottom. Maybe add that.
@@ -62,13 +63,17 @@ function HomePage() {
 export default HomePage;
 
 async function loadWeatherData() {
-  const apiKey = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
   // weather data is fetched from the openweathermap api
-  // TODO: Make the request in the backend
-  // TODO: Restrict access to apis allowed_host to particular websites.
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`
-  );
+
+  const response = await fetch(`${domain}/api/shop/external`, {
+    method: "POST",
+    body: JSON.stringify({
+      type: "weather",
+    }),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
   if (!response.ok) {
     throw json(
       { message: "Could not fetch weather" },
@@ -76,7 +81,7 @@ async function loadWeatherData() {
     );
   } else {
     const data = await response.json();
-    const icon = data.weather["0"].icon;
+    const icon = data.message;
     return icon;
   }
 }

@@ -1,6 +1,6 @@
 import { screen } from "../../../../../test-utils/testing-library-utils";
 import { render } from "@testing-library/react";
-import { Route, Routes, MemoryRouter } from "react-router-dom";
+import { Route, Routes, MemoryRouter, Outlet } from "react-router-dom";
 
 import userEvent from "@testing-library/user-event";
 
@@ -14,10 +14,12 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     render(
       <MemoryRouter initialEntries={[loginRoute]}>
         <Routes>
-          <Route
-            path="/account/:accessType"
-            element={<AccessAccountPage />}
-          ></Route>
+          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+            <Route
+              path="/account/:accessType"
+              element={<AccessAccountPage />}
+            ></Route>
+          </Route>
         </Routes>
       </MemoryRouter>
     );
@@ -75,10 +77,12 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     render(
       <MemoryRouter initialEntries={[signUpRoute]}>
         <Routes>
-          <Route
-            path="/account/:accessType"
-            element={<AccessAccountPage />}
-          ></Route>
+          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+            <Route
+              path="/account/:accessType"
+              element={<AccessAccountPage />}
+            ></Route>
+          </Route>
         </Routes>
       </MemoryRouter>
     );
@@ -117,10 +121,12 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     render(
       <MemoryRouter initialEntries={[signUpRoute]}>
         <Routes>
-          <Route
-            path="/account/:accessType"
-            element={<AccessAccountPage />}
-          ></Route>
+          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+            <Route
+              path="/account/:accessType"
+              element={<AccessAccountPage />}
+            ></Route>
+          </Route>
         </Routes>
       </MemoryRouter>
     );

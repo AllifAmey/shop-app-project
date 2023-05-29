@@ -51,12 +51,13 @@
 - &#9745; Deploy new backend to AWS
 - &#9744; Add Google Autocomplete api to get the address.
 - &#9744; Add more documentation to different components explaining what logic does.
-- &#9744; Look for ways to split components to simplify logic
-- &#9744; Add default product settings to allow for rapid product creation - backend related mostly.
-- &#9744; For scalability, look into testing and implement as much as possible
+- &#9745; Look for ways to split components to simplify logic
+- &#9745; For scalability, look into testing and implement as much as possible
 - &#9745; Transfer the current way of development towards Test-driven development,
 - apply to both backend and frontend
 - &#9745; Reduce image files
+- &#9745; Make website responsive
+- &#9745; Further secure the external api keys by transferring from client to server
 - &#9745; Implemented dashboard using d3 and the data analysis api with it
 
 Current activity -
