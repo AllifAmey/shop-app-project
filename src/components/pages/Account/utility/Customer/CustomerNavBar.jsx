@@ -18,7 +18,7 @@ function CustomerNavBar(props) {
   */
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box sx={{ width: props.isMobile ? "100%" : 500 }}>
       <BottomNavigation
         showLabels
         value={props.navValue}

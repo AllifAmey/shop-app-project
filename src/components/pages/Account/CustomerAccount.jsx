@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useOutletContext } from "react-router-dom";
 
 // 3rd party components.
 import { AgGridReact } from "ag-grid-react";
@@ -18,47 +19,83 @@ import { getCart } from "../../services/Internal_API/AccountAPI/Cart/CartAPI";
 import { getOrders } from "../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
 // utility
-import NewCustomerNavBar from "./utility/Customer/CustomerNavBar";
+import CustomerNavBar from "./utility/Customer/CustomerNavBar";
 import OrderDetailRender from "./utility/Customer/OrderDetailRender";
 import ProductButtonRender from "./utility/Customer/ProductButtonRender";
 import TotalAmountRender from "./utility/Customer/TotalAmountRender";
 import calculateTotalAmount from "./utility/Customer/calculateTotalAmount";
 
-const cartColumnDefs = [
-  { field: "cart_item_id", headerName: "Cart item id" },
-  { field: "product", cellRenderer: ProductButtonRender },
-  { field: "quantity" },
-  { field: "total price", cellRenderer: TotalAmountRender },
-];
-
-const orderColumnDefs = [
-  { field: "id", headerName: "Order id" },
-  { field: "order detail", cellRenderer: OrderDetailRender },
-  {
-    field: "date_ordered",
-    headerName: "Date Ordered",
-  },
-  { field: "delivery_status", headerName: "Delivery Status" },
-];
-
 function CustomerAccount() {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
+
+  const context = useOutletContext();
+
+  const cartColumnDefs = [
+    {
+      field: "cart_item_id",
+      headerName: context.isMobile ? "id" : "Cart item id",
+    },
+    {
+      field: "product",
+      cellRenderer: ProductButtonRender,
+      cellRendererParams: {
+        isMobile: context.isMobile,
+      },
+    },
+    { field: "quantity", headerName: context.isMobile ? "Qt" : "Quantity" },
+    {
+      field: "total price",
+      headerName: context.isMobile ? "Total" : "Total Price",
+      cellRenderer: TotalAmountRender,
+      cellRendererParams: {
+        isMobile: context.isMobile,
+      },
+    },
+  ];
+
+  const orderColumnDefs = [
+    {
+      field: "id",
+      headerName: context.isMobile ? "id" : "Order id",
+      flex: context.isMobile ? 1.2 : 1,
+    },
+    {
+      field: "order detail",
+      headerName: context.isMobile ? "Detail" : "Order Detail",
+      cellRenderer: OrderDetailRender,
+      cellRendererParams: {
+        isMobile: context.isMobile,
+      },
+      flex: context.isMobile ? 1.5 : 1,
+    },
+    {
+      field: "date_ordered",
+      headerName: context.isMobile ? "Date" : "Date Ordered",
+      flex: context.isMobile ? 2 : 1,
+    },
+    {
+      field: "delivery_status",
+      headerName: context.isMobile ? "Status" : "Delivery Status",
+      flex: context.isMobile ? 2 : 1,
+    },
+  ];
+
   const [navValue, setNavValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [rowData, setRowData] = useState();
+  const [columnDefs, setColumnDefs] = useState(cartColumnDefs);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const gridRef = useRef();
 
-  const [columnDefs, setColumnDefs] = useState(cartColumnDefs);
-
   const defaultColDef = useMemo(() => ({
     sortable: true,
     filter: true,
+    resizable: true,
+    flex: 1,
   }));
-
   const cellClickedListener = useCallback((event) => {
     console.log("cellClicked", event);
   }, []);
@@ -72,8 +109,7 @@ function CustomerAccount() {
         cart_item_id: "",
         product: "",
         quantity: "",
-        "total price":
-          userCart.length === 0 ? "" : `Total amount : £${total_cart_amount}`,
+        "total price": userCart.length === 0 ? "" : total_cart_amount,
       };
       setRowData([...userCart, lastRowData]);
     });
@@ -132,13 +168,16 @@ function CustomerAccount() {
               <Grid item justifyContent="center">
                 Welcome back, {localStorage.getItem("username")}
               </Grid>
-              <NewCustomerNavBar
+              <CustomerNavBar
                 setNavValue={setNavValue}
                 navValue={navValue}
+                isDesktop={context.isDesktop}
+                isTablet={context.isTablet}
+                isMobile={context.isMobile}
               />
               <div
                 className="ag-theme-material"
-                style={{ width: 800, height: 500 }}
+                style={{ width: context.isMobile ? "100%" : 800, height: 500 }}
               >
                 <AgGridReact
                   ref={gridRef}

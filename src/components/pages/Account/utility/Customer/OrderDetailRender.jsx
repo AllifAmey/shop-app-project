@@ -32,7 +32,7 @@ function OrderDetailRender(params) {
         }}
         aria-label="Order detail"
       >
-        Order details
+        {params.isMobile ? "Detail" : "Order details"}
       </Button>
       <Dialog
         open={open}

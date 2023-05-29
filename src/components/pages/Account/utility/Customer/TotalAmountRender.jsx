@@ -13,7 +13,12 @@ function TotalAmountRender(props) {
           `£${(props.data.quantity * Number(props.data.product.price)).toFixed(
             2
           )}`}
-        {props.value !== undefined && props.value}
+        {props.value !== undefined &&
+          (props.value === ""
+            ? ""
+            : props.isMobile
+            ? `Total £${props.value}`
+            : `Total amount : £${props.value}`)}
       </div>
     </>
   );

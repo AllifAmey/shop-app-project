@@ -37,7 +37,7 @@ function ProductButtonRender(props) {
           }}
           aria-label="Product Detail"
         >
-          Product Details
+          {props.isMobile ? "Details" : "Product Details"}
         </Button>
       )}
       <Dialog
