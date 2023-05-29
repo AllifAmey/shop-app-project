@@ -1,15 +1,18 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+
+// 3rd party components.
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import AnimatedPage from "../../utility/AnimatedPage";
-import { MuiTelInput } from "mui-tel-input";
-import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import { MuiTelInput } from "mui-tel-input";
+
+// utility
+import AnimatedPage from "../../utility/AnimatedPage";
 import domain from "../../services/domain";
 
 function ContactPageTablet() {

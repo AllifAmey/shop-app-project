@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import natureImg from "../../assets/img/Storypage/nature-inspiration.avif";
+import natureImg from "../../assets/img/Storypage/nature-inspiration.png";
 import AnimatedPage from "../../utility/AnimatedPage";
 import Box from "@mui/material/Box";
 
@@ -81,6 +81,7 @@ function StoryPageMobile() {
                   objectFit: "cover",
                 }}
                 alt="Nature"
+                loading="lazy"
               ></Grid>
               <Grid item fontWeight={800} fontSize={30}>
                 Design Inspiration

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import img from "../../../../assets/img/icons/openSign-icon.png";
 import { useInView } from "react-intersection-observer";
-import googlemap from "../../../../assets/img/Homepage/our-location-google-map.avif";
+import googlemap from "../../../../assets/img/Homepage/our-location-google-map.png";
 
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";

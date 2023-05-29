@@ -1,6 +1,6 @@
-import ringImg from "../../../../assets/img/Homepage/ring-homepage.avif";
-import pinCushionImg from "../../../../assets/img/Homepage/pin-cushion-homepage.avif";
-import scrunchyImg from "../../../../assets/img/Homepage/scrunchy-homepage.avif";
+import ringImg from "../../../../assets/img/Homepage/ring-homepage.png";
+import pinCushionImg from "../../../../assets/img/Homepage/pin-cushion-homepage.png";
+import scrunchyImg from "../../../../assets/img/Homepage/scrunchy-homepage.png";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
