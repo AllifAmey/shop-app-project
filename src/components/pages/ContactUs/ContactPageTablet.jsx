@@ -7,6 +7,10 @@ import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import domain from "../../services/domain";
 
 function ContactPageTablet() {
   /**
@@ -32,39 +36,62 @@ function ContactPageTablet() {
 
    */
 
-  const [phone, setPhone] = useState("");
+  const [emailContent, setEmailContent] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    phone: "",
+    msg: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (newPhone) => {
-    setPhone(newPhone);
-    console.log(phone);
+    setEmailContent({ ...emailContent, phone: newPhone });
   };
 
-  const form = useRef();
-
-  function sendEmail(e) {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_cwfc9gm",
-        "template_2406ad3",
-        form.current,
-        import.meta.env.VITE_EMAILJS_API_KEY
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  }
+    setIsLoading(true);
+    let response = await fetch(`${domain}/api/shop/external`, {
+      method: "POST",
+      body: JSON.stringify({
+        type: "email",
+        content: JSON.stringify({
+          first_name: emailContent.fName,
+          last_name: emailContent.lName,
+          your_name: emailContent.fName.concat(" ", emailContent.lName),
+          email: emailContent.email,
+          phone_number: emailContent.phone,
+          message: emailContent.msg,
+        }),
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      setError(true);
+    } else {
+      setSuccess(true);
+      setEmailContent({
+        fName: "",
+        lName: "",
+        email: "",
+        phone: "",
+        msg: "",
+      });
+      setError(false);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <>
       <AnimatedPage>
-        <form ref={form} onSubmit={sendEmail}>
+        <form onSubmit={sendEmail}>
           <Grid height="50vh" width={1} position="relative">
             <Grid
               container
@@ -126,6 +153,13 @@ function ContactPageTablet() {
                       size="big"
                       name="first_name"
                       fullWidth
+                      value={emailContent.fName}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          fName: e.target.value,
+                        });
+                      }}
                     />
                   </Grid>
                   <Grid item flex={1}>
@@ -136,6 +170,13 @@ function ContactPageTablet() {
                       size="big"
                       name="last_name"
                       fullWidth
+                      value={emailContent.lName}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          lName: e.target.value,
+                        });
+                      }}
                     />
                   </Grid>
                 </Grid>
@@ -149,12 +190,19 @@ function ContactPageTablet() {
                       type="email"
                       name="email"
                       fullWidth
+                      value={emailContent.email}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          email: e.target.value,
+                        });
+                      }}
                     />
                   </Grid>
                   <Grid item flex={1}>
                     <MuiTelInput
                       defaultCountry="GB"
-                      value={phone}
+                      value={emailContent.phone}
                       onChange={handleChange}
                       name="phone_number"
                     />
@@ -169,17 +217,40 @@ function ContactPageTablet() {
                   fullWidth
                   size="big"
                   name="message"
+                  value={emailContent.msg}
+                  onChange={(e) => {
+                    setEmailContent({
+                      ...emailContent,
+                      msg: e.target.value,
+                    });
+                  }}
                 />
+                {isLoading ? (
+                  <CircularProgress />
+                ) : (
+                  <Button
+                    variant="contained"
+                    size="big"
+                    sx={{ fontSize: "15px", background: "#e6fcf5" }}
+                    type="submit"
+                    aria-label="Submit email form"
+                  >
+                    Send
+                  </Button>
+                )}
 
-                <Button
-                  variant="contained"
-                  size="big"
-                  sx={{ fontSize: "15px", background: "#e6fcf5" }}
-                  type="submit"
-                  aria-label="Submit email form"
-                >
-                  Send
-                </Button>
+                {error && (
+                  <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    There was an error sending the message.
+                  </Alert>
+                )}
+                {success && (
+                  <Alert severity="success">
+                    <AlertTitle>Success</AlertTitle>
+                    Message sent!
+                  </Alert>
+                )}
               </Grid>
             </Grid>
           </Grid>

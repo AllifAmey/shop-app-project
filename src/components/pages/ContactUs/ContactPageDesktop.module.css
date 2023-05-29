@@ -86,7 +86,7 @@
     "fName fName lName lName"
     "email email mobile mobile"
     "message message message message"
-    "submit-btn . . .";
+    "submit-btn email-status email-status email-status";
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 10%, 1fr, 1fr, 60% 10%;
   padding: 20px;
@@ -114,4 +114,8 @@
 }
 .email-btn {
   grid-area: submit-btn;
+}
+
+.email-status {
+  grid-area: email-status;
 }

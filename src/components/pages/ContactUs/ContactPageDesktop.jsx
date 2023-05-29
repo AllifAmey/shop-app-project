@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styles from "./ContactPageDesktop.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -7,6 +7,10 @@ import { MuiTelInput } from "mui-tel-input";
 import emailjs from "@emailjs/browser";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import CircularProgress from "@mui/material/CircularProgress";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import domain from "../../services/domain";
 
 function ContactPageDesktop() {
   /**
@@ -32,41 +36,62 @@ function ContactPageDesktop() {
 
    */
 
-  const [phone, setPhone] = useState("");
+  const [emailContent, setEmailContent] = useState({
+    fName: "",
+    lName: "",
+    email: "",
+    phone: "",
+    msg: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (newPhone) => {
-    setPhone(newPhone);
-    console.log(phone);
+    setEmailContent({ ...emailContent, phone: newPhone });
   };
 
-  const form = useRef();
-
-  function sendEmail(e) {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
-    //TODO: maybe try django to send emails.
-    // from django.core.mail import send_mail
-    emailjs
-      .sendForm(
-        "service_cwfc9gm",
-        "template_2406ad3",
-        form.current,
-        import.meta.env.VITE_EMAILJS_API_KEY
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  }
+    setIsLoading(true);
+    let response = await fetch(`${domain}/api/shop/external`, {
+      method: "POST",
+      body: JSON.stringify({
+        type: "email",
+        content: JSON.stringify({
+          first_name: emailContent.fName,
+          last_name: emailContent.lName,
+          your_name: emailContent.fName.concat(" ", emailContent.lName),
+          email: emailContent.email,
+          phone_number: emailContent.phone,
+          message: emailContent.msg,
+        }),
+      }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      setError(true);
+    } else {
+      setSuccess(true);
+      setEmailContent({
+        fName: "",
+        lName: "",
+        email: "",
+        phone: "",
+        msg: "",
+      });
+      setError(false);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <>
       <AnimatedPage>
-        <form ref={form} onSubmit={sendEmail}>
+        <form onSubmit={sendEmail}>
           <div className={styles["main-container"]}>
             <div className={styles["contact-container"]}>
               <div className={styles["content-container"]}>
@@ -140,7 +165,6 @@ function ContactPageDesktop() {
                     </svg>
                   </div>
                 </div>
-
                 <div className={styles["email-container"]}>
                   <div className={styles["email-title"]}>Send a Message</div>
                   <div className={styles["email-fName"]}>
@@ -150,6 +174,13 @@ function ContactPageDesktop() {
                       variant="outlined"
                       size="big"
                       name="first_name"
+                      value={emailContent.fName}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          fName: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div className={styles["email-lName"]}>
@@ -159,6 +190,13 @@ function ContactPageDesktop() {
                       variant="outlined"
                       size="big"
                       name="last_name"
+                      value={emailContent.lName}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          lName: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div className={styles["email-address"]}>
@@ -169,12 +207,19 @@ function ContactPageDesktop() {
                       size="big"
                       type="email"
                       name="email"
+                      value={emailContent.email}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          email: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div className={styles["email-mobile"]}>
                     <MuiTelInput
                       defaultCountry="GB"
-                      value={phone}
+                      value={emailContent.phone}
                       onChange={handleChange}
                       name="phone_number"
                     />
@@ -188,18 +233,43 @@ function ContactPageDesktop() {
                       fullWidth={true}
                       size="big"
                       name="message"
+                      value={emailContent.msg}
+                      onChange={(e) => {
+                        setEmailContent({
+                          ...emailContent,
+                          msg: e.target.value,
+                        });
+                      }}
                     />
                   </div>
                   <div className={styles["email-btn"]}>
-                    <Button
-                      variant="contained"
-                      size="big"
-                      sx={{ fontSize: "15px" }}
-                      type="submit"
-                      aria-label="Submit email form"
-                    >
-                      Send
-                    </Button>
+                    {isLoading ? (
+                      <CircularProgress />
+                    ) : (
+                      <Button
+                        variant="contained"
+                        size="big"
+                        sx={{ fontSize: "15px" }}
+                        type="submit"
+                        aria-label="Submit email form"
+                      >
+                        Send
+                      </Button>
+                    )}
+                  </div>
+                  <div className={styles["email-status"]}>
+                    {error && (
+                      <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        There was an error sending the message.
+                      </Alert>
+                    )}
+                    {success && (
+                      <Alert severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        Message sent!
+                      </Alert>
+                    )}
                   </div>
                 </div>
               </div>
