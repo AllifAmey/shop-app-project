@@ -1,6 +1,6 @@
 import domain from "../../../domain";
 
-export async function loginAPI(setIsLoading, email, pass) {
+export async function loginAPI(setIsLoading, setIsError, email, pass) {
   /* 
   Logs in 
   */
@@ -13,6 +13,7 @@ export async function loginAPI(setIsLoading, email, pass) {
 
   if (!response.ok) {
     setIsLoading(false);
+    setIsError(true);
     return "error";
   } else {
     let data = await response.json();

@@ -28,8 +28,8 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     const loginPageText = screen.queryAllByText("Login");
     const emailFormTitle = screen.getByText("Email Address");
     const emailForm = screen.getByRole("textbox", { name: "Email" });
-    const passwordFormTitle = screen.queryAllByText("Password");
-    const passwordForm = screen.getByRole("textbox", { name: "Password" });
+    const passwordFormTitle = screen.queryAllByText("Passwor");
+    const passwordForm = screen.getByLabelText("Password");
     const loginPageButton = screen.getByRole("button", { name: "Login" });
     const signUpLink = screen.getByRole("link", {
       name: "Link to sign up to shop",
@@ -94,7 +94,7 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     const emailFormTitle = screen.getByText("Email Address");
     const emailForm = screen.getByRole("textbox", { name: "Email" });
     const passwordFormTitle = screen.queryAllByText("Password");
-    const passwordForm = screen.getByRole("textbox", { name: "Password" });
+    const passwordForm = screen.getByLabelText("Password");
     const loginLink = screen.getByRole("link", {
       name: "Link to Log in to shop",
     });

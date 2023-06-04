@@ -35,6 +35,7 @@ function AccessAccountMobile() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
 
@@ -43,7 +44,7 @@ function AccessAccountMobile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (title === "Login") {
-      const data = await loginAPI(setIsLoading, email, pass);
+      const data = await loginAPI(setIsLoading, setIsError, email, pass);
       if (data === "error") {
         // set error
       } else {
@@ -59,7 +60,7 @@ function AccessAccountMobile() {
       }
     } else if (title === "Sign Up") {
       await SignUp(setIsLoading, name, email, pass);
-      const data = await loginAPI(setIsLoading, email, pass);
+      const data = await loginAPI(setIsLoading, setIsError, email, pass);
       if (data.user_status === "member") {
         localStorage.setItem("username", data.name);
       } else if (data.user_status === "staff") {
@@ -194,6 +195,7 @@ function AccessAccountMobile() {
                           label="Password"
                           variant="outlined"
                           size="big"
+                          type="password"
                           inputProps={{
                             "aria-label": "Password",
                           }}
@@ -205,6 +207,7 @@ function AccessAccountMobile() {
                       </Grid>
                     </Grid>
                   )}
+                  {isError && <div>Information entered is incorrect</div>}
                   <Grid item width={0.5} marginTop="1rem" marginBottom="1rem">
                     <Button
                       variant="outlined"
