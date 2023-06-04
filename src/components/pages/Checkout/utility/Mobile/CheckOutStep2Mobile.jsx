@@ -7,6 +7,12 @@ function CheckOutStep2Mobile(props) {
   /*Inspiration: 
   https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
 
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
+
   const handleChange = (event) => {
     props.setDeliveryInfo({
       ...props.deliveryInfo,
@@ -17,7 +23,6 @@ function CheckOutStep2Mobile(props) {
   const itemStyles = {
     fontSie: "18px",
   };
-  // const nextDate = new Date( Date.now() + days * 24 * 60 * 60 * 1000)
   const premiumDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const premiumMonth = premiumDate.toLocaleString("default", {
     month: "short",

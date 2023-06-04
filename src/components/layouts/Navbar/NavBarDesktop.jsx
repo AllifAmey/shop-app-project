@@ -12,9 +12,7 @@ import PrimaryLinks from "./utility/PrimaryLinks";
 function NavBarDesktop(props) {
   /*
   docs:
-  Logic for layout- 
-  The layout is based on flexbox.
-  This is the navbar users see on Desktop.
+    read Navbar.jsx docs.
 
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

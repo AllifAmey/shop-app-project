@@ -10,10 +10,7 @@ import HamburgerMenu from "./utility/HamburgerMenu";
 function NavBarTablet(props) {
   /*
   docs:
-  Logic for layout- 
-  The layout is based on flexbox.
-
-
+      read Navbar.jsx docs.
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);

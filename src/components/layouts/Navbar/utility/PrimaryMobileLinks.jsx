@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { NavLink as RouterLink } from "react-router-dom";
 
 function PrimaryMobileLinks(props) {

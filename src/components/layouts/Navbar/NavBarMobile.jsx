@@ -8,11 +8,9 @@ import HamburgerMenu from "./utility/HamburgerMenu";
 
 function NavBar(props) {
   /*
-  docs:
-  Logic for layout- 
-  The layout is based on flexbox.
+   docs:
+    read Navbar.jsx docs.
 
-  Navbar items are spaced move to make it easier for mobile users.
 
    */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

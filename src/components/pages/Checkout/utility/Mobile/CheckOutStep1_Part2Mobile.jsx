@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -6,6 +6,11 @@ import CountrySelect from "../CountrySelect";
 import { useForm } from "react-hook-form";
 
 function CheckOutStep1_Part2Mobile(props) {
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
   const address_line1 = useRef(""),
     address_line2 = useRef(""),
     country = useRef("");

@@ -1,6 +1,8 @@
 import Grid from "@mui/material/Grid";
 
 function CheckOutOrderItemDesktop(props) {
+  // docs: individual order items shown in the order section
+  // only for deskop and tablet
   const styleImg = { height: "40px", width: "40px", borderRadius: "30%" };
 
   return (

@@ -6,6 +6,11 @@ import TextField from "@mui/material/TextField";
 function CheckOutStep2Tablet(props) {
   /*Inspiration: 
   https://help-uk.newlook.com/hc/article_attachments/4410674657553/Standard.jpg */
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
 
   const handleChange = (event) => {
     props.setDeliveryInfo({

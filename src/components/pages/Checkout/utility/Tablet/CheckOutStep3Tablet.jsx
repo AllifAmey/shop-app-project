@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -11,6 +11,11 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "../../../../../store";
 
 function CheckOutStep3Tablet(props) {
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
   const [isLoading, setIsLoading] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import PaymentButton from "../../../../utility/PaymentButton";
@@ -7,10 +7,15 @@ import {
   postOrders,
   postOrdersAnonymous,
 } from "../../../../services/Internal_API/AccountAPI/Orders/OrderAPI";
-import { useDispatch } from "react-redux";
+
 import { cartActions } from "../../../../../store";
 
 function CheckOutStep3Desktop(props) {
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
   const [isLoading, setIsLoading] = useState(false);
   const cart = useSelector((state) => state.cart.cart);
 

@@ -1,6 +1,11 @@
 import Grid from "@mui/material/Grid";
 
 function CheckOutOrderItemTablet(props) {
+  /*
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
   const styleImg = { height: "40px", width: "40px", borderRadius: "30%" };
 
   return (

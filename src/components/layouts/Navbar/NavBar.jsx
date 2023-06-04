@@ -3,6 +3,14 @@ import NavBarMobile from "./NavBarMobile";
 import NavBarTablet from "./NavBarTablet";
 
 function NavBar(props) {
+  /*
+  docs:
+    Logic for layout- 
+    The layout is based on flexbox.
+    For Mobile and tablet a hamburger is used to display the links
+    
+
+   */
   return (
     <>
       {props.isDesktop && (

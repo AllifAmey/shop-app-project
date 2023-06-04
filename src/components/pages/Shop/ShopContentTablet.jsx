@@ -16,17 +16,8 @@ import { shopActions } from "../../../store";
 
 function ShopContentTablet(props) {
   /*
-  The way the logic works in general:
-  There are two sides of the shop - filters on the left and products on right.
-  left - 
-  Each product has a catagory attached to its object.
-  Filters are created based on how many unique values of catagory there are.
-  Filters then allow for users to see or not to see the products with this catagory.
-  right - 
-  When data is grabbed from the product api,
-  the product's values goes through to the product component,
-  it is then this component that creates the product cards seen in the shop with all,
-  of its functionality.
+    docs:
+      read ShopPage.jsx docs.
   */
 
   // backend call

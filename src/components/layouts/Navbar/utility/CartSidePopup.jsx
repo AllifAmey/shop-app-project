@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink as RouterLink } from "react-router-dom";
+
+// 3rd party components.
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import { Grid } from "@mui/material";
-import { useSelector } from "react-redux";
+import Grid from "@mui/material/Grid";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+
+// api
 import {
   getCart,
   patchCartItem,
   deleteCartItem,
 } from "../../../services/Internal_API/AccountAPI/Cart/CartAPI";
-import { useDispatch } from "react-redux";
+
+// store
+import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../../../../store";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
 
 function CartSidePopup(props) {
   // https://codesandbox.io/s/6ncow?file=/src/App.tsx inspiration for cartsidepopup

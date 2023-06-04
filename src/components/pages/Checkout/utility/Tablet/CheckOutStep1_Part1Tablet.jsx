@@ -6,31 +6,17 @@ import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { useForm } from "react-hook-form";
 
 function CheckOutStep1_Part1Tablet(props) {
-  const [phoneError, setPhoneError] = useState(false);
   /*
-  const handleChange = (newPhone) => {
-    setPhone(newPhone);
-  };*/
+   docs:
+      read CheckOutPage.jsx docs
+      
+  */
+  const [phoneError, setPhoneError] = useState(false);
+
   const miniContainerStyles = {
     fontSize: "20px",
   };
-  /*
-  {
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone: "",
-    address: "",
-    city: "",
-    county: "",
-    post_code: "",
-    delivery_type: "",
-  }
 
-  */
-
-  //  setDeliveryInfo={setDeliveryInfo};
-  //  deliveryInfo={deliveryInfo};
   const {
     register,
     handleSubmit,
