@@ -2,6 +2,10 @@ import { useRouteError } from "react-router-dom";
 import NavBar from "../../layouts/Navbar/NavBar";
 
 function ErrorPage() {
+  /*
+   docs:
+    displays not found if error status is 404 else "something went wrong"  
+   */
   const error = useRouteError();
   let title = "Something went wrong!";
   let message = "";

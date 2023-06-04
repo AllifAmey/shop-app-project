@@ -1,30 +1,16 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import natureImg from "../../assets/img/Storypage/nature-inspiration.png";
 import AnimatedPage from "../../utility/AnimatedPage";
-import Box from "@mui/material/Box";
 
 function StoryPageMobile() {
   /*
-    https://cdn.shopify.com/s/files/1/0070/7032/files/mvmt-about-age.png?format=jpg&quality=90&v=1647467698
-    https://cdn.searchenginejournal.com/wp-content/uploads/2018/08/mailchimp-about-us-page-5ec5b852e40d7.png
-    https://cdn2.avada.io/media/resources/WrtbTi5.jpg <--- I chose this one for simplicity and aligning to her design.
-    https://blog.hubspot.com/service/best-contact-us-pages - for contact us pages. 
-
-    Use google map api to create the google map - scroll down to "Connect with one of our global offices"
-    https://www.hubspot.com/company/contact?_ga=2.153440184.1862735785.1624414629-863205565.1624414629&hubs_post=blog.hubspot.com%2Fservice%2Fbest-contact-us-pages&hubs_post-cta=HubSpot 
-
     
     docs:
-    The main component is wrapped around the animation component to bring out the animation.
-    The layout logic is based solely on flexbox. 
+     Read StoryPage.jsx docs.
+   
 
-    future plans:
-
-    Perhaps later showcasing the educational profile of the site's owner should be added.
-
-
-    */
+  */
   // the styles for the flexbox that contains text
   const textContainerStyles = {
     flexDirection: "column",

@@ -6,14 +6,10 @@ import ideaIcon from "../../../../assets/img/icons/idea-icon.png";
 import shopIcon from "../../../../assets/img/icons/shop-icon.png";
 
 function ValuesSectionMobile() {
-  // https://blog.hubspot.com/hs-fs/hubfs/Shopify-1.jpg?width=650&name=Shopify-1.jpg- inspiration
-
   /*
   docs - 
     Logic for layout -
-      Essentially there is a container that is 50vh and inside of that are 3 containers
-      each divded exactly by 3. Each of the divded containers contains the content which are ,
-      further centered.
+      Individual values are now displayed in a flex column to fit mobile screens.
   
   future - 
 
