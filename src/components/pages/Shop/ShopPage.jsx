@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { json, defer, Await, useLoaderData } from "react-router-dom";
 
 import domain from "../../services/domain";

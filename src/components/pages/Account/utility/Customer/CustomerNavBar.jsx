@@ -6,11 +6,11 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 function CustomerNavBar(props) {
   /*
-  Even though the component is called BottomNavigation,
-  this is actually the mini navbar for customers sitting above the datagrid.
+  docs:
+    Top navbar for the customers
 
-  The Navbar for customers includes two values 0 and 1, corresponding to
-  "Cart" and "Orders" respectively. 
+    The Navbar for customers includes two values 0 and 1, corresponding to
+    "Cart" and "Orders" respectively. 
 
   https://mui.com/material-ui/react-bottom-navigation/ for reference.
 

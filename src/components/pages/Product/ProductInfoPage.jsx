@@ -10,7 +10,7 @@ import ProductDetailMobile from "./ProductDetailMobile";
 
 function ProductInfoPage() {
   /*
-   comment from the old code: 
+   docs: 
     Vision:
     Left 60% - product image.
     Right 40% - product info
@@ -27,8 +27,8 @@ function ProductInfoPage() {
 
     price small letters 
 
-    */
-  /* 
+  
+  
   Referance to this component can be seen in the route. 
   It is directed when the user presses the "buy now" button . 
 
@@ -38,9 +38,6 @@ function ProductInfoPage() {
   ProductInfoPage
   
   */
-
-  // TODO: Look into Django to see if there is a seperator for this instead of doing it
-  // on the frontend.
 
   const { productDetail } = useLoaderData();
 

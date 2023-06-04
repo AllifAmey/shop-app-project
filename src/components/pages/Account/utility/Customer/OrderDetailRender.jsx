@@ -10,10 +10,14 @@ import DialogContent from "@mui/material/DialogContent";
 import calculateTotalAmount from "./calculateTotalAmount";
 
 function OrderDetailRender(params) {
-  /**Inspirations so far:
-   * https://startfoodbooking.com/wp-content/uploads/2021/03/1-2-2.png
-   * Most Likely design --> https://community.magento.com/t5/image/serverpage/image-id/15214i492EBBB8C3839898/image-size/large?v=v2&px=999
-   * https://mdbcdn.b-cdn.net/docs/standard/extended/order-details/assets/featured.png
+  /*Inspirations so far:
+   https://startfoodbooking.com/wp-content/uploads/2021/03/1-2-2.png
+   Most Likely design --> https://community.magento.com/t5/image/serverpage/image-id/15214i492EBBB8C3839898/image-size/large?v=v2&px=999
+  https://mdbcdn.b-cdn.net/docs/standard/extended/order-details/assets/featured.png
+  
+    docs:
+      renders the full order data to the user upon clicking
+      button
    */
   const [open, setOpen] = useState(false);
   const handleOpen = () => {

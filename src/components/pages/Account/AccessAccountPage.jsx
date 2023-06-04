@@ -4,9 +4,9 @@ import AccessAccountDesktop from "./AccessAccountDesktop";
 import AccessAccountTablet from "./AccessAccountTablet";
 import AccessAccountMobile from "./AccessAccountMobile";
 
-function AccessAccountPage(props) {
+function AccessAccountPage() {
   /*
-  Page to login or sign up.
+  Page to login or sign up
   */
   const context = useOutletContext();
   return (

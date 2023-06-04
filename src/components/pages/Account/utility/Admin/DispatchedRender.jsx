@@ -2,6 +2,8 @@ import Checkbox from "@mui/material/Checkbox";
 import { patchOrders } from "../../../../services/Internal_API/AccountAPI/Orders/OrderAPI";
 
 function DispatchedRender(props) {
+  // docs: upon clicking a patch request is sent to update
+  // the delivery status.
   let checked = null;
   if (props.data.delivery_status === "Dispatched") {
     checked = true;

@@ -37,7 +37,7 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 function DropboxUploadBtn(props) {
-  // grabs the file from dropbox updates state on main create productpage
+  // docs: grabs the file from dropbox updates state on main create productpage
 
   const APP_KEY = import.meta.env.VITE_DROPBOX_API_KEY;
 
@@ -90,6 +90,9 @@ function AddProductForm() {
   // inspiration
   // https://toolset.com/wp-content/uploads/2020/09/add-product-front-end-1.png
 
+  // docs: Allows the creation of a product
+  // through steps.
+
   const [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [storeImage, setStoreImage] = useState(null);
@@ -110,6 +113,7 @@ function AddProductForm() {
       storage,
       `gs://shop-app-project-366818.appspot.com/images/product/${productInfo.name}-${x}`
     );
+    // image is first compressed  before uploading to firebase.
     new Compressor(storeImage, {
       quality: 0.6,
       width: 500,

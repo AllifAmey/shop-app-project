@@ -1,6 +1,11 @@
 import Tab from "@mui/material/Tab";
 
 function SideTabs() {
+  /* 
+    docs: 
+      These are the labels to the left of the admin dashboard.
+   */
+
   return (
     <>
       <Tab

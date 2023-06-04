@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 
 function ItemsOrderedRender(params) {
-  // renders item ordered on the admin page
+  // docs: renders item ordered on the admin page
 
   const [open, setOpen] = useState(false);
   const [openPic, setOpenPic] = useState(false);
@@ -19,7 +19,6 @@ function ItemsOrderedRender(params) {
     setOpen(false);
   };
 
-  // TODO: investigate whether the utility function could be used.
   const total_order_amount = params.data.order.reduce(
     (initialValue, currentOrderItem) => {
       const currentTotalPrice = Number(

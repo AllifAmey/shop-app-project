@@ -7,7 +7,9 @@ import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 
 function ProductDetailRender(props) {
-  // add buttons to allow to edit???
+  // docs : a simple button that upon clicking
+  // opens a model
+  // future: add buttons to allow to edit?
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);

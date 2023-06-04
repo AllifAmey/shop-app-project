@@ -6,7 +6,11 @@ import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 
 function ProductDetailTablet(props) {
-  //
+  /*
+    docs:
+      Read ProductInfoPage.jsx docs
+      
+  */
 
   // styles
   const mainContainerStyles = {

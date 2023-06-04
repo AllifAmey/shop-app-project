@@ -10,7 +10,10 @@ import {
 } from "recharts";
 
 function SalesChart(props) {
-  // shows says per month
+  /*
+    docs:
+      Shows sales per month using  d3.js
+  */
 
   return (
     <>

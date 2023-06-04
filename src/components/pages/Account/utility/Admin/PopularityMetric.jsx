@@ -1,7 +1,11 @@
 import Grid from "@mui/material/Grid";
 
 function PopularityMetric(props) {
-  // shows says per month
+  /*
+    docs:
+      Two metrics are shown most popular and least popular.
+
+  */
 
   return (
     <>

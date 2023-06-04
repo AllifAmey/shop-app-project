@@ -4,25 +4,19 @@ import ContactPageTablet from "./ContactPageTablet";
 import ContactPageMobile from "./ContactPageMobile";
 
 function ContactPage() {
-  /**
-   *https://i.ytimg.com/vi/ZafzM_z9PLs/maxresdefault.jpg
-   Contact page with picture under the phone number.
-   https://viclafouch.github.io/mui-tel-input/docs/getting-started/ phone number. 
-   */
-
   /*
    docs - 
     Logic for layout-
-      The way it works is simple. It's flexboxes on top of flexboxes to give the layout from the link above.
-      The idea is to have a main flexbox and then to have a flexbox on top of that using absolute to move on top,
-      and shift to the left to give this sort of feel that it is on top.
-      The main reason for this design is due to intuition. I feel it looks good .
+      Overall the layout is flexboxes on top of flexboxes that use absolute positioning.
+      On desktop/tablet the contact form section uses the grid system.
+      On Mobile, the layout is more simple with contact information top and ,
+      contact us section simplified and easier to use on Mobile. 
     
     future - 
 
-    Perhaps the look of the layout needs to change but not much else.
-    For scaling, perhaps turn the current backend into something that can handle emails which is possible.
-    The emailjs usage is quite minimal but that is anticipating audience. 
+    For scaling maybe attempt to use some Django email server.
+    For now emails are sent from the backend using EmailJS.
+    The emailjs usage should be quite small as I anticipate. 
 
 
    */

@@ -10,6 +10,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 
 function ProductButtonRender(props) {
+  // docs: simply renders a product detail button
+  // upon click model pops up with product details
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);

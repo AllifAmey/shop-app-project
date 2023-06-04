@@ -4,7 +4,8 @@ import Button from "@mui/material/Button";
 import { deleteProducts } from "../../../../services/Internal_API/ShopAPI/Products/ProductsAPI";
 
 function ProductDeleteRender(props) {
-  // red button with the "Are you sure? pop up final warning"
+  // docs: currently deletes product upon clicking
+  // future: red button with the "Are you sure? pop up final warning"
 
   return (
     <>
