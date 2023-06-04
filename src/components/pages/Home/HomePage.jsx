@@ -15,6 +15,8 @@ https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/60107f23208b459
 !IMPORTANT FEATURE TO ADD:
 
 Add video to the homepage to show examples of making the jewellery.
+
+test
 */
 
 function HomePage() {
