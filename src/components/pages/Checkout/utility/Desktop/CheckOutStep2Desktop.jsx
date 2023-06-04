@@ -62,7 +62,6 @@ function CheckOutStep2Desktop(props) {
         >
           Delivery
         </Grid>
-
         <Grid
           item
           container
@@ -80,7 +79,7 @@ function CheckOutStep2Desktop(props) {
               onChange={handleChange}
               value="Standard"
               name="radio-buttons"
-              inputProps={{ "aria-label": "Standard" }}
+              inputProps={{ "aria-label": "Standard", "data-cy": "Standard" }}
             />
             £2.99
           </Grid>
@@ -108,7 +107,7 @@ function CheckOutStep2Desktop(props) {
               onChange={handleChange}
               value="Premium"
               name="radio-buttons"
-              inputProps={{ "aria-label": "Premium" }}
+              inputProps={{ "aria-label": "Premium", "data-cy": "Premium" }}
             />
             £3.99
           </Grid>
@@ -127,6 +126,7 @@ function CheckOutStep2Desktop(props) {
             <TextField
               id="filled-multiline-flexible"
               label="Delivery Instructions"
+              data-cy="Delivery Instructions"
               multiline
               rows={5}
               maxRows={10}
@@ -157,6 +157,7 @@ function CheckOutStep2Desktop(props) {
             }}
             style={{ paddingTop: "1rem" }}
             aria-label="Go back to physical address step"
+            data-cy="Back"
           >
             Back
           </Button>
@@ -174,6 +175,7 @@ function CheckOutStep2Desktop(props) {
             }}
             style={{ paddingTop: "1rem" }}
             aria-label="Go back to payment step"
+            data-cy="Continue"
           >
             Continue
           </Button>

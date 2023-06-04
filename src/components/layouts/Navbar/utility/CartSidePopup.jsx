@@ -235,6 +235,7 @@ function CartSidePopup(props) {
                   component={RouterLink}
                   to="/checkout"
                   onClick={() => props.setIsDrawerOpen(false)}
+                  data-cy="Popup Checkout"
                 >
                   Checkout
                 </Button>

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+// 3rd party components.
 import Grid from "@mui/material/Grid";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,9 +13,11 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link as RouterLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+// store
 import { cartActions } from "../../../../../store/index";
+
+// apis
 import {
   getCart,
   patchCartItem,

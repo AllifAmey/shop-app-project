@@ -32,6 +32,7 @@ function MainSectionDesktop() {
               fontSize: "15px",
             }}
             aria-label="Button link to Product Page"
+            data-cy="Explore Shop"
           >
             Explore Shop
           </Button>

@@ -1,5 +1,3 @@
-import React from "react";
-
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 

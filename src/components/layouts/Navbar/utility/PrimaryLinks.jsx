@@ -35,6 +35,7 @@ function PrimaryLinks(props) {
         component={RouterLink}
         to="/"
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Home"
       >
         Home
       </Grid>
@@ -47,6 +48,7 @@ function PrimaryLinks(props) {
         component={RouterLink}
         to="/shop"
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Shop"
       >
         Shop
       </Grid>
@@ -59,6 +61,7 @@ function PrimaryLinks(props) {
         component={RouterLink}
         to="/story"
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Our Story"
       >
         Our Story
       </Grid>
@@ -70,6 +73,7 @@ function PrimaryLinks(props) {
           to="/help"
           onMouseOver={props.handleClick}
           fontSize={24}
+          data-cy="Support"
         >
           Support
         </Link>

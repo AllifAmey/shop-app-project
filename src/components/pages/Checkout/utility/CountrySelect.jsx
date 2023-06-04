@@ -21,7 +21,7 @@ export default function CountrySelect(props) {
             width="20"
             src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
             srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            alt=""
+            alt={`${option.code.toLowerCase()}`}
           />
           {option.label} ({option.code}) +{option.phone}
         </Box>
@@ -31,6 +31,7 @@ export default function CountrySelect(props) {
           {...params}
           label="Choose a country"
           inputProps={{
+            "data-cy": "Choose a country",
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill
           }}

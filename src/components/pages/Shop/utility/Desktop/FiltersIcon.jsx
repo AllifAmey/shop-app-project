@@ -1,6 +1,4 @@
-import React from "react";
 import Checkbox from "@mui/material/Checkbox";
-
 import Grid from "@mui/material/Grid";
 
 function FiltersIcon(props) {
@@ -47,6 +45,7 @@ function FiltersIcon(props) {
                   <Checkbox
                     inputProps={{
                       "aria-label": `filter ${filter_name} checkbox`,
+                      "data-cy": `${filter_name}`,
                     }}
                     checked={filter_val}
                     onChange={(event) => {

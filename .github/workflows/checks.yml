@@ -1,0 +1,12 @@
+___
+name: Checks
+
+on: [push]
+
+jobs: 
+  test-runs:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: npm run test

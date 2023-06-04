@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ProductCard.module.css";
 
+// 3rd party components.
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -10,9 +13,11 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link as RouterLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+// store
 import { cartActions } from "../../../../../store";
+
+// apis
 import {
   getCart,
   patchCartItem,
@@ -150,6 +155,7 @@ function ProductCard(props) {
                 variant="contained"
                 size="big"
                 aria-label={`Button link to ${props.product.name} detail page`}
+                data-cy={`Detail Product ${props.product.id}`}
               >
                 Details
               </Button>
@@ -162,6 +168,7 @@ function ProductCard(props) {
                 size="medium"
                 onClick={addCartHandler}
                 aria-label={`Add ${props.product.name} to cart`}
+                data-cy={`Add Product ${props.product.id}`}
               >
                 Add Cart
               </Button>

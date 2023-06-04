@@ -37,6 +37,7 @@ function SupportMenu(props) {
           component={RouterLink}
           to="/support/faq"
           sx={{ fontSize: "1rem" }}
+          data-cy="FAQ"
         >
           FAQ
         </MenuItem>
@@ -44,6 +45,7 @@ function SupportMenu(props) {
           component={RouterLink}
           to="/support/contact"
           sx={{ fontSize: "1rem", whiteSpace: "normal" }}
+          data-cy="Contact Us"
         >
           Contact Us
         </MenuItem>

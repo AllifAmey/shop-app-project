@@ -72,6 +72,7 @@ function CheckOutStep1_Part2Desktop(props) {
                 inputRef={address_line1}
                 inputProps={{
                   "aria-label": "Address Line 1",
+                  "data-cy": "Address Line 1",
                 }}
                 required
               />
@@ -87,6 +88,7 @@ function CheckOutStep1_Part2Desktop(props) {
                 inputRef={address_line2}
                 inputProps={{
                   "aria-label": "Address Line 2",
+                  "data-cy": "Address Line 2",
                 }}
               />
             </Grid>
@@ -111,6 +113,7 @@ function CheckOutStep1_Part2Desktop(props) {
                 }}
                 inputProps={{
                   "aria-label": "City",
+                  "data-cy": "City",
                 }}
                 required
               />
@@ -135,6 +138,7 @@ function CheckOutStep1_Part2Desktop(props) {
                 }}
                 inputProps={{
                   "aria-label": "Post Code",
+                  "data-cy": "Post Code",
                 }}
                 required
               />
@@ -168,6 +172,7 @@ function CheckOutStep1_Part2Desktop(props) {
             }}
             style={{ paddingTop: "1rem" }}
             aria-label="Go back to Contact Step"
+            data-cy="Back"
           >
             Back
           </Button>
@@ -177,6 +182,7 @@ function CheckOutStep1_Part2Desktop(props) {
             type="submit"
             style={{ paddingTop: "1rem" }}
             aria-label="Go to Delivery step"
+            data-cy="Continue"
           >
             Continue
           </Button>

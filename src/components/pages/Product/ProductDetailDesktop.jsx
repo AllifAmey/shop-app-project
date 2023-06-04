@@ -91,6 +91,7 @@ function ProductDetailDesktop(props) {
                   component={RouterLink}
                   to="/checkout"
                   sx={{ fontSize: "16px" }}
+                  data-cy="Checkout"
                 >
                   Check Out
                 </Button>

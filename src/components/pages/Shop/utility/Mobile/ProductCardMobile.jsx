@@ -1,5 +1,8 @@
-import React, { useState, forwardRef } from "react";
+import { useState, forwardRef } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+// 3rd party components.
 import Grid from "@mui/material/Grid";
 import Dialog from "@mui/material/Dialog";
 import IconButton from "@mui/material/IconButton";
@@ -11,9 +14,11 @@ import CardMedia from "@mui/material/CardMedia";
 import CircularProgress from "@mui/material/CircularProgress";
 import SvgIcon from "@mui/material/SvgIcon";
 import Slide from "@mui/material/Slide";
-import { Link as RouterLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+// store
 import { cartActions } from "../../../../../store/index";
+
+// apis
 import {
   getCart,
   patchCartItem,

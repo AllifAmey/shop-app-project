@@ -1,6 +1,5 @@
-import React from "react";
 import { NavLink as RouterLink } from "react-router-dom";
-import { SvgIcon } from "@mui/material";
+import SvgIcon from "@mui/material/SvgIcon";
 import Link from "@mui/material/Link";
 
 function AccountIcon() {
@@ -26,6 +25,8 @@ function AccountIcon() {
             localStorage.getItem("username")
       }`}
       display="flex"
+      aria-label="Account icon link"
+      data-cy="Account"
     >
       <SvgIcon
         version="1.0"
