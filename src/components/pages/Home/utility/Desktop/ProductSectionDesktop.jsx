@@ -23,12 +23,6 @@ function ProductSectionDesktop() {
     I am uncertain whether to split the components to allow different types of product or to,
     keep things as they are. This may be replaced with videos showing how each product is created.
     
-
-    sx={{
-                background: `url(${pinCushionImg}) no-repeat
-                center center/cover`,
-              }}
-              alt="Pin Cushion Image"
    */
 
   const TitleStyle = { fontSize: "36px", fontWeight: 800 };

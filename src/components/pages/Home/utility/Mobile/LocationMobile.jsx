@@ -11,14 +11,9 @@ function LocationMobile(props) {
 
   /*
   docs - 
-    logic for layout -
-    Looking into the css code. It essentially boils down to big flex box,
-    that centers another flexbox which has two other containers,
-    one , the map, that has 100% height and 50% width,
-    the other containing other boxes.
-    One particular box,"article-bottom", is the bottom container of the right-cointainer,
-    that has another item overlapping the container to form the illusion of ,
-    the sign hanging on this lightly coloured border.
+    A map showing the business's location is first shown
+    A switch can be used to replace the map with
+    weather and opening times. 
 
   future - 
 
