@@ -22,7 +22,7 @@ function CheckOutStep3Desktop(props) {
   function userCart() {
     let initial_cart = [];
     cart.forEach((cartItem) => {
-      const product_id = cartItem.id;
+      const product_id = cartItem.product.id;
       const quantity = cartItem.quantity;
       initial_cart.push({
         product_id: product_id,
@@ -97,16 +97,19 @@ function CheckOutStep3Desktop(props) {
                     setIsLoading,
                     props.deliveryInfo,
                     props.total_price
-                  );
+                  ).then((_) => {
+                    dispatch(cartActions.replaceCart([]));
+                  });
                 } else {
                   postOrdersAnonymous(
                     setIsLoading,
                     props.deliveryInfo,
                     props.total_price,
                     userCart()
-                  );
+                  ).then((_) => {
+                    dispatch(cartActions.replaceCart([]));
+                  });
                 }
-                dispatch(cartActions.replaceCart([]));
               }}
               style={{ paddingTop: "1rem" }}
               aria-label="Submit Order"

@@ -1,7 +1,7 @@
 import domain from "../../../domain";
 
 export async function getOrders(setIsLoading) {
-  // this grabs the
+  // this grabs the orders
   setIsLoading(true);
 
   const token = localStorage.getItem("Token");
@@ -39,34 +39,8 @@ export async function getSpecificOrder(setIsLoading, order_id) {
 }
 
 export async function postOrders(setIsLoading, orderInfo, total_price) {
-  // this grabs the
+  // This post the orders for users
   setIsLoading(true);
-  /*
-  {
-  "user": 0,
-  "first_name": orderInfo.first_name,
-  "last_name": orderInfo.first_name,
-  "email": orderInfo.email,
-  "phone_number": orderInfo.phone_number,
-  "address": orderInfo.address,
-  "city": orderInfo.city,
-  "county": orderInfo.county,
-  "post_code": orderInfo.post_code,
-  "delivery_type": orderInfo.post_code
-}
-  {
-    "user": 2,
-    "first_name": "asdf",
-    "last_name": "asdfasdf",
-    "email": "asdff@dol.com",
-    "phone_number": "+44 7495 996322",
-    "address": "awefawef awefawef",
-    "city": "awef",
-    "country": "awefawef",
-    "post_code": "awefawef",
-    "delivery_type": "awefawefawef"
-  },
-  */
 
   const token = localStorage.getItem("Token");
   const user_id = localStorage.getItem("user_id");
@@ -109,7 +83,7 @@ export async function postOrdersAnonymous(
   total_price,
   user_cart
 ) {
-  // this grabs the
+  // this post the orders for anonymous users.
   setIsLoading(true);
   let user_data = {
     first_name: orderInfo.first_name,
