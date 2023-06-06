@@ -76,6 +76,7 @@ function CheckOutStep1_Part2Tablet(props) {
                 inputRef={address_line1}
                 inputProps={{
                   "aria-label": "Address Line 1",
+                  "data-cy": "Address Line 1",
                 }}
                 required
               />
@@ -115,6 +116,7 @@ function CheckOutStep1_Part2Tablet(props) {
                 }}
                 inputProps={{
                   "aria-label": "City",
+                  "data-cy": "City",
                 }}
                 required
               />
@@ -139,6 +141,7 @@ function CheckOutStep1_Part2Tablet(props) {
                 }}
                 inputProps={{
                   "aria-label": "Post Code",
+                  "data-cy": "Post Code",
                 }}
                 required
               />
@@ -172,6 +175,7 @@ function CheckOutStep1_Part2Tablet(props) {
             }}
             style={{ paddingTop: "1rem" }}
             aria-label="Go back to Contact Step"
+            data-cy="Back"
           >
             Back
           </Button>
@@ -181,6 +185,7 @@ function CheckOutStep1_Part2Tablet(props) {
             type="submit"
             style={{ paddingTop: "1rem" }}
             aria-label="Go to Delivery step"
+            data-cy="Continue"
           >
             Continue
           </Button>

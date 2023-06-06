@@ -36,6 +36,7 @@ function FiltersIconTablet(props) {
                 <Checkbox
                   inputProps={{
                     "aria-label": `filter ${filter_name} checkbox`,
+                    "data-cy": `${filter_name}`,
                   }}
                   checked={filter_val}
                   onChange={(event) => {

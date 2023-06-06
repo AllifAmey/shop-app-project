@@ -71,6 +71,7 @@ function CheckOutStep1_Part1Tablet(props) {
                 }}
                 inputProps={{
                   "aria-label": "First Name",
+                  "data-cy": "First Name",
                 }}
                 required
               />
@@ -94,6 +95,7 @@ function CheckOutStep1_Part1Tablet(props) {
                 }}
                 inputProps={{
                   "aria-label": "Last Name",
+                  "data-cy": "Last Name",
                 }}
                 required
               />
@@ -136,6 +138,7 @@ function CheckOutStep1_Part1Tablet(props) {
               }}
               inputProps={{
                 "aria-label": "Email",
+                "data-cy": "Email",
                 "aria-invalid": `${errors?.email ? "true" : "false"}`,
               }}
               required
@@ -172,6 +175,7 @@ function CheckOutStep1_Part1Tablet(props) {
               }
               inputProps={{
                 "aria-label": "Phone",
+                "data-cy": "Phone",
                 "aria-invalid": `${
                   phoneError || props.deliveryInfo.phone_number === ""
                     ? "true"
@@ -188,6 +192,7 @@ function CheckOutStep1_Part1Tablet(props) {
             type="submit"
             style={{ paddingTop: "1rem" }}
             aria-label="Go to physical address step"
+            data-cy="Continue"
           >
             Continue
           </Button>

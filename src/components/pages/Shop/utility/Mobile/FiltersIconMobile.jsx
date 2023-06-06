@@ -44,6 +44,7 @@ function FiltersIconMobile(props) {
                 <Checkbox
                   inputProps={{
                     "aria-label": `filter ${filter_name} checkbox`,
+                    "data-cy": `${filter_name}`,
                   }}
                   size="small"
                   checked={filter_val}

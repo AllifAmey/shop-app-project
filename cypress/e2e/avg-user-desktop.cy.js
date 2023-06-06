@@ -3,37 +3,29 @@
 
 /* eslint-disable cypress/no-unnecessary-waiting */
 
-describe("average user experience for mobile", () => {
+describe("average user experience for desktop", () => {
   it("allows user to explore shop full and buy item", () => {
     // simulating average user experience
     // that is why there are waits.
-    cy.viewport(400, 660);
+    cy.viewport(1200, 660);
     cy.visit(" http://localhost:3000/");
-    cy.wait(3000);
+    cy.wait(1000);
     cy.get('[data-cy="Explore Shop"]').click();
     cy.wait(2000);
-    cy.get('[data-cy="Account"]').click();
+    cy.get('[data-cy="Our Story"]').click();
     cy.wait(1000);
-    cy.get('[data-cy="Hamburger"]').click();
+    cy.get('[data-cy="Support"]').trigger("mouseover");
     cy.wait(1000);
-    cy.get('[data-cy="Close"]').click();
-    cy.wait(1000);
-    cy.get('[data-cy="Hamburger"]').click();
-    cy.wait(2000);
-    cy.get('[data-cy="Story"]').click();
-    cy.wait(1000);
-    cy.get('[data-cy="Hamburger"]').click();
-    cy.wait(2000);
     cy.get('[data-cy="FAQ"]').click();
-    cy.wait(1000);
-    cy.get('[data-cy="Hamburger"]').click();
     cy.wait(1000);
     cy.get('[data-cy="Contact Us"]').click();
     cy.wait(1000);
-    cy.get('[data-cy="Hamburger"]').click();
+    cy.get("body").click(0, 0);
+    cy.wait(2000);
+    cy.get('[data-cy="Account"]').click();
     cy.wait(1000);
     cy.get('[data-cy="Shop"]').click();
-    cy.wait(1000);
+    cy.wait(2000);
     cy.get('[data-cy="Ring"]').click();
     cy.wait(500);
     cy.get('[data-cy="Ring"]').click();
@@ -43,7 +35,7 @@ describe("average user experience for mobile", () => {
     cy.get('[data-cy="Bracelet"]').click();
     cy.wait(500);
     cy.get('[data-cy="Add Product 1"]').click();
-    cy.wait(1000);
+    cy.wait(500);
     cy.get('[data-cy="Detail Product 1"]').click();
     cy.wait(2000);
     cy.get('[data-cy="Cart"]').click();

@@ -1,12 +1,17 @@
 import { Suspense } from "react";
-import { json, defer, Await, useLoaderData } from "react-router-dom";
+import {
+  json,
+  defer,
+  Await,
+  useLoaderData,
+  useOutletContext,
+} from "react-router-dom";
 
 import domain from "../../services/domain";
 import ShopContentDesktop from "./ShopContentDesktop";
 import ShopContentTablet from "./ShopContentTablet";
 import ShopContentMobile from "./ShopContentMobile";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useOutletContext } from "react-router-dom";
 
 function ShopPage() {
   /*
