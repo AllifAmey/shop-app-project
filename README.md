@@ -56,7 +56,7 @@
 - &#9745; Transfer the current way of development towards Test-driven development,
 - apply to both backend and frontend
 - &#9745; Reduce image files
-- &#9744; Add E2E testing for mobile and tablet users.
+- &#9745; Add E2E testing for mobile and tablet users.
 - &#9744; Add Stripe instead for payment processing.
 - &#9744; Integrate a CDN to resolve issues related to images.
 - &#9745; Make website responsive
