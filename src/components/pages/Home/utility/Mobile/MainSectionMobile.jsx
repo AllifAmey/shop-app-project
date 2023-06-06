@@ -17,7 +17,7 @@ function MainSectionMobile() {
     the text being lifted up, the z-index is important as it directly lifts the importance of the background.
    
    */
-  
+
   return (
     <>
       <section
@@ -39,6 +39,7 @@ function MainSectionMobile() {
               fontSize: "15px",
             }}
             aria-label="Button link to Product Page"
+            data-cy="Explore Shop"
           >
             Explore Shop
           </Button>

@@ -38,6 +38,7 @@ function PrimaryMobileLinks(props) {
           props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Home"
       >
         Home
       </Grid>
@@ -50,6 +51,7 @@ function PrimaryMobileLinks(props) {
           props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Shop"
       >
         Shop
       </Grid>
@@ -62,6 +64,7 @@ function PrimaryMobileLinks(props) {
           props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Story"
       >
         Our Story
       </Grid>
@@ -74,6 +77,7 @@ function PrimaryMobileLinks(props) {
           props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="FAQ"
       >
         FAQ
       </Grid>
@@ -86,6 +90,7 @@ function PrimaryMobileLinks(props) {
           props.handleMobileClose();
         }}
         style={({ isActive }) => (isActive ? isActiveStyle : undefined)}
+        data-cy="Contact Us"
       >
         Contact us
       </Grid>

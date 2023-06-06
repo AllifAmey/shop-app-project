@@ -56,9 +56,9 @@
 - &#9745; Transfer the current way of development towards Test-driven development,
 - apply to both backend and frontend
 - &#9745; Reduce image files
-- &#9745; Add E2E testing for mobile and tablet users.
-- &#9745; Add Stripe instead for payment processing.
-- &#9745; Integrate a CDN to resolve issues related to images.
+- &#9744; Add E2E testing for mobile and tablet users.
+- &#9744; Add Stripe instead for payment processing.
+- &#9744; Integrate a CDN to resolve issues related to images.
 - &#9745; Make website responsive
 - &#9745; Further secure the external api keys by transferring from client to server
 - &#9745; Implemented dashboard using d3 and the data analysis api with it

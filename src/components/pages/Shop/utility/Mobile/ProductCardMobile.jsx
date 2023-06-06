@@ -162,6 +162,7 @@ function ProductCardMobile(props) {
                 variant="contained"
                 size="small"
                 aria-label={`Button link to ${props.product.name} detail page`}
+                data-cy={`Detail Product ${props.product.id}`}
               >
                 Details
               </Button>
@@ -175,6 +176,7 @@ function ProductCardMobile(props) {
                   variant="contained"
                   onClick={addCartHandler}
                   aria-label={`Add ${props.product.name} to cart`}
+                  data-cy={`Add Product ${props.product.id}`}
                   endIcon={
                     <SvgIcon
                       version="1.0"

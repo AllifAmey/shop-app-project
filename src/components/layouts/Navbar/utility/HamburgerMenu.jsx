@@ -22,6 +22,7 @@ function HamburgerMenu(props) {
         aria-haspopup="true"
         onClick={props.handleMobileOpen}
         color="inherit"
+        data-cy="Hamburger"
       >
         <MenuIcon />
       </IconButton>
@@ -36,6 +37,7 @@ function HamburgerMenu(props) {
           color="inherit"
           onClick={props.handleMobileClose}
           aria-label="close"
+          data-cy="Close"
         >
           <CloseIcon />
         </IconButton>
