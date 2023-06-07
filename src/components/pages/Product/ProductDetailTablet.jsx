@@ -1,7 +1,6 @@
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -22,7 +21,6 @@ function ProductDetailTablet(props) {
   const mainGridContainerStyles = {
     fontSize: "1rem",
   };
-  const imgStyle = { borderRadius: "50%", height: "350px", width: "350px" };
   const mainHeaderStyle = { fontSize: "26px" };
   const subTitleStyle = { fontSize: "20px" };
   return (
@@ -42,12 +40,14 @@ function ProductDetailTablet(props) {
             justifyContent="center"
             alignItems="center"
           >
-            <Box
-              component="img"
+            <img
               alt={`${props.product.name.toLowerCase()}`}
               src={props.product.image_url}
-              sx={imgStyle}
-            ></Box>
+              title={`${props.product.name.toLowerCase()}`}
+              height="350px"
+              width="350px"
+              style={{ borderRadius: "50%" }}
+            />
           </Grid>
           <Grid
             item

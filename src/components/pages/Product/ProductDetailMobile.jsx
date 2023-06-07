@@ -1,7 +1,6 @@
 import AnimatedPopUpPage from "../../utility/AnimatedPopUpPage";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -22,7 +21,6 @@ function ProductDetailMobile(props) {
   const mainGridContainerStyles = {
     fontSize: "1rem",
   };
-  const imgStyle = { borderRadius: "50%", height: "200px", width: "200px" };
   const mainHeaderStyle = { fontSize: "26px", fontWeight: "800" };
   const subTitleStyle = { fontSize: "20px" };
   return (
@@ -48,12 +46,14 @@ function ProductDetailMobile(props) {
               <Grid item sx={mainHeaderStyle}>
                 Handmade {props.product.name.toLowerCase()}
               </Grid>
-              <Box
-                component="img"
+              <img
                 alt={`${props.product.name.toLowerCase()}`}
                 src={props.product.image_url}
-                sx={imgStyle}
-              ></Box>
+                title={`${props.product.name.toLowerCase()}`}
+                height="200px"
+                width="200px"
+                style={{ borderRadius: "50%" }}
+              />
             </Grid>
             <Grid
               item

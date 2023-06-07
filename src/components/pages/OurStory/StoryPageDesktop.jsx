@@ -86,7 +86,6 @@ function StoryPageDesktop() {
                     objectFit: "cover",
                   }}
                   alt="Nature"
-                  loading="lazy"
                 ></Grid>
               </Grid>
             </Grid>

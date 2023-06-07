@@ -67,7 +67,6 @@ function StoryPageMobile() {
                   objectFit: "cover",
                 }}
                 alt="Nature"
-                loading="lazy"
               ></Grid>
               <Grid item fontWeight={800} fontSize={30}>
                 Design Inspiration
