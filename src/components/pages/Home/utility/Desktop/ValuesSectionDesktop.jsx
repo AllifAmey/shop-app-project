@@ -26,10 +26,6 @@ function ValuesSectionDesktop() {
     fontSize: "30px",
     fontWeight: 800,
   };
-  const valueImageStyle = {
-    height: "50px",
-    width: "50px",
-  };
   const valueTextStyle = {
     fontSize: "20px",
     width: "80%",
@@ -63,14 +59,14 @@ function ValuesSectionDesktop() {
               gap={1}
               padding="1rem"
             >
-              <Grid
-                item
-                component="img"
+              <img
                 src={ideaIcon}
-                sx={valueImageStyle}
                 loading="lazy"
                 alt="Philosophy icon"
-              ></Grid>
+                title="Philosophy icon"
+                width="50px"
+                height="50px"
+              />
               <Grid item sx={valueTitleStyle}>
                 Our Philosophy
               </Grid>
@@ -90,14 +86,14 @@ function ValuesSectionDesktop() {
               justifyContent="center"
               alignItems="center"
             >
-              <Grid
-                item
-                component="img"
+              <img
                 src={shopIcon}
-                sx={valueImageStyle}
                 loading="lazy"
                 alt="Shop icon"
-              ></Grid>
+                title="Shop Icon"
+                width="50px"
+                height="50px"
+              />
               <Grid item sx={valueTitleStyle}>
                 Shop
               </Grid>
@@ -117,14 +113,14 @@ function ValuesSectionDesktop() {
               justifyContent="center"
               alignItems="center"
             >
-              <Grid
-                item
-                component="img"
+              <img
                 src={supportIcon}
-                sx={valueImageStyle}
-                loading="lazy"
                 alt="Support Icon"
-              ></Grid>
+                title="Support Icon"
+                width="50px"
+                height="50px"
+                loading="lazy"
+              />
               <Grid item sx={valueTitleStyle}>
                 Support
               </Grid>

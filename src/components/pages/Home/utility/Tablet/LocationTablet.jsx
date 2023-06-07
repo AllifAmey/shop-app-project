@@ -1,7 +1,8 @@
 import styles from "./LocationTablet.module.css";
-import img from "../../../../assets/img/icons/openSign-icon.png";
+
 import { useInView } from "react-intersection-observer";
 import googlemap from "../../../../assets/img/Homepage/our-location-google-map.png";
+import openSignImg from "../../../../assets/img/icons/openSign-icon.png";
 
 function LocationTablet(props) {
   // https://i.pinimg.com/originals/65/e7/63/65e763df894b30b767e3134675d83767.jpg <-- inspiration
@@ -45,7 +46,10 @@ function LocationTablet(props) {
               src={googlemap}
               alt="google map"
               loading="lazy"
-              style={{ height: "100%", width: "50%", objectFit: "cover" }}
+              height="100%"
+              width="50%"
+              title="Map showing location of the shop."
+              style={{ objectFit: "cover" }}
             />
             <div className={styles["right-container"]}>
               <div className={styles["article-container"]}>
@@ -58,7 +62,10 @@ function LocationTablet(props) {
                     <img
                       src={`https://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
                       alt="Weather icon"
-                      className={styles["weather-icon"]}
+                      loading="lazy"
+                      title="Current weather at our shop."
+                      height="50px"
+                      width="50px"
                     />
                   </div>
                 </div>
@@ -75,8 +82,12 @@ function LocationTablet(props) {
                     </div>
                     <div className={styles["article-bottom"]}>
                       <img
-                        src={img}
+                        src={openSignImg}
                         alt="open-sign"
+                        loading="lazy"
+                        title="Opening Sign"
+                        height="50px"
+                        width="50px"
                         className={styles["open-sign"]}
                       ></img>
                       <div className={styles["article-timeBox"]}>

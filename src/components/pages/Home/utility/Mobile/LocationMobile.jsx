@@ -1,7 +1,7 @@
 import { useState } from "react";
-import img from "../../../../assets/img/icons/openSign-icon.png";
 import { useInView } from "react-intersection-observer";
 import googlemap from "../../../../assets/img/Homepage/our-location-google-map.png";
+import openSignImg from "../../../../assets/img/icons/openSign-icon.png";
 
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
@@ -64,7 +64,10 @@ function LocationMobile(props) {
                 src={googlemap}
                 alt="google map"
                 loading="lazy"
-                style={{ height: "80%", width: "90%", objectFit: "cover" }}
+                title="Current weather at our shop."
+                height="80%"
+                width="90%"
+                style={{ objectFit: "cover" }}
               />
             )}
             {!checked && (
@@ -73,11 +76,14 @@ function LocationMobile(props) {
                   <Grid item fontSize="20px">
                     Current Weather
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={6} height="100%">
                     <img
                       src={`https://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
                       alt="Weather icon"
                       loading="lazy"
+                      title="Current weather at our shop."
+                      height="100%"
+                      width="100%"
                     />
                   </Grid>
                 </Grid>
@@ -111,9 +117,13 @@ function LocationMobile(props) {
                   </div>
                   <div>1 Tavistock St, London WC2E 8BD</div>
                   <img
-                    src={img}
+                    src={openSignImg}
+                    loading="lazy"
+                    title="Opening Sign"
                     alt="open-sign"
-                    style={{ height: "50px", width: "50px", margin: "0 auto" }}
+                    height="50px"
+                    width="50px"
+                    style={{ margin: "0 auto" }}
                   ></img>
                   <div style={{ fontWeight: "800" }}>Saturday - Sunday</div>
                   <div style={{ fontWeight: "800" }}>8am to 6pm!</div>

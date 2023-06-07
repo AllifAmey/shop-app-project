@@ -23,9 +23,7 @@ function PrimaryMobileLinks(props) {
     flex: 1,
   };
   const isActiveStyle = {
-    color: "#4dabf7",
-    backgroundColor: "#dee2e6",
-    boxShadow: "rgba(100, 100, 111, 0.1) 0px 7px 29px 0px",
+    color: "red",
   };
   return (
     <>

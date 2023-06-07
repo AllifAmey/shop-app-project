@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
 import styles from "./MainSectionTablet.module.css";
-import img from "../../../../assets/img/icons/arrow-down.png";
+import arrowImg from "../../../../assets/img/icons/arrow-down.png";
 
 function MainSectionTablet() {
   /*
@@ -35,7 +35,7 @@ function MainSectionTablet() {
             size="big"
             color="primary"
             sx={{
-              fontSize: "15px",
+              fontSize: "1rem",
             }}
             aria-label="Button link to Product Page"
             data-cy="Explore Shop"
@@ -52,12 +52,14 @@ function MainSectionTablet() {
             smooth={true}
             offset={0}
             duration={500}
+            href="#"
           >
             <img
-              src={img}
+              src={arrowImg}
               alt="arrow"
-              className={styles["arrow"]}
-              style={{ width: "50px", height: "50px" }}
+              title="Click and scroll to the bottom."
+              width="50px"
+              height="50px"
             ></img>
           </Link>
         </div>

@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-scroll";
 import styles from "./MainSectionMobile.module.css";
-import img from "../../../../assets/img/icons/arrow-down.png";
+import arrowImg from "../../../../assets/img/icons/arrow-down.png";
 
 function MainSectionMobile() {
   /*
@@ -53,12 +53,14 @@ function MainSectionMobile() {
             smooth={true}
             offset={0}
             duration={500}
+            href="#"
           >
             <img
-              src={img}
+              src={arrowImg}
               alt="arrow"
-              className={styles["arrow"]}
-              style={{ width: "50px", height: "50px" }}
+              title="Click and scroll to the bottom."
+              width="50px"
+              height="50px"
             ></img>
           </Link>
         </div>

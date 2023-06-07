@@ -32,14 +32,15 @@ function ProductSectionDesktop() {
       <Box height="auto" width={1}>
         <Grid container flexDirection="column">
           <Grid item container height="50vh">
-            <Grid item xs={6}>
+            <Grid item xs={6} height="100%">
               <img
                 src={ringImg}
+                height="100%"
+                width="100%"
                 style={{
-                  height: "50vh",
-                  width: "100%",
                   objectFit: "cover",
                 }}
+                title="Ring"
                 alt="Ring"
                 loading="lazy"
               />
@@ -78,14 +79,15 @@ function ProductSectionDesktop() {
             </Grid>
           </Grid>
           <Grid item direction="row-reverse" container height="50vh">
-            <Grid item xs={6}>
+            <Grid item xs={6} height="100%">
               <img
                 src={pinCushionImg}
+                height="100%"
+                width="100%"
                 style={{
-                  height: "50vh",
-                  width: "100%",
                   objectFit: "cover",
                 }}
+                title="Pin Cushion"
                 alt="Pin Cushion"
                 loading="lazy"
               />
@@ -125,14 +127,15 @@ function ProductSectionDesktop() {
             </Grid>
           </Grid>
           <Grid item container height="50vh">
-            <Grid item xs={6}>
+            <Grid item xs={6} height="100%">
               <img
                 src={scrunchyImg}
+                height="100%"
+                width="100%"
                 style={{
-                  height: "50vh",
-                  width: "100%",
                   objectFit: "cover",
                 }}
+                title="Scrunchy"
                 alt="Scrunchy"
                 loading="lazy"
               />

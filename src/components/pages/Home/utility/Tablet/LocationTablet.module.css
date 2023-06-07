@@ -50,11 +50,6 @@
   top: 90%;
   left: 40%;
 }
-/* weather icon */
-.weather-icon {
-  height: 50px;
-  width: 50px;
-}
 
 /* This container is the card */
 .article-card {
@@ -104,8 +99,6 @@
   top: -5%;
   left: 35%;
   right: 35%;
-  height: 50px;
-  width: 50px;
 }
 
 .article-timeBox {

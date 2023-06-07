@@ -57,6 +57,7 @@ function ProductSectionMobile() {
             <Grid
               item
               width={1}
+              title="Ring"
               sx={{ ...PictureStyle, backgroundImage: `url(${ringImg})` }}
             ></Grid>
             <Grid sx={textStyles}>
@@ -71,6 +72,7 @@ function ProductSectionMobile() {
             <Grid
               item
               width={1}
+              title="Pin Cushion"
               sx={{ ...PictureStyle, backgroundImage: `url(${pinCushionImg})` }}
             ></Grid>
             <Grid sx={textStyles}>
@@ -85,6 +87,7 @@ function ProductSectionMobile() {
             <Grid
               item
               width={1}
+              title="Scrunchy"
               sx={{ ...PictureStyle, backgroundImage: `url(${scrunchyImg})` }}
             ></Grid>
             <Grid sx={textStyles}>
