@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // api
 import {
@@ -45,9 +46,11 @@ function CartSidePopup(props) {
   useEffect(() => {
     // grab the user's cart and store into frontend's cart
     if (localStorage.getItem("isLogged") === "LOGGED_IN") {
-      getCart(setIsLoading).then((user_cart) => {
+      getCart(setIsLoading).then((res) => {
         setIsLoading(true);
-        dispatch(cartActions.replaceCart(user_cart));
+        if (res !== "error") {
+          dispatch(cartActions.replaceCart(res));
+        }
         setIsLoading(false);
       });
     }
@@ -121,7 +124,9 @@ function CartSidePopup(props) {
     cartSidePopupWidth = "80%";
   }
 
-  return (
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
     <Drawer
       anchor="right"
       open={props.isDrawerOpen}

@@ -15,9 +15,13 @@ export async function getCart(setIsLoading) {
     },
   });
   const data = await response.json();
-
-  setIsLoading(false);
-  return data;
+  if (response.status === 401) {
+    setIsLoading(false);
+    return "error";
+  } else {
+    setIsLoading(false);
+    return data;
+  }
 }
 
 export async function postCart(setIsLoading, product_id) {

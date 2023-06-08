@@ -31,7 +31,6 @@ import ItemsOrderedRender from "./utility/Admin/ItemsOrderedRender";
 import UrgencyLevelRender from "./utility/Admin/UrgencyLevelRender";
 import DispatchedRender from "./utility/Admin/DispatchedRender";
 import AddProductForm from "./utility/Admin/AddProductForm";
-require("ag-grid-community/styles/ag-grid.css");
 
 function VerticalTabs(props) {
   const [value, setValue] = useState(0);

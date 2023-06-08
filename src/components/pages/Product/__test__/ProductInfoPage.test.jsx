@@ -3,7 +3,7 @@ import {
   render,
 } from "../../../../../test-utils/testing-library-utils";
 
-import ProductInfoContent from "../ProductInfoContent";
+import ProductDetailDesktop from "../ProductDetailDesktop";
 
 describe("Testing productInfoContent component inside of ProductInfoPage component", () => {
   const FAKE_TEST_DATA = {
@@ -18,7 +18,7 @@ describe("Testing productInfoContent component inside of ProductInfoPage compone
     price: "3.99",
   };
   test("check product info text is correctly rendered", () => {
-    render(<ProductInfoContent product={FAKE_TEST_DATA} />);
+    render(<ProductDetailDesktop product={FAKE_TEST_DATA} />);
     const product = FAKE_TEST_DATA;
     const detailSectionTitle = screen.getByText("Details");
     const descriptionSectionTitle = screen.getByText("Description");
