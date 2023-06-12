@@ -86,6 +86,7 @@ function StoryPageTablet() {
                   sx={{
                     objectFit: "cover",
                   }}
+                  title="Inspiration by nature"
                   alt="Nature"
                 ></Grid>
               </Grid>

@@ -32,8 +32,11 @@ import UrgencyLevelRender from "./utility/Admin/UrgencyLevelRender";
 import DispatchedRender from "./utility/Admin/DispatchedRender";
 import AddProductForm from "./utility/Admin/AddProductForm";
 
+import { Helmet } from "react-helmet-async";
+
 function VerticalTabs(props) {
   const [value, setValue] = useState(0);
+  const [isHacker, setIsHacker] = useState(false);
   const [innerValueTab, setInnerValueTab] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [rowData, setRowData] = useState([]);
@@ -45,7 +48,7 @@ function VerticalTabs(props) {
   };
 
   useEffect(() => {
-    getShopAnalysis(setIsLoading).then((data) => {
+    getShopAnalysis(setIsLoading, setIsHacker).then((data) => {
       setAnalysisData(data);
     });
   }, []);
@@ -108,7 +111,9 @@ function VerticalTabs(props) {
 
   const gridRef = useRef();
 
-  return (
+  return isHacker ? (
+    <div>You going to be reported to the police. Unauthorised access.</div>
+  ) : (
     <Box
       sx={{
         bgcolor: "background.paper",
@@ -244,6 +249,19 @@ function AdminAccountPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{`${localStorage.getItem("username")}'s Admin Page`}</title>
+        <meta
+          name="description"
+          content="See orders, analytics and products inside of UniqueShopGB"
+        />
+        <link
+          rel="canonical"
+          href={`/account/${localStorage.getItem(
+            "user_status"
+          )}/${localStorage.getItem("username")}`}
+        />
+      </Helmet>
       <Box height="100vh">
         <Container maxWidth="lg">
           <Grid

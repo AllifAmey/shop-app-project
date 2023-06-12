@@ -1,6 +1,6 @@
 import domain from "../../../domain";
 
-export async function getShopAnalysis(setIsLoading) {
+export async function getShopAnalysis(setIsLoading, setIsHacker) {
   // this grabs the
   setIsLoading(true);
 
@@ -13,8 +13,13 @@ export async function getShopAnalysis(setIsLoading) {
       Authorization: `Token ${token}`,
     },
   });
-  const data = await response.json();
-
-  setIsLoading(false);
-  return data;
+  if (!response.ok) {
+    setIsHacker(true);
+    setIsLoading(false);
+    return "error";
+  } else {
+    const data = await response.json();
+    setIsLoading(false);
+    return data;
+  }
 }

@@ -8,6 +8,8 @@ import ProductDetailDesktop from "./ProductDetailDesktop";
 import ProductDetailTablet from "./ProductDetailTablet";
 import ProductDetailMobile from "./ProductDetailMobile";
 
+import { Helmet } from "react-helmet-async";
+
 function ProductInfoPage() {
   /*
    docs: 
@@ -56,6 +58,21 @@ function ProductInfoPage() {
         <Await resolve={productDetail}>
           {(loadedProductDetail) => (
             <>
+              <Helmet>
+                <title>
+                  Handmade {`${loadedProductDetail.name.toLowerCase()}`}
+                </title>
+                <meta
+                  name="description"
+                  content={`Learn more about our handmade ${loadedProductDetail.name.toLowerCase()} at UniqueShopGB`}
+                />
+                <link
+                  rel="canonical"
+                  href={`/product/handmade-${loadedProductDetail.name
+                    .toLowerCase()
+                    .replaceAll(" ", "-")}-${loadedProductDetail.id}`}
+                />
+              </Helmet>
               {context.isDesktop && (
                 <ProductDetailDesktop product={loadedProductDetail} />
               )}
@@ -89,7 +106,7 @@ async function loadProductDetail(product_id) {
     );
   } else {
     const data = await response.json();
-    return data;
+    return { ...data, id: product_id };
   }
 }
 

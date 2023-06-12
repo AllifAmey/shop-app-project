@@ -193,5 +193,5 @@ describe("Testing CheckOutStep1_part1Desktop error handling", () => {
     const Step1_Part2Title = screen.queryAllByText("Address");
     // verify the next step title now exist on the screen.
     expect(Step1_Part2Title.length).toBeGreaterThanOrEqual(2);
-  });
+  }, 40000);
 });

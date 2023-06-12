@@ -65,7 +65,7 @@ function NavBarTablet(props) {
             flex={1}
             sx={{ textAlign: "start", fontSize: "30px", color: "red" }}
           >
-            SahrahJewellery
+            UniqueShopGB
           </Grid>
           <Grid
             item

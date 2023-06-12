@@ -6,25 +6,29 @@ import userEvent from "@testing-library/user-event";
 
 import AccessAccountPage from "../AccessAccountPage";
 
+import { HelmetProvider } from "react-helmet-async";
+
 describe("Testing AccessAccountPage component (login, signup, recover)", () => {
   test("Ensure login page renders correctly and functionality works", async () => {
     const loginRoute = "/account/login/";
     const user = userEvent.setup();
     // use <MemoryRouter> when you want to manually control the history
     render(
-      <MemoryRouter initialEntries={[loginRoute]}>
-        <Routes>
-          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
-            <Route
-              path="/account/:accessType"
-              element={<AccessAccountPage />}
-            ></Route>
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <HelmetProvider>
+        <MemoryRouter initialEntries={[loginRoute]}>
+          <Routes>
+            <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+              <Route
+                path="/account/:accessType"
+                element={<AccessAccountPage />}
+              ></Route>
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </HelmetProvider>
     );
     // get all the elements on the page
-    const AccessAccountPageTitle = screen.getByText("SahrahJewellery");
+    const AccessAccountPageTitle = screen.getByText("UniqueShopGB");
     const loginPageText = screen.queryAllByText("Login");
     const emailFormTitle = screen.getByText("Email Address");
     const emailForm = screen.getByRole("textbox", { name: "Email" });
@@ -75,19 +79,21 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     const user = userEvent.setup();
     // use <MemoryRouter> when you want to manually control the history
     render(
-      <MemoryRouter initialEntries={[signUpRoute]}>
-        <Routes>
-          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
-            <Route
-              path="/account/:accessType"
-              element={<AccessAccountPage />}
-            ></Route>
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <HelmetProvider>
+        <MemoryRouter initialEntries={[signUpRoute]}>
+          <Routes>
+            <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+              <Route
+                path="/account/:accessType"
+                element={<AccessAccountPage />}
+              ></Route>
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </HelmetProvider>
     );
     // grab all the elements on the page
-    const AccessAccountPageTitle = screen.getByText("SahrahJewellery");
+    const AccessAccountPageTitle = screen.getByText("UniqueShopGB");
     const signUpPageText = screen.queryAllByText("Sign Up");
     const nameFormTitle = screen.queryAllByText("Name");
     const nameForm = screen.getByRole("textbox", { name: "Name" });
@@ -119,19 +125,21 @@ describe("Testing AccessAccountPage component (login, signup, recover)", () => {
     const user = userEvent.setup();
     // use <MemoryRouter> when you want to manually control the history
     render(
-      <MemoryRouter initialEntries={[signUpRoute]}>
-        <Routes>
-          <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
-            <Route
-              path="/account/:accessType"
-              element={<AccessAccountPage />}
-            ></Route>
-          </Route>
-        </Routes>
-      </MemoryRouter>
+      <HelmetProvider>
+        <MemoryRouter initialEntries={[signUpRoute]}>
+          <Routes>
+            <Route path="/" element={<Outlet context={{ isDesktop: true }} />}>
+              <Route
+                path="/account/:accessType"
+                element={<AccessAccountPage />}
+              ></Route>
+            </Route>
+          </Routes>
+        </MemoryRouter>
+      </HelmetProvider>
     );
     // grab all the elements on the page
-    const AccessAccountPageTitle = screen.getByText("SahrahJewellery");
+    const AccessAccountPageTitle = screen.getByText("UniqueShopGB");
     const recoverPageText = screen.queryAllByText("Recover");
     const emailFormTitle = screen.getByText("Email Address");
     const emailForm = screen.getByRole("textbox", { name: "Email" });

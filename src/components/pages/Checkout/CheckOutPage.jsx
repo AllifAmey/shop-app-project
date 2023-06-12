@@ -3,6 +3,8 @@ import CheckOutPageDesktop from "./CheckOutPageDesktop";
 import CheckOutPageTablet from "./CheckOutPageTablet";
 import CheckOutPageMobile from "./CheckOutPageMobile";
 
+import { Helmet } from "react-helmet-async";
+
 function CheckOutPage() {
   /*
     https://boltfinancial.wpengine.com/wp-content/uploads/2019/10/made-checkout-example-progress-indicator-1.png
@@ -30,6 +32,14 @@ function CheckOutPage() {
   const context = useOutletContext();
   return (
     <>
+      <Helmet>
+        <title>Checkout</title>
+        <meta
+          name="description"
+          content="Checkout page , the last step to purchase our items at UniqueShopGB."
+        />
+        <link rel="canonical" href="/checkout" />
+      </Helmet>
       {context.isDesktop && <CheckOutPageDesktop />}
       {context.isTablet && <CheckOutPageTablet />}
       {context.isMobile && <CheckOutPageMobile />}

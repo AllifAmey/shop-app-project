@@ -41,7 +41,7 @@ function NavBar(props) {
           height="100%"
         >
           <Grid item sx={{ fontSize: "26px", color: "red" }}>
-            SahrahJewellery
+            UniqueShopGB
           </Grid>
           <Grid item>
             <AccountIcon />

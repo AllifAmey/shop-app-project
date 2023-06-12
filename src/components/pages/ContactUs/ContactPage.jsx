@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import ContactPageDesktop from "./ContactPageDesktop";
 import ContactPageTablet from "./ContactPageTablet";
 import ContactPageMobile from "./ContactPageMobile";
+import { Helmet } from "react-helmet-async";
 
 function ContactPage() {
   /*
@@ -23,6 +24,14 @@ function ContactPage() {
   const context = useOutletContext();
   return (
     <>
+      <Helmet>
+        <title>Contact Us</title>
+        <meta
+          name="description"
+          content="Contact us for any enquires related to our shop or business "
+        />
+        <link rel="canonical" href="/support/contact" />
+      </Helmet>
       {context.isDesktop && <ContactPageDesktop />}
       {context.isTablet && <ContactPageTablet />}
       {context.isMobile && <ContactPageMobile />}

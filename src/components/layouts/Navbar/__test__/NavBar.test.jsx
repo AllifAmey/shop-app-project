@@ -11,7 +11,7 @@ describe("Testing NavBar component", () => {
     render(<NavBar isDesktop={true} />);
 
     // consistent contents in navbar
-    const companyName = screen.getByText("SahrahJewellery");
+    const companyName = screen.getByText("UniqueShopGB");
     const accountSVGTitle = screen.getByTitle("Account Icon");
     const cartSVGTitle = screen.getByTitle("Cart Icon");
 

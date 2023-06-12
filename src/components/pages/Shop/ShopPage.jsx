@@ -12,6 +12,7 @@ import ShopContentDesktop from "./ShopContentDesktop";
 import ShopContentTablet from "./ShopContentTablet";
 import ShopContentMobile from "./ShopContentMobile";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Helmet } from "react-helmet-async";
 
 function ShopPage() {
   /*
@@ -49,6 +50,14 @@ function ShopPage() {
       <Await resolve={products}>
         {(loadedProducts) => (
           <>
+            <Helmet>
+              <title>Shop</title>
+              <meta
+                name="description"
+                content="Purchase different jewellery and art pieces we have on sale at UniqueShopGB"
+              />
+              <link rel="canonical" href="/shop" />
+            </Helmet>
             {context.isDesktop && (
               <ShopContentDesktop products={loadedProducts} />
             )}

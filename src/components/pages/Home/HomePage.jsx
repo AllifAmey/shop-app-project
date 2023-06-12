@@ -5,6 +5,7 @@ import HomePageTablet from "./HomePageTablet";
 import HomePageMobile from "./HomePageMobile";
 import { useOutletContext } from "react-router-dom";
 import domain from "../../services/domain";
+import { Helmet } from "react-helmet-async";
 
 function HomePage() {
   /*
@@ -29,6 +30,13 @@ function HomePage() {
           {(loadedWeather) => {
             return (
               <>
+                <Helmet>
+                  <meta
+                    name="description"
+                    content="We are a London-based family business selling handcrafted jewellery. Come visit us at Jubilee Market!"
+                  />
+                  <link rel="canonical" href="" />
+                </Helmet>
                 {context.isDesktop && (
                   <HomePageDesktop loadedWeather={loadedWeather} />
                 )}

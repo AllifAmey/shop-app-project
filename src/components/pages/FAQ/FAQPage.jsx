@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 import FAQPageDesktop from "./FAQPageDesktop";
 import FAQPageTablet from "./FAQPageTablet";
 import FAQPageMobile from "./FAQPageMobile";
+import { Helmet } from "react-helmet-async";
 
 function FAQPage() {
   /*
@@ -40,6 +41,14 @@ function FAQPage() {
 
   return (
     <>
+      <Helmet>
+        <title>FAQ</title>
+        <meta
+          name="description"
+          content="Frequently Asked Questions about our shop - UniqueShopGB"
+        />
+        <link rel="canonical" href="/support/faq" />
+      </Helmet>
       {context.isDesktop && <FAQPageDesktop />}
       {context.isTablet && <FAQPageTablet />}
       {context.isMobile && <FAQPageMobile />}

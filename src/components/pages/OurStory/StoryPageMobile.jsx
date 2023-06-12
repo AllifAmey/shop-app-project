@@ -66,6 +66,7 @@ function StoryPageMobile() {
                   height: "60%",
                   objectFit: "cover",
                 }}
+                title="Inspiration by nature"
                 alt="Nature"
               ></Grid>
               <Grid item fontWeight={800} fontSize={30}>

@@ -12,6 +12,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { loginAPI } from "../../services/Internal_API/AccountAPI/Access/LoginAPI";
 import { SignUp } from "../../services/Internal_API/AccountAPI/Access/SignupAPI";
 
+import { Helmet } from "react-helmet-async";
+
 function CapitaliseEachWord(text) {
   // capitalises each word for params
   // This is used to make the AccessAccountPage title relevant to the page.
@@ -75,6 +77,14 @@ function AccessAccountDesktop() {
 
   return (
     <>
+      <Helmet>
+        <title>{`${title}`}</title>
+        <meta
+          name="description"
+          content="Create, login or recover your account at UniqueShopGB."
+        />
+        <link rel="canonical" href={`/account/${params.accessType}`} />
+      </Helmet>
       {isLoading ? (
         <CircularProgress size="25rem" sx={{ margin: "auto" }} />
       ) : (
@@ -105,7 +115,7 @@ function AccessAccountDesktop() {
                   height={0.3}
                 >
                   <Grid item fontSize={44}>
-                    SahrahJewellery
+                    UniqueShopGB
                   </Grid>
                   <Grid item fontSize={30} fontWeight={800}>
                     {title}

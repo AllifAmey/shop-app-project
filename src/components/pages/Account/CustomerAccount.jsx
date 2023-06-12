@@ -28,6 +28,8 @@ import ProductButtonRender from "./utility/Customer/ProductButtonRender";
 import TotalAmountRender from "./utility/Customer/TotalAmountRender";
 import calculateTotalAmount from "./utility/Customer/calculateTotalAmount";
 
+import { Helmet } from "react-helmet-async";
+
 function CustomerAccount() {
   // inspiration
   // https://woocommerce.com/wp-content/uploads/2020/11/my-account-page-order-again.jpg
@@ -153,6 +155,19 @@ function CustomerAccount() {
 
   return (
     <>
+      <Helmet>
+        <title>{`${localStorage.getItem("username")}'s Account`}</title>
+        <meta
+          name="description"
+          content="See your orders and cart through a dashboard at UniqueShopGB"
+        />
+        <link
+          rel="canonical"
+          href={`/account/${localStorage.getItem(
+            "user_status"
+          )}/${localStorage.getItem("username")}`}
+        />
+      </Helmet>
       {isLoading ? (
         <Grid container justifyContent="center">
           <CircularProgress size="25rem" sx={{ margin: "auto" }} />

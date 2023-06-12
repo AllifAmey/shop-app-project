@@ -69,7 +69,7 @@ function NavBarDesktop(props) {
             flex={1}
             sx={{ textAlign: "start", fontSize: "30px", color: "red" }}
           >
-            SahrahJewellery
+            UniqueShopGB
           </Grid>
           <PrimaryLinks handleClick={handleClick} />
           <Grid

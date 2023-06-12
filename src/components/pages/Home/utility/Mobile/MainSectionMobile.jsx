@@ -25,7 +25,7 @@ function MainSectionMobile() {
         title="Jewellery hammered in background"
       >
         <div className={styles["center-container"]}>
-          <div className={styles["title"]}>SahrahJewellery</div>
+          <div className={styles["title"]}>UniqueShopGB</div>
           <div className={styles["short-info"]}>
             The best handcrafted Jewellery money can buy at a affordable price.
           </div>

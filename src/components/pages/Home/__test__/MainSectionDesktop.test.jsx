@@ -16,7 +16,7 @@ describe("MainSectionDesktop component", () => {
   test("check if correct text is rendered", () => {
     render(<MainSectionDesktop />);
     // texts seen on homepage
-    const CompanyText = screen.getByText("SahrahJewellery");
+    const CompanyText = screen.getByText("UniqueShopGB");
     const BriefCompanyText = screen.getByText(
       "The best handcrafted Jewellery money can buy at a affordable price."
     );
