@@ -50,7 +50,7 @@
 
 - &#9745; Deploy new backend to AWS
 - &#9744; Add Google Autocomplete api to get the address.
-- &#9744; Add more documentation to different components explaining what logic does.
+- &#9745; Add more documentation to different components explaining what logic does.
 - &#9745; Look for ways to split components to simplify logic
 - &#9745; For scalability, look into testing and implement as much as possible
 - &#9745; Transfer the current way of development towards Test-driven development,

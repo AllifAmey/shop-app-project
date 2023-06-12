@@ -1,8 +1,6 @@
-import { NavLink as RouterLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import SvgIcon from "@mui/material/SvgIcon";
-import Link from "@mui/material/Link";
 import Badge from "@mui/material/Badge";
 
 function CartIcon(props) {
@@ -46,16 +44,15 @@ function CartIcon(props) {
         },
       }}
     >
-      <Link
-        underline="none"
-        color="#343a40"
-        component={RouterLink}
+      <div
+        href="#"
         onClick={() => {
           props.setDrawerOpen(true);
         }}
         display="flex"
         aria-label="Opens the sidepop to see cart"
         data-cy="Cart"
+        style={{ cursor: "pointer" }}
       >
         <SvgIcon
           version="1.0"
@@ -91,7 +88,7 @@ function CartIcon(props) {
             />
           </g>
         </SvgIcon>
-      </Link>
+      </div>
     </Badge>
   );
 }
