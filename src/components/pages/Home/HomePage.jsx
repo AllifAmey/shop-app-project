@@ -70,10 +70,7 @@ async function loadWeatherData() {
     },
   });
   if (!response.ok) {
-    throw json(
-      { message: "Could not fetch weather" },
-      { status: response.status }
-    );
+    return "No weather Icon then";
   } else {
     const data = await response.json();
     const icon = data.message;
