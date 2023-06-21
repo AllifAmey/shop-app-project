@@ -65,7 +65,7 @@
 Current activity -
 
 high priority -
-optimising sql and reworking api infrastructure
-error handling on more apis
-medium priority -
-Captcha/throttling to deal with brute force login attempts.
+Migrate to NextJS TO fix urgent SEO issue related to JS not showing.
+Reestablish Google Map API
+Redesign the LocationMobile and show everything instead of using switch.
+Look into switching current images to webp
